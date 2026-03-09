@@ -39,7 +39,7 @@
   </head>
   <body>
     <nav class="bg-neutral-primary fixed w-full z-20">
-      <div class="flex flex-wrap items-center justify-start mx-auto gap-5 py-3">
+      <div class="flex flex-wrap items-center mx-auto justify-start py-3 px-3">
         <button
           data-collapse-toggle="navbar-default"
           type="button"
@@ -65,13 +65,15 @@
             />
           </svg>
         </button>
-        <img src="logo.jpeg" class="h-12" alt="AvatarForms Logo"/> <!-- Change logo if you want to -->
-        <span
-            class="self-center text-xl text-heading font-semibold whitespace-nowrap"
-            >AvatarForms</span>
+        <div class="flex items-center gap-3">
+            <img src="logo.jpeg" class="h-12" alt="AvatarForms Logo"/> <!-- Change logo if you want to -->
+            <span
+                class="self-center text-xl text-heading font-semibold whitespace-nowrap"
+                >AvatarForms</span>
+        </div>
         <div class="hidden w-full md:flex md:w-auto md:ml-auto" id="navbar-default">
           <ul
-            class="font-medium flex flex-col md:flex-row md:gap-6 p-4 md:p-0 mt-4 md:mt-0 border border-default md:border-0 rounded-base md:rounded-none bg-neutral-secondary-soft md:bg-transparent"
+            class="font-medium flex flex-col md:flex-row md:gap-5 p-4 md:p-0 mt-4 md:mt-0 border border-default md:border-0 rounded-base md:rounded-none bg-neutral-secondary-soft md:bg-transparent"
           >
             <li>
               <a
@@ -179,12 +181,16 @@
 
     <!-- Mission Section-->
     <section class="bg-neutral-primary py-0 text-center">
-        <h2 class="text-3xl font-bold mb-6">Our mission</h2>
-        <h2>(Insert reason for Avatarforms here)</h2>
-        <h2>
-            AvatarForms turns text based forms into interactive conversations with
-            AI powered avatar.
-        </h2>
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-4xl font-bold mb-6">Our mission</h2>
+            <p>Autistic children may find filling in text-based forms difficult due to presumed context 
+                and vague questions.
+                AvatarForms turns text based forms into interactive conversations with
+                AI powered avatar. The AI can clarify the question, resolve specific user difficulties and skip questions
+                that users do not want to answer.
+                This helps autistic children to be more independent by eliminating teacher assistance in form filling.
+            </p>
+        </div>
     </section>
 
     <!-- Abstract Section -->
