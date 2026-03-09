@@ -25,11 +25,7 @@
   </head>
   <body>
     <nav class="bg-neutral-primary/70 fixed w-full z-20">
-      <div class="flex flex-wrap items-center justify-evenly mx-auto py-8">
-        <img src="logo.jpeg" class="h-12 alt="AvatarForms Logo"/> <!-- Change logo if you want to -->
-        <span
-            class="self-center text-xl text-heading font-semibold whitespace-nowrap"
-            >AvatarForms</span>
+      <div class="flex flex-wrap items-center justify-start mx-auto gap-5 py-8">
         <button
           data-collapse-toggle="navbar-default"
           type="button"
@@ -55,6 +51,10 @@
             />
           </svg>
         </button>
+        <img src="logo.jpeg" class="h-12 alt="AvatarForms Logo"/> <!-- Change logo if you want to -->
+        <span
+            class="self-center text-xl text-heading font-semibold whitespace-nowrap"
+            >AvatarForms</span>
         <div class="hidden w-full md:block md:w-auto" id="navbar-default">
           <ul
             class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-default rounded-base bg-neutral-secondary-soft md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-neutral-primary md:bg-opacity-100 md:bg-white"
@@ -145,12 +145,16 @@
     </nav>
 
     <!-- Hero Section-->
-    <section class="bg-neutral-primary py-30">
-      <h1>AvatarForms</h1>
-      <h2>By Atticus, Dex, Fakhur, Muaz</h2> <!--Alphabetical order-->
+    <section class="bg-neutral-primary py-30 text-center">
+        <h1 class="text-7xl font-bold text-blue-600">AvatarForms</h1>
+        <h2 class="text-xl mt-4">By Atticus, Dex, Fakhur, and Muaz</h2>
 
-      <h2>This project is developed in partnership with:</h2>
-      <h2>(Need logos here) National autistic society, UCL</h2>
+        <h2 class="mt-12 mb-6 font-semibold">In partnership with:</h2>
+        
+        <div class="flex items-center justify-center gap-12">
+            <img src="National_Autistic_Society_Logo_2018.png" class="h-16 w-auto" alt="National Autistic Society Logo"/>
+            <img src="ucl-logo--primary.svg" class="h-16 w-auto" alt="UCL Logo"/>
+        </div>
     </section>
 
     <!-- Mission Section-->
