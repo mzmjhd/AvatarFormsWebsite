@@ -9,27 +9,41 @@
       href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css"
       rel="stylesheet"
     />
+    <!--The styles block below seems long but it makes the code editor
+     happy and make it parse the html properly-->
     <style type="text/tailwindcss">
-      @theme {
-        --color-neutral-primary: white;
-        --color-neutral-secondary-soft: white;
-        --color-heading: black;
-        --color-body: black;
-        --color-brand: white;
-        --color-fg-brand: white;
-        --color-default: black;
-        --color-neutral-tertiary: black;
-        --radius-base: 0.5rem;
-      }
+        @theme inline {
+            --color-neutral-primary: var(--neutral-primary);
+            --color-neutral-secondary-soft: var(--neutral-secondary-soft);
+            --color-heading: var(--heading);
+            --color-body: var(--body);
+            --color-brand: var(--brand);
+            --color-fg-brand: var(--fg-brand);
+            --color-default: var(--default);
+            --color-neutral-tertiary: var(--neutral-tertiary);
+            --radius-base: var(--radius-base);
+        }
+
+        :root {
+            --neutral-primary: white;
+            --neutral-secondary-soft: white;
+            --heading: black;
+            --body: black;
+            --brand: white;
+            --fg-brand: white;
+            --default: black;
+            --neutral-tertiary: black;
+            --radius-base: 0.5rem;
+        }
     </style>
   </head>
   <body>
     <nav class="bg-neutral-primary fixed w-full z-20">
-      <div class="flex flex-wrap items-center justify-start mx-auto gap-5 py-8">
+      <div class="flex flex-wrap items-center justify-start mx-auto gap-5 py-3">
         <button
           data-collapse-toggle="navbar-default"
           type="button"
-          class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-body rounded-base hover:bg-neutral-secondary-soft hover:text-heading focus:outline-none focus:ring-2 focus:ring-neutral-tertiary"
+          class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-body rounded-base hover:bg-neutral-secondary-soft hover:text-heading focus:outline-none focus:ring-2 focus:ring-neutral-tertiary md:hidden"
           aria-controls="navbar-default"
           aria-expanded="false"
         >
@@ -51,13 +65,13 @@
             />
           </svg>
         </button>
-        <img src="logo.jpeg" class="h-12 alt="AvatarForms Logo"/> <!-- Change logo if you want to -->
+        <img src="logo.jpeg" class="h-12" alt="AvatarForms Logo"/> <!-- Change logo if you want to -->
         <span
             class="self-center text-xl text-heading font-semibold whitespace-nowrap"
             >AvatarForms</span>
-        <div class="hidden w-full" id="navbar-default">
+        <div class="hidden w-full md:flex md:w-auto md:ml-auto" id="navbar-default">
           <ul
-            class="font-medium flex flex-col p-4 mt-4 border border-default rounded-base bg-neutral-secondary-soft"
+            class="font-medium flex flex-col md:flex-row md:gap-6 p-4 md:p-0 mt-4 md:mt-0 border border-default md:border-0 rounded-base md:rounded-none bg-neutral-secondary-soft md:bg-transparent"
           >
             <li>
               <a
@@ -146,7 +160,13 @@
 
     <!-- Hero Section-->
     <section class="bg-neutral-primary py-30 text-center">
-        <h1 class="text-7xl font-bold text-blue-600">AvatarForms</h1>
+        <h1
+        id="gradient-text"
+        class="self-center text-7xl font-bold whitespace-nowrap bg-clip-text text-transparent"
+        style="background-image: linear-gradient(to bottom, #61a5fa, #1d4ed8);"
+        >
+        AvatarForms
+        </h1>
         <h2 class="text-xl mt-4">By Atticus, Dex, Fakhur, and Muaz</h2>
 
         <h2 class="mt-12 mb-6 font-semibold">In partnership with:</h2>
@@ -158,8 +178,8 @@
     </section>
 
     <!-- Mission Section-->
-    <section class="bg-neutral-primary py-0">
-        <h1>Our mission</h1>
+    <section class="bg-neutral-primary py-0 text-center">
+        <h2 class="text-3xl font-bold mb-6">Our mission</h2>
         <h2>(Insert reason for Avatarforms here)</h2>
         <h2>
             AvatarForms turns text based forms into interactive conversations with
@@ -168,13 +188,16 @@
     </section>
 
     <!-- Abstract Section -->
-    <section class="bg-neutral-secondary py-20">
-        <h1>This project uses the following open source projects:</h1>
-        <h2>Framework: https://github.com/unoplatform/uno</h2>
-        <h2>Avatar animation: https://github.com/met4citizen/TalkingHead</h2>
-        <h2>Avatar Text to Speech: https://github.com/met4citizen/HeadTTS</h2>
-        <h2>Local AI: https://github.com/mozilla-ai/llamafile</h2>
-        <h2>(Add more if I missed some)</h2>
+    <section class="bg-neutral-secondary py-20 px-6">
+        <div class="w-full">
+            <h2 class="text-3xl font-bold mb-6">Open Source Acknowledgments</h2>
+            <ul class="space-y-4 text-lg">
+                <li><strong>Framework:</strong> <a href="https://github.com/unoplatform/uno" class="text-blue-600 hover:underline">Uno Platform</a></li>
+                <li><strong>Avatar animation:</strong> <a href="https://github.com/met4citizen/TalkingHead" class="text-blue-600 hover:underline">TalkingHead</a></li>
+                <li><strong>Avatar Text to Speech:</strong> <a href="https://github.com/met4citizen/HeadTTS" class="text-blue-600 hover:underline">HeadTTS</a></li>
+                <li><strong>Local AI:</strong> <a href="https://github.com/mozilla-ai/llamafile" class="text-blue-600 hover:underline">llamafile</a></li>
+            </ul>
+        </div>
     </section>
 
     <!-- FlowBite JS-->
