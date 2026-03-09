@@ -12,28 +12,37 @@
     <!--The styles block below seems long but it makes the code editor
      happy and make it parse the html properly-->
     <style type="text/tailwindcss">
-        @theme inline {
-            --color-neutral-primary: var(--neutral-primary);
-            --color-neutral-secondary-soft: var(--neutral-secondary-soft);
-            --color-heading: var(--heading);
-            --color-body: var(--body);
-            --color-brand: var(--brand);
-            --color-fg-brand: var(--fg-brand);
-            --color-default: var(--default);
-            --color-neutral-tertiary: var(--neutral-tertiary);
-            --radius-base: var(--radius-base);
+        :root {
+            --bg: white;
+            --text: black;
+            --radius-base: 0.5rem;
         }
 
-        :root {
-            --neutral-primary: white;
-            --neutral-secondary-soft: white;
-            --heading: black;
-            --body: black;
-            --brand: white;
-            --fg-brand: white;
-            --default: black;
-            --neutral-tertiary: black;
-            --radius-base: 0.5rem;
+        .dark {
+            --bg: #111827;
+            --text: white;
+        }
+
+        @theme inline {
+            --color-neutral-primary: var(--bg);
+            --color-neutral-secondary-soft: var(--bg);
+            --color-heading: var(--text);
+            --color-body: var(--text);
+            --color-neutral-tertiary: var(--text);
+            --color-default: var(--text);
+            --radius-base: var(--radius-base);
+        }
+        :root { --sun-op: 0; --moon-op: 1; }
+        .dark { --sun-op: 1; --moon-op: 0; }
+        nav img.h-12 {
+            clip-path: inset(0% 0% 0% 0% round 22.37%);
+        }
+
+        /* Apply variables globally */
+        body, section, nav, ul {
+            background-color: var(--bg);
+            color: var(--text);
+            transition: background-color 0.2s, color 0.2s;
         }
     </style>
   </head>
@@ -43,7 +52,7 @@
         <button
           data-collapse-toggle="navbar-default"
           type="button"
-          class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-body rounded-base hover:bg-neutral-secondary-soft hover:text-heading focus:outline-none focus:ring-2 focus:ring-neutral-tertiary md:hidden"
+          class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-body rounded-base hover:bg-neutral-secondary-soft hover:text-heading focus:outline-none focus:ring-2 focus:ring-neutral-tertiary lg:hidden"
           aria-controls="navbar-default"
           aria-expanded="false"
         >
@@ -71,14 +80,14 @@
                 class="self-center text-xl text-heading font-semibold whitespace-nowrap"
                 >AvatarForms</span>
         </div>
-        <div class="hidden w-full md:flex md:w-auto md:ml-auto" id="navbar-default">
+        <div class="hidden w-full lg:flex lg:w-auto lg:ml-auto" id="navbar-default">
           <ul
-            class="font-medium flex flex-col md:flex-row md:gap-5 p-4 md:p-0 mt-4 md:mt-0 border border-default md:border-0 rounded-base md:rounded-none bg-neutral-secondary-soft md:bg-transparent"
+            class="font-medium flex flex-col lg:flex-row lg:gap-3 p-4 lg:p-0 mt-4 lg:mt-0 border border-default lg:border-0 rounded-base lg:rounded-none bg-neutral-secondary-soft lg:bg-transparent"
           >
             <li>
               <a
                 href="#"
-                class="block py-2 px-3 text-black bg-brand rounded"
+                class="block py-2 px-3 text-heading bg-brand rounded"
                 aria-current="page"
                 >Requirements</a
               >
@@ -86,7 +95,7 @@
             <li>
               <a
                 href="#"
-                class="block py-2 px-3 text-black bg-brand rounded"
+                class="block py-2 px-3 text-heading bg-brand rounded"
                 aria-current="page"
                 >Research</a
               >
@@ -94,7 +103,7 @@
             <li>
               <a
                 href="#"
-                class="block py-2 px-3 text-black bg-brand rounded"
+                class="block py-2 px-3 text-heading bg-brand rounded"
                 aria-current="page"
                 >UI Design</a
               >
@@ -102,7 +111,7 @@
             <li>
               <a
                 href="#"
-                class="block py-2 px-3 text-black bg-brand rounded"
+                class="block py-2 px-3 text-heading bg-brand rounded"
                 aria-current="page"
                 >System Design</a
               >
@@ -110,7 +119,7 @@
             <li>
               <a
                 href="#"
-                class="block py-2 px-3 text-black bg-brand rounded"
+                class="block py-2 px-3 text-heading bg-brand rounded"
                 aria-current="page"
                 >Implementation</a
               >
@@ -118,7 +127,7 @@
             <li>
               <a
                 href="#"
-                class="block py-2 px-3 text-black bg-brand rounded"
+                class="block py-2 px-3 text-heading bg-brand rounded"
                 aria-current="page"
                 >Testing</a
               >
@@ -126,7 +135,7 @@
             <li>
               <a
                 href="#"
-                class="block py-2 px-3 text-black bg-brand rounded"
+                class="block py-2 px-3 text-heading bg-brand rounded"
                 aria-current="page"
                 >Evaluation</a
               >
@@ -134,7 +143,7 @@
             <li>
               <a
                 href="#"
-                class="block py-2 px-3 text-black bg-brand rounded"
+                class="block py-2 px-3 text-heading bg-brand rounded"
                 aria-current="page"
                 >Appendices</a
               >
@@ -142,18 +151,30 @@
             <li>
               <a
                 href="#"
-                class="block py-2 px-3 text-black bg-brand rounded"
+                class="block py-2 px-3 text-heading bg-brand rounded"
                 aria-current="page"
                 >Blog</a
               >
             </li>
             <li>
               <a
-                href="#"
-                class="block py-2 px-3 text-black bg-brand rounded"
+                href="https://github.com/Dexdezdes/COMP0016_2026_Team14_AvatarForms.git"
+                class="block py-2 px-3 text-heading bg-brand rounded"
                 aria-current="page"
                 >GitHub</a
               >
+            </li>
+            <li class="ml-4 flex items-center">
+                <button onclick="document.documentElement.classList.toggle('dark')" 
+                        class="cursor-pointer p-2 border border-current rounded-md hover:opacity-70 transition-opacity relative w-9 h-9">
+                    <svg class="w-5 h-5 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <g style="opacity: var(--sun-op)">
+                            <circle cx="12" cy="12" r="5"></circle>
+                            <path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M17.66 6.34l1.42-1.42"></path>
+                        </g>
+                        <path style="opacity: var(--moon-op)" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+                </button>
             </li>
           </ul>
         </div>
