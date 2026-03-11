@@ -39,15 +39,27 @@
         }
 
         /* Apply variables globally */
-        body, section, nav, ul {
+        section {
             background-color: var(--bg);
             color: var(--text);
             transition: background-color 0.2s, color 0.2s;
         }
+        
+        nav {
+            color: var(--text);
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        p {
+          font-family:'Poppins', sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6 {
+          font-family:'Inter', sans-serif;
+        }
     </style>
   </head>
   <body>
-    <nav class="bg-neutral-primary fixed w-full z-20">
+    <nav class="bg-neutral-primary/70 backdrop-blur-md fixed w-full z-9999 top-0 start-0">
       <div class="flex flex-wrap items-center mx-auto justify-start py-3 px-3">
         <button
           data-collapse-toggle="navbar-default"
@@ -75,14 +87,14 @@
           </svg>
         </button>
         <div class="flex items-center gap-3">
-            <img src="images/logo.jpeg" class="h-12" alt="AvatarForms Logo"/> <!-- Change logo if you want to -->
+            <img src="assets/images/logo.jpeg" class="h-12" alt="AvatarForms Logo"/> <!-- Change logo if you want to -->
             <span
                 class="self-center text-xl text-heading font-semibold whitespace-nowrap"
                 >AvatarForms</span>
         </div>
         <div class="hidden w-full lg:flex lg:w-auto lg:ml-auto" id="navbar-default">
           <ul
-            class="font-medium flex flex-col lg:flex-row lg:gap-3 p-4 lg:p-0 mt-4 lg:mt-0 border border-default lg:border-0 rounded-base lg:rounded-none bg-neutral-secondary-soft lg:bg-transparent"
+            class="font-medium flex flex-col lg:flex-row lg:gap-3 p-4 lg:p-0 mt-4 lg:mt-0 border border-gray-200/30 dark:border-gray-700/30 lg:border-0 rounded-base lg:rounded-none bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm lg:bg-transparent lg:backdrop-blur-none"
           >
             <li>
               <a
@@ -182,26 +194,59 @@
     </nav>
 
     <!-- Hero Section-->
-    <section class="bg-neutral-primary py-30 text-center">
-        <h1
-        id="gradient-text"
-        class="self-center text-7xl font-bold whitespace-nowrap bg-clip-text text-transparent"
-        style="background-image: linear-gradient(to bottom, #61a5fa, #1d4ed8);"
-        >
-        AvatarForms
-        </h1>
-        <h2 class="text-xl mt-4">By Atticus, Dex, Fakhur, and Muaz</h2>
-
-        <h2 class="mt-12 mb-6 font-semibold">In partnership with:</h2>
-        
-        <div class="flex items-center justify-center gap-12">
-            <img src="images/National_Autistic_Society_Logo_2018.png" class="h-16 w-auto" alt="National Autistic Society Logo"/>
-            <img src="images/ucl-logo--primary.svg" class="h-16 w-auto" alt="UCL Logo"/>
+    <section class="bg-neutral-primary py-30" style="background: radial-gradient(ellipse 115% 90% at 50% 5%, rgba(99, 102, 241, 0.35) 0%, var(--bg) 65%);">
+      <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16">
+        <div class="grid md:grid-cols-2 gap-8">
+          <!--Title-->
+          <div class="bg-transparent rounded-base md:p-12 text-center">
+            <span class="inline-flex items-center bg-fuchsia-200/70 outline-2 outline-fuchsia-700 text-fuchsia-700 text-xs font-medium px-1.5 py-0.5 mb-3 rounded-sm">
+                <p>UCL CS Group 14 IXN Project</p>
+            </span>
+              <h1 id="gradient-text" class="self-center text-7xl font-bold whitespace-nowrap bg-clip-text text-transparent mb-6" style="background-image: linear-gradient(to bottom, #61a5fa, #1d4ed8);">
+                AvatarForms
+              </h1>
+              <p class="font-thin text-gray-400">by Atticus, Dex, Fakhrur, and Muaz</p>
+              <h2 class="mt-12 mb-6">In partnership with:</h2>
+              <div class="flex items-center justify-center gap-12">
+                  <img src="assets/images/National_Autistic_Society_Logo_2018.png" class="h-16 w-auto" alt="National Autistic Society Logo"/>
+                  <img src="assets/images/ucl-logo--primary.svg" class="h-16 w-auto" alt="UCL Logo"/>
+              </div>
+          </div>
+          <!--Carousell-->
+          <div id="indicators-carousel" class="relative w-full shadow-xl rounded-base" data-carousel="slide">
+            <!-- Carousel wrapper -->
+            <div class="relative overflow-hidden rounded-base h-full">
+              <!-- Item 1 -->
+              <div class="hidden duration-700 ease-in-out h-full" data-carousel-item="active">
+                  <img src="/assets/images/dex.JPG" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+              </div>
+              <!-- Item 2 -->
+              <div class="hidden duration-700 ease-in-out h-full" data-carousel-item>
+                  <img src="/assets/images/logo.jpeg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+              </div>
+              <!-- Slider indicators -->
+              <div class="absolute z-30 flex -translate-x-1/2 bottom-5 space-x-3 rtl:space-x-reverse left-1/2">
+                <button type="button" class="w-3 h-3 rounded-base" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
+                <button type="button" class="w-3 h-3 rounded-base" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
+              </div>
+              <!-- Slider controls -->
+              <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-base bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                  <svg class="w-5 h-5 text-white rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m15 19-7-7 7-7"/></svg>
+                </span>
+              </button>
+              <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-base bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                  <svg class="w-5 h-5 text-white rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7"/></svg>
+                </span>
+              </button>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
-
     <!-- Mission Section-->
-    <section class="bg-neutral-primary py-0 text-center">
+    <section class="bg-neutral-primary py-30 text-center">
         <div class="max-w-4xl mx-auto">
             <h2 class="text-4xl font-bold mb-6">Our mission</h2>
             <p>Autistic children may find filling in text-based forms difficult due to presumed context 
@@ -213,19 +258,88 @@
             </p>
         </div>
     </section>
-
-    <!-- Abstract Section -->
-    <section class="bg-neutral-secondary py-20 px-6">
-        <div class="w-full">
-            <h2 class="text-3xl font-bold mb-6">Open Source Acknowledgments</h2>
-            <ul class="space-y-4 text-lg">
-                <li><strong>Framework:</strong> <a href="https://github.com/unoplatform/uno" class="text-blue-600 hover:underline">Uno Platform</a></li>
-                <li><strong>Avatar animation:</strong> <a href="https://github.com/met4citizen/TalkingHead" class="text-blue-600 hover:underline">TalkingHead</a></li>
-                <li><strong>Avatar Text to Speech:</strong> <a href="https://github.com/met4citizen/HeadTTS" class="text-blue-600 hover:underline">HeadTTS</a></li>
-                <li><strong>Local AI:</strong> <a href="https://github.com/mozilla-ai/llamafile" class="text-blue-600 hover:underline">llamafile</a></li>
-            </ul>
+    <!--Footer-->
+    <footer class="bg-neutral-primary" style="background: radial-gradient(ellipse 115% 90% at 50% 100%, rgba(99, 102, 241, 0.35) 0%, var(--bg) 65%);">
+      <div class="mx-auto w-3/5 px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+          <!--Logo and Name-->
+          <div class="flex flex-col gap-4">
+            <div class="flex items-center gap-3">
+              <img src="assets/images/logo.jpeg" class="h-12 rounded-base" alt="AvatarForms Logo"/>
+              <span class="text-heading text-2xl font-semibold whitespace-nowrap">AvatarForms</span>
+            </div>
+          </div>
+          <!--About Us-->
+          <div>
+              <h2 class=" text-sm font-semibold text-heading uppercase">About Us</h2>
+              <p class="text-body mb-4 text-sm text-gray-400">AvatarForms is a UCL Computer Science student project developed in partnership with the National Autistic Society to create accessible and inclusive digital forms.</p>
+              <ul class="mb-6 text-body font-light">
+                  <li class="mb-3">
+                      <a href="https://github.com/Dexdezdes/COMP0016_2026_Team14_AvatarForms.git" target="_blank" class="hover:underline flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                        <p class="text-body text-sm">GitHub</p>
+                      </a>
+                  </li>
+                  <li class="mb-3">
+                      <a href="mailto:team14@avatarforms.com" class="hover:underline flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                        <p class="text-body text-sm">Contact Us</p>
+                      </a>
+                  </li>
+              </ul>
+          </div>
+          <!--Documentation-->
+          <div>
+              <h2 class="mb-6 text-sm font-semibold text-heading uppercase">Documentation</h2>
+              <ul class="text-body text-sm grid grid-cols-2 gap-x-4">
+                  <li class="mb-3">
+                      <a href="#" class="hover:underline">Requirements</a>
+                  </li>
+                  <li class="mb-3">
+                      <a href="#" class="hover:underline">Testing</a>
+                  </li>
+                  <li class="mb-3">
+                      <a href="#" class="hover:underline">Research</a>
+                  </li>
+                  <li class="mb-3">
+                      <a href="#" class="hover:underline">Evaluation</a>
+                  </li>
+                  <li class="mb-3">
+                      <a href="#" class="hover:underline">UI Design</a>
+                  </li>
+                  <li class="mb-3">
+                      <a href="#" class="hover:underline">Appendices</a>
+                  </li>
+                  <li class="mb-3">
+                      <a href="#" class="hover:underline">System Design</a>
+                  </li>
+                  <li class="mb-3">
+                      <a href="#" class="hover:underline">Blog</a>
+                  </li>
+                  <li class="mb-3">
+                      <a href="#" class="hover:underline">Implementation</a>
+                  </li>
+              </ul>
+          </div>
+          <!--Project Partners-->
+          <div>
+              <h2 class="mb-6 text-sm font-semibold text-heading uppercase">Project Partners</h2>
+              <div class="flex flex-col gap-8 items-start">
+                  <img src="assets/images/National_Autistic_Society_Logo_2018.png" class="h-16 w-auto" alt="National Autistic Society Logo"/>
+                  <img src="assets/images/ucl-logo--primary.svg" class="h-16 w-auto" alt="UCL Logo"/>
+              </div>
+          </div>
         </div>
-    </section>
+        <!-- Copyright -->
+        <div class="py-6 text-center">
+          <p class="text-sm text-gray-400 font-thin">© 2026 AvatarForms - UCL CS Group 14. All Rights Reserved.</p>
+        </div>
+      </div>
+    </footer>
 
     <!-- FlowBite JS-->
     <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
