@@ -5,68 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AvatarForms</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link
-      href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css"
-      rel="stylesheet"
-    />
-    <!--The styles block below seems long but it makes the code editor
-     happy and make it parse the html properly-->
-    <style type="text/tailwindcss">
-        :root {
-            --bg: white;
-            --text: black;
-            --radius-base: 0.5rem;
-        }
-
-        .dark {
-            --bg: #111827;
-            --text: white;
-        }
-
-        @theme inline {
-            --color-neutral-primary: var(--bg);
-            --color-neutral-secondary-soft: var(--bg);
-            --color-heading: var(--text);
-            --color-body: var(--text);
-            --color-neutral-tertiary: var(--text);
-            --color-default: var(--text);
-            --radius-base: var(--radius-base);
-        }
-        :root { --sun-op: 0; --moon-op: 1; }
-        .dark { --sun-op: 1; --moon-op: 0; }
-        nav img.h-12 {
-            clip-path: inset(0% 0% 0% 0% round 22.37%);
-        }
-
-        /* Apply variables globally */
-        section {
-            background-color: var(--bg);
-            color: var(--text);
-            transition: background-color 0.2s, color 0.2s;
-        }
-        
-        /* Alternating section backgrounds */
-        section:nth-child(even) {
-            background-color: rgb(249 250 251);
-        }
-        
-        .dark section:nth-child(even) {
-            background-color: rgb(31 41 55);
-        }
-        
-        nav {
-            color: var(--text);
-            transition: background-color 0.2s, color 0.2s;
-        }
-
-        p {
-          font-family:'Poppins', sans-serif;
-        }
-        h1, h2, h3, h4, h5, h6 {
-          font-family:'Inter', sans-serif;
-        }
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet"/>
+    <link href="css/styles.css" rel="stylesheet"/>
   </head>
+
+  <!-- Body -->
   <body>
     <nav class="bg-neutral-primary/70 backdrop-blur-md fixed w-full z-9999 top-0 start-0">
       <div class="flex flex-wrap items-center mx-auto justify-start py-3 px-3">
@@ -203,7 +146,7 @@
     </nav>
 
     <!-- Hero Section-->
-    <section class="bg-neutral-primary py-30" style="background: radial-gradient(ellipse 115% 90% at 50% 5%, rgba(99, 102, 241, 0.35) 0%, var(--bg) 65%);">
+    <section class="bg-neutral-primary py-30" style="background: radial-gradient(ellipse 115% 90% at 50% -30%, var(--gradient-color) 0%, var(--bg) 65%);">
       <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16">
         <div class="grid md:grid-cols-2 gap-8">
           <!--Title-->
@@ -254,7 +197,6 @@
         </div>
       </div>
     </section>
-
     <!-- Mission Section-->
     <section class="bg-neutral-primary py-30 text-center">
         <div class="max-w-4xl mx-auto">
@@ -296,11 +238,11 @@
     </section>
 
     <!--Footer-->
-    <footer class="bg-neutral-primary" style="background: radial-gradient(ellipse 115% 90% at 50% 100%, rgba(99, 102, 241, 0.35) 0%, var(--bg) 65%);">
-      <div class="mx-auto w-3/5 px-8">
+    <footer class="bg-neutral-primary" style="background: radial-gradient(ellipse 115% 90% at 50% 120%, var(--gradient-color) 0%, var(--bg) 65%);">
+      <div class="mx-auto w-3/5 px-8 py-8">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           <!--Logo and Name-->
-          <div class="flex flex-col gap-4">
+          <div class="flex justify-center gap-4">
             <div class="flex items-center gap-3">
               <img src="assets/images/logo.jpeg" class="h-12 rounded-base" alt="AvatarForms Logo"/>
               <span class="text-heading text-2xl font-semibold whitespace-nowrap">AvatarForms</span>
@@ -380,5 +322,7 @@
 
     <!-- FlowBite JS-->
     <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
+
   </body>
+
 </html>

@@ -1,0 +1,55 @@
+        :root {
+            --bg: white;
+            --text: black;
+            --radius-base: 0.5rem;
+            --gradient-color: rgba(99, 102, 241, 0.35);
+        }
+
+        .dark {
+            --bg: #111827;
+            --text: white;
+            --gradient-color: rgba(224, 176, 255, 0.7);
+        }
+
+        @theme inline {
+            --color-neutral-primary: var(--bg);
+            --color-neutral-secondary-soft: var(--bg);
+            --color-heading: var(--text);
+            --color-body: var(--text);
+            --color-neutral-tertiary: var(--text);
+            --color-default: var(--text);
+            --radius-base: var(--radius-base);
+        }
+        :root { --sun-op: 0; --moon-op: 1; }
+        .dark { --sun-op: 1; --moon-op: 0; }
+        nav img.h-12 {
+            clip-path: inset(0% 0% 0% 0% round 22.37%);
+        }
+
+        /* Apply variables globally */
+        section {
+            background-color: var(--bg);
+            color: var(--text);
+            transition: background-color 0.2s, color 0.2s;
+        }
+        
+        /* Alternating section backgrounds */
+        section:nth-child(odd) {
+            background-color: rgb(249 250 251);
+        }
+        
+        .dark section:nth-child(odd) {
+            background-color: rgb(31 41 55);
+        }
+        
+        nav {
+            color: var(--text);
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        p {
+          font-family:'Poppins', sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6 {
+          font-family:'Inter', sans-serif;
+        }
