@@ -3,12 +3,20 @@
             --text: black;
             --radius-base: 0.5rem;
             --gradient-color: rgba(99, 102, 241, 0.35);
+            --sidebar-bg: rgb(249 250 251);
+            --sidebar-border: rgb(229 231 235);
+            --sidebar-link-hover-bg: rgba(99, 102, 241, 0.12);
+            --sidebar-link-hover-text: var(--text);
         }
 
         .dark {
             --bg: #111827;
             --text: white;
             --gradient-color: rgba(224, 176, 255, 0.7);
+            --sidebar-bg: rgb(17 24 39);
+            --sidebar-border: rgb(55 65 81);
+            --sidebar-link-hover-bg: rgba(99, 102, 241, 0.28);
+            --sidebar-link-hover-text: white;
         }
 
         @theme inline {
@@ -45,6 +53,29 @@
         nav {
             color: var(--text);
             transition: background-color 0.2s, color 0.2s;
+        }
+
+        html,
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        #default-sidebar > div {
+            background-color: var(--sidebar-bg);
+            border-color: var(--sidebar-border);
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+
+        #default-sidebar a {
+            color: var(--text);
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        #default-sidebar a:hover {
+            background-color: var(--sidebar-link-hover-bg);
+            color: var(--sidebar-link-hover-text);
         }
 
         p {
