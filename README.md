@@ -12,10 +12,12 @@ Website for the COMP0016 System Engineering Project: AvatarForms.
 ## Project Structure
 
 - `index.html`, `requirements.html`, `appendices.html`: pages
+- `ui-showcase.html`: visual catalog of approved reusable UI classes
 - `components/navbar.html`: top navigation + dark mode toggle
 - `components/sidebar.html`: left sidebar navigation
 - `components/breadcrumbs.html`: base breadcrumb root (`Home`)
 - `css/styles.css`: theme variables, dark mode, typography, sidebar styles
+- `docs/design-system.md`: semantic class rules and copy/paste patterns
 - `.vscode/html.code-snippets`: developer snippets (including `afhtml`)
 
 ## Run Locally
@@ -51,10 +53,60 @@ Use the VS Code snippet prefix `afhtml` (defined in `.vscode/html.code-snippets`
 
 - Keep utility classes in markup for layout/spacing.
 - Keep cross-page theme behavior in `css/styles.css` (tokens and shared rules).
+- `af-*` classes are optional helpers for repeated patterns (not mandatory).
 - Flowbite components rely on including both:
 	- Flowbite CSS in `<head>`
 	- Flowbite JS before `</body>`
 - Prefer existing classes/tokens already used in the project (`text-body`, `text-heading`, `rounded-base`, etc.).
+
+## Design System Workflow
+
+To keep styling consistent for all developers:
+
+1. Build pages from `afhtml` snippet.
+2. Use Tailwind/Flowbite classes normally; no refactor to `af-*` is required.
+3. Keep colors/radius/shadows/text contrast consistent via `css/styles.css` tokens.
+4. Check `ui-showcase.html` for optional reusable helper patterns.
+5. If a visual pattern repeats across pages, centralize it in `css/styles.css` and document it in `docs/design-system.md`.
+6. Validate in both light and dark mode.
+
+### Color Utility Contract
+
+Use these shared class names for consistency:
+
+- `bg-neutral-primary`, `bg-neutral-secondary`, `bg-neutral-secondary-soft`
+- `text-heading`, `text-body`, `text-body-muted`, `text-body-soft`
+- `border-border-subtle`, `text-fg-brand`
+
+All are token-driven in `css/styles.css`, so light/dark color behavior stays consistent automatically.
+
+### Gradient Utility Contract
+
+Use these reusable classes for gradient styling:
+
+- `text-gradient-brand` for gradient headings/titles
+- `gradient-brand-bar` for color bars/dividers
+
+Use semantic size helpers with bars:
+
+- Heights: `bar-thin`, `bar-md`, `bar-thick`
+- Widths: `bar-short`, `bar-medium`, `bar-full`
+
+Example:
+
+`<div class="gradient-brand-bar bar-md bar-full rounded-base"></div>`
+
+### New Developer Cheat Sheet
+
+- Use Tailwind for layout (`flex/grid/gap/padding/margin`).
+- Use `af-*` for repeated UI patterns (cards, buttons, forms, section headings).
+- Use color utility classes (`text-body`, `text-heading`, `bg-neutral-*`) for consistent theming.
+- Use `text-gradient-brand` and `gradient-brand-bar` for branded highlights.
+
+What is “accent”?
+
+- Accent is the brand emphasis color for links, primary buttons, input focus rings, and callout highlights.
+- Avoid using accent as large section background fill unless you intentionally want a strong highlight.
 
 ## Dark Mode
 

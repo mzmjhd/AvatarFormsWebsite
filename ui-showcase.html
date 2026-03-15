@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AvatarForms - UI Showcase</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet"/>
+    <link href="css/styles.css" rel="stylesheet"/>
+  </head>
+  <body>
+    <nav id="navbar-container" class="fixed top-0 w-full z-50"></nav>
+
+    <div class="flex pt-16 ml-64 min-h-screen">
+      <aside id="sidebar-container" class="fixed left-0 top-16 w-64 min-h-screen"></aside>
+
+      <main class="flex-1 p-6">
+        <div id="breadcrumbs-container" class="mb-6"></div>
+
+        <section class="af-section">
+          <div class="af-container af-stack">
+            <div class="af-stack">
+              <span class="af-badge">Design System</span>
+              <h1 class="af-section-title">UI Showcase</h1>
+              <p class="af-section-subtitle">Optional helper patterns. You can keep using standard Tailwind/Flowbite classes and only reuse these when helpful.</p>
+            </div>
+
+            <section class="af-card af-stack shadow-surface-md">
+              <h2 class="af-card-title">Blue/Purple Palette Preview</h2>
+              <p class="af-card-text">Proposed palette for titles, color bars, and section treatments.</p>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+                <div class="rounded-base border border-border-subtle overflow-hidden bg-neutral-primary">
+                  <div class="h-14" style="background-color:#2563EB;"></div>
+                  <div class="p-3 text-sm text-body">
+                    <p class="font-semibold text-heading">Primary Blue</p>
+                    <p class="text-body-soft">#2563EB</p>
+                  </div>
+                </div>
+                <div class="rounded-base border border-border-subtle overflow-hidden bg-neutral-primary">
+                  <div class="h-14" style="background-color:#4F46E5;"></div>
+                  <div class="p-3 text-sm text-body">
+                    <p class="font-semibold text-heading">Indigo</p>
+                    <p class="text-body-soft">#4F46E5</p>
+                  </div>
+                </div>
+                <div class="rounded-base border border-border-subtle overflow-hidden bg-neutral-primary">
+                  <div class="h-14" style="background-color:#7C3AED;"></div>
+                  <div class="p-3 text-sm text-body">
+                    <p class="font-semibold text-heading">Violet</p>
+                    <p class="text-body-soft">#7C3AED</p>
+                  </div>
+                </div>
+                <div class="rounded-base border border-border-subtle overflow-hidden bg-neutral-primary">
+                  <div class="h-14" style="background-color:#06B6D4;"></div>
+                  <div class="p-3 text-sm text-body">
+                    <p class="font-semibold text-heading">Accent Cyan</p>
+                    <p class="text-body-soft">#06B6D4</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="af-stack">
+                <div class="rounded-base p-5 border border-border-subtle bg-neutral-primary">
+                  <p class="text-sm text-body-soft mb-2">Gradient Title</p>
+                  <h3 class="text-4xl font-bold text-gradient-brand">AvatarForms Gradient Title</h3>
+                </div>
+
+                <div class="rounded-base p-5 border border-border-subtle bg-neutral-primary af-stack">
+                  <p class="text-sm text-body-soft">Color Bar</p>
+                  <div class="gradient-brand-bar bar-thick bar-full rounded-base"></div>
+                  <div class="flex flex-wrap items-center gap-3 pt-1">
+                    <div class="gradient-brand-bar bar-thin bar-short rounded-base"></div>
+                    <span class="text-xs text-body-soft">bar-thin + bar-short</span>
+                  </div>
+                  <div class="flex flex-wrap items-center gap-3">
+                    <div class="gradient-brand-bar bar-md bar-medium rounded-base"></div>
+                    <span class="text-xs text-body-soft">bar-md + bar-medium</span>
+                  </div>
+                </div>
+
+                <div class="rounded-base p-6 text-heading border border-border-subtle" style="background:linear-gradient(135deg,#1E1B4B 0%,#1E3A8A 45%,#0F172A 100%);">
+                  <p class="text-sm text-white/70 mb-2">Dark Section Gradient</p>
+                  <h3 class="text-2xl font-semibold text-white">Section Example</h3>
+                  <p class="text-white/80 mt-2">Use this style for callout sections, hero strips, or divider blocks.</p>
+                </div>
+              </div>
+            </section>
+
+            <div class="af-grid-two">
+              <article class="af-card af-stack shadow-surface-md">
+                <h2 class="af-card-title">Card Pattern</h2>
+                <p class="af-card-text">Reusable surface for grouped content.</p>
+                <a href="requirements.html" class="af-link">Open requirements</a>
+              </article>
+
+              <article class="af-card af-stack shadow-surface-md">
+                <h2 class="af-card-title">Button Pattern</h2>
+                <p class="af-card-text">Primary and secondary actions share one visual style.</p>
+                <div class="flex gap-2">
+                  <button type="button" class="af-btn af-btn-primary">Primary action</button>
+                  <button type="button" class="af-btn af-btn-secondary">Secondary</button>
+                </div>
+              </article>
+            </div>
+
+            <div class="af-callout">
+              Add new reusable styling in <a href="docs/design-system.md" class="af-link">docs/design-system.md</a> and <a href="css/styles.css" class="af-link">css/styles.css</a> instead of per-page custom CSS.
+            </div>
+
+            <section class="af-card af-stack">
+              <h2 class="af-card-title">Typography Roles</h2>
+              <p class="af-card-text">Three text roles cover every case. Use these instead of ad-hoc <code>text-gray-*</code> classes.</p>
+              <div class="af-stack" style="gap: 1.5rem">
+                <div>
+                  <p class="text-xs type-muted mb-1"><code>.type-heading</code> — Inter 700, line-height 1.2</p>
+                  <p class="type-heading text-xl">Page title or section header</p>
+                </div>
+                <div>
+                  <p class="text-xs type-muted mb-1"><code>.type-body</code> — Poppins, line-height 1.7 (automatic on &lt;p&gt;)</p>
+                  <p class="type-body">Normal paragraph content. Readable, comfortable spacing for longer descriptions, feature copy, or instructional text.</p>
+                </div>
+                <div>
+                  <p class="text-xs type-muted mb-1"><code>.type-muted</code> — Poppins, muted color, line-height 1.7</p>
+                  <p class="type-muted">By Dex, Atticus and the team · March 2026 · Supporting text, captions, bylines.</p>
+                </div>
+                <div class="gradient-brand-bar bar-thin bar-short"></div>
+              </div>
+            </section>
+
+            <section class="af-card af-stack">
+              <h2 class="af-card-title">Form Pattern</h2>
+              <form class="af-stack">
+                <div class="af-form-group">
+                  <label for="showcase-name" class="af-label">Name</label>
+                  <input id="showcase-name" type="text" class="af-input" placeholder="Enter your name" />
+                </div>
+                <div class="af-form-group">
+                  <label for="showcase-topic" class="af-label">Topic</label>
+                  <select id="showcase-topic" class="af-select">
+                    <option>Requirements</option>
+                    <option>UI Design</option>
+                    <option>Implementation</option>
+                  </select>
+                </div>
+                <div class="af-form-group">
+                  <label for="showcase-message" class="af-label">Message</label>
+                  <textarea id="showcase-message" class="af-textarea" rows="4" placeholder="Write your message"></textarea>
+                </div>
+              </form>
+            </section>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
+    <script>
+      const breadcrumbPaths = {
+        'index.html': [{ title: 'Home', href: 'index.html' }],
+        'requirements.html': [
+          { title: 'Home', href: 'index.html' },
+          { title: 'Requirements', href: 'requirements.html' }
+        ],
+        'appendices.html': [
+          { title: 'Home', href: 'index.html' },
+          { title: 'Requirements', href: 'requirements.html' },
+          { title: 'Appendices', href: 'appendices.html' }
+        ],
+        'ui-showcase.html': [
+          { title: 'Home', href: 'index.html' },
+          { title: 'UI Showcase', href: 'ui-showcase.html' }
+        ]
+      };
+
+      function addCurrentBreadcrumb() {
+        const breadcrumbsList = document.getElementById('breadcrumbs-list');
+        if (!breadcrumbsList) return;
+
+        const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+        const trail = breadcrumbPaths[currentPath] || [
+          { title: 'Home', href: 'index.html' },
+          { title: 'Page' }
+        ];
+
+        if (currentPath === 'index.html') return;
+
+        trail.slice(1).forEach((crumb, index) => {
+          const isLast = index === trail.slice(1).length - 1;
+          const listItem = document.createElement('li');
+          listItem.className = 'inline-flex items-center gap-2 text-body';
+
+          const separator = `
+            <svg class="w-3 h-3 text-body" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+            </svg>
+          `;
+
+          if (isLast || !crumb.href) {
+            listItem.innerHTML = `${separator}<span aria-current="page">${crumb.title}</span>`;
+          } else {
+            listItem.innerHTML = `${separator}<a href="${crumb.href}" class="hover:text-fg-brand">${crumb.title}</a>`;
+          }
+
+          breadcrumbsList.appendChild(listItem);
+        });
+      }
+
+      fetch('components/navbar.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('navbar-container').innerHTML = data;
+        })
+        .catch(error => console.error('Error loading navbar:', error));
+
+      fetch('components/sidebar.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('sidebar-container').innerHTML = data;
+        })
+        .catch(error => console.error('Error loading sidebar:', error));
+
+      fetch('components/breadcrumbs.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('breadcrumbs-container').innerHTML = data;
+          addCurrentBreadcrumb();
+        })
+        .catch(error => console.error('Error loading breadcrumbs:', error));
+    </script>
+  </body>
+</html>

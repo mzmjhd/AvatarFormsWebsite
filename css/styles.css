@@ -1,33 +1,67 @@
         :root {
             --bg: white;
+            --bg-secondary: rgb(249 250 251);
             --text: black;
+            --text-soft: rgb(107 114 128);
             --radius-base: 0.5rem;
             --gradient-color: rgba(99, 102, 241, 0.35);
+            --hero-aurora: radial-gradient(ellipse 120% 95% at 50% -28%, rgba(79, 70, 229, 0.26) 0%, rgba(6, 182, 212, 0.12) 36%, var(--bg) 70%);
+            --footer-aurora: radial-gradient(ellipse 120% 95% at 50% 90%, rgba(79, 70, 229, 0.26) 0%, rgba(6, 182, 212, 0.12) 36%, var(--bg) 70%);
             --sidebar-bg: rgb(249 250 251);
             --sidebar-border: rgb(229 231 235);
             --sidebar-link-hover-bg: rgba(99, 102, 241, 0.12);
             --sidebar-link-hover-text: var(--text);
+            --surface: rgb(249 250 251);
+            --surface-border: rgb(229 231 235);
+            --muted-text: rgb(75 85 99);
+            --accent: #7C3AED;
+            --accent-contrast: white;
+            --focus-ring: rgba(79, 70, 229, 0.35);
+            --shadow-sm: 0 1px 2px 0 rgba(15, 23, 42, 0.08);
+            --shadow-md: 0 4px 10px -2px rgba(15, 23, 42, 0.14);
+            --shadow-lg: 0 12px 24px -8px rgba(15, 23, 42, 0.22);
+            --gradient-brand: linear-gradient(90deg, #06B6D4 0%, #4F46E5 50%, #7C3AED 100%);
         }
 
         .dark {
-            --bg: #111827;
-            --text: white;
-            --gradient-color: rgba(224, 176, 255, 0.7);
-            --sidebar-bg: rgb(17 24 39);
-            --sidebar-border: rgb(55 65 81);
-            --sidebar-link-hover-bg: rgba(99, 102, 241, 0.28);
-            --sidebar-link-hover-text: white;
+            --bg: #0F1115;
+            --bg-secondary: #151922;
+            --text: #EEF2FF;
+            --text-soft: #B7C0D6;
+            --gradient-color: rgba(96, 165, 250, 0.45);
+            --hero-aurora: radial-gradient(ellipse 135% 105% at 50% -30%, rgba(99, 102, 241, 0.42) 0%, rgba(34, 211, 238, 0.18) 34%, rgba(15, 23, 42, 0.92) 68%, var(--bg) 86%);
+            --footer-aurora: radial-gradient(ellipse 135% 105% at 50% 130%, rgba(99, 102, 241, 0.42) 0%, rgba(34, 211, 238, 0.18) 34%, rgba(15, 23, 42, 0.92) 68%, var(--bg) 86%);
+            --sidebar-bg: #151922;
+            --sidebar-border: #2A3142;
+            --sidebar-link-hover-bg: rgba(96, 165, 250, 0.16);
+            --sidebar-link-hover-text: #EEF2FF;
+            --surface: #1A2030;
+            --surface-border: #2A3142;
+            --muted-text: #96A3BF;
+            --accent: #7C3AED;
+            --accent-contrast: #0F1115;
+            --focus-ring: rgba(96, 165, 250, 0.35);
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 6px 14px -4px rgba(0, 0, 0, 0.38);
+            --shadow-lg: 0 16px 30px -10px rgba(0, 0, 0, 0.5);
+            --gradient-brand: linear-gradient(90deg, #06B6D4 0%, #4F46E5 50%, #7C3AED 100%);
         }
 
         @theme inline {
             --color-neutral-primary: var(--bg);
-            --color-neutral-secondary-soft: var(--bg);
+            --color-neutral-secondary: var(--bg-secondary);
+            --color-neutral-secondary-soft: var(--surface);
+            --color-neutral-tertiary: var(--text);
             --color-heading: var(--text);
             --color-body: var(--text);
-            --color-neutral-tertiary: var(--text);
+            --color-body-muted: var(--muted-text);
+            --color-body-soft: var(--text-soft);
             --color-default: var(--text);
+            --color-border-subtle: var(--surface-border);
+            --color-fg-brand: var(--accent);
             --radius-base: var(--radius-base);
         }
+        
         :root { --sun-op: 0; --moon-op: 1; }
         .dark { --sun-op: 1; --moon-op: 0; }
         nav img.h-12 {
@@ -43,23 +77,48 @@
         
         /* Alternating section backgrounds */
         section:nth-child(odd) {
-            background-color: rgb(249 250 251);
+            background-color: var(--bg-secondary);
         }
         
-        .dark section:nth-child(odd) {
-            background-color: rgb(31 41 55);
-        }
-        
-        nav {
-            color: var(--text);
-            transition: background-color 0.2s, color 0.2s;
-        }
-
         html,
         body {
             background-color: var(--bg);
             color: var(--text);
             transition: background-color 0.2s, color 0.2s;
+        }
+        
+        #default-navbar {
+            color: var(--text);
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        #default-navbar a {
+            color: var(--text);
+            transition: color 0.2s;
+        }
+
+        #default-navbar .nav-link-bar {
+            position: relative;
+        }
+
+        #default-navbar .nav-link-bar::after {
+            content: "";
+            position: absolute;
+            left: 0.75rem;
+            right: 0.75rem;
+            bottom: 0.3rem;
+            height: 0.2rem;
+            border-radius: var(--radius-base);
+            background: var(--gradient-brand);
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform 0.25s ease;
+            pointer-events: none;
+        }
+
+        #default-navbar .nav-link-bar:hover::after,
+        #default-navbar .nav-link-bar:focus-visible::after {
+            transform: scaleX(1);
         }
 
         #default-sidebar > div {
@@ -70,17 +129,264 @@
 
         #default-sidebar a {
             color: var(--text);
+            border-radius: var(--radius-base);
             transition: background-color 0.2s, color 0.2s;
         }
 
         #default-sidebar a:hover {
             background-color: var(--sidebar-link-hover-bg);
             color: var(--sidebar-link-hover-text);
+            border-radius: var(--radius-base);
         }
 
+        .radius-strict-ui :where(a, button, input, select, textarea, .af-card, .af-callout, .af-badge, .af-btn, .af-input, .af-select, .af-textarea, #default-sidebar a) {
+            border-radius: var(--radius-base);
+        }
+
+        .radius-strict-ui section,
+        .radius-strict-ui section * {
+            border-radius: 0;
+        }
+
+        /* ─── Typography baseline ──────────────────────────────────────────── */
         p {
-          font-family:'Poppins', sans-serif;
+            font-family: 'Poppins', sans-serif;
+            color: var(--text);
+            line-height: 1.7;
         }
         h1, h2, h3, h4, h5, h6 {
-          font-family:'Inter', sans-serif;
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            line-height: 1.2;
+        }
+
+        /*
+         * 3-role text utility classes
+         * Use these instead of ad-hoc text-gray-* Tailwind classes:
+         *
+         *  .type-heading  — page titles, section headers, card titles
+         *  .type-body     — paragraph and general content text
+         *  .type-muted    — secondary / supporting / footer / byline text
+         */
+        .type-heading {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            line-height: 1.2;
+            font-weight: 700;
+        }
+        .type-body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text);
+            line-height: 1.7;
+        }
+        .type-muted {
+            font-family: 'Poppins', sans-serif;
+            color: var(--muted-text);
+            line-height: 1.7;
+        }
+        /* ─────────────────────────────────────────────────────────────────── */
+
+        .af-container {
+            width: min(100%, 72rem);
+            margin-inline: auto;
+            padding-inline: 1rem;
+        }
+
+        .af-section {
+            padding-block: 3rem;
+        }
+
+        .af-section-title {
+            font-size: clamp(1.5rem, 2.4vw, 2rem);
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 0.75rem;
+        }
+
+        .af-section-subtitle {
+            color: var(--muted-text);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .af-stack {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .af-grid-two {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(1, minmax(0, 1fr));
+        }
+
+        @media (min-width: 768px) {
+            .af-grid-two {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        .af-card {
+            background-color: var(--surface);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-base);
+            padding: 1rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .af-card-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.35rem;
+        }
+
+        .af-card-text {
+            color: var(--muted-text);
+            line-height: 1.6;
+        }
+
+        .af-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            border-radius: var(--radius-base);
+            padding: 0.55rem 0.95rem;
+            border: 1px solid transparent;
+            font-weight: 500;
+            transition: opacity 0.2s, background-color 0.2s, color 0.2s, border-color 0.2s;
+            cursor: pointer;
+        }
+
+        .af-btn:hover {
+            opacity: 0.92;
+        }
+
+        .af-btn-primary {
+            background-color: var(--accent);
+            color: var(--accent-contrast);
+        }
+
+        .af-btn-secondary {
+            background-color: transparent;
+            color: var(--text);
+            border-color: var(--surface-border);
+        }
+
+        .af-badge {
+            display: inline-flex;
+            align-items: center;
+            border-radius: 999px;
+            padding: 0.2rem 0.6rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border: 1px solid var(--surface-border);
+            color: var(--text);
+            background-color: var(--surface);
+        }
+
+        .af-callout {
+            border-left: 3px solid var(--accent);
+            background-color: var(--surface);
+            color: var(--text);
+            border-radius: var(--radius-base);
+            padding: 0.9rem 1rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .shadow-surface-sm {
+            box-shadow: var(--shadow-sm);
+        }
+
+        .shadow-surface-md {
+            box-shadow: var(--shadow-md);
+        }
+
+        .shadow-surface-lg {
+            box-shadow: var(--shadow-lg);
+        }
+
+        .bg-hero-aurora {
+            background: var(--hero-aurora);
+        }
+
+        .bg-footer-aurora {
+            background: var(--footer-aurora);
+        }
+
+        .gradient-brand-bar {
+            background: var(--gradient-brand);
+            border-radius: var(--radius-base);
+        }
+
+        .bar-thin {
+            height: 0.25rem;
+        }
+
+        .bar-md {
+            height: 0.5rem;
+        }
+
+        .bar-thick {
+            height: 0.75rem;
+        }
+
+        .bar-full {
+            width: 100%;
+        }
+
+        .bar-short {
+            width: 8rem;
+        }
+
+        .bar-medium {
+            width: 14rem;
+        }
+
+        .text-gradient-brand {
+            background: var(--gradient-brand);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .af-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .af-link:hover {
+            text-decoration: underline;
+        }
+
+        .af-form-group {
+            display: grid;
+            gap: 0.45rem;
+        }
+
+        .af-label {
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .af-input,
+        .af-textarea,
+        .af-select {
+            width: 100%;
+            padding: 0.55rem 0.75rem;
+            border-radius: var(--radius-base);
+            border: 1px solid var(--surface-border);
+            background-color: var(--bg);
+            color: var(--text);
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .af-input:focus,
+        .af-textarea:focus,
+        .af-select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--focus-ring);
         }
