@@ -229,9 +229,25 @@
             grid-template-columns: repeat(1, minmax(0, 1fr));
         }
 
+        .af-grid-three {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(1, minmax(0, 1fr));
+        }
+
         @media (min-width: 768px) {
             .af-grid-two {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .af-grid-three {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .af-grid-three {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
             }
         }
 
@@ -248,6 +264,18 @@
         .af-card:focus-within {
             transform: translateY(-0.35rem);
             box-shadow: var(--shadow-lg);
+            border-color: var(--accent);
+        }
+
+        .af-card-link {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .af-card-horizontal {
+            min-height: 8.25rem;
+            padding: 0.85rem 1rem;
         }
 
         .af-card-title {
