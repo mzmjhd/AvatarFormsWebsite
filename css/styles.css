@@ -21,6 +21,7 @@
             --shadow-md: 0 4px 10px -2px rgba(15, 23, 42, 0.14);
             --shadow-lg: 0 12px 24px -8px rgba(15, 23, 42, 0.22);
             --gradient-brand: linear-gradient(90deg, #06B6D4 0%, #4F46E5 50%, #7C3AED 100%);
+            --font-weight-heading: 900;
         }
 
         .dark {
@@ -167,6 +168,7 @@
             font-family: 'Inter', sans-serif;
             color: var(--text);
             line-height: 1.2;
+            font-weight: var(--font-weight-heading);
         }
 
         /*
@@ -181,7 +183,7 @@
             font-family: 'Inter', sans-serif;
             color: var(--text);
             line-height: 1.2;
-            font-weight: 700;
+            font-weight: var(--font-weight-heading);
         }
         .type-body {
             font-family: 'Poppins', sans-serif;
@@ -207,7 +209,7 @@
 
         .af-section-title {
             font-size: clamp(1.5rem, 2.4vw, 2rem);
-            font-weight: 700;
+            font-weight: var(--font-weight-heading);
             color: var(--text);
             margin-bottom: 0.75rem;
         }
@@ -256,6 +258,7 @@
             border: 1px solid var(--surface-border);
             border-radius: var(--radius-base);
             padding: 1rem;
+            margin-bottom: 2rem;
             box-shadow: var(--shadow-sm);
             transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
         }
@@ -279,7 +282,7 @@
 
         .af-card-title {
             font-size: 1.125rem;
-            font-weight: 600;
+            font-weight: var(--font-weight-heading);
             color: var(--text);
             margin-bottom: 0.35rem;
         }
@@ -519,6 +522,79 @@
 
         .af-tab-panel {
             padding-top: 1rem;
+        }
+
+        .af-table-wrap {
+            margin-top: 1rem;
+            overflow-x: auto;
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-base);
+            background-color: var(--bg);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .af-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 720px;
+        }
+
+        .af-table thead th {
+            text-align: left;
+            padding: 0.9rem 1rem;
+            background-color: var(--surface);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            font-weight: var(--font-weight-heading);
+            border-bottom: 1px solid var(--surface-border);
+        }
+
+        .af-table tbody td {
+            padding: 0.9rem 1rem;
+            vertical-align: top;
+            color: var(--text);
+            border-bottom: 1px solid var(--surface-border);
+        }
+
+        .af-table tbody tr:last-child td {
+            border-bottom: 0;
+        }
+
+        .af-table-key {
+            font-family: 'Inter', sans-serif;
+            font-weight: var(--font-weight-heading);
+            width: 28%;
+            white-space: normal;
+        }
+
+        .af-table-value {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.7;
+            color: var(--muted-text);
+        }
+
+        .af-inline-code {
+            display: inline-block;
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 0.9em;
+            background: var(--surface);
+            color: var(--text);
+            border: 1px solid var(--surface-border);
+            border-radius: 0.35rem;
+            padding: 0.1rem 0.35rem;
+            white-space: nowrap;
+        }
+
+        .af-table td code {
+            display: inline-block;
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 0.9em;
+            background: var(--surface);
+            color: var(--text);
+            border: 1px solid var(--surface-border);
+            border-radius: 0.35rem;
+            padding: 0.1rem 0.35rem;
+            white-space: nowrap;
         }
 
         .af-form-group {
