@@ -20,54 +20,55 @@
     <main class="flex-1 py-6 px-50">
       <div id="breadcrumbs-container" class="mb-6"></div>
       <section class="af-stack">
-        <div class="grid grid-cols-2 gap-6" role="list">
-          <a href="" class="af-card af-card-horizontal af-card-link" role="listitem">
-            <div class="af-card-title-row">
-              <h3 class="af-card-title">Partner Requirements</h3>
-              <span class="gradient-brand-bar bar-thin bar-medium" aria-hidden="true"></span>
-            </div>
-            <p class="af-card-text">Understand what partner organisations need from the platform and how they will use it.</p>
-          </a>
+        <ul
+          class="af-tabs"
+          id="requirements-tabs"
+          data-tabs-toggle="#requirements-tab-content"
+          role="tablist"
+          aria-label="Requirements tabs"
+        >
+            <li class="me-2" role="presentation">
+                <button class="af-tab-link" id="profile-tab" data-tabs-target="#profile-panel" type="button" role="tab" aria-controls="profile-panel" aria-selected="true">Profile</button>
+            </li>
+            <li class="me-2" role="presentation">
+                <button class="af-tab-link" id="dashboard-tab" data-tabs-target="#dashboard-panel" type="button" role="tab" aria-controls="dashboard-panel" aria-selected="false">Dashboard</button>
+            </li>
+            <li class="me-2" role="presentation">
+                <button class="af-tab-link" id="settings-tab" data-tabs-target="#settings-panel" type="button" role="tab" aria-controls="settings-panel" aria-selected="false">Settings</button>
+            </li>
+            <li class="me-2" role="presentation">
+                <button class="af-tab-link" id="contacts-tab" data-tabs-target="#contacts-panel" type="button" role="tab" aria-controls="contacts-panel" aria-selected="false">Contacts</button>
+            </li>
+            <li role="presentation">
+                <button class="af-tab-link af-tab-link-disabled" id="disabled-tab" type="button" role="tab" aria-selected="false" disabled>Disabled</button>
+            </li>
+        </ul>
 
-          <a href="" class="af-card af-card-horizontal af-card-link" role="listitem">
-            <div class="af-card-title-row">
-              <h3 class="af-card-title">Project Background</h3>
-              <span class="gradient-brand-bar bar-thin bar-medium" aria-hidden="true"></span>
+        <div id="requirements-tab-content">
+          <div class="af-tab-panel" id="profile-panel" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="af-card">
+              <h3 class="af-card-title">Profile Requirements</h3>
+              <p class="af-card-text">Define persona details, stakeholders, and high-level goals for this requirements stream.</p>
             </div>
-            <p class="af-card-text">Review the context and key motivations that led to the AvatarForms project.</p>
-          </a>
-
-          <a href="" class="af-card af-card-horizontal af-card-link" role="listitem">
-            <div class="af-card-title-row">
-              <h3 class="af-card-title">Project Goals</h3>
-              <span class="gradient-brand-bar bar-thin bar-medium" aria-hidden="true"></span>
+          </div>
+          <div class="hidden af-tab-panel" id="dashboard-panel" role="tabpanel" aria-labelledby="dashboard-tab">
+            <div class="af-card">
+              <h3 class="af-card-title">Dashboard Requirements</h3>
+              <p class="af-card-text">Capture overview metrics, priority insights, and the key widgets needed on the dashboard.</p>
             </div>
-            <p class="af-card-text">See the core objectives that define what success looks like for this project.</p>
-          </a>
-
-          <a href="" class="af-card af-card-horizontal af-card-link" role="listitem">
-            <div class="af-card-title-row">
-              <h3 class="af-card-title">Requirements Gathering</h3>
-              <span class="gradient-brand-bar bar-thin bar-medium" aria-hidden="true"></span>
+          </div>
+          <div class="hidden af-tab-panel" id="settings-panel" role="tabpanel" aria-labelledby="settings-tab">
+            <div class="af-card">
+              <h3 class="af-card-title">Settings Requirements</h3>
+              <p class="af-card-text">List configuration options, validation rules, and default values for user/system settings.</p>
             </div>
-            <p class="af-card-text">Explore how requirements were collected from stakeholders, research, and analysis.</p>
-          </a>
-
-          <a href="" class="af-card af-card-horizontal af-card-link" role="listitem">
-            <div class="af-card-title-row">
-              <h3 class="af-card-title">Use Cases</h3>
-              <span class="gradient-brand-bar bar-thin bar-medium" aria-hidden="true"></span>
+          </div>
+          <div class="hidden af-tab-panel" id="contacts-panel" role="tabpanel" aria-labelledby="contacts-tab">
+            <div class="af-card">
+              <h3 class="af-card-title">Contacts Requirements</h3>
+              <p class="af-card-text">Document contact fields, permission levels, and required integrations for directory data.</p>
             </div>
-            <p class="af-card-text">Browse practical scenarios that show how users interact with AvatarForms features.</p>
-          </a>
-
-          <a href="" class="af-card af-card-horizontal af-card-link" role="listitem">
-            <div class="af-card-title-row">
-              <h3 class="af-card-title">MoSCoW Requirement List</h3>
-              <span class="gradient-brand-bar bar-thin bar-medium" aria-hidden="true"></span>
-            </div>
-            <p class="af-card-text">View prioritised requirements grouped into Must, Should, Could, and Won't have.</p>
-          </a>
+          </div>
         </div>
       </section>
     </main>
@@ -125,6 +126,43 @@
       });
     }
 
+    function initRequirementsTabs() {
+      const tabList = document.getElementById('requirements-tabs');
+      const panelContainer = document.getElementById('requirements-tab-content');
+      if (!tabList || !panelContainer) return;
+
+      const tabs = Array.from(tabList.querySelectorAll('[role="tab"][data-tabs-target]'));
+      const panels = Array.from(panelContainer.querySelectorAll('[role="tabpanel"]'));
+      if (!tabs.length || !panels.length) return;
+
+      const activateTab = (selectedTab) => {
+        const targetSelector = selectedTab.getAttribute('data-tabs-target');
+        if (!targetSelector) return;
+
+        tabs.forEach((tab) => {
+          const isActive = tab === selectedTab;
+          tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+          tab.tabIndex = isActive ? 0 : -1;
+        });
+
+        panels.forEach((panel) => {
+          panel.classList.add('hidden');
+        });
+
+        const activePanel = panelContainer.querySelector(targetSelector);
+        if (activePanel) {
+          activePanel.classList.remove('hidden');
+        }
+      };
+
+      tabs.forEach((tab) => {
+        tab.addEventListener('click', () => activateTab(tab));
+      });
+
+      const initiallySelected = tabs.find((tab) => tab.getAttribute('aria-selected') === 'true') || tabs[0];
+      activateTab(initiallySelected);
+    }
+
 
     fetch('components/navbar.html')
       .then(response => response.text())
@@ -154,6 +192,8 @@
         document.getElementById('footer-placeholder').innerHTML = data;
       })
       .catch(error => console.error('Error loading footer:', error));
+
+    initRequirementsTabs();
 
   </script>
 </body>

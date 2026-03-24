@@ -18,7 +18,7 @@ Website for the COMP0016 System Engineering Project: AvatarForms.
 - `components/breadcrumbs.html`: base breadcrumb root (`Home`)
 - `css/styles.css`: theme variables, dark mode, typography, sidebar styles
 - `docs/design-system.md`: semantic class rules and copy/paste patterns
-- `.vscode/html.code-snippets`: developer snippets (including `afhtml`)
+- `.vscode/html.code-snippets`: developer snippets (including `afhtml` and `aftabs`)
 
 ## Run Locally
 
@@ -40,6 +40,15 @@ Use the VS Code snippet prefix `afhtml` (defined in `.vscode/html.code-snippets`
 - Default page layout (`min-h-screen`, fixed sidebar + main content)
 - Shared script to load navbar/sidebar/breadcrumb components
 - Breadcrumb generation helper (`breadcrumbPaths` + `addCurrentBreadcrumb()`)
+
+## Dynamic Tabs Snippet (`aftabs`)
+
+Use the VS Code snippet prefix `aftabs` (defined in `.vscode/html.code-snippets`) to insert an in-page tab pattern with:
+
+- AvatarForms tab styling (`af-tabs`, `af-tab-link`) including gradient hover/active bottom bar
+- Accessible tab semantics (`role="tablist"`, `role="tab"`, `role="tabpanel"`, `aria-selected`)
+- Hidden/showing tab panels that update dynamically on tab click (no page navigation)
+- A small initializer (`initAfTabs(...)`) for reliable tab switching without relying on Flowbite auto-init
 
 ### New Page Checklist (after using `afhtml`)
 
