@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>AvatarForms - System Design</title>
+		<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+		<link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet"/>
+		<link href="css/styles.css" rel="stylesheet"/>
+	</head>
+	<body class="min-h-screen flex flex-col">
+		<nav id="navbar-container" class="fixed top-0 w-full z-50"></nav>
+
+		<!-- Layout Container -->
+		<div class="flex flex-1 pt-16">
+			<aside id="sidebar-container" class="w-64 flex-shrink-0 self-stretch"></aside>
+
+			<!-- Main content area -->
+			<main class="flex-1 py-6 px-50">
+				<div id="breadcrumbs-container" class="mb-6"></div>
+
+				<section class="af-stack">
+					<div class="af-stack">
+						<h1 class="af-section-title">System Design</h1>
+						<p class="af-section-subtitle">An overview of our design choices to build a robust and scalable application</p>
+					</div>
+
+					<ul class="af-tabs" id="system-design-tabs" role="tablist" aria-label="System design tabs">
+						<li class="me-2" role="presentation">
+							<button class="af-tab-link" id="system-design-overview-tab" data-tabs-target="#system-design-overview-panel" type="button" role="tab" aria-controls="system-design-overview-panel" aria-selected="true">Overview</button>
+						</li>
+						<li class="me-2" role="presentation">
+							<button class="af-tab-link" id="system-design-architecture-tab" data-tabs-target="#system-design-architecture-panel" type="button" role="tab" aria-controls="system-design-architecture-panel" aria-selected="false">Architecture</button>
+						</li>
+						<li class="me-2" role="presentation">
+							<button class="af-tab-link" id="system-design-data-flow-tab" data-tabs-target="#system-design-data-flow-panel" type="button" role="tab" aria-controls="system-design-data-flow-panel" aria-selected="false">Data Flow</button>
+						</li>
+						<li class="me-2" role="presentation">
+							<button class="af-tab-link" id="system-design-security-tab" data-tabs-target="#system-design-security-panel" type="button" role="tab" aria-controls="system-design-security-panel" aria-selected="false">Security</button>
+						</li>
+						<li role="presentation">
+							<button class="af-tab-link" id="system-design-deployment-tab" data-tabs-target="#system-design-deployment-panel" type="button" role="tab" aria-controls="system-design-deployment-panel" aria-selected="false">Deployment</button>
+						</li>
+					</ul>
+
+					<div id="system-design-tab-content">
+						<div class="af-tab-panel" id="system-design-overview-panel" role="tabpanel" aria-labelledby="system-design-overview-tab">
+							<div class="af-card">
+								<h3 class="af-card-title">Overview</h3>
+								<p class="af-card-text">Describe project scope, core goals, and major system boundaries in this section.</p>
+							</div>
+						</div>
+						<div class="hidden af-tab-panel" id="system-design-architecture-panel" role="tabpanel" aria-labelledby="system-design-architecture-tab">
+							<div class="af-card">
+								<h3 class="af-card-title">Architecture</h3>
+								<p class="af-card-text">Document key components, responsibilities, and interactions between frontend, backend, and AI services.</p>
+							</div>
+						</div>
+						<div class="hidden af-tab-panel" id="system-design-data-flow-panel" role="tabpanel" aria-labelledby="system-design-data-flow-tab">
+							<div class="af-card">
+								<h3 class="af-card-title">Data Flow</h3>
+								<p class="af-card-text">Map the lifecycle of user inputs, transformations, storage, and outputs across the platform.</p>
+							</div>
+						</div>
+						<div class="hidden af-tab-panel" id="system-design-security-panel" role="tabpanel" aria-labelledby="system-design-security-tab">
+							<div class="af-card">
+								<h3 class="af-card-title">Security</h3>
+								<p class="af-card-text">Capture authentication, authorization, data protection, and compliance requirements here.</p>
+							</div>
+						</div>
+						<div class="hidden af-tab-panel" id="system-design-deployment-panel" role="tabpanel" aria-labelledby="system-design-deployment-tab">
+							<div class="af-card">
+								<h3 class="af-card-title">Deployment</h3>
+								<p class="af-card-text">Outline hosting strategy, environments, release process, and monitoring considerations.</p>
+							</div>
+						</div>
+					</div>
+				</section>
+			</main>
+		</div>
+
+		<div id="footer-placeholder"></div>
+
+		<script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
+		<script>
+			const breadcrumbPaths = {
+				'index.html': [{ title: 'Home', href: 'index.html' }],
+				'requirements.html': [
+					{ title: 'Home', href: 'index.html' },
+					{ title: 'Requirements', href: 'requirements.html' }
+				],
+				'appendices.html': [
+					{ title: 'Home', href: 'index.html' },
+					{ title: 'Requirements', href: 'requirements.html' },
+					{ title: 'Appendices', href: 'appendices.html' }
+				],
+				'ui-showcase.html': [
+					{ title: 'Home', href: 'index.html' },
+					{ title: 'UI Showcase', href: 'ui-showcase.html' }
+				],
+				'system-design.html': [
+					{ title: 'Home', href: 'index.html' },
+					{ title: 'System Design', href: 'system-design.html' }
+				]
+			};
+
+			function addCurrentBreadcrumb() {
+				const breadcrumbsList = document.getElementById('breadcrumbs-list');
+				if (!breadcrumbsList) return;
+
+				const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+				const trail = breadcrumbPaths[currentPath] || [
+					{ title: 'Home', href: 'index.html' },
+					{ title: 'Page' }
+				];
+
+				if (currentPath === 'index.html') return;
+
+				trail.slice(1).forEach((crumb, index) => {
+					const isLast = index === trail.slice(1).length - 1;
+					const listItem = document.createElement('li');
+					listItem.className = 'inline-flex items-center gap-2 text-body';
+
+					const separator = `
+						<svg class="w-3 h-3 text-body" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+							<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+						</svg>
+					`;
+
+					if (isLast || !crumb.href) {
+						listItem.innerHTML = `${separator}<span aria-current="page">${crumb.title}</span>`;
+					} else {
+						listItem.innerHTML = `${separator}<a href="${crumb.href}" class="hover:text-fg-brand">${crumb.title}</a>`;
+					}
+
+					breadcrumbsList.appendChild(listItem);
+				});
+			}
+
+			function initAfTabs(tabListId, panelContainerId) {
+				const tabList = document.getElementById(tabListId);
+				const panelContainer = document.getElementById(panelContainerId);
+				if (!tabList || !panelContainer) return;
+
+				const tabs = Array.from(tabList.querySelectorAll('[role="tab"][data-tabs-target]'));
+				const panels = Array.from(panelContainer.querySelectorAll('[role="tabpanel"]'));
+				if (!tabs.length || !panels.length) return;
+
+				const activateTab = (selectedTab) => {
+					const targetSelector = selectedTab.getAttribute('data-tabs-target');
+					if (!targetSelector) return;
+
+					tabs.forEach((tab) => {
+						const isActive = tab === selectedTab;
+						tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+						tab.tabIndex = isActive ? 0 : -1;
+					});
+
+					panels.forEach((panel) => panel.classList.add('hidden'));
+
+					const activePanel = panelContainer.querySelector(targetSelector);
+					if (activePanel) activePanel.classList.remove('hidden');
+				};
+
+				tabs.forEach((tab) => {
+					tab.addEventListener('click', () => activateTab(tab));
+				});
+
+				const initiallySelected = tabs.find((tab) => tab.getAttribute('aria-selected') === 'true') || tabs[0];
+				activateTab(initiallySelected);
+			}
+
+			fetch('components/navbar.html')
+				.then(response => response.text())
+				.then(data => {
+					document.getElementById('navbar-container').innerHTML = data;
+				})
+				.catch(error => console.error('Error loading navbar:', error));
+
+			fetch('components/sidebar.html')
+				.then(response => response.text())
+				.then(data => {
+					document.getElementById('sidebar-container').innerHTML = data;
+				})
+				.catch(error => console.error('Error loading sidebar:', error));
+
+			fetch('components/breadcrumbs.html')
+				.then(response => response.text())
+				.then(data => {
+					document.getElementById('breadcrumbs-container').innerHTML = data;
+					addCurrentBreadcrumb();
+				})
+				.catch(error => console.error('Error loading breadcrumbs:', error));
+
+			fetch('components/footer.txt')
+				.then(response => response.text())
+				.then(data => {
+					document.getElementById('footer-placeholder').innerHTML = data;
+				})
+				.catch(error => console.error('Error loading footer:', error));
+
+			initAfTabs('system-design-tabs', 'system-design-tab-content');
+		</script>
+	</body>
+</html>
