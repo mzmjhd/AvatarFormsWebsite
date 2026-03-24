@@ -8,13 +8,13 @@
     <link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet"/>
     <link href="css/styles.css" rel="stylesheet"/>
   </head>
-  <body>
+  <body class="min-h-screen flex flex-col">
     <nav id="navbar-container" class="fixed top-0 w-full z-50"></nav>
 
-    <div class="flex pt-16 min-h-screen">
-      <aside id="sidebar-container" class="w-64 flex-shrink-0"></aside>
+    <div id="main-container" class="flex flex-1 pt-16">
+      <aside id="sidebar-container" class="w-64 flex"></aside>
 
-      <main class="flex-1 p-6 pb-96">
+      <main class="flex-1 p-6">
         <div id="breadcrumbs-container" class="mb-6"></div>
 
         <section class="af-section">
@@ -155,7 +155,7 @@
     </div>
 
     <!--Footer-->
-    <footer class="bg-neutral-primary bg-footer-aurora fixed bottom-0 left-0 right-0 w-full z-50" style="z-index: 9999;">
+    <footer class="bg-footer-aurora w-full">
       <div class="mx-auto w-3/5 px-8 py-8">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           <!--Logo and Name-->
@@ -290,11 +290,6 @@
         });
       }
 
-      function syncSidebarWithFooter() {
-        // Sidebar now flows naturally, footer will be pushed down automatically
-        // No manual positioning needed
-      }
-
       fetch('components/navbar.html')
         .then(response => response.text())
         .then(data => {
@@ -306,8 +301,6 @@
         .then(response => response.text())
         .then(data => {
           document.getElementById('sidebar-container').innerHTML = data;
-          syncSidebarWithFooter();
-          initRequirementsDropdown();
         })
         .catch(error => console.error('Error loading sidebar:', error));
 
@@ -319,31 +312,6 @@
         })
         .catch(error => console.error('Error loading breadcrumbs:', error));
 
-      window.addEventListener('resize', syncSidebarWithFooter);
-
-      function toggleRequirementsDropdown() {
-        const dropdown = document.getElementById('requirements-dropdown');
-        const arrow = document.getElementById('requirements-arrow');
-        
-        if (dropdown.classList.contains('max-h-0')) {
-          dropdown.classList.remove('max-h-0');
-          dropdown.classList.add('max-h-96');
-        } else {
-          dropdown.classList.remove('max-h-96');
-          dropdown.classList.add('max-h-0');
-        }
-        arrow.classList.toggle('rotate-180');
-      }
-
-      function initRequirementsDropdown() {
-        const button = document.getElementById('requirements-button');
-        if (button) {
-          button.addEventListener('click', function(event) {
-            event.stopPropagation();
-            toggleRequirementsDropdown();
-          });
-        }
-      }
     </script>
   </body>
 </html>
