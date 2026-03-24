@@ -20,7 +20,7 @@
       "      <aside id=\"sidebar-container\" class=\"w-64 flex-shrink-0 self-stretch\"></aside>",
       "",
       "      <!-- Main content area -->",
-      "      <main class=\"flex-1 p-6\">",
+      "      <main class=\"flex-1 py-6 px-50\">",
       "        <div id=\"breadcrumbs-container\" class=\"mb-6\"></div>",
       "        $0",
       "      </main>",
