@@ -17,7 +17,7 @@
       "",
       "    <!-- Layout Container -->",
       "    <div class=\"flex flex-1 pt-16\">",
-      "      <aside id=\"sidebar-container\" class=\"w-64 flex-shrink-0 self-stretch\"></aside>",
+      "      <aside id=\"sidebar-container\" class=\"w-64 flex\"></aside>",
       "",
       "      <!-- Main content area -->",
       "      <main class=\"flex-1 w-full max-w-[1400px] mx-auto py-6 px-4 sm:px-6 lg:px-8\">",

@@ -13,65 +13,169 @@
 
 		<!-- Layout Container -->
 		<div class="flex flex-1 pt-16">
-			<aside id="sidebar-container" class="w-64 flex-shrink-0 self-stretch"></aside>
+			<aside id="sidebar-container" class="w-64 flex"></aside>
 
 			<!-- Main content area -->
-			<main class="flex-1 py-6 px-50">
+			<main class="flex-1 w-full max-w-[1400px] mx-auto py-6 px-4 sm:px-6 lg:px-8">
 				<div id="breadcrumbs-container" class="mb-6"></div>
 
 				<section class="af-stack">
 					<div class="af-stack">
 						<h1 class="af-section-title">System Design</h1>
-						<p class="af-section-subtitle">An overview of our design choices to build a robust and scalable application</p>
+						<p class="af-section-subtitle">An overview of our design choices to build a robust and scalable software.</p>
 					</div>
 
 					<ul class="af-tabs" id="system-design-tabs" role="tablist" aria-label="System design tabs">
 						<li class="me-2" role="presentation">
-							<button class="af-tab-link" id="system-design-overview-tab" data-tabs-target="#system-design-overview-panel" type="button" role="tab" aria-controls="system-design-overview-panel" aria-selected="true">Overview</button>
+							<button class="af-tab-link" id="system-design-architecture-tab" data-tabs-target="#system-design-architecture-panel" type="button" role="tab" aria-controls="system-design-architecture-panel" aria-selected="true">System Architecture</button>
+						</li>
+                        <li class="me-2" role="presentation">
+							<button class="af-tab-link" id="system-design-sequence-tab" data-tabs-target="#system-design-sequence-panel" type="button" role="tab" aria-controls="system-design-sequence-panel" aria-selected="false">Sequence Diagram</button>
 						</li>
 						<li class="me-2" role="presentation">
-							<button class="af-tab-link" id="system-design-architecture-tab" data-tabs-target="#system-design-architecture-panel" type="button" role="tab" aria-controls="system-design-architecture-panel" aria-selected="false">Architecture</button>
+							<button class="af-tab-link" id="system-design-site-tab" data-tabs-target="#system-design-site-panel" type="button" role="tab" aria-controls="system-design-site-panel" aria-selected="false">Site Map</button>
 						</li>
 						<li class="me-2" role="presentation">
-							<button class="af-tab-link" id="system-design-data-flow-tab" data-tabs-target="#system-design-data-flow-panel" type="button" role="tab" aria-controls="system-design-data-flow-panel" aria-selected="false">Data Flow</button>
-						</li>
-						<li class="me-2" role="presentation">
-							<button class="af-tab-link" id="system-design-security-tab" data-tabs-target="#system-design-security-panel" type="button" role="tab" aria-controls="system-design-security-panel" aria-selected="false">Security</button>
+							<button class="af-tab-link" id="system-design-design-pattern-tab" data-tabs-target="#system-design-design-pattern-panel" type="button" role="tab" aria-controls="system-design-design-pattern-panel" aria-selected="false">Design Pattern</button>
 						</li>
 						<li role="presentation">
-							<button class="af-tab-link" id="system-design-deployment-tab" data-tabs-target="#system-design-deployment-panel" type="button" role="tab" aria-controls="system-design-deployment-panel" aria-selected="false">Deployment</button>
+							<button class="af-tab-link" id="system-design-data-tab" data-tabs-target="#system-design-data-panel" type="button" role="tab" aria-controls="system-design-data-panel" aria-selected="false">Data Storage</button>
 						</li>
 					</ul>
 
 					<div id="system-design-tab-content">
-						<div class="af-tab-panel" id="system-design-overview-panel" role="tabpanel" aria-labelledby="system-design-overview-tab">
+						<div class="af-tab-panel" id="system-design-architecture-panel" role="tabpanel" aria-labelledby="system-design-architecture-tab">
 							<div class="af-card">
-								<h3 class="af-card-title">Overview</h3>
-								<p class="af-card-text">Describe project scope, core goals, and major system boundaries in this section.</p>
+								<div class="af-card-title-row">
+									<span class="af-card-title">System Architecture Diagram</span>
+									<span class="gradient-brand-bar bar-thin"></span>
+								</div>
+								<p class="af-card-text">Showcases the blueprint of our software, its core components, their relationships, and the communication channels between them.</p>
+								<div class="af-iframe-container">
+									<iframe
+										class="af-iframe"
+										src="https://whimsical.com/embed/WfY52g5bo8hSyGiP6Z8fZe"
+										title="System architecture diagram"
+										loading="lazy"
+									></iframe>
+								</div>
+                            </div>
+						</div>
+                        <div class="hidden af-tab-panel" id="system-design-sequence-panel" role="tabpanel" aria-labelledby="system-design-sequence-tab">
+							<div class="af-card">
+								<div class="af-card-title-row">
+									<span class="af-card-title">Sequence Diagram</span>
+									<span class="gradient-brand-bar bar-thin"></span>
+								</div>
+								<p class="af-card-text">Details how objects and services in our software interact in a time-sequenced throughout an interview session.</p>
+                                <div class="af-iframe-container">
+									<iframe
+										class="af-iframe"
+										src="https://whimsical.com/embed/61g8BWmmWHXgAgkieA4rcy"
+										title="System architecture diagram"
+										loading="lazy"
+									></iframe>
+								</div>
 							</div>
 						</div>
-						<div class="hidden af-tab-panel" id="system-design-architecture-panel" role="tabpanel" aria-labelledby="system-design-architecture-tab">
+						<div class="hidden af-tab-panel" id="system-design-site-panel" role="tabpanel" aria-labelledby="system-design-site-tab">
 							<div class="af-card">
-								<h3 class="af-card-title">Architecture</h3>
-								<p class="af-card-text">Document key components, responsibilities, and interactions between frontend, backend, and AI services.</p>
+								<div class="af-card-title-row">
+									<span class="af-card-title">Site Map</span>
+									<span class="gradient-brand-bar bar-thin"></span>
+								</div>
+								<p class="af-card-text">Displays all the pages and UI elements in our software and the relationship between them.</p>
+								<div class="af-iframe-container">
+									<iframe
+										class="af-iframe"
+										src="https://whimsical.com/embed/BFfL31rQPuPagB6baKRoWM"
+										title="System architecture diagram"
+										loading="lazy"
+									></iframe>
+								</div>
 							</div>
 						</div>
-						<div class="hidden af-tab-panel" id="system-design-data-flow-panel" role="tabpanel" aria-labelledby="system-design-data-flow-tab">
+						<div class="hidden af-tab-panel" id="system-design-design-pattern-panel" role="tabpanel" aria-labelledby="system-design-design-pattern-tab">
 							<div class="af-card">
-								<h3 class="af-card-title">Data Flow</h3>
-								<p class="af-card-text">Map the lifecycle of user inputs, transformations, storage, and outputs across the platform.</p>
+								<div class="af-card-title-row">
+									<span class="af-card-title">Design Patterns</span>
+									<span class="gradient-brand-bar bar-thin"></span>
+								</div>
+								<p class="af-card-text">We maintained high code readability and maintainability by following several proven software design patterns.</p>
+								<div class="af-table-wrap">
+									<table class="af-table">
+										<thead>
+											<tr>
+												<th>Pattern</th>
+												<th>Implementation</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td class="af-table-key">Dependency Injection</td>
+												<td class="af-table-value">We utilised this pattern in the WinUI frontend (C#). This can be seen through the usage of <code class="af-inline-code">App.GetService&lt;T&gt;()</code> to provide services like <code class="af-inline-code">IPythonProcessService</code>, <code class="af-inline-code">ILlamafileProcessService</code>, and <code class="af-inline-code">ILocalSettingsService</code>, decoupling the UI from backend implementations.</td>
+											</tr>
+											<tr>
+												<td class="af-table-key">Observer</td>
+												<td class="af-table-value">We utilised this pattern heavily to communicate state changes across the different systems in our software. For instance, <code class="af-inline-code">_pythonProcessService.OutputReceived += _onPythonOutput</code> routes standard output streams from the Python backend directly to the <code class="af-inline-code">WinUI DispatcherQueue</code> to update the console log in <code class="af-inline-code">AvatarPage</code>.</td>
+											</tr>
+											<tr>
+												<td class="af-table-key">Facade</td>
+												<td class="af-table-value">We implemented the Python class <code class="af-inline-code">AvatarFormsInterviewer</code>, which hides the complexities of multiple agentic LLM logic. It encapsulates the underlying initialisations of <code class="af-inline-code">TalkerAgent</code>, <code class="af-inline-code">EvaluatorAgent</code>, and <code class="af-inline-code">RAG_Agent</code>, providing a streamlined interview loop.</td>
+											</tr>
+											<tr>
+												<td class="af-table-key">Strategy</td>
+												<td class="af-table-value">We implemented distinct agent classes (<code class="af-inline-code">TalkerAgent</code>, <code class="af-inline-code">EvaluatorAgent</code>, <code class="af-inline-code">RAG_Agent</code>) in the Python backend to encapsulate the specific reasoning strategy needed at different stages of the interview (e.g: asking standard queries vs evaluating an off-topic user response).</td>
+											</tr>
+											<tr>
+												<td class="af-table-key">State</td>
+												<td class="af-table-value">Our <code class="af-inline-code">AvatarFormsInterviewer</code> functions as a conversation state machine. It actively transitions between states (<code class="af-inline-code">questions_index</code>, <code class="af-inline-code">last_evaluation</code>, and <code class="af-inline-code">cutoff counters</code>), deciding dynamically whether to prompt for more information or smoothly advance the interview.</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
 							</div>
+
+                            <div class="af-card">
+								<div class="af-card-title-row">
+									<span class="af-card-title">Design Principles</span>
+									<span class="gradient-brand-bar bar-thin"></span>
+								</div>
+								<ul class="list-disc pl-6 mt-4 space-y-3">
+									<li class="af-table-value">
+										<strong class="type-heading">Single Responsibility Principle (SRP):</strong>
+										Each component has a strictly defined responsibility. In the Agent Orchestration Layer (Python), the <code class="af-inline-code">TalkerAgent</code> drafts speech, the <code class="af-inline-code">EvaluatorAgent</code> analyses response accuracy, and the <code class="af-inline-code">RAG_Agent</code> extracts structured final answers. In the .NET application, <code class="af-inline-code">AvatarPage.xaml.cs</code> only handles view and peripheral logic, delegating heavy logic to APIs and services
+									</li>
+									<li class="af-table-value">
+										<strong class="type-heading">Separation of Concerns (SoC):</strong>
+										There is a clear boundary between UI layout (WinUI), backend logic (.NET), agent orchestration (Python) and avatar generation (HeadTTS). Instead of mixing all the separate logics in the main .NET application, the systems interact through APIs such as <code class="af-inline-code">WebSockets</code> and lightweight <code class="af-inline-code">HTTP</code> servers.
+									</li>
+									<li class="af-table-value">
+										<strong class="type-heading">Open/Closed Principle (OCP):</strong>
+										.NET functionalities are defined through clear interfaces such as <code class="af-inline-code">ILocalSettingsService</code> and <code class="af-inline-code">IPythonProcessService</code>. The system can swap how Python processes are started or how settings are cached without modifying logic in <code class="af-inline-code">AvatarPage</code>.
+									</li>
+									<li class="af-table-value">
+										<strong class="type-heading">Don't Repeat Yourself (DRY):</strong>
+                                        Repetitive logic is consistently abstracted into reusable functions and methods, significantly reducing redundancy across the system.								
+                                    </li>
+								</ul>
+                            </div>
 						</div>
-						<div class="hidden af-tab-panel" id="system-design-security-panel" role="tabpanel" aria-labelledby="system-design-security-tab">
+						<div class="hidden af-tab-panel" id="system-design-data-panel" role="tabpanel" aria-labelledby="system-design-data-tab">
 							<div class="af-card">
-								<h3 class="af-card-title">Security</h3>
-								<p class="af-card-text">Capture authentication, authorization, data protection, and compliance requirements here.</p>
-							</div>
-						</div>
-						<div class="hidden af-tab-panel" id="system-design-deployment-panel" role="tabpanel" aria-labelledby="system-design-deployment-tab">
-							<div class="af-card">
-								<h3 class="af-card-title">Deployment</h3>
-								<p class="af-card-text">Outline hosting strategy, environments, release process, and monitoring considerations.</p>
+								<div class="af-card-title-row">
+									<span class="af-card-title">ER Diagram</span>
+									<span class="gradient-brand-bar bar-thin"></span>
+								</div>
+								<p class="af-card-text">Illustrates a visual, structural representation of data, mapping entities, their attributes, and relationships within our database.</p>
+                                <div class="af-iframe-container">
+									<iframe
+										class="af-iframe"
+										src="https://whimsical.com/embed/EhmdGwR2CoAVztVXTMehV2"
+										title="System architecture diagram"
+										loading="lazy"
+									></iframe>
+								</div>
 							</div>
 						</div>
 					</div>
