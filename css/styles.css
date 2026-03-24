@@ -262,9 +262,8 @@
 
         .af-card:hover,
         .af-card:focus-within {
-            transform: translateY(-0.35rem);
+            transform: translateY(-0.05rem), ease(0.2s);
             box-shadow: var(--shadow-lg);
-            border-color: var(--accent);
         }
 
         .af-card-link {
@@ -420,6 +419,90 @@
 
         .af-link:hover {
             text-decoration: underline;
+        }
+
+        .af-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-end;
+            gap: 0.25rem;
+            border-bottom: 1px solid var(--surface-border);
+        }
+
+        .af-tab-link {
+            position: relative;
+            display: inline-block;
+            padding: 1rem;
+            background: transparent;
+            border-radius: var(--radius-base) var(--radius-base) 0 0;
+            border-bottom: 0.2rem solid transparent;
+            border-left: none;
+            border-right: none;
+            border-top: none;
+            color: var(--muted-text);
+            text-decoration: none;
+            transition: color 0.2s ease, background-color 0.2s ease, border-image 0.2s ease;
+            cursor: pointer;
+        }
+
+        .af-tab-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -0.2rem;
+            height: 0.2rem;
+            background: var(--gradient-brand);
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform 0.25s ease;
+            pointer-events: none;
+        }
+
+        .af-tab-link:hover,
+        .af-tab-link:focus-visible {
+            color: var(--text);
+            background-color: var(--surface);
+            border-image-source: var(--gradient-brand);
+            border-image-slice: 1;
+            outline: none;
+        }
+
+        .af-tab-link:hover::after,
+        .af-tab-link:focus-visible::after {
+            transform: scaleX(1);
+        }
+
+        .af-tab-link[aria-current="page"],
+        .af-tab-link[aria-selected="true"] {
+            color: var(--text);
+            background-color: var(--surface);
+            border-image-source: var(--gradient-brand);
+            border-image-slice: 1;
+            font-weight: 600;
+        }
+
+        .af-tab-link[aria-current="page"]::after,
+        .af-tab-link[aria-selected="true"]::after {
+            transform: scaleX(1);
+        }
+
+        .af-tab-link-disabled,
+        .af-tab-link-disabled:hover,
+        .af-tab-link-disabled:focus-visible {
+            color: var(--text-soft);
+            cursor: not-allowed;
+            background-color: transparent;
+            border-image: none;
+            border-bottom-color: transparent;
+        }
+
+        .af-tab-link-disabled::after {
+            display: none;
+        }
+
+        .af-tab-panel {
+            padding-top: 1rem;
         }
 
         .af-form-group {
