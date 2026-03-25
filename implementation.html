@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>AvatarForms - Implementation</title>
+		<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+		<link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet"/>
+		<link href="css/styles.css" rel="stylesheet"/>
+	</head>
+	<body class="min-h-screen flex flex-col">
+		<nav id="navbar-container" class="fixed top-0 w-full z-50"></nav>
+
+		<!-- Layout Container -->
+		<div class="flex flex-1 pt-16">
+			<aside id="sidebar-container" class="w-64 flex"></aside>
+
+			<!-- Main content area -->
+			<main class="flex-1 w-full max-w-[1400px] mx-auto py-6 px-4 sm:px-6 lg:px-8">
+				<div id="breadcrumbs-container" class="mb-6"></div>
+
+				<section class="af-stack">
+					<div class="af-stack">
+						<h1 class="af-section-title">Implementation</h1>
+						<p class="af-section-subtitle">A deep dive into the technical details of the project.</p>
+					</div>
+
+                    <ul class="af-tabs" id="implementation-tabs" role="tablist" aria-label="Implementation tabs">
+                        <li class="me-2" role="presentation">
+                            <button class="af-tab-link" id="implementation-AI-tab" data-tabs-target="#implementation-AI-panel" type="button" role="tab" aria-controls="implementation-AI-panel" aria-selected="true">AI Implementation</button>
+                        </li>
+                        <li class="me-2" role="presentation">
+                            <button class="af-tab-link" id="implementation-backend-tab" data-tabs-target="#implementation-backend-panel" type="button" role="tab" aria-controls="implementation-backend-panel" aria-selected="true">Backend Implementation (.NET)</button>
+                        </li>
+                        <li class="me-2" role="presentation">
+                            <button class="af-tab-link" id="implementation-database-tab" data-tabs-target="#implementation-database-panel" type="button" role="tab" aria-controls="implementation-database-panel" aria-selected="true">Database</button>
+                        </li>
+                        <li class="me-2" role="presentation">
+                            <button class="af-tab-link" id="implementation-avatar-tab" data-tabs-target="#implementation-avatar-panel" type="button" role="tab" aria-controls="implementation-avatar-panel" aria-selected="true">Avatar Generation</button>
+                        </li>
+                        <li role="presentation">
+                            <button class="af-tab-link" id="implementation-packaging-tab" data-tabs-target="#implementation-packaging-panel" type="button" role="tab" aria-controls="implementation-packaging-panel" aria-selected="true">Packaging & Deployment</button>
+                        </li>
+                    </ul>
+
+                    <div id="implementation-tab-content">
+                        <!-- AI Implementation -->
+                        <div class="af-tab-panel" id="implementation-AI-panel" role="tabpanel" aria-labelledby="implementation-AI-tab">
+                            <div class="af-card">
+                                <div class="af-card-title-row">
+                                    <span class="af-card-title">Python Agents</span>
+                                    <span class="gradient-brand-bar bar-thin"></span>
+                                </div>
+                                <p class="af-card-text">Python agent description.</p>
+                            </div>
+                            <div class="af-card">
+                                <div class="af-card-title-row">
+                                    <span class="af-card-title">Llamafile</span>
+                                    <span class="gradient-brand-bar bar-thin"></span>
+                                </div>
+                                <p class="af-card-text">Llamafile description.</p>
+                            </div>
+                            <div class="af-card">
+                                <div class="af-card-title-row">
+                                    <span class="af-card-title">I/O Streaming</span>
+                                    <span class="gradient-brand-bar bar-thin"></span>
+                                </div>
+                                <p class="af-card-text">Content</p>
+                            </div>
+                        </div>
+
+                        <!-- Backend Implementation -->
+                        <div class="af-tab-panel" id="implementation-backend-panel" role="tabpanel" aria-labelledby="implementation-backend-tab">
+                            <div class="af-card">
+                                <div class="af-card-title-row">
+                                    <span class="af-card-title">Forms Parsing</span>
+                                    <span class="gradient-brand-bar bar-thin"></span>
+                                </div>
+                                <p class="af-card-text">Content</p>
+                            </div>
+                            <div class="af-card">
+                                <div class="af-card-title-row">
+                                    <span class="af-card-title">Llamafile Process</span>
+                                    <span class="gradient-brand-bar bar-thin"></span>
+                                </div>
+                                <p class="af-card-text">Content</p>
+                            </div>
+                            <div class="af-card">
+                                <div class="af-card-title-row">
+                                    <span class="af-card-title">Python Process</span>
+                                    <span class="gradient-brand-bar bar-thin"></span>
+                                </div>
+                                <p class="af-card-text">Content</p>
+                            </div>
+                            <div class="af-card">
+                                <div class="af-card-title-row">
+                                    <span class="af-card-title">API Management</span>
+                                    <span class="gradient-brand-bar bar-thin"></span>
+                                </div>
+                                <p class="af-card-text">Content</p>
+                            </div>
+                            <div class="af-card">
+                                <div class="af-card-title-row">
+                                    <span class="af-card-title">Response Export</span>
+                                    <span class="gradient-brand-bar bar-thin"></span>
+                                </div>
+                                <p class="af-card-text">Content</p>
+                            </div>
+                        </div>
+
+                        <!-- Database Implementation -->
+                        <div class="af-tab-panel" id="implementation-database-panel" role="tabpanel" aria-labelledby="implementation-database-tab">
+                            <div class="af-card">
+                                <div class="af-card-title-row">
+                                    <span class="af-card-title">Database</span>
+                                    <span class="gradient-brand-bar bar-thin"></span>
+                                </div>
+                                <p class="af-card-text">Content</p>
+                            </div>
+                        </div>
+
+                        <!-- Avatar Implementation -->
+                        <div class="af-tab-panel" id="implementation-avatar-panel" role="tabpanel" aria-labelledby="implementation-avatar-tab">
+                            <div class="af-card">
+                                <div class="af-card-title-row">
+                                    <span class="af-card-title">Avatar</span>
+                                    <span class="gradient-brand-bar bar-thin"></span>
+                                </div>
+                                <p class="af-card-text">Content</p>
+                            </div>
+                        </div>
+
+                        <!-- Packaging Implementation -->
+                        <div class="af-tab-panel" id="implementation-packaging-panel" role="tabpanel" aria-labelledby="implementation-packaging-tab">
+                            <div class="af-card">
+                                <div class="af-card-title-row">
+                                    <span class="af-card-title">Packaging</span>
+                                    <span class="gradient-brand-bar bar-thin"></span>
+                                </div>
+                                <p class="af-card-text">Content</p>
+                            </div>
+                        </div>
+                    </div>
+				</section>
+			</main>
+		</div>
+
+		<div id="footer-placeholder"></div>
+
+		<script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
+		<script>
+			const breadcrumbPaths = {
+				'index.html': [{ title: 'Home', href: 'index.html' }],
+				'requirements.html': [
+					{ title: 'Home', href: 'index.html' },
+					{ title: 'Requirements', href: 'requirements.html' }
+				],
+				'appendices.html': [
+					{ title: 'Home', href: 'index.html' },
+					{ title: 'Requirements', href: 'requirements.html' },
+					{ title: 'Appendices', href: 'appendices.html' }
+				],
+				'ui-showcase.html': [
+					{ title: 'Home', href: 'index.html' },
+					{ title: 'UI Showcase', href: 'ui-showcase.html' }
+				],
+                'system-design.html': [
+					{ title: 'Home', href: 'index.html' },
+					{ title: 'System Design', href: 'system-design.html' }
+				],
+				'implementation.html': [
+					{ title: 'Home', href: 'index.html' },
+					{ title: 'Implementation', href: 'implementation.html' }
+				]
+			};
+
+			function addCurrentBreadcrumb() {
+				const breadcrumbsList = document.getElementById('breadcrumbs-list');
+				if (!breadcrumbsList) return;
+
+				const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+				const trail = breadcrumbPaths[currentPath] || [
+					{ title: 'Home', href: 'index.html' },
+					{ title: 'Page' }
+				];
+
+				if (currentPath === 'index.html') return;
+
+				trail.slice(1).forEach((crumb, index) => {
+					const isLast = index === trail.slice(1).length - 1;
+					const listItem = document.createElement('li');
+					listItem.className = 'inline-flex items-center gap-2 text-body';
+
+					const separator = `
+						<svg class="w-3 h-3 text-body" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+							<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+						</svg>
+					`;
+
+					if (isLast || !crumb.href) {
+						listItem.innerHTML = `${separator}<span aria-current="page">${crumb.title}</span>`;
+					} else {
+						listItem.innerHTML = `${separator}<a href="${crumb.href}" class="hover:text-fg-brand">${crumb.title}</a>`;
+					}
+
+					breadcrumbsList.appendChild(listItem);
+				});
+			}
+
+			function initAfTabs(tabListId, panelContainerId) {
+				const tabList = document.getElementById(tabListId);
+				const panelContainer = document.getElementById(panelContainerId);
+				if (!tabList || !panelContainer) return;
+
+				const tabs = Array.from(tabList.querySelectorAll('[role="tab"][data-tabs-target]'));
+				const panels = Array.from(panelContainer.querySelectorAll('[role="tabpanel"]'));
+				if (!tabs.length || !panels.length) return;
+
+				const activateTab = (selectedTab) => {
+					const targetSelector = selectedTab.getAttribute('data-tabs-target');
+					if (!targetSelector) return;
+
+					tabs.forEach((tab) => {
+						const isActive = tab === selectedTab;
+						tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+						tab.tabIndex = isActive ? 0 : -1;
+					});
+
+					panels.forEach((panel) => panel.classList.add('hidden'));
+
+					const activePanel = panelContainer.querySelector(targetSelector);
+					if (activePanel) activePanel.classList.remove('hidden');
+				};
+
+				tabs.forEach((tab) => {
+					tab.addEventListener('click', () => activateTab(tab));
+				});
+
+				const initiallySelected = tabs.find((tab) => tab.getAttribute('aria-selected') === 'true') || tabs[0];
+				activateTab(initiallySelected);
+			}
+
+			fetch('components/navbar.html')
+				.then(response => response.text())
+				.then(data => {
+					document.getElementById('navbar-container').innerHTML = data;
+				})
+				.catch(error => console.error('Error loading navbar:', error));
+
+			fetch('components/sidebar.html')
+				.then(response => response.text())
+				.then(data => {
+					document.getElementById('sidebar-container').innerHTML = data;
+				})
+				.catch(error => console.error('Error loading sidebar:', error));
+
+			fetch('components/breadcrumbs.html')
+				.then(response => response.text())
+				.then(data => {
+					document.getElementById('breadcrumbs-container').innerHTML = data;
+					addCurrentBreadcrumb();
+				})
+				.catch(error => console.error('Error loading breadcrumbs:', error));
+
+			fetch('components/footer.txt')
+				.then(response => response.text())
+				.then(data => {
+					document.getElementById('footer-placeholder').innerHTML = data;
+				})
+				.catch(error => console.error('Error loading footer:', error));
+
+			initAfTabs('implementation-tabs', 'implementation-tab-content');
+		</script>
+	</body>
+</html>
