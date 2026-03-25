@@ -640,11 +640,13 @@
         .af-code-snippet[class*="language-"] {
             padding-top: 1.4rem;
             background: var(--bg);
+            margin: 1.25rem;
+            margin-bottom: 1.75rem;
         }
 
         div.code-toolbar > .toolbar {
             top: 0.55rem;
-            right: 0.55rem;
+            right: 1.8rem;
         }
 
         div.code-toolbar > .toolbar > .toolbar-item > button {

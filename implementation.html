@@ -33,7 +33,7 @@
                             <button class="af-tab-link" id="implementation-AI-tab" data-tabs-target="#implementation-AI-panel" type="button" role="tab" aria-controls="implementation-AI-panel" aria-selected="true">AI</button>
                         </li>
                         <li class="me-2" role="presentation">
-                            <button class="af-tab-link" id="implementation-backend-tab" data-tabs-target="#implementation-backend-panel" type="button" role="tab" aria-controls="implementation-backend-panel" aria-selected="true">Backend (.NET)</button>
+                            <button class="af-tab-link" id="implementation-backend-tab" data-tabs-target="#implementation-backend-panel" type="button" role="tab" aria-controls="implementation-backend-panel" aria-selected="true">Backend</button>
                         </li>
                         <li class="me-2" role="presentation">
                             <button class="af-tab-link" id="implementation-database-tab" data-tabs-target="#implementation-database-panel" type="button" role="tab" aria-controls="implementation-database-panel" aria-selected="true">Database</button>
@@ -98,7 +98,7 @@ namespace HelloWorldDemo
                                     <span class="af-card-title">System Overview</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
-                                <p class="af-card-text">Our backend implementation is built using the MVVM architecture with supporting Services and follows best practices for scalability, maintainability, and security.</p>
+                                <p class="af-card-text">Our backend implementation is built on <code class="af-inline-code">.NET 10</code> using the <code class="af-inline-code">Model-View-ViewModel (MVVM)</code> architecture with supporting Services and follows best practices for scalability, maintainability, and security.</p>
                                 <p class="af-card-text">Core business logic are broken down into smaller components based on their functionalities, allowing for reusability and clear separation of concern. Core services for our backend implementation include:</p>
                                 <ul class="list-disc pl-6 mt-4 space-y-3">
 									<li class="af-table-value">
@@ -132,28 +132,98 @@ namespace HelloWorldDemo
                             </div>
                             <div class="af-card">
                                 <div class="af-card-title-row">
-                                    <span class="af-card-title">2. Python Process</span>
+                                    <span class="af-card-title">2. Python Process Service</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
-								<p class="af-card-text">The .NET backend starts a Python process to run interview logic and stream outputs back to the application.</p>
+								<p class="af-card-text">The <code class="af-inline-code">PythonProcessService</code> is the main service that manages the main bridge between the WinUI frontend and the Python agent orchestration layer. It abstracts running the Python agent orchestration layer as an external process and streaming its <code class="af-inline-code">stdin/stdout/stderr</code> into the UI and higher-level services.</p>
+                                <p class="af-card-text">The <code class="af-inline-code">public async Task<bool> StartAsync()</code> method takes in the Python startup arguments, build them, and runs the compiled Python application.</p>
+                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-csharp">string arguments = BuildArguments(useLocal, llamaPort, websocketPort, httpPort, responsePort);
+// Initialise working directory and find executable path 
+// ...
+
+if (File.Exists(compiledExePath))
+{
+    // Use compiled executable and log if success
+    // ...
+
+    start = new ProcessStartInfo
+    {
+        // Initialise path and working directory, arguments, stdin/stdout/stderr redirection for Python process
+        // ...
+    };
+}
+
+_pythonProcess = new Process { StartInfo = start, EnableRaisingEvents = true };
+_pythonProcess.OutputDataReceived += (s, e) =>
+{
+    if (!string.IsNullOrEmpty(e.Data))
+        OutputReceived?.Invoke(e.Data);
+};
+
+_pythonProcess.ErrorDataReceived += (s, e) =>
+{
+    if (!string.IsNullOrEmpty(e.Data))
+    {
+        string cleaned = Regex.Replace(e.Data, @"\x1B\[[^@-~]*[@-~]", string.Empty);
+        ErrorReceived?.Invoke($"[PYTHON ERROR]: {cleaned}");
+    }
+};</code></pre>
+                                <p class="af-card-text">It allows async reading of <code class="af-inline-code">stdout/stderr</code> to be wired into <code class="af-inline-code">OutputReceived</code> and <code class="af-inline-code">ErrorReceived</code> events for better documentation and ease of development, while also providing a method for sending input from the user to the agent via <code class="af-inline-code">stdin</code>:</p>
+                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-csharp">public void SendInput(string message)
+{
+    if (_pythonProcess is null || _pythonProcess.HasExited) return;
+
+    _pythonProcess.StandardInput.WriteLine(message);
+    _pythonProcess.StandardInput.Flush();
+}</code></pre>
+                                <p class="af-card-text">This service allows full Python agent logs to be displayed in the in‑app console log in <code class="af-inline-code">AvatarPage</code>, including ANSI color support, and cleanly manages the agent lifecycle: start, restart, and clean shutdown on app exit.</p>
                             </div>
                             <div class="af-card">
                                 <div class="af-card-title-row">
-                                    <span class="af-card-title">Llamafile Process</span>
+                                    <span class="af-card-title">3. Llamafile Process Service</span>
+                                    <span class="gradient-brand-bar bar-thin"></span>
+                                </div>
+                                <p class="af-card-text">The <code class="af-inline-code">LlamafileProcessService</code> is the main service managing the LLM server. For our use case, we opted for packaging our LLM into an executable using Llamafile, an open source solution to distribute LLMs as a single file, to simplify the user experience. This allows users with minor technical knowledge to run the application without any additional setup, removing the need to install additional third-party local LLM server providers.</p>
+                                <p class="af-card-text">It is symmetrical to <code class="af-inline-code">PythonProcessService</code>, where it starts the Llamafile process with the right parameters (port, GPU/CPU flags, model-specific args), stream logs to the in‑app console log in <code class="af-inline-code">AvatarPage</code>, and provides structured API methods to manage the process lifecycle: start, restart, and clean shutdown on exit - especially important to prevent any idle resource usage.</p>
+                                <p class="af-card-text">Before running the process, we implemented a method to get the user's machine hardware information, <code class="af-inline-code">private (string type, long mem) GetGpuInfo()</code>, to allow the LLM to be initialised with the best parameters and context size with stability based on the machine's specifications. Machines with insufficient video memory (VRAM) will be defaulted to do CPU inferencing, as llamafiles will fail to run when experiencing memory constraint.</p>
+                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-csharp">var (gpuName, gpuMem) = GetGpuInfo();
+System.Diagnostics.Debug.WriteLine($"Detected GPU: {gpuName} with {gpuMem} MB VRAM");
+var gpuArgs = 0; // Default to CPU
+var contextArgs = 1024; // Default to 1K context window for CPU
+if (gpuName.Contains("NVIDIA", StringComparison.OrdinalIgnoreCase)
+    || gpuName.Contains("AMD", StringComparison.OrdinalIgnoreCase)) // Only supports NVIDIA and AMD GPUs
+{
+    if (gpuMem > 6144) // 6GB+ VRAM
+    {
+        gpuArgs = 9999;
+        contextArgs = 4096;
+    }
+    else if (gpuMem > 4096) // 4GB+ VRAM
+    {
+        gpuArgs = 9999;
+        contextArgs = 2048;
+    }
+}
+else
+{
+    OutputReceived?.Invoke($"[LLAMAFILE] No compatible GPU detected, using CPU with limited context");
+}
+
+var start = new ProcessStartInfo
+{
+    // Initialise arguments, context size, and stdin/stdout/stderr redirection for Llamafile process
+};</code>
+                            </div>
+                            <div class="af-card">
+                                <div class="af-card-title-row">
+                                    <span class="af-card-title">4. API Services</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
                                 <p class="af-card-text">Content</p>
                             </div>
                             <div class="af-card">
                                 <div class="af-card-title-row">
-                                    <span class="af-card-title">API Management</span>
-                                    <span class="gradient-brand-bar bar-thin"></span>
-                                </div>
-                                <p class="af-card-text">Content</p>
-                            </div>
-                            <div class="af-card">
-                                <div class="af-card-title-row">
-                                    <span class="af-card-title">Response Export</span>
+                                    <span class="af-card-title">5. Response Export</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
                                 <p class="af-card-text">Content</p>
