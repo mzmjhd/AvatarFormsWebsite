@@ -665,6 +665,10 @@
             text-shadow: none;
         }
 
+        .af-code-snippet .token {
+            background: none !important;
+        }
+
         .af-code-snippet .token.comment,
         .af-code-snippet .token.prolog,
         .af-code-snippet .token.doctype,
@@ -674,10 +678,10 @@
 
         .af-code-snippet .token.keyword,
         .af-code-snippet .token.boolean,
-        .af-code-snippet .token.operator {
+        .af-code-snippet .token.operator{
             color: var(--code-keyword);
         }
-
+        
         .af-code-snippet .token.string,
         .af-code-snippet .token.char,
         .af-code-snippet .token.interpolation-string {

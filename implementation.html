@@ -220,7 +220,126 @@ var start = new ProcessStartInfo
                                     <span class="af-card-title">4. API Services</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
-                                <p class="af-card-text">Content</p>
+                                <p class="af-card-text">As the Python agent orchestration layer is running as an external process, we've implemented two API services, <code class="af-inline-code">QuestionnaireAPIService</code> & <code class="af-inline-code">ResponseAPIService</code>, that forms a simple client-server pipeline for communication.</p>
+                                <p class="af-card-text">The <code class="af-inline-code">QuestionnaireAPIService</code> is a HTTP client service that gets a questionnaire from an internal service, <code class="af-inline-code">QuestionnaireService</code>.</p>
+                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-csharp">var questionnaire = await _questionnaireService.GetWithQuestionsAsync(questionnaireId);</code></pre>
+                                <p class="af-card-text">The questionnaire will be converted into a DTO, where each questionnaire will contain a name, description, and a list of questions with their respective type and options (for MCQ questions).</p>
+                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-csharp">var payload = QuestionnaireTransferDto.FromQuestionnaire(questionnaire);</code></pre>
+                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-csharp">public class QuestionTransferDto
+{
+    [JsonPropertyName("text")]
+    public required string Text { get; set; }
+
+    [JsonPropertyName("type")]
+    public required string Type { get; set; } // "open_ended" or "mcq"
+
+    [JsonPropertyName("options")]
+    public List<string>? Options { get; set; }
+}
+
+public class QuestionnaireTransferDto
+{
+    [JsonPropertyName("questionnaire_id")]
+    public required string QuestionnaireId { get; set; }
+
+    [JsonPropertyName("description")]
+    public required string Description { get; set; }
+
+    [JsonPropertyName("questions")]
+    public required List<QuestionTransferDto> Questions { get; set; }
+}</code></pre>
+                                <p class="af-card-text">The service will then create a nested JSON payload and send a HTTP POST request to the Python HTTP Flask server in <code class="af-inline-code">api.py</code> to be processed into inputs for the agents.</p>
+                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-python">def start_http_server(port):
+    # Start Flask API HTTP server
+    # ...
+
+@app.route('/questionnaire', methods=['POST'])
+def receive_questionnaire():
+    global questionnaire_data
+
+    try:
+        data = request.get_json()
+
+        # Process received payload
+        # Return the processed payload as dictionaries to the main function
+        # ...
+
+        return jsonify({"status": "success", "message": "Questionnaire received"}), 200
+
+    except Exception as e:
+        # Catch exception
+        # ...</code></pre>
+                                <p class="af-card-text">The interview would then be conducted promptly until all the questions are completed. When it's time for the responses to be sent back, the responses will be sent to a HTTP Server on the .NET application side in <code class="af-inline-code">ResponseAPIService</code>, which acts as a HTTP Listener that runs from the start of an interview until it receives a set number of response (same as number of questions sent in the first place) to be stored back into the database.</p>
+                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-csharp">public void SetExpectedQuestionCount(int count)
+    {
+        _expectedQuestionCount = count;
+        _receivedResponseCount = 0;
+    }
+
+    public async Task StartServerAsync(int port = 5000)
+    {
+        // Start HTTP server using the in-built HttpListener class
+    }
+
+    public async Task StopServerAsync()
+    {
+        // Stop server if _receivedResponseCount == _expectedQuestionCount or receive _cancellationToken
+    }</code></pre>
+                                <p class="af-card-text">The <code class="af-inline-code">ResponseAPIService</code> will handle the response by first receiving the payload (one response to one question) using <code class="af-inline-code">StreamReader</code>. It'll deserialise it using <code class="af-inline-code">JsonDeserializer</code> class, check if <code class="af-inline-code">questionnaire_id</code>, <code class="af-inline-code">question</code>, <code class="af-inline-code">order</code>(question number), and <code class="af-inline-code">answer</code> fields are present, and store them in the database if everything is valid.</p>
+                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-csharp">private async Task HandleResponseAsync(HttpListenerRequest request, HttpListenerResponse response, CancellationToken cancellationToken)
+    {
+        try
+        {
+            using var reader = new StreamReader(request.InputStream, request.ContentEncoding);
+            var body = await reader.ReadToEndAsync();
+
+            // Deserialise JSON and get payload
+            // ...
+
+            // Validate payload
+            if (string.IsNullOrWhiteSpace(payload.QuestionnaireId) ||
+                string.IsNullOrWhiteSpace(payload.Question) ||
+                string.IsNullOrWhiteSpace(payload.Answer))
+            {
+                // Manage response status error
+                // ...
+            }
+
+            // Get or create response session (A data structure to store the list of responses to the questions in an interview session)
+            // ...
+
+            // Find the question by order and questionnaire
+            var question = await dbContext.Questions
+                .FirstOrDefaultAsync(q => q.QuestionnaireId == payload.QuestionnaireId && 
+                                        q.Order == payload.QuestionOrder,
+                                    cancellationToken);
+
+            // For MCQ questions, use the matched option text as the answer
+            var answerText = payload.QuestionType == "mcq" && !string.IsNullOrWhiteSpace(payload.SelectedOption)
+                ? payload.SelectedOption
+                : payload.Answer;
+
+            // Create a response entity and save to database
+            var responseEntity = new Models.Response
+            {
+                ResponseSessionId = session.Id,
+                QuestionId = question.Id,
+                AnswerText = answerText,
+                AnsweredDate = DateTime.UtcNow
+            };
+
+            dbContext.Responses.Add(responseEntity);
+
+            // Increment _receivedResponseCount and check if all responses have been received to stop the server and save changes to database
+            // ...
+
+        }
+        catch (Exception ex)
+        {
+            // Catch the exception...
+        }
+    }</code></pre>
+                                <p class="af-card-text">That sums up how the API connections help bridge the communication between the database and the Python agent orchestration layer.</p>
                             </div>
                             <div class="af-card">
                                 <div class="af-card-title-row">
