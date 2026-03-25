@@ -213,7 +213,8 @@ var start = new ProcessStartInfo
 {
     // Initialise arguments, context size, and stdin/stdout/stderr redirection for Llamafile process
     // ...
-};</code>
+};</code></pre>
+                                <p class="af-card-text">Again, similar to the <code class="af-inline-code">PythonProcessService</code>, this service also allows async reading of <code class="af-inline-code">stdout/stderr</code> to be wired into <code class="af-inline-code">OutputReceived</code> and <code class="af-inline-code">ErrorReceived</code> events for full logging in the in‑app console log in <code class="af-inline-code">AvatarPage</code>, and also manage the process lifecycle.</p>
                             </div>
                             <div class="af-card">
                                 <div class="af-card-title-row">
@@ -287,59 +288,59 @@ def receive_questionnaire():
     }</code></pre>
                                 <p class="af-card-text">The <code class="af-inline-code">ResponseAPIService</code> will handle the response by first receiving the payload (one response to one question) using <code class="af-inline-code">StreamReader</code>. It'll deserialise it using <code class="af-inline-code">JsonDeserializer</code> class, check if <code class="af-inline-code">questionnaire_id</code>, <code class="af-inline-code">question</code>, <code class="af-inline-code">order</code>(question number), and <code class="af-inline-code">answer</code> fields are present, and store them in the database if everything is valid.</p>
                                 <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-csharp">private async Task HandleResponseAsync(HttpListenerRequest request, HttpListenerResponse response, CancellationToken cancellationToken)
+{
+    try
     {
-        try
+        using var reader = new StreamReader(request.InputStream, request.ContentEncoding);
+        var body = await reader.ReadToEndAsync();
+
+        // Deserialise JSON and get payload
+        // ...
+
+        // Validate payload
+        if (string.IsNullOrWhiteSpace(payload.QuestionnaireId) ||
+            string.IsNullOrWhiteSpace(payload.Question) ||
+            string.IsNullOrWhiteSpace(payload.Answer))
         {
-            using var reader = new StreamReader(request.InputStream, request.ContentEncoding);
-            var body = await reader.ReadToEndAsync();
-
-            // Deserialise JSON and get payload
+            // Manage response status error
             // ...
-
-            // Validate payload
-            if (string.IsNullOrWhiteSpace(payload.QuestionnaireId) ||
-                string.IsNullOrWhiteSpace(payload.Question) ||
-                string.IsNullOrWhiteSpace(payload.Answer))
-            {
-                // Manage response status error
-                // ...
-            }
-
-            // Get or create response session (A data structure to store the list of responses to the questions in an interview session)
-            // ...
-
-            // Find the question by order and questionnaire
-            var question = await dbContext.Questions
-                .FirstOrDefaultAsync(q => q.QuestionnaireId == payload.QuestionnaireId && 
-                                        q.Order == payload.QuestionOrder,
-                                    cancellationToken);
-
-            // For MCQ questions, use the matched option text as the answer
-            var answerText = payload.QuestionType == "mcq" && !string.IsNullOrWhiteSpace(payload.SelectedOption)
-                ? payload.SelectedOption
-                : payload.Answer;
-
-            // Create a response entity and save to database
-            var responseEntity = new Models.Response
-            {
-                ResponseSessionId = session.Id,
-                QuestionId = question.Id,
-                AnswerText = answerText,
-                AnsweredDate = DateTime.UtcNow
-            };
-
-            dbContext.Responses.Add(responseEntity);
-
-            // Increment _receivedResponseCount and check if all responses have been received to stop the server and save changes to database
-            // ...
-
         }
-        catch (Exception ex)
+
+        // Get or create response session (A data structure to store the list of responses to the questions in an interview session)
+        // ...
+
+        // Find the question by order and questionnaire
+        var question = await dbContext.Questions
+            .FirstOrDefaultAsync(q => q.QuestionnaireId == payload.QuestionnaireId && 
+                                    q.Order == payload.QuestionOrder,
+                                cancellationToken);
+
+        // For MCQ questions, use the matched option text as the answer
+        var answerText = payload.QuestionType == "mcq" && !string.IsNullOrWhiteSpace(payload.SelectedOption)
+            ? payload.SelectedOption
+            : payload.Answer;
+
+        // Create a response entity and save to database
+        var responseEntity = new Models.Response
         {
-            // Catch the exception...
-        }
-    }</code></pre>
-                                <p class="af-card-text">That sums up how the API connections help bridge the communication between the database and the Python agent orchestration layer.</p>
+            ResponseSessionId = session.Id,
+            QuestionId = question.Id,
+            AnswerText = answerText,
+            AnsweredDate = DateTime.UtcNow
+        };
+
+        dbContext.Responses.Add(responseEntity);
+
+        // Increment _receivedResponseCount and check if all responses have been received to stop the server and save changes to database
+        // ...
+
+    }
+    catch (Exception ex)
+    {
+        // Catch the exception...
+    }
+}</code></pre>
+                                <p class="af-card-text">Separating the questionnaire API (sender) and response API (receiver) into distinct services enforces a clear separation of concerns, allowing each to operate, scale, and fail independently without impacting the other. It also enables asynchronous communication with the Python agent orchestration layer, improving flexibility and overall system resilience.</p>
                             </div>
                             <div class="af-card">
                                 <div class="af-card-title-row">
@@ -365,10 +366,100 @@ def receive_questionnaire():
                         <div class="af-tab-panel" id="implementation-avatar-panel" role="tabpanel" aria-labelledby="implementation-avatar-tab">
                             <div class="af-card">
                                 <div class="af-card-title-row">
-                                    <span class="af-card-title">Avatar</span>
+                                    <span class="af-card-title">HeadTTS</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
-                                <p class="af-card-text">Content</p>
+                                <p class="af-card-text">The avatar generation is implemented by integrating an open-source browser-based 3D avatar rendering with an embedded Text-To-Speech (Kokoro TTS) and lipsync solution that takes in text input, <a href="https://github.com/met4citizen/HeadTTS" class="af-link">HeadTTS</a>, inside the <code class="af-inline-code">AvatarPage</code> using a <code class="af-inline-code">WebView2</code> control. 
+                                    When the page initialises, a lightweight local web server is started to serve the <a href="https://github.com/met4citizen/HeadTTS" class="af-link">HeadTTS</a> assets. 
+                                    The WebView navigates to a dynamically constructed URL that includes avatar and voice parameters. This allows the application to control avatar configuration without modifying the frontend code directly. 
+                                    The avatar is loaded in the <code class="af-inline-code">AvatarPage</code> via:</p>
+                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-csharp">// Start local web server
+if (_webServer == null)
+{
+    var prefix = "http://127.0.0.1:5501/";
+    _webServer = new SimpleWebServer(contentPath, prefix);
+    _webServer.Start();
+}
+
+AvatarWebView.CoreWebView2.Navigate(GetHeadTTSUrl());</code></pre>
+                                <p class="af-card-text"><code class="af-inline-code">GetHeadTTSUrl()</code> injects query parameters such as avatar models, voice, language, and whether to use <code class="af-inline-code">WASM</code> (CPU) or <code class="af-inline-code">WebGPU</code> (GPU) for the TTS and lipsync model. 
+                                    The shared method from <code class="af-inline-code">LlamafileProcessService</code>, <code class="af-inline-code">GetGPUInfo()</code>, also helps here facillitate the choice between <code class="af-inline-code">WASM</code> and <code class="af-inline-code">WebGPU</code> based on system specifications.</p>
+                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-csharp">private string GetHeadTTSUrl()
+{
+    var (gpuName, gpuMem) = GetGpuInfo();
+    bool useWasm = true;
+
+    if (gpuMem > 6144 && (gpuName.Contains("NVIDIA", StringComparison.OrdinalIgnoreCase) || gpuName.Contains("AMD", StringComparison.OrdinalIgnoreCase)))
+    {
+        useWasm = false; // Run on current logic (local inference/non-wasm)
+    }
+
+    string url = $"http://127.0.0.1:5501/index.html?avatar={_selectedAvatar}";
+    if (!string.IsNullOrEmpty(_selectedVoice))
+    {
+        url += $"&voice={_selectedVoice}";
+    }
+
+    if (useWasm)
+    {
+        url += "&wasm=true";
+    }
+
+    return url;
+}</code></pre>
+                                <p class="af-card-text">The parameters <code class="af-inline-code">_selectedAvatar</code> and <code class="af-inline-code">_selectedVoice</code> are obtained from the <code class="af-inline-code">LocalSettingsService</code>, so the initialisation will stay consistent with the user's preference.</p>
+                            </div>
+                            <div class="af-card">
+                                <div class="af-card-title-row">
+                                    <span class="af-card-title">Streaming</span>
+                                    <span class="gradient-brand-bar bar-thin"></span>
+                                </div>
+                                <p class="af-card-text">Communication between the backend Python agent and the avatar occurs through a WebSocket bridge for real-time streaming of speech content. 
+                                    The Python server maintains connected browser clients and pushes messages using:</p>
+                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-python">await stream_message("speech", speech_line)</code></pre>
+                                <p class="af-card-text">where the function <code class="af-inline-code">stream_message()</code> manages the connected client using <code class="af-inline-code">asyncio</code> and send messages through the Websockets channel:</p>
+                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-python">async def stream_message(message_type, content):
+    if connected_clients:
+        message = json.dumps({
+            "type": message_type,
+            "content": content
+        })
+
+        await asyncio.gather(
+            *[client.send(message) for client in connected_clients],
+            return_exceptions=True
+        )</code></pre>
+                                <p class="af-card-text">These messages are received in the browser and passed into the <a href="https://github.com/met4citizen/HeadTTS" class="af-link">HeadTTS</a> pipeline:</p>
+                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-javascript">function connectWebSocket() {
+    ws = new WebSocket('ws://localhost:8883')
+
+    // Connect to WebSockets
+    // ...
+
+    ws.onmessage = (event) => {
+        const message = JSON.parse(event.data);
+
+        if (message.type === 'speech') {
+        if (!isPersonReady) {
+            pendingSpeech.push(message.content);
+            return;
+        }
+
+        synthesizeSpeech(message.content);
+        }
+    };
+
+    // Manage WebSocket errors
+    // ...
+
+    // Close WebSocket connection
+    // ...
+
+}</code></pre>
+                                <p class="af-card-text">After <code class="af-inline-code">synthesizeSpeech(message.content)</code>, <a href="https://github.com/met4citizen/HeadTTS" class="af-link">HeadTTS</a> will produce the speech and animate the 3D avatar accordingly.
+                                    This design removes the conversational logic from the visual layer, where the Python orchestrator layer handles interview flow, while <a href="https://github.com/met4citizen/HeadTTS" class="af-link">HeadTTS</a> handles the rendering and playback. 
+                                    Additionally, a buffering mechanism <code class="af-inline-code">pendingSpeech</code> ensures that speech is queued until the avatar and TTS engine are fully initialized, in case of avatar model or voice change mid-interview.</p>
+                                <p class="af-card-text">Overall, the implementation uses HeadTTS as the main rendering engine with real time communication via WebSockets to allow sub real-time (3X real-time) inferencing for both the Text-To-Speech and 3D avatar render components.</p>
                             </div>
                         </div>
 
