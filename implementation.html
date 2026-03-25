@@ -24,7 +24,7 @@
 
 				<section class="af-stack">
 					<div class="af-stack">
-						<h1 class="af-section-title">Implementation</h1>
+						<h1 class="text-5xl text-font-bold text-gradient-brand">Implementation</h1>
 						<p class="af-section-subtitle">A deep dive into the technical details of the project.</p>
 					</div>
 
@@ -51,28 +51,28 @@
                         <div class="af-tab-panel" id="implementation-AI-panel" role="tabpanel" aria-labelledby="implementation-AI-tab">
                             <div class="af-card">
                                 <div class="af-card-title-row">
-                                    <span class="af-card-title">Python Agents</span>
+                                    <span class="af-card-title text-gradient-brand">Python Agents</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
                                 <p class="af-card-text">Python agent description.</p>
                             </div>
                             <div class="af-card">
                                 <div class="af-card-title-row">
-                                    <span class="af-card-title">Llamafile</span>
+                                    <span class="af-card-title text-gradient-brand">Llamafile</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
                                 <p class="af-card-text">Llamafile description.</p>
                             </div>
                             <div class="af-card">
                                 <div class="af-card-title-row">
-                                    <span class="af-card-title">I/O Streaming</span>
+                                    <span class="af-card-title text-gradient-brand">I/O Streaming</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
                                 <p class="af-card-text">Content</p>
                             </div>
                             <div class="af-card">
 								<div class="af-card-title-row">
-									<span class="af-card-title">Code Snippet Example</span>
+									<span class="af-card-title text-gradient-brand">Code Snippet Example</span>
 									<span class="gradient-brand-bar bar-thin"></span>
 								</div>
 								<p class="af-card-text">A Prism.js C# snippet with line numbers and a glyph-based copy button.</p>
@@ -95,7 +95,7 @@ namespace HelloWorldDemo
                         <div class="af-tab-panel" id="implementation-backend-panel" role="tabpanel" aria-labelledby="implementation-backend-tab">
                              <div class="af-card">
                                 <div class="af-card-title-row">
-                                    <span class="af-card-title">System Overview</span>
+                                    <span class="af-card-title text-gradient-brand">System Overview</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
                                 <p class="af-card-text">Our backend implementation is built on <code class="af-inline-code">.NET 10</code> using the <code class="af-inline-code">Model-View-ViewModel (MVVM)</code> architecture with supporting Services and follows best practices for scalability, maintainability, and security.</p>
@@ -125,14 +125,14 @@ namespace HelloWorldDemo
                             </div>
                             <div class="af-card">
                                 <div class="af-card-title-row">
-                                    <span class="af-card-title">1. Forms Parsing</span>
+                                    <span class="af-card-title text-gradient-brand">1. Forms Parsing</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
                                 <p class="af-card-text">Content</p>
                             </div>
                             <div class="af-card">
                                 <div class="af-card-title-row">
-                                    <span class="af-card-title">2. Python Process Service</span>
+                                    <span class="af-card-title text-gradient-brand">2. Python Process Service</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
 								<p class="af-card-text">The <code class="af-inline-code">PythonProcessService</code> is the main service that manages the main bridge between the WinUI frontend and the Python agent orchestration layer. It abstracts running the Python agent orchestration layer as an external process and streaming its <code class="af-inline-code">stdin/stdout/stderr</code> into the UI and higher-level services.</p>
@@ -180,7 +180,7 @@ _pythonProcess.ErrorDataReceived += (s, e) =>
                             </div>
                             <div class="af-card">
                                 <div class="af-card-title-row">
-                                    <span class="af-card-title">3. Llamafile Process Service</span>
+                                    <span class="af-card-title text-gradient-brand">3. Llamafile Process Service</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
                                 <p class="af-card-text">The <code class="af-inline-code">LlamafileProcessService</code> is the main service managing the LLM server. For our use case, we opted for packaging our LLM into an executable using Llamafile, an open source solution to distribute LLMs as a single file, to simplify the user experience. This allows users with minor technical knowledge to run the application without any additional setup, removing the need to install additional third-party local LLM server providers.</p>
@@ -217,7 +217,7 @@ var start = new ProcessStartInfo
                             </div>
                             <div class="af-card">
                                 <div class="af-card-title-row">
-                                    <span class="af-card-title">4. API Services</span>
+                                    <span class="af-card-title text-gradient-brand">4. API Services</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
                                 <p class="af-card-text">As the Python agent orchestration layer is running as an external process, we've implemented two API services, <code class="af-inline-code">QuestionnaireAPIService</code> & <code class="af-inline-code">ResponseAPIService</code>, that forms a simple client-server pipeline for communication.</p>
@@ -343,7 +343,7 @@ def receive_questionnaire():
                             </div>
                             <div class="af-card">
                                 <div class="af-card-title-row">
-                                    <span class="af-card-title">5. Response Export</span>
+                                    <span class="af-card-title text-gradient-brand">5. Response Export</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
                                 <p class="af-card-text">Content</p>
@@ -354,7 +354,7 @@ def receive_questionnaire():
                         <div class="af-tab-panel" id="implementation-database-panel" role="tabpanel" aria-labelledby="implementation-database-tab">
                             <div class="af-card">
                                 <div class="af-card-title-row">
-                                    <span class="af-card-title">Database</span>
+                                    <span class="af-card-title text-gradient-brand">Database</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
                                 <p class="af-card-text">Content</p>
@@ -365,7 +365,7 @@ def receive_questionnaire():
                         <div class="af-tab-panel" id="implementation-avatar-panel" role="tabpanel" aria-labelledby="implementation-avatar-tab">
                             <div class="af-card">
                                 <div class="af-card-title-row">
-                                    <span class="af-card-title">Avatar</span>
+                                    <span class="af-card-title text-gradient-brand">Avatar</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
                                 <p class="af-card-text">Content</p>
@@ -376,7 +376,7 @@ def receive_questionnaire():
                         <div class="af-tab-panel" id="implementation-packaging-panel" role="tabpanel" aria-labelledby="implementation-packaging-tab">
                             <div class="af-card">
                                 <div class="af-card-title-row">
-                                    <span class="af-card-title">Packaging</span>
+                                    <span class="af-card-title text-gradient-brand">Packaging</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
                                 <p class="af-card-text">Content</p>
