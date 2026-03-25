@@ -290,6 +290,7 @@
         .af-card-text {
             color: var(--muted-text);
             line-height: 1.6;
+            margin-bottom: 0.75rem;
         }
 
         .af-btn {
@@ -626,4 +627,48 @@
         .af-select:focus {
             border-color: var(--accent);
             box-shadow: 0 0 0 3px var(--focus-ring);
+        }
+
+        .af-code-snippet {
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-base);
+            box-shadow: var(--shadow-sm);
+            background: var(--surface);
+            margin-top: 0.75rem;
+        }
+
+        .af-code-snippet[class*="language-"] {
+            padding-top: 1.4rem;
+            background: var(--bg);
+        }
+
+        div.code-toolbar > .toolbar {
+            top: 0.55rem;
+            right: 0.55rem;
+        }
+
+        div.code-toolbar > .toolbar > .toolbar-item > button {
+            border: 1px solid var(--surface-border);
+            background: var(--bg);
+            color: var(--text-soft);
+            border-radius: 0.45rem;
+            min-width: 1.9rem;
+            height: 1.9rem;
+            padding: 0;
+            line-height: 1;
+            font-size: 1.05rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.2s ease;
+        }
+
+        div.code-toolbar > .toolbar > .toolbar-item > button:hover,
+        div.code-toolbar > .toolbar > .toolbar-item > button:focus-visible {
+            background: var(--surface);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-1px);
+            outline: none;
         }

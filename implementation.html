@@ -6,6 +6,9 @@
 		<title>AvatarForms - Implementation</title>
 		<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 		<link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet"/>
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet"/>
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet"/>
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet"/>
 		<link href="css/styles.css" rel="stylesheet"/>
 	</head>
 	<body class="min-h-screen flex flex-col">
@@ -27,11 +30,13 @@
 
                     <ul class="af-tabs" id="implementation-tabs" role="tablist" aria-label="Implementation tabs">
                         <li class="me-2" role="presentation">
-                            <button class="af-tab-link" id="implementation-AI-tab" data-tabs-target="#implementation-AI-panel" type="button" role="tab" aria-controls="implementation-AI-panel" aria-selected="true">AI Implementation</button>
+                            <button class="af-tab-link" id="implementation-backend-tab" data-tabs-target="#implementation-backend-panel" type="button" role="tab" aria-controls="implementation-backend-panel" aria-selected="true">Backend (.NET)</button>
                         </li>
+                        
                         <li class="me-2" role="presentation">
-                            <button class="af-tab-link" id="implementation-backend-tab" data-tabs-target="#implementation-backend-panel" type="button" role="tab" aria-controls="implementation-backend-panel" aria-selected="true">Backend Implementation (.NET)</button>
+                            <button class="af-tab-link" id="implementation-AI-tab" data-tabs-target="#implementation-AI-panel" type="button" role="tab" aria-controls="implementation-AI-panel" aria-selected="true">AI</button>
                         </li>
+
                         <li class="me-2" role="presentation">
                             <button class="af-tab-link" id="implementation-database-tab" data-tabs-target="#implementation-database-panel" type="button" role="tab" aria-controls="implementation-database-panel" aria-selected="true">Database</button>
                         </li>
@@ -67,27 +72,76 @@
                                 </div>
                                 <p class="af-card-text">Content</p>
                             </div>
+                            <div class="af-card">
+								<div class="af-card-title-row">
+									<span class="af-card-title">Code Snippet Example</span>
+									<span class="gradient-brand-bar bar-thin"></span>
+								</div>
+								<p class="af-card-text">A Prism.js C# snippet with line numbers and a glyph-based copy button.</p>
+								<pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-csharp">using System;
+
+namespace HelloWorldDemo
+{
+	internal static class Program
+	{
+		private static void Main()
+		{
+			Console.WriteLine("Hello, World!");
+		}
+	}
+}</code></pre>
+							</div>
                         </div>
 
                         <!-- Backend Implementation -->
                         <div class="af-tab-panel" id="implementation-backend-panel" role="tabpanel" aria-labelledby="implementation-backend-tab">
+                             <div class="af-card">
+                                <div class="af-card-title-row">
+                                    <span class="af-card-title">System Overview</span>
+                                    <span class="gradient-brand-bar bar-thin"></span>
+                                </div>
+                                <p class="af-card-text">Our backend implementation is built using the MVVM architecture with supporting Services and follows best practices for scalability, maintainability, and security.</p>
+                                <p class="af-card-text">Core business logic are broken down into smaller components based on their functionalities, allowing for reusability and clear separation of concern. Core services for our backend implementation include:</p>
+                                <ul class="list-disc pl-6 mt-4 space-y-3">
+									<li class="af-table-value">
+										<strong class="type-heading"><code class="af-inline-code">FormsLinkParserService</code>:</strong>
+                                        Employs a web scraper with a C# script to intelligently collect questionnaire details and metadata.
+                                    </li>
+                                    <li class="af-table-value">
+										<strong class="type-heading"><code class="af-inline-code">PythonProcessService</code>:</strong>
+                                        Manages the Python runtime application initialisations and startup arguments.
+                                    </li>
+                                    <li class="af-table-value">
+										<strong class="type-heading"><code class="af-inline-code">LlamafileProcessService</code>:</strong>
+                                        Manages the Llamafile (LLM) server startup with dynamic resource allocation.
+                                    </li>
+                                    <li class="af-table-value">
+										<strong class="type-heading"><code class="af-inline-code">QuestionnaireAPIService</code> & <code class="af-inline-code">ResponseAPIService</code>:</strong>
+                                        Manages API connection for questionnaire and response data pipeline.
+                                    </li>
+                                    <li class="af-table-value">
+										<strong class="type-heading"><code class="af-inline-code">ResponsesPageViewModel</code> & <code class="af-inline-code">ResponseDetailPageViewModel</code>:</strong>
+                                        Collects data from the database and export them using a CSV format to ease form response data processing.
+                                    </li>
+								</ul>
+                            </div>
                             <div class="af-card">
                                 <div class="af-card-title-row">
-                                    <span class="af-card-title">Forms Parsing</span>
+                                    <span class="af-card-title">1. Forms Parsing</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
                                 <p class="af-card-text">Content</p>
+                            </div>
+                            <div class="af-card">
+                                <div class="af-card-title-row">
+                                    <span class="af-card-title">2. Python Process</span>
+                                    <span class="gradient-brand-bar bar-thin"></span>
+                                </div>
+								<p class="af-card-text">The .NET backend starts a Python process to run interview logic and stream outputs back to the application.</p>
                             </div>
                             <div class="af-card">
                                 <div class="af-card-title-row">
                                     <span class="af-card-title">Llamafile Process</span>
-                                    <span class="gradient-brand-bar bar-thin"></span>
-                                </div>
-                                <p class="af-card-text">Content</p>
-                            </div>
-                            <div class="af-card">
-                                <div class="af-card-title-row">
-                                    <span class="af-card-title">Python Process</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
                                 <p class="af-card-text">Content</p>
@@ -148,6 +202,12 @@
 		<div id="footer-placeholder"></div>
 
 		<script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
 		<script>
 			const breadcrumbPaths = {
 				'index.html': [{ title: 'Home', href: 'index.html' }],
