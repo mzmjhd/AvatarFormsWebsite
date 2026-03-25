@@ -39,7 +39,7 @@
             --gradient-color: rgba(96, 165, 250, 0.45);
             --hero-aurora: radial-gradient(ellipse 135% 105% at 50% -30%, rgba(99, 102, 241, 0.42) 0%, rgba(34, 211, 238, 0.18) 34%, rgba(15, 23, 42, 0.92) 68%, var(--bg) 86%);
             --footer-aurora: radial-gradient(ellipse 135% 105% at 50% 130%, rgba(99, 102, 241, 0.42) 0%, rgba(34, 211, 238, 0.18) 34%, rgba(15, 23, 42, 0.92) 68%, var(--bg) 100%);
-            --sidebar-bg: #151922;
+            --sidebar-bg: #0F1115;
             --sidebar-border: #2A3142;
             --sidebar-link-hover-bg: rgba(96, 165, 250, 0.16);
             --sidebar-link-hover-text: #EEF2FF;
@@ -295,8 +295,10 @@
         }
 
         .af-card-title {
-            font-size: 1.125rem;
-            font-weight: var(--font-weight-heading);
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            line-height: 1.3;
             color: var(--text);
             margin-bottom: 0.35rem;
         }
