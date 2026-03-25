@@ -22,6 +22,13 @@
             --shadow-lg: 0 12px 24px -8px rgba(15, 23, 42, 0.22);
             --gradient-brand: linear-gradient(90deg, #06B6D4 0%, #4F46E5 50%, #7C3AED 100%);
             --font-weight-heading: 900;
+            --code-fg: #1f2937;
+            --code-muted: #6b7280;
+            --code-keyword: #4f46e5;
+            --code-string: #0f766e;
+            --code-number: #be185d;
+            --code-function: #0369a1;
+            --code-type: #7c3aed;
         }
 
         .dark {
@@ -46,6 +53,13 @@
             --shadow-md: 0 6px 14px -4px rgba(0, 0, 0, 0.38);
             --shadow-lg: 0 16px 30px -10px rgba(0, 0, 0, 0.5);
             --gradient-brand: linear-gradient(90deg, #06B6D4 0%, #4F46E5 50%, #7C3AED 100%);
+            --code-fg: #e5e7eb;
+            --code-muted: #9ca3af;
+            --code-keyword: #93c5fd;
+            --code-string: #86efac;
+            --code-number: #f9a8d4;
+            --code-function: #67e8f9;
+            --code-type: #c4b5fd;
         }
 
         @theme inline {
@@ -642,6 +656,53 @@
             background: var(--bg);
             margin: 1.25rem;
             margin-bottom: 1.75rem;
+            color: var(--code-fg);
+        }
+
+        .af-code-snippet code[class*="language-"] {
+            color: var(--code-fg);
+            background: transparent;
+            text-shadow: none;
+        }
+
+        .af-code-snippet .token.comment,
+        .af-code-snippet .token.prolog,
+        .af-code-snippet .token.doctype,
+        .af-code-snippet .token.cdata {
+            color: var(--code-muted);
+        }
+
+        .af-code-snippet .token.keyword,
+        .af-code-snippet .token.boolean,
+        .af-code-snippet .token.operator {
+            color: var(--code-keyword);
+        }
+
+        .af-code-snippet .token.string,
+        .af-code-snippet .token.char,
+        .af-code-snippet .token.interpolation-string {
+            color: var(--code-string);
+        }
+
+        .af-code-snippet .token.number,
+        .af-code-snippet .token.constant {
+            color: var(--code-number);
+        }
+
+        .af-code-snippet .token.function,
+        .af-code-snippet .token.method {
+            color: var(--code-function);
+        }
+
+        .af-code-snippet .token.class-name,
+        .af-code-snippet .token.namespace,
+        .af-code-snippet .token.builtin {
+            color: var(--code-type);
+        }
+
+        .af-code-snippet .line-numbers-rows > span:before {
+            color: var(--code-muted);
+            opacity: 0.95;
         }
 
         div.code-toolbar > .toolbar {
