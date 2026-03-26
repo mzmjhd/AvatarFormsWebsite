@@ -39,10 +39,7 @@
               <button class="af-tab-link" id="ui-user-experience-tab" data-tabs-target="#ui-user-experience-panel" type="button" role="tab" aria-controls="ui-user-experience-panel" aria-selected="false">User Experience</button>
             </li>
             <li class="me-2" role="presentation">
-              <button class="af-tab-link" id="ui-wireframes-tab" data-tabs-target="#ui-wireframes-panel" type="button" role="tab" aria-controls="ui-wireframes-panel" aria-selected="false">Wireframes</button>
-            </li>
-            <li class="me-2" role="presentation">
-              <button class="af-tab-link" id="ui-prototyping-tab" data-tabs-target="#ui-prototyping-panel" type="button" role="tab" aria-controls="ui-prototyping-panel" aria-selected="false">Prototyping</button>
+              <button class="af-tab-link" id="ui-wireframes-prototyping-tab" data-tabs-target="#ui-wireframes-prototyping-panel" type="button" role="tab" aria-controls="ui-wireframes-prototyping-panel" aria-selected="false">Wireframes &amp; Prototyping</button>
             </li>
             <li class="me-2" role="presentation">
               <button class="af-tab-link" id="ui-heuristic-tab" data-tabs-target="#ui-heuristic-panel" type="button" role="tab" aria-controls="ui-heuristic-panel" aria-selected="false">Heuristic Evaluations</button>
@@ -58,50 +55,231 @@
           <div id="ui-tab-content">
             <div class="af-tab-panel" id="ui-design-panel" role="tabpanel" aria-labelledby="ui-design-tab">
               <div class="af-card">
-                <h3 class="af-card-title">Design Principles</h3>
-                <p class="af-card-text">Add tab content here.</p>
+                <div class="af-card-title-row">
+                  <span class="af-card-title text-gradient-brand">Design Principles</span>
+                  <span class="gradient-brand-bar bar-thin"></span>
+                </div>
+                <p class="af-card-text">Our design approach aligns with established HCI theory rather than purely aesthetic preference. Based on our evaluation of the final interface, the system satisfies several widely cited principles in usability and interaction design.</p>
+
+                <div class="af-table-wrap mt-4">
+                  <table class="af-table">
+                    <thead>
+                      <tr>
+                        <th scope="col" class="af-table-key">Principle</th>
+                        <th scope="col" class="af-table-value">Observed Alignment in AvatarForms</th>
+                        <th scope="col" class="af-table-value">Evaluation</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="af-table-key">Visibility of system status (Nielsen)</td>
+                        <td class="af-table-value">Questionnaire and response states are visible in list views, with immediate feedback after sorting and file-validation events.</td>
+                        <td class="af-table-value">Strong</td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-key">User control and freedom (Nielsen)</td>
+                        <td class="af-table-value">The addition of explicit Back and Cancel actions in high-commitment flows reduces interaction lock-in and supports recovery.</td>
+                        <td class="af-table-value">Strong after refinement</td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-key">Consistency and standards (Nielsen; Shneiderman)</td>
+                        <td class="af-table-value">Reusable panel structure, stable sidebar navigation, and repeated control placement reduce relearning cost across screens.</td>
+                        <td class="af-table-value">Strong</td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-key">Error prevention (Nielsen)</td>
+                        <td class="af-table-value">Invalid upload handling now provides immediate, high-contrast, explanatory feedback before downstream failure occurs.</td>
+                        <td class="af-table-value">Moderate to strong</td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-key">Gestalt law of proximity</td>
+                        <td class="af-table-value">Related controls and data are grouped into discrete cards, improving scanability and reducing semantic ambiguity.</td>
+                        <td class="af-table-value">Strong</td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-key">Hick's Law</td>
+                        <td class="af-table-value">Core tasks are prioritised while advanced features are deferred, reducing decision complexity for first-time users.</td>
+                        <td class="af-table-value">Moderate to strong</td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-key">Fitts's Law</td>
+                        <td class="af-table-value">Primary actions are positioned in predictable, visually distinct locations, reducing movement and target-acquisition effort.</td>
+                        <td class="af-table-value">Moderate</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <p class="af-card-text mt-4">Collectively, these alignments indicate that the final interface supports learnability, operational efficiency, and safer interaction. The principal remaining opportunity is to further optimise target sizing and action prominence on dense screens for improved motor efficiency.</p>
               </div>
             </div>
+            <!--Sketches-->
             <div class="hidden af-tab-panel" id="ui-sketches-panel" role="tabpanel" aria-labelledby="ui-sketches-tab">
+              <p class="af-card-text">To make progression explicit, the sketches are grouped as numbered design iterations for each concept family. Each sequence demonstrates how layout priorities evolved from initial framing to more structured task flows.</p>
+
               <div class="af-card">
-                <h3 class="af-card-title">Initial Sketches</h3>
-                <p class="af-card-text">Add tab content here.</p>
+                <div class="af-card-title-row">
+                  <span class="af-card-title text-gradient-brand">Sketch 1 Iterations</span>
+                  <span class="gradient-brand-bar bar-thin"></span>
+                </div>
+                <div class="af-grid-three">
+                  <figure>
+                    <img src="assets/images/sketch1(1).png" alt="Sketch 1 iteration 1" class="af-image w-full h-auto rounded-base border border-border-subtle" />
+                    <figcaption class="af-card-text af-image-caption mt-3">Sketch 1 (1): initial simplified composition focusing on quick orientation and low cognitive load.</figcaption>
+                  </figure>
+                  <figure>
+                    <img src="assets/images/sketch1(2).png" alt="Sketch 1 iteration 2" class="af-image w-full h-auto rounded-base border border-border-subtle" />
+                    <figcaption class="af-card-text af-image-caption mt-3">Sketch 1 (2): intermediate refinement introducing clearer task grouping and improved panel separation.</figcaption>
+                  </figure>
+                  <figure>
+                    <img src="assets/images/sketch1(3).png" alt="Sketch 1 iteration 3" class="af-image w-full h-auto rounded-base border border-border-subtle" />
+                    <figcaption class="af-card-text af-image-caption mt-3">Sketch 1 (3): mature variant with stronger information hierarchy and more explicit action pathways.</figcaption>
+                  </figure>
+                </div>
+              </div>
+
+              <div class="af-card">
+                <div class="af-card-title-row">
+                  <span class="af-card-title text-gradient-brand">Sketch 2 Iterations</span>
+                  <span class="gradient-brand-bar bar-thin"></span>
+                </div>
+                <div class="af-grid-three">
+                  <figure>
+                    <img src="assets/images/sketch2(1).png" alt="Sketch 2 iteration 1" class="af-image w-full h-auto rounded-base border border-border-subtle" />
+                    <figcaption class="af-card-text af-image-caption mt-3">Sketch 2 (1): feature-rich layout proposal with expanded navigational scope.</figcaption>
+                  </figure>
+                  <figure>
+                    <img src="assets/images/sketch2(2).png" alt="Sketch 2 iteration 2" class="af-image w-full h-auto rounded-base border border-border-subtle" />
+                    <figcaption class="af-card-text af-image-caption mt-3">Sketch 2 (2): structural revision balancing discoverability with visual economy.</figcaption>
+                  </figure>
+                  <figure>
+                    <img src="assets/images/sketch2(3).png" alt="Sketch 2 iteration 3" class="af-image w-full h-auto rounded-base border border-border-subtle" />
+                    <figcaption class="af-card-text af-image-caption mt-3">Sketch 2 (3): consolidated variant integrating richer functionality with clearer interaction flow.</figcaption>
+                  </figure>
+                </div>
               </div>
             </div>
             <div class="hidden af-tab-panel" id="ui-user-experience-panel" role="tabpanel" aria-labelledby="ui-user-experience-tab">
               <div class="af-card">
-                <h3 class="af-card-title">User Experience</h3>
-                <p class="af-card-text">Add tab content here.</p>
+                <div class="af-card-title-row">
+                  <span class="af-card-title text-gradient-brand">User Experience Rationale</span>
+                  <span class="gradient-brand-bar bar-thin"></span>
+                </div>
+                <p class="af-card-text">The UX strategy prioritised clarity, predictability, and low interaction cost for common form-management tasks. Rather than maximising feature density, the interface was structured to support rapid completion of core actions: creating questionnaires, inspecting response volumes, and opening individual response views with minimal navigation overhead.</p>
+                <p class="af-card-text">Across design iterations, feedback consistently reinforced the importance of explicit navigation affordances, clear ordering controls, and actionable validation messaging. This led to a user experience model that balances ease of first-time use with sufficient depth for repeated operational use.</p>
+                <ul class="list-disc pl-6 mt-3 space-y-2 text-body">
+                  <li>Primary strength: reduced cognitive load through stable layout and clear task grouping.</li>
+                  <li>Primary strength: consistent control placement across dashboard, responses, and avatar flows.</li>
+                  <li>Remaining consideration: continue improving prominence of secondary controls in dense screens.</li>
+                </ul>
               </div>
             </div>
-            <div class="hidden af-tab-panel" id="ui-wireframes-panel" role="tabpanel" aria-labelledby="ui-wireframes-tab">
-              <div class="af-card">
-                <h3 class="af-card-title">Wireframes</h3>
-                <p class="af-card-text">Add tab content here.</p>
-              </div>
-            </div>
-            <div class="hidden af-tab-panel" id="ui-prototyping-panel" role="tabpanel" aria-labelledby="ui-prototyping-tab">
-              <div class="af-card">
-                <h3 class="af-card-title">Prototyping</h3>
-                <p class="af-card-text">Add tab content here.</p>
-              </div>
+            <!--Wireframes&Prototyping-->
+            <div class="hidden af-tab-panel" id="ui-wireframes-prototyping-panel" role="tabpanel" aria-labelledby="ui-wireframes-prototyping-tab">
+              <p class="af-card-text">The prototyping progression documents the transition from initial structural exploration to a more complete interaction model. Each stage incrementally refines hierarchy, control prominence, and flow predictability.</p>
+              <figure class="af-card">
+                <div class="af-card-title-row">
+                  <span class="af-card-title text-gradient-brand">Prototype 1</span>
+                  <span class="gradient-brand-bar bar-thin"></span>
+                </div>
+                <p class="af-card-text">Prototype 1: initial structural model with emphasis on core task discoverability.</p>
+                <img src="assets/images/prototype1.png" alt="Prototype 1 showing the initial interaction model" class="af-image w-auto h-auto max-w-full max-h-96 md:max-h-[28rem] rounded-base border border-border-subtle mx-auto block" />
+              </figure>
+              <figure class="af-card">
+                <div class="af-card-title-row">
+                  <span class="af-card-title text-gradient-brand">Prototype 2</span>
+                  <span class="gradient-brand-bar bar-thin"></span>
+                </div>
+                <p class="af-card-text">Prototype 2: refined architecture balancing richer functionality with navigational clarity.</p>
+                <img src="assets/images/prototype2.png" alt="Prototype 2 showing refined information architecture" class="af-image w-auto h-auto max-w-full max-h-96 md:max-h-[28rem] rounded-base border border-border-subtle mx-auto block" />
+              </figure>
+              <figure class="af-card">
+                <div class="af-card-title-row">
+                  <span class="af-card-title text-gradient-brand">Prototype 3</span>
+                  <span class="gradient-brand-bar bar-thin"></span>
+                </div>
+                <p class="af-card-text">Prototype 3: final pre-implementation prototype consolidating layout, controls, and interaction flow.</p>
+                <img src="assets/images/finalPrototype.png" alt="Final prototype iteration used before final UI implementation" class="af-image w-auto h-auto max-w-full max-h-96 md:max-h-[28rem] rounded-base border border-border-subtle mx-auto block" />
+              </figure>
             </div>
             <div class="hidden af-tab-panel" id="ui-heuristic-panel" role="tabpanel" aria-labelledby="ui-heuristic-tab">
               <div class="af-card">
-                <h3 class="af-card-title">Heuristic Evaluations</h3>
-                <p class="af-card-text">Add tab content here.</p>
+                <div class="af-card-title-row">
+                  <span class="af-card-title text-gradient-brand">Heuristic Evaluations</span>
+                  <span class="gradient-brand-bar bar-thin"></span>
+                </div>
+                <p class="af-card-text">A heuristic evaluation approach was selected because it provides rapid, cost-effective usability diagnosis without dependence on external participant recruitment. The inspection identified three medium-to-high priority issues associated with control visibility, ordering flexibility, and error prevention.</p>
+                <p class="af-card-text">Following this evaluation, the identified fixes were implemented in a revised design iteration, Prototype 3, which served as our final prototype before the final UI design was consolidated.</p>
+                <div class="af-table-wrap mt-4">
+                  <table class="af-table">
+                    <thead>
+                      <tr>
+                        <th scope="col" class="af-table-key">Problem</th>
+                        <th scope="col" class="af-table-value">Heuristic Breach</th>
+                        <th scope="col" class="af-table-value">Severity (0-4)</th>
+                        <th scope="col" class="af-table-value">Implemented Response</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="af-table-key">Lack of explicit return paths in creation and response-detail views.</td>
+                        <td class="af-table-value">User control and freedom; consistency and standards.</td>
+                        <td class="af-table-value">2</td>
+                        <td class="af-table-value">Added visible Cancel and Back controls within relevant panels.</td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-key">Questionnaire and response entries had non-customisable ordering.</td>
+                        <td class="af-table-value">User control and freedom.</td>
+                        <td class="af-table-value">3</td>
+                        <td class="af-table-value">Introduced sort menus for questionnaire and response lists.</td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-key">Invalid file uploads lacked actionable feedback messaging.</td>
+                        <td class="af-table-value">Error prevention.</td>
+                        <td class="af-table-value">3</td>
+                        <td class="af-table-value">Added high-contrast inline error notice with explicit remediation guidance.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p class="af-card-text mt-4">Severity scale used: 0 (not a problem), 1 (cosmetic), 2 (minor), 3 (major), 4 (catastrophic).</p>
+                <p class="af-card-text">In summary, the heuristic findings directly informed Prototype 3, ensuring that the final prototype incorporated corrective changes prior to implementation.</p>
               </div>
             </div>
             <div class="hidden af-tab-panel" id="ui-final-panel" role="tabpanel" aria-labelledby="ui-final-tab">
               <div class="af-card">
-                <h3 class="af-card-title">Final UI Design</h3>
-                <p class="af-card-text">Add tab content here.</p>
+                <div class="af-card-title-row">
+                  <span class="af-card-title text-gradient-brand">Final UI Design</span>
+                  <span class="gradient-brand-bar bar-thin"></span>
+                </div>
+                <p class="af-card-text">The final interface integrates the outcomes of sketch comparison, prototype iteration, and heuristic inspection. The dashboard now emphasises operational overview and rapid access to key actions, while the avatar page foregrounds a clear, low-friction creation workflow that supports novice and returning users alike.</p>
+                <div class="af-grid-two">
+                  <figure class="af-card">
+                    <img src="assets/images/Dashboard.png" alt="Final dashboard interface with questionnaire and response management controls" class="af-image w-full h-auto rounded-base border border-border-subtle" />
+                    <figcaption class="af-card-text af-image-caption mt-3"><strong class="type-heading">Dashboard:</strong> structured overview, response visibility, and actionable list management.</figcaption>
+                  </figure>
+                  <figure class="af-card">
+                    <img src="assets/images/Avatar%20Page-Empty.png" alt="Final avatar page in empty state showing clear form structure and action buttons" class="af-image w-full h-auto rounded-base border border-border-subtle" />
+                    <figcaption class="af-card-text af-image-caption mt-3"><strong class="type-heading">Avatar Page:</strong> simplified, task-oriented composition with clearer action affordances.</figcaption>
+                  </figure>
+                </div>
               </div>
             </div>
             <div class="hidden af-tab-panel" id="ui-references-panel" role="tabpanel" aria-labelledby="ui-references-tab">
               <div class="af-card">
-                <h3 class="af-card-title">References</h3>
-                <p class="af-card-text">Add tab content here.</p>
+                <div class="af-card-title-row">
+                  <span class="af-card-title text-gradient-brand">References</span>
+                  <span class="gradient-brand-bar bar-thin"></span>
+                </div>
+                <ol class="list-decimal pl-6 space-y-3 af-card-text mt-3">
+                  <li>J. Nielsen, "10 Usability Heuristics for User Interface Design," Nielsen Norman Group, 30 Jan. 2024. Accessed: 02 Nov. 2025. [Online]. Available: https://www.nngroup.com/articles/ten-usability-heuristics/</li>
+                  <li>C. Evans, "COMP0016-07 Evaluation Part 2" (video lecture), Moodle. [Online].</li>
+                  <li>B. Shneiderman, C. Plaisant, M. Cohen, S. Jacobs, N. Elmqvist and N. Diakopoulos, Designing the User Interface: Strategies for Effective Human-Computer Interaction, 6th ed. Boston, MA, USA: Pearson, 2016.</li>
+                  <li>D. Norman, The Design of Everyday Things: Revised and Expanded Edition. New York, NY, USA: Basic Books, 2013.</li>
+                  <li>S. K. Card, T. P. Moran and A. Newell, The Psychology of Human-Computer Interaction. Hillsdale, NJ, USA: Lawrence Erlbaum Associates, 1983.</li>
+                  <li>W. E. Hick, "On the rate of gain of information," Quarterly Journal of Experimental Psychology, vol. 4, no. 1, pp. 11-26, 1952.</li>
+                  <li>P. M. Fitts, "The information capacity of the human motor system in controlling the amplitude of movement," Journal of Experimental Psychology, vol. 47, no. 6, pp. 381-391, 1954.</li>
+                </ol>
               </div>
             </div>
           </div>
