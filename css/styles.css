@@ -312,6 +312,24 @@
             margin-bottom: 0.75rem;
         }
 
+        .af-image {
+            border-radius: var(--radius-base);
+            border: 1px solid var(--surface-border);
+            display: block;
+        }
+
+        .af-image-caption {
+            color: var(--text-soft);
+            font-size: 0.9rem;
+            font-weight: 300;
+            line-height: 1.5;
+        }
+
+        .af-image-caption * {
+            color: inherit;
+            font-weight: 300 !important;
+        }
+
         .af-btn {
             display: inline-flex;
             align-items: center;
