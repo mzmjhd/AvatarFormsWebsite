@@ -108,10 +108,66 @@ namespace HelloWorldDemo
                         <div class="af-tab-panel" id="implementation-frontend-panel" role="tabpanel" aria-labelledby="implementation-frontend-tab">
                             <div class="af-card">
                                 <div class="af-card-title-row">
-                                    <span class="af-card-title text-gradient-brand">WinUI 3</span>
+                                    <span class="af-card-title text-gradient-brand">1. WinUI 3 Architecture</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
-                                <p class="af-card-text">WinUI 3 description.</p>
+                                <p class="af-card-text">The frontend is built with <code class="af-inline-code">WinUI 3</code> and C#, using a modular page-and-component structure that keeps presentation and behavior predictable across dashboard, response, and avatar workflows. Reusable user controls are used for repeated UI patterns so interaction behavior remains consistent while reducing duplicated implementation effort.</p>
+                                <p class="af-card-text">A key implementation goal was to preserve the default Microsoft look and feel by relying on the standard WinUI control library and design language wherever possible, with only minimal visual overrides. This keeps the interface aligned with the wider Microsoft ecosystem and makes interactions immediately familiar for Windows users.</p>
+                                <p class="af-card-text">This architecture also aligns well with the broader MVVM-oriented application design. View composition stays lightweight, while state and command handling are maintained in dedicated ViewModels and services, enabling clearer debugging, easier extension, and lower risk when iterating on the interface.</p>
+                            </div>
+
+                            <div class="af-card">
+                                <div class="af-card-title-row">
+                                    <span class="af-card-title text-gradient-brand">2. Mica + Frosted Surface System</span>
+                                    <span class="gradient-brand-bar bar-thin"></span>
+                                </div>
+                                <p class="af-card-text">The frontend visual language follows a frosted-mica direction where layered translucent surfaces separate context without introducing visual clutter. Primary containers establish depth with subtle blur and low-contrast boundaries, while content cards remain slightly more opaque to preserve readability and reduce background interference.</p>
+                                <p class="af-card-text">Surface hierarchy is intentionally restrained: one backdrop layer for global atmosphere, one panel layer for navigation and context, and one content layer for task execution. This keeps the UI calm and legible while still communicating spatial structure through soft elevation and tonal separation.</p>
+                            </div>
+
+                            <div class="af-card">
+                                <div class="af-card-title-row">
+                                    <span class="af-card-title text-gradient-brand">3. Dark Mode Implementation</span>
+                                    <span class="gradient-brand-bar bar-thin"></span>
+                                </div>
+                                <p class="af-card-text">Dark mode is implemented as a first-class design mode rather than a post-process color inversion. Tokens define background, surface, border, muted text, and accent behavior so that component styling can switch coherently while preserving information hierarchy and semantic emphasis.</p>
+                                <p class="af-card-text">For a low-stimulation environment, contrast is calibrated to avoid harsh luminance jumps: body copy remains readable, secondary text is softened but still accessible, and accent gradients are used selectively for section headers and key affordances. This maintains focus over long sessions without visual fatigue.</p>
+                            </div>
+
+                            <div class="af-card">
+                                <div class="af-card-title-row">
+                                    <span class="af-card-title text-gradient-brand">4. Typography + Spacing System</span>
+                                    <span class="gradient-brand-bar bar-thin"></span>
+                                </div>
+                                <p class="af-card-text">Typography uses clear role separation between heading, body, and muted-support text so users can scan dense technical content quickly. Section titles use stronger weight and gradient emphasis, while paragraphs and supporting labels follow stable line-height and spacing rules to keep reading flow smooth.</p>
+                                <p class="af-card-text">Spacing follows a consistent rhythm across cards, list groups, and code-adjacent explanation blocks. Predictable vertical gaps improve chunking and lower cognitive overhead, especially when users move between implementation categories that contain mixed prose and technical detail.</p>
+                            </div>
+
+                            <div class="af-card">
+                                <div class="af-card-title-row">
+                                    <span class="af-card-title text-gradient-brand">5. Interaction + Motion</span>
+                                    <span class="gradient-brand-bar bar-thin"></span>
+                                </div>
+                                <p class="af-card-text">Interaction behavior is designed to feel responsive but restrained. Hover, focus, and state transitions use short-duration easing to communicate affordance changes without drawing unnecessary attention away from task content.</p>
+                                <p class="af-card-text">Motion is deliberately subtle and functional: tab switching clarifies context changes, card emphasis supports discoverability, and control feedback confirms user actions. This avoids high-arousal animation patterns while still providing clear interaction cues for confidence and flow continuity.</p>
+                            </div>
+
+                            <div class="af-card">
+                                <div class="af-card-title-row">
+                                    <span class="af-card-title text-gradient-brand">6. Component Consistency</span>
+                                    <span class="gradient-brand-bar bar-thin"></span>
+                                </div>
+                                <p class="af-card-text">Consistency is enforced through shared component patterns for cards, tabs, navigation regions, links, and typography roles. Reusing established structures reduces relearning cost and ensures users can transfer interaction expectations between pages with minimal friction.</p>
+                                <p class="af-card-text">At implementation level, standardized visual tokens (radius, border, shadow, surface tone, and gradient accent) keep components visually coherent in both light and dark modes. The component set also stays close to default Microsoft control behaviors so the product remains in sync with Microsoft platform conventions while preserving a unified frontend identity.</p>
+                            </div>
+
+                            <div class="af-card">
+                                <div class="af-card-title-row">
+                                    <span class="af-card-title text-gradient-brand">7. Accessibility + Comfort</span>
+                                    <span class="gradient-brand-bar bar-thin"></span>
+                                </div>
+                                <p class="af-card-text">Accessibility and comfort are treated as implementation constraints, not optional enhancements. Keyboard-reachable controls, visible focus states, and clear text hierarchy support practical usability across different interaction preferences and attention profiles.</p>
+                                <p class="af-card-text">The low-stimulation objective is reflected in reduced visual noise, moderated contrast transitions, and predictable layout behavior. Together, these choices improve long-duration usability and reduce cognitive strain while preserving clarity for critical actions.</p>
                             </div>
                         </div>
 
