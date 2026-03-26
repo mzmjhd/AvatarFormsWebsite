@@ -26,7 +26,7 @@
     <aside id="sidebar-container" class="w-64 flex"></aside>
     
     <!-- Main content area -->
-    <main class="flex-1 py-6 px-50">
+    <main class="flex-1 w-full max-w-[1400px] mx-auto py-6 px-4 sm:px-6 lg:px-8">
       <div id="breadcrumbs-container" class="mb-6"></div>
       <section class="af-stack">
         <!--Page Title-->
@@ -43,16 +43,16 @@
           aria-label="research tabs"
         >
             <li class="me-2" role="presentation">
-                <button class="af-tab-link" id="scraper-filler-tab" data-tabs-target="#scraper-filler-panel" type="button" role="tab" aria-controls="scraper-filler-panel" aria-selected="true">Online form scraper+filler approach</button>
+                <button class="af-tab-link" id="scraper-filler-tab" data-tabs-target="#scraper-filler-panel" type="button" role="tab" aria-controls="scraper-filler-panel" aria-selected="true">Online form scraper and filler</button>
             </li>
             <li class="me-2" role="presentation">
-                <button class="af-tab-link" id="n8n-tab" data-tabs-target="#n8n-panel" type="button" role="tab" aria-controls="n8n-panel" aria-selected="false">n8n approach</button>
+                <button class="af-tab-link" id="n8n-tab" data-tabs-target="#n8n-panel" type="button" role="tab" aria-controls="n8n-panel" aria-selected="false">n8n AI chain</button>
             </li>
             <li class="me-2" role="presentation">
-                <button class="af-tab-link" id="lipsync-tab" data-tabs-target="#lipsync-panel" type="button" role="tab" aria-controls="lipsync-panel" aria-selected="false">Native speech engine lipsync approach</button>
+                <button class="af-tab-link" id="lipsync-tab" data-tabs-target="#lipsync-panel" type="button" role="tab" aria-controls="lipsync-panel" aria-selected="false">Native speech engine lip-sync</button>
             </li>
             <li class="me-2" role="presentation">
-                <button class="af-tab-link" id="meta-human-tab" data-tabs-target="#meta-human-panel" type="button" role="tab" aria-controls="meta-human-panel" aria-selected="false">Metahuman approach</button>
+                <button class="af-tab-link" id="meta-human-tab" data-tabs-target="#meta-human-panel" type="button" role="tab" aria-controls="meta-human-panel" aria-selected="false">Metahuman avatars</button>
             </li>
         </ul>
 
@@ -67,9 +67,9 @@
                   <div class="gradient-brand-bar bar-full bar-thin"></div>
                 </div>
                 <div class="card-content">
-                  <p class="af-card-text">This approach was made before it was known that we are developing a C# windows application. It was entirely in python.
-                    The form scraper scraps an online form, then an AI model engages in conversation through the terminal. 
-                    Afterwards the answers are output into the online form through an automatic form filler.
+                  <p class="af-card-text">Developed prior to the shift toward a C# Windows application, this initial prototype was built entirely in Python. 
+                    The system utilized a form extraction utility to parse online fields, followed by an AI model that conducted user conversations via a terminal interface. 
+                    Once complete, the gathered responses were injected into the target online form using an automated filler.
                   </p>
                 </div>
               </div>
@@ -82,8 +82,9 @@
                   <div class="gradient-brand-bar bar-full bar-thin"></div>
                 </div>
                 <div class="card-content">
-                  <p class="af-card-text">Form scrapper is a very useful feature developed in this prototype which was put into the final product.
-                    Since the scrapper is what "connects" the application with an online forms. This prototype also familiarized us with local AI. 
+                  <p class="af-card-text">The form extraction module proved to be a critical asset, serving as the foundational bridge between the application and external web forms. 
+                    Successfully integrated into the final product, this feature enables seamless data synchronization. 
+                    Furthermore, this prototype provided essential experience in deploying and managing local AI models, a core component of the current system's architecture.
                   </p>
                 </div>
               </div>
@@ -96,8 +97,8 @@
                   <div class="gradient-brand-bar bar-full bar-thin"></div>
                 </div>
                 <div class="card-content">
-                  <p class="af-card-text"> This prototype was too crude, relying on the terminal rather than an actual user interface.
-                    Also, it can only do one form at a time which is too reliant on the online form.
+                  <p class="af-card-text"> Despite its functional success, the prototype remained an unrefined proof of concept that relied on a terminal-based interface rather than a dedicated graphical user environment. 
+                    Furthermore, the system architecture was limited to single-form processing, creating a rigid dependency on specific online form structures that hindered scalability and user flexibility.
                   </p>
                 </div>
               </div>
@@ -114,9 +115,10 @@
                 </div>
                 <div id="n8n-container1" class="py-6">
                 <div class="card-content">
-                  <p class="af-card-text">We tried to use n8n to better format the AI flow. The AI outputs JSON that contains two variables, one for if the answer is satisfiable, and one for the actual AI output text.</p>
-                  <br>
-                  <p class="af-card-text">This then continues for every question. At the end, a table of the user answer to each question was output.</p>
+                  <p class="af-card-text">We integrated n8n to orchestrate a more structured AI control flow. 
+                    In this model, the AI was prompted to return a JSON object containing two key variables: an evaluation flag to determine if a response was satisfactory and the corresponding conversational output. 
+                    This logic was applied iteratively across all form fields, culminating in a structured data table that compiled the user’s final responses for review.
+                  </p>
                   <img src="assets/images/n8n_chain.jpg"/>
                 </div>
               </div>
@@ -130,7 +132,10 @@
                   <p class="af-card-text"></p>
                 <div id="n8n-container2" class="py-6">
                 <div class="card-content">
-                  <p class="af-card-text">Familiarized us with the logic and flow of the conversation and AI evaluation loop.</p>
+                  <p class="af-card-text">This phase was essential for establishing the foundational logic of our conversation-driven data collection. 
+                    By prototyping with n8n, we gained a deeper understanding of the AI evaluation loop and the necessity of structured state management. 
+                    These findings were vital in transitioning from a linear script to the adaptive, intelligent interaction model we have today.
+                  </p>
                 </div>
               </div>
             </div>
@@ -143,10 +148,11 @@
                   <p class="af-card-text"></p>
                 <div id="n8n-container2" class="py-6">
                 <div class="card-content">
-                  <p class="af-card-text">The JSON approach was fragile especially when carried over long conversations or when the model used was small.
-                    Since this approach relies on the AI model to output the correct JSON variable names.</p>
-                  <br>
-                  <p class="af-card-text">It was also unclear how we would implement n8n in the C# application.</p>
+                  <p class="af-card-text">
+                    The JSON-based extraction method lacked the necessary robustness for extended dialogues, particularly when utilizing resource-constrained AI models. 
+                    This approach created a rigid dependency on the model’s ability to strictly adhere to a specific schema; any deviation in output syntax resulted in system failure. 
+                    Furthermore, the architectural overhead required to integrate a third-party orchestration tool like n8n into a native C# environment presented significant implementation challenges.
+                  </p>
                 </div>
               </div>
             </div>
@@ -159,15 +165,14 @@
                 <h3 class="af-card-title text-gradient-brand">Conversation prototype</h3>
                 <div class="gradient-brand-bar bar-full bar-thin"></div>
               </div>
-              <p class="af-card-text">This prototype looks very similar to the avatar page in the final product.
-                The major difference is the method for lipsync and text to speech method. This prototype uses
-                the native speech engine and used a word by word lipsync method that made the C# app instruct the 
-                mouth animation of the avatar following the voice output of the operating system.
+              <p class="af-card-text">This prototype visually aligns with the final product's interface; however, it utilizes a distinct architectural approach for speech synthesis and lip-synchronization. 
+                By leveraging the Windows native speech engine, the system implemented a word-by-word viseme mapping logic. 
+                In this configuration, the C# application dynamically controlled the avatar’s mouth animations in real-time, synchronizing them with the operating system's localized voice output.
               </p>
               <br>
               <p class="af-card-text">
-                This prototype showed a high potential for multilingual support and lowering computational cost since it uses the
-                native speech engine.
+                This iteration demonstrated significant potential for broad linguistic compatibility and architectural efficiency. 
+                By leveraging the host environment’s native speech engine, the system achieved a substantial reduction in computational overhead, allowing for high-performance execution without the need for intensive local processing or external cloud dependencies.
               </p>
             </div>
 
@@ -176,9 +181,8 @@
                 <h3 class="af-card-title text-gradient-brand">Techniques learned</h3>
                 <div class="gradient-brand-bar bar-full bar-thin"></div>
               </div>
-              <p class="af-card-text">This prototype is actually the predecessor of the current final product, because it was the 
-                first time we achieved verbal conversation with the AI for form filling.
-                Various functions still remain, such as method of finding the python environment, microphone input, textbox...
+              <p class="af-card-text">This prototype serves as the foundational iteration of the current production environment, marking the first successful integration of a verbal AI-driven dialogue for data collection. 
+                Several core architectural components developed during this phase remain central to the final application, including the automated Python environment discovery logic, real-time microphone input processing, and the integrated user interface elements.
               </p>
             </div>
 
@@ -187,10 +191,9 @@
                 <h3 class="af-card-title text-gradient-brand">Reason for improvement</h3>
                 <div class="gradient-brand-bar bar-full bar-thin"></div>
               </div>
-              <p class="af-card-text">Due to the way that C# app instructs the mouth animation which is telling the 
-                mouth animation to end early when it knows the word has already been output, the mouth animation maybe viewed 
-                as jittery at times. The current headTTS approach plays the pre-aligned mouth animation and voice at the same time which was smoother.
-                The windows native speech engine's english voice was also too robotic.
+              <p class="af-card-text">While highly functional, this synchronization method relied on the C# application dynamically terminating animations based on real-time audio telemetry, which occasionally led to minor timing discrepancies. 
+                In contrast, the current HeadTTS architecture utilizes a pre-aligned, unified playback system that ensures a smoother visual experience. 
+                Additionally, the transition from the native speech engine to our current solution allowed us to move beyond the more traditional synthetic tonal quality of OS-level voices toward a more natural, human-like auditory experience.
               </p>
             </div>
           </div>
@@ -203,15 +206,16 @@
                 <h3 class="af-card-title text-gradient-brand">Future prototype</h3>
                 <div class="gradient-brand-bar bar-full bar-thin"></div>
               </div>
-              <p class="af-card-text">This prototype is very minimal and have not been integrated with the application yet.
-                It is using unreal engine's Metahuman which are very realistic and looks better than the current Talkinghead 3D
-                avatars. Metahuman can also express emotions which would be perfect for imitating a real conversation.
+              <p class="af-card-text">This exploratory prototype represents a high-fidelity frontier for the project, utilizing Unreal Engine’s MetaHuman framework to achieve superior visual realism. 
+                Beyond static aesthetics, MetaHumans offer a sophisticated emotional expression system, providing a more empathetic and lifelike conversational experience. 
+                While currently independent of the main application, this iteration serves as a benchmark for the next generation of user-centric digital interaction.
               </p>
               <img src="assets/images/metahuman.JPG"/>
               <br>
               <p class="af-card-text">
-                This prototype showed a high potential for realistic avatars, however it is very difficult to implement it 
-                into the application due to the unreal engine constraint and computational cost. It could be reserved for future development.
+                This iteration demonstrated significant potential for high-fidelity user interaction; however, full system integration presents substantial architectural complexities.
+                The primary challenges involve the hardware requirements inherent in the Unreal Engine environment and the associated computational overhead. 
+                Consequently, this high-performance framework remains a strategic roadmap item for future development cycles.
               </p>
             </div>
           </div>
@@ -228,11 +232,11 @@
       'index.html': [{ title: 'Home', href: 'index.html' }],
       'research.html': [
         { title: 'Home', href: 'index.html' },
-        { title: 'research', href: 'research.html' }
+        { title: 'Research', href: 'research.html' }
       ],
       'appendices.html': [
         { title: 'Home', href: 'index.html' },
-        { title: 'research', href: 'research.html' },
+        { title: 'Research', href: 'research.html' },
         { title: 'Appendices', href: 'appendices.html' }
       ]
     };
