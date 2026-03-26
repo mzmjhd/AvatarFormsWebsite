@@ -390,6 +390,11 @@
             overflow: hidden;
         }
 
+        .af-iframe-container-video {
+            height: auto;
+            aspect-ratio: 16 / 9;
+        }
+
         .af-iframe {
             display: block;
             width: 100%;
