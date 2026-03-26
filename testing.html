@@ -39,10 +39,10 @@
 							<button class="af-tab-link" id="testing-unit-tab" data-tabs-target="#testing-unit-panel" type="button" role="tab" aria-controls="testing-unit-panel" aria-selected="true">Unit Testing & Integration Testing</button>
 						</li>
 						<li class="me-2" role="presentation">
-							<button class="af-tab-link" id="testing-integration-tab" data-tabs-target="#testing-integration-panel" type="button" role="tab" aria-controls="testing-integration-panel" aria-selected="false">Performance Testing</button>
+							<button class="af-tab-link" id="testing-compatibility-tab" data-tabs-target="#testing-compatibility-panel" type="button" role="tab" aria-controls="testing-compatibility-panel" aria-selected="false">Compatibility Testing</button>
 						</li>
 						<li class="me-2" role="presentation">
-							<button class="af-tab-link" id="testing-system-tab" data-tabs-target="#testing-system-panel" type="button" role="tab" aria-controls="testing-system-panel" aria-selected="false">Compatibility Testing</button>
+							<button class="af-tab-link" id="testing-performance-tab" data-tabs-target="#testing-performance-panel" type="button" role="tab" aria-controls="testing-performance-panel" aria-selected="false">Performance Testing</button>
 						</li>
 						<li role="presentation">
 							<button class="af-tab-link" id="testing-acceptance-tab" data-tabs-target="#testing-acceptance-panel" type="button" role="tab" aria-controls="testing-acceptance-panel" aria-selected="false">User Acceptance Testing</button>
@@ -60,30 +60,49 @@
 							</div>
 						</div>
 
-						<div class="af-tab-panel hidden" id="testing-integration-panel" role="tabpanel" aria-labelledby="testing-integration-tab">
+						<div class="af-tab-panel hidden" id="testing-compatibility-panel" role="tabpanel" aria-labelledby="testing-compatibility-tab">
 							<div class="af-card">
 								<div class="af-card-title-row">
-									<span class="af-card-title text-gradient-brand">Integration Testing</span>
+									<span class="af-card-title text-gradient-brand">Compatibility Testing</span>
 									<span class="gradient-brand-bar bar-thin"></span>
 								</div>
-								<p class="af-card-text">Content placeholder.</p>
+								<p class="af-card-text">Compatibility testing was conducted on a range of Windows-based systems using both NVIDIA and AMD GPUs, alongside machines equipped with AMD and Intel CPUs.
+									Theoretically, the application can be run on any devices with a CPU architecture of either AMD64 (AMD CPUs circa 2003+) or ARM64 (Intel CPUs circa 2006+), while compatibility with Qualcomm Snapdragon CPUs have not yet been tested.</p>
+								<p class="af-card-text">The Text-To-Speech and 3D avatar lip-sync models are already deployed using the ONNX Runtime format, but the LLM solution (llamafile) has limited documentation on NPU support.
+									That being said, the application ran reliably across these configurations when GPU acceleration was available.
+									However, when running on CPU-only systems, particularly during LLM inference, performance degraded significantly as expected, which will be discussed further in the Performance section.</p>
+								<p class="af-card-text">As this is a Windows-based application, compatibility with macOS or other UNIX-based systems was not tested.</p>
 							</div>
 						</div>
 
-						<div class="af-tab-panel hidden" id="testing-system-panel" role="tabpanel" aria-labelledby="testing-system-tab">
+						<div class="af-tab-panel hidden" id="testing-performance-panel" role="tabpanel" aria-labelledby="testing-performance-tab">
 							<div class="af-card">
 								<div class="af-card-title-row">
-									<span class="af-card-title text-gradient-brand">System Testing</span>
+									<span class="af-card-title text-gradient-brand">Performance Testing</span>
 									<span class="gradient-brand-bar bar-thin"></span>
 								</div>
-								<p class="af-card-text">Content placeholder.</p>
+								<p class="af-card-text">The performance was tested on devices with the following system specifications:</p>
+								<ul class="list-disc pl-6 mt-4 space-y-3">
+									<li class="af-table-value">
+										<strong class="type-heading">CPU-Only Windows System:</strong>
+										AMD Ryzen 5 4600H (Mobile) + 16GB RAM (DRR4@2666MT/s)
+									</li>
+									<li class="af-table-value">
+										<strong class="type-heading">CPU + GPU (Mid-Range with 6GB VRAM) Windows System:</strong>
+
+									</li>
+									<li class="af-table-value">
+										<strong class="type-heading">CPU + GPU (Mid-Range with 12GB VRAM) Windows System:</strong>
+										AMD Ryzen 5 5700X + NVIDIA RTX 4070Ti 12GB + 32GB RAM (DDR4@3200MT/s)
+									</li>
+								</ul>
 							</div>
 						</div>
 
 						<div class="af-tab-panel hidden" id="testing-acceptance-panel" role="tabpanel" aria-labelledby="testing-acceptance-tab">
 							<div class="af-card">
 								<div class="af-card-title-row">
-									<span class="af-card-title text-gradient-brand">Acceptance Testing</span>
+									<span class="af-card-title text-gradient-brand">User Acceptance Testing</span>
 									<span class="gradient-brand-bar bar-thin"></span>
 								</div>
 								<p class="af-card-text">Content placeholder.</p>
