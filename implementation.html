@@ -379,10 +379,175 @@ def receive_questionnaire():
                         <div class="af-tab-panel" id="implementation-database-panel" role="tabpanel" aria-labelledby="implementation-database-tab">
                             <div class="af-card">
                                 <div class="af-card-title-row">
-                                    <span class="af-card-title text-gradient-brand">SQL Implementation</span>
+                                    <span class="af-card-title text-gradient-brand">1. Database Stack and Storage</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
-                                <p class="af-card-text">Content</p>
+                                <p class="af-card-text">Our data layer uses <code class="af-inline-code">EF Core</code> with a <code class="af-inline-code">DbContext</code> backed by <code class="af-inline-code">SQLite</code>. This keeps deployment light while preserving strong relational modeling and query capabilities.</p>
+                                <p class="af-card-text">The primary provider package is <code class="af-inline-code">Microsoft.EntityFrameworkCore.Sqlite</code>, which enables EF Core to map C# entities to the local SQLite engine.</p>
+                                <p class="af-card-text">The SQLite file <code class="af-inline-code">questionnaire.db</code> is stored locally under <code class="af-inline-code">LocalApplicationData</code>, so user data remains isolated to the host machine and does not require external database provisioning.</p>
+                            </div>
+
+                            <div class="af-card">
+                                <div class="af-card-title-row">
+                                    <span class="af-card-title text-gradient-brand">2. Schema Initialization and Lifecycle</span>
+                                    <span class="gradient-brand-bar bar-thin"></span>
+                                </div>
+                                <p class="af-card-text">The application uses <code class="af-inline-code">Database.EnsureCreatedAsync()</code> on startup to dynamically create missing tables from <code class="af-inline-code">AppDbContext</code> model definitions. This removes friction during first run setup and keeps schema initialization automatic.</p>
+                                <p class="af-card-text">Although migrations are used in development, runtime schema bootstrap prioritizes <code class="af-inline-code">EnsureCreatedAsync()</code> for practical deployment and predictable local initialization.</p>
+                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-csharp">// Delete database before each run if testing, or ensure it exists for production
+using (var scope = Host.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService&lt;AppDbContext&gt;();
+
+    // Create database with schema if it doesn't exist
+    await dbContext.Database.EnsureCreatedAsync();
+
+    // Seeding sample data logic follows...
+}</code></pre>
+                            </div>
+
+                            <div class="af-card">
+                                <div class="af-card-title-row">
+                                    <span class="af-card-title text-gradient-brand">3. Entity Model and Relationships</span>
+                                    <span class="gradient-brand-bar bar-thin"></span>
+                                </div>
+                                <p class="af-card-text">The schema is centered around questionnaires, their questions/options, and response sessions captured during interviews.</p>
+                                <div class="af-table-wrap">
+                                    <table class="af-table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" class="af-table-key">Entity</th>
+                                                <th scope="col" class="af-table-value">Primary Key</th>
+                                                <th scope="col" class="af-table-value">Foreign Keys</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="af-table-key"><code class="af-inline-code">Questionnaire</code></td>
+                                                <td class="af-table-value"><code class="af-inline-code">Id</code></td>
+                                                <td class="af-table-value">-</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="af-table-key"><code class="af-inline-code">Question</code></td>
+                                                <td class="af-table-value"><code class="af-inline-code">Id</code></td>
+                                                <td class="af-table-value"><code class="af-inline-code">QuestionnaireId</code></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="af-table-key"><code class="af-inline-code">QuestionOption</code></td>
+                                                <td class="af-table-value"><code class="af-inline-code">Id</code></td>
+                                                <td class="af-table-value"><code class="af-inline-code">QuestionId</code></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="af-table-key"><code class="af-inline-code">ResponseSession</code></td>
+                                                <td class="af-table-value"><code class="af-inline-code">Id</code></td>
+                                                <td class="af-table-value"><code class="af-inline-code">QuestionnaireId</code></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="af-table-key"><code class="af-inline-code">Response</code></td>
+                                                <td class="af-table-value"><code class="af-inline-code">Id</code></td>
+                                                <td class="af-table-value"><code class="af-inline-code">ResponseSessionId</code>, <code class="af-inline-code">QuestionId</code></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <ul class="list-disc pl-6 mt-4 space-y-3">
+                                    <li class="af-table-value"><code class="af-inline-code">Questionnaire</code> 1:n <code class="af-inline-code">Question</code></li>
+                                    <li class="af-table-value"><code class="af-inline-code">Questionnaire</code> 1:n <code class="af-inline-code">ResponseSession</code></li>
+                                    <li class="af-table-value"><code class="af-inline-code">Question</code> 1:n <code class="af-inline-code">QuestionOption</code></li>
+                                    <li class="af-table-value"><code class="af-inline-code">Question</code> has one <code class="af-inline-code">QuestionType</code> enum value</li>
+                                    <li class="af-table-value"><code class="af-inline-code">Question</code> 1:n <code class="af-inline-code">Response</code></li>
+                                    <li class="af-table-value"><code class="af-inline-code">Response</code> n:1 <code class="af-inline-code">ResponseSession</code></li>
+                                </ul>
+                                <br>
+                                <p class="af-card-text">Cascade rules are configured so deleting a <code class="af-inline-code">Questionnaire</code> removes related dependent entities, and deleting a <code class="af-inline-code">ResponseSession</code> removes all <code class="af-inline-code">Response</code> rows associated with that session.</p>
+                            </div>
+
+                            <div class="af-card">
+                                <div class="af-card-title-row">
+                                    <span class="af-card-title text-gradient-brand">4. Saving Questionnaires (Repository Service)</span>
+                                    <span class="gradient-brand-bar bar-thin"></span>
+                                </div>
+                                <p class="af-card-text">Database write operations are encapsulated in <code class="af-inline-code">QuestionnaireService</code> to keep ViewModels independent from persistence details. Before committing, the service injects <code class="af-inline-code">CreatedDate</code> and <code class="af-inline-code">ModifiedDate</code>, then persists the questionnaire graph in one transaction.</p>
+                                <p class="af-card-text">When a top-level <code class="af-inline-code">Questionnaire</code> entity is added, EF Core tracks nested <code class="af-inline-code">Question</code> and <code class="af-inline-code">QuestionOption</code> objects and saves them automatically through graph persistence.</p>
+                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-csharp">// Add new questionnaire
+public async Task&lt;Questionnaire&gt; AddAsync(Questionnaire questionnaire)
+{
+    try
+    {
+        // Inject application-managed timestamps
+        questionnaire.CreatedDate = DateTime.UtcNow;
+        questionnaire.ModifiedDate = DateTime.UtcNow;
+        
+        _context.Questionnaires.Add(questionnaire);
+        await _context.SaveChangesAsync();
+        
+        return questionnaire;
+    }
+    catch (Exception ex)
+    {
+        throw new Exception("Error adding questionnaire", ex);
+    }
+}</code></pre>
+                            </div>
+
+                            <div class="af-card">
+                                <div class="af-card-title-row">
+                                    <span class="af-card-title text-gradient-brand">5. Saving Interview Responses (Internal API Flow)</span>
+                                    <span class="gradient-brand-bar bar-thin"></span>
+                                </div>
+                                <p class="af-card-text">The interview response pipeline is handled through an internal HTTP endpoint in <code class="af-inline-code">ResponseAPIService</code>. This local API pattern allows the Python/Llamafile orchestration flow to submit data asynchronously while the .NET side validates and persists each response.</p>
+                                <p class="af-card-text">Incoming payloads are mapped to the active <code class="af-inline-code">ResponseSession</code>, and answer text is dynamically resolved based on question type (for example, MCQ option text vs open-ended text). Completion state is tracked with <code class="af-inline-code">_receivedResponseCount</code> against <code class="af-inline-code">_expectedQuestionCount</code> before marking the session complete.</p>
+                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-csharp">// Look up the exact question configuration
+var question = await dbContext.Questions
+    .FirstOrDefaultAsync(q =&gt; q.QuestionnaireId == payload.QuestionnaireId &amp;&amp; 
+                            q.Order == payload.QuestionOrder, cancellationToken);
+
+// Create and save the response, handling Answer variations (MCQ vs OpenEnded)
+var answerText = payload.QuestionType == "mcq" &amp;&amp; !string.IsNullOrWhiteSpace(payload.SelectedOption)
+    ? payload.SelectedOption
+    : payload.Answer;
+
+var responseEntity = new Models.Response
+{
+    ResponseSessionId = session.Id,
+    QuestionId = question.Id,
+    AnswerText = answerText,
+    AnsweredDate = DateTime.UtcNow
+};
+
+dbContext.Responses.Add(responseEntity);
+await dbContext.SaveChangesAsync(cancellationToken);
+
+// Validation check to mark the interview state as complete
+_receivedResponseCount++;
+if (_expectedQuestionCount &gt; 0 &amp;&amp; _receivedResponseCount &gt;= _expectedQuestionCount)
+{
+    session.IsComplete = true; // Mark session as complete
+    await dbContext.SaveChangesAsync(cancellationToken);
+    
+    // Asynchronous invocation so HTTP response is not bottlenecked
+    _ = Task.Run(() =&gt; AllResponsesReceived?.Invoke()); 
+}</code></pre>
+                            </div>
+
+                            <div class="af-card">
+                                <div class="af-card-title-row">
+                                    <span class="af-card-title text-gradient-brand">6. Migration Strategy in Development</span>
+                                    <span class="gradient-brand-bar bar-thin"></span>
+                                </div>
+                                <p class="af-card-text">Database migrations are still used during development to evolve schema definitions safely and track structural changes over time.</p>
+                                <p class="af-card-text">In practice, this combines the strengths of both approaches: migrations for controlled schema evolution and <code class="af-inline-code">EnsureCreatedAsync()</code> for first-run initialization in local deployment scenarios.</p>
+                                <p class="af-card-text">This strategy avoids manual setup for end users while preserving a structured, versioned schema workflow for engineering and testing.</p>
+                            </div>
+
+                            <div class="af-card">
+                                <div class="af-card-title-row">
+                                    <span class="af-card-title text-gradient-brand">7. EF Core Data Operations and Consistency</span>
+                                    <span class="gradient-brand-bar bar-thin"></span>
+                                </div>
+                                <p class="af-card-text">Core CRUD behavior is handled through EF Core and service-layer methods, reducing boilerplate SQL while keeping queries strongly typed and model-safe.</p>
+                                <p class="af-card-text">Entity tracking in <code class="af-inline-code">DbContext</code> ensures updates and inserts are synchronized through <code class="af-inline-code">SaveChangesAsync()</code>, and navigation-based graph persistence keeps related entities consistent.</p>
+                                <p class="af-card-text">Together with foreign keys and cascade rules, this provides reliable referential integrity across <code class="af-inline-code">Questionnaire</code>, <code class="af-inline-code">Question</code>, <code class="af-inline-code">ResponseSession</code>, and <code class="af-inline-code">Response</code> lifecycles.</p>
                             </div>
                         </div>
 
