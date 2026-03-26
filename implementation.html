@@ -396,7 +396,7 @@ def receive_questionnaire():
                                 <p class="af-card-text">The avatar generation is implemented by integrating an open-source browser-based 3D avatar rendering with an embedded Text-To-Speech (Kokoro TTS) and lipsync solution that takes in text input, <a href="https://github.com/met4citizen/HeadTTS" class="af-link">HeadTTS</a>, inside the <code class="af-inline-code">AvatarPage</code> using a <code class="af-inline-code">WebView2</code> control. 
                                     When the page initialises, a lightweight local web server is started to serve the <a href="https://github.com/met4citizen/HeadTTS" class="af-link">HeadTTS</a> assets. 
                                     The WebView navigates to a dynamically constructed URL that includes avatar and voice parameters. This allows the application to control avatar configuration without modifying the frontend code directly. 
-                                    The avatar is loaded in the <code class="af-inline-code">AvatarPage</code> via:</p>
+                                    The avatar is loaded in the <code class="af-inline-code">AvatarPage</code>.</p>
                                 <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-csharp">// Start local web server
 if (_webServer == null)
 {
@@ -431,11 +431,113 @@ AvatarWebView.CoreWebView2.Navigate(GetHeadTTSUrl());</code></pre>
 
     return url;
 }</code></pre>
-                                <p class="af-card-text">The parameters <code class="af-inline-code">_selectedAvatar</code> and <code class="af-inline-code">_selectedVoice</code> are obtained from the <code class="af-inline-code">LocalSettingsService</code>, so the initialisation will stay consistent with the user's preference.</p>
                             </div>
+
                             <div class="af-card">
                                 <div class="af-card-title-row">
-                                    <span class="af-card-title text-gradient-brand">Streaming</span>
+                                    <span class="af-card-title text-gradient-brand">Avatar Selection</span>
+                                    <span class="gradient-brand-bar bar-thin"></span>
+                                </div>
+                                <p class="af-card-text">The avatar selection system is implemented as a dynamic and extensible feature that allows users to choose and load custom 3D avatars from <a href="https://avaturn.me/" class="af-link">Avaturn</a> (Type-2) or any 3D avatars with these features:</p>
+                                <ul class="list-disc pl-6 mt-4 mb-6 space-y-3">
+									<li class="af-table-value">
+										<strong class="type-heading">Mixamo-compatible rig</strong>
+										for body animations.
+									</li>
+									<li class="af-table-value">
+										<strong class="type-heading">ARKit blendshapes</strong>
+										for facial expressions.
+									</li>
+									<li class="af-table-value">
+										<strong class="type-heading">Oculus visemes shape keys</strong>
+										for lipsync animations.
+									</li>
+								</ul> 
+                                <p class="af-card-text">On the WinUI side, available avatars are automatically discovered by scanning a local directory containing .glb files. 
+                                    These are then populated into a ComboBox, where each item stores both a display name and an internal identifier used by the system. 
+                                    This is achieved through directory scanning and dynamic UI population.
+                                </p>
+                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-csharp">string avatarsDir = Path.Combine(AppContext.BaseDirectory, "HeadTTS", "avatars");
+var glbFiles = Directory.GetFiles(avatarsDir, "*.glb");
+
+foreach (var file in glbFiles)
+{
+    string avatarName = Path.GetFileNameWithoutExtension(file);
+
+    var item = new ComboBoxItem
+    {
+        Content = char.ToUpper(avatarName[0]) + avatarName.Substring(1),
+        Tag = avatarName
+    };
+
+    AvatarComboBox.Items.Add(item);
+}</code></pre>
+                                <p class="af-card-text">When a user selects an avatar or voice the selection is stored and persisted using the <code class="af-inline-code">LocalSettingsService</code> for resilience. 
+                                    The selected avatar is passed to the Javascript rendering layer via URL query parameters like mentioned in the section above. 
+                                    On the HeadTTS side, the avatar and voice parameters are extracted from the URL and used to dynamically construct a configuration object. 
+                                    This determines which 3D model to load and how it should behave.
+                                </p>
+                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-javascript">function getPerson(avatarName, voiceParam) {
+  let person;
+
+  if (avatarName == "david" || avatarName == "julia") { // Normal avatars
+    person = {
+      avatar: {
+        url: `./avatars/${avatarName}.glb`,
+        body: avatarName == "julia" ? "F" : "M",
+        avatarMood: "neutral"
+      },
+      setup: {
+        voice: voiceParam,
+        language: "en-us",
+        speed: 1,
+        audioEncoding: "wav"
+      }
+    }
+  } else { // Avaturn custom avatars
+    person = {
+      avatar: {
+        url: `./avatars/${avatarName}.glb`,
+        body: 'F',
+        avatarMood: 'happy',
+        retarget: {
+          Hips: { y: 0.03 }, Spine: { y: 0.02 }, Spine1: { y: 0.02, z: 0.01 },
+          Spine2: { y: 0.02, z: 0.01 }, Neck: { z: 0.02, y: 0.01 }, Head: { z: 0.02 },
+          LeftShoulder: { rx: -0.5 }, RightShoulder: { rx: -0.5 },
+          scaleToHipsLevel: 1.0
+        },
+        baseline: {
+          headRotateX: -0.05,
+          eyeBlinkLeft: 0.15,
+          eyeBlinkRight: 0.15
+        }
+      },
+      setup: {
+        voice: voiceParam,
+        language: "en-us",
+        speed: 1,
+        audioEncoding: "wav"
+      }
+    }
+  }
+
+  return person;
+}</code></pre>
+                                <p class="af-card-text">The custom avatar uploads allow users to import the compatible .glb files via a file picker, which are copied into the avatars directory and immediately made available for selection.</p>
+                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-csharp">var file = await picker.PickSingleFileAsync();
+string targetPath = Path.Combine(targetDir, file.Name);
+
+using (var stream = await file.OpenStreamForReadAsync())
+using (var targetStream = File.Create(targetPath))
+{
+    await stream.CopyToAsync(targetStream);
+}</code></pre>
+                                <p class="af-card-text">Overall, this provides a flexible and user-friendly avatar selection by combining dynamic file discovery, settings, and integration between the WinUI frontend and the browser-based 3D avatar generation.</p>
+                            </div>
+
+                            <div class="af-card">
+                                <div class="af-card-title-row">
+                                    <span class="af-card-title text-gradient-brand">Conversation Streaming</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
                                 <p class="af-card-text">Communication between the backend Python agent and the avatar occurs through a WebSocket bridge for real-time streaming of speech content. 
