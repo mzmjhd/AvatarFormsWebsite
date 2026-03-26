@@ -153,6 +153,9 @@
 
         #default-sidebar a {
             color: var(--text);
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            line-height: 1.3;
             border-radius: var(--radius-base);
             transition: background-color 0.2s, color 0.2s;
         }
@@ -451,7 +454,8 @@
         .af-link {
             color: var(--accent);
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 200;
+            font-style: italic;
         }
 
         .af-link:hover {
@@ -555,6 +559,7 @@
             width: 100%;
             border-collapse: collapse;
             min-width: 720px;
+            justify-content: start;
         }
 
         .af-table thead th {
