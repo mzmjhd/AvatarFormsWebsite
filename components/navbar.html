@@ -100,7 +100,7 @@
               >
             </li>
             <li class="ml-4 flex items-center">
-                <button onclick="document.documentElement.classList.toggle('dark')" 
+                <button onclick="document.documentElement.classList.toggle('dark'); localStorage.setItem('color-theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light')" 
                         class="cursor-pointer p-2 border border-current rounded-md hover:opacity-70 transition-opacity relative w-9 h-9">
                     <svg class="w-5 h-5 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <g style="opacity: var(--sun-op)">
