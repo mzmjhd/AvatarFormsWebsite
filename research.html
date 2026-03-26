@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AvatarForms</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script>
+        // On page load, check localStorage or system defaults
+        if (localStorage.getItem('color-theme') === 'dark' || 
+            (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet"/>
+    <link href="css/styles.css" rel="stylesheet"/>
+  </head>
+
+<body class="min-h-screen flex flex-col">
+  <nav id="navbar-container" class="fixed top-0 w-full z-50"></nav>
+
+  <!--Layout Container-->
+  <div class="flex flex-1 pt-16">
+    <aside id="sidebar-container" class="w-64 flex"></aside>
+    
+    <!-- Main content area -->
+    <main class="flex-1 py-6 px-50">
+      <div id="breadcrumbs-container" class="mb-6"></div>
+      <section class="af-stack">
+        <!--Page Title-->
+        <div class="af-stack">
+						<h1 class="text-5xl text-font-bold text-gradient-brand">Research</h1>
+						<p class="af-section-subtitle">This section details the research and prototypes during project development.</p>
+				</div>
+        <!--Tabs-->
+        <ul
+          class="af-tabs"
+          id="research-tabs"
+          data-tabs-toggle="#research-tab-content"
+          role="tablist"
+          aria-label="research tabs"
+        >
+            <li class="me-2" role="presentation">
+                <button class="af-tab-link" id="scraper-filler-tab" data-tabs-target="#scraper-filler-panel" type="button" role="tab" aria-controls="scraper-filler-panel" aria-selected="true">Online form scraper+filler approach</button>
+            </li>
+            <li class="me-2" role="presentation">
+                <button class="af-tab-link" id="n8n-tab" data-tabs-target="#n8n-panel" type="button" role="tab" aria-controls="n8n-panel" aria-selected="false">n8n approach</button>
+            </li>
+            <li class="me-2" role="presentation">
+                <button class="af-tab-link" id="lipsync-tab" data-tabs-target="#lipsync-panel" type="button" role="tab" aria-controls="lipsync-panel" aria-selected="false">Native speech engine lipsync approach</button>
+            </li>
+            <li class="me-2" role="presentation">
+                <button class="af-tab-link" id="meta-human-tab" data-tabs-target="#meta-human-panel" type="button" role="tab" aria-controls="meta-human-panel" aria-selected="false">Metahuman approach</button>
+            </li>
+        </ul>
+
+        <!--Tab Content-->
+        <div id="research-tab-content">
+          <!--Scraper-filler-->
+          <div class="af-tab-panel" id="scraper-filler-panel" role="tabpanel" aria-labelledby="scraper-filler-tab">
+            <div class="af-card">
+              <div id="scraper-filler1" class="py-6">
+                <div class="af-card-title-row">
+                  <h3 class="af-card-title text-gradient-brand">Earliest prototype</h3>
+                  <div class="gradient-brand-bar bar-full bar-thin"></div>
+                </div>
+                <div class="card-content">
+                  <p class="af-card-text">This approach was made before it was known that we are developing a C# windows application. It was entirely in python.
+                    The form scraper scraps an online form, then an AI model engages in conversation through the terminal. 
+                    Afterwards the answers are output into the online form through an automatic form filler.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="af-card">
+              <div id="scraper-filler2" class="py-6">
+                <div class="af-card-title-row">
+                  <h3 class="af-card-title text-gradient-brand">Techniques learned</h3>
+                  <div class="gradient-brand-bar bar-full bar-thin"></div>
+                </div>
+                <div class="card-content">
+                  <p class="af-card-text">Form scrapper is a very useful feature developed in this prototype which was put into the final product.
+                    Since the scrapper is what "connects" the application with an online forms. This prototype also familiarized us with local AI. 
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="af-card">
+              <div id="scraper-filler3" class="py-6">
+                <div class="af-card-title-row">
+                  <h3 class="af-card-title text-gradient-brand">Reason for improvement</h3>
+                  <div class="gradient-brand-bar bar-full bar-thin"></div>
+                </div>
+                <div class="card-content">
+                  <p class="af-card-text"> This prototype was too crude, relying on the terminal rather than an actual user interface.
+                    Also, it can only do one form at a time which is too reliant on the online form.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--n8n-->
+          <div class="hidden af-tab-panel" id="n8n-panel" role="tabpanel" aria-labelledby="n8n-tab">
+            <div class="af-card">
+
+              <div class="af-card-title-row">
+                <h3 class="af-card-title text-gradient-brand">AI control flow prototype</h3>
+                <div class="gradient-brand-bar bar-full bar-thin"></div>
+                </div>
+                <div id="n8n-container1" class="py-6">
+                <div class="card-content">
+                  <p class="af-card-text">We tried to use n8n to better format the AI flow. The AI outputs JSON that contains two variables, one for if the answer is satisfiable, and one for the actual AI output text.</p>
+                  <br>
+                  <p class="af-card-text">This then continues for every question. At the end, a table of the user answer to each question was output.</p>
+                  <img src="assets/images/n8n_chain.jpg"/>
+                </div>
+              </div>
+            </div>
+
+            <div class="af-card">
+              <div class="af-card-title-row">
+                <h3 class="af-card-title text-gradient-brand">Techniques learned</h3>
+                <div class="gradient-brand-bar bar-full bar-thin"></div>
+                </div>
+                  <p class="af-card-text"></p>
+                <div id="n8n-container2" class="py-6">
+                <div class="card-content">
+                  <p class="af-card-text">Familiarized us with the logic and flow of the conversation and AI evaluation loop.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="af-card">
+              <div class="af-card-title-row">
+                <h3 class="af-card-title text-gradient-brand">Reason for improvement</h3>
+                <div class="gradient-brand-bar bar-full bar-thin"></div>
+                </div>
+                  <p class="af-card-text"></p>
+                <div id="n8n-container2" class="py-6">
+                <div class="card-content">
+                  <p class="af-card-text">The JSON approach was fragile especially when carried over long conversations or when the model used was small.
+                    Since this approach relies on the AI model to output the correct JSON variable names.</p>
+                  <br>
+                  <p class="af-card-text">It was also unclear how we would implement n8n in the C# application.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--Lipsync-->
+          <div class="hidden af-tab-panel" id="lipsync-panel" role="tabpanel" aria-labelledby="lipsync-tab">
+            <div class="af-card">
+              <div class="af-card-title-row">
+                <h3 class="af-card-title text-gradient-brand">Conversation prototype</h3>
+                <div class="gradient-brand-bar bar-full bar-thin"></div>
+              </div>
+              <p class="af-card-text">This prototype looks very similar to the avatar page in the final product.
+                The major difference is the method for lipsync and text to speech method. This prototype uses
+                the native speech engine and used a word by word lipsync method that made the C# app instruct the 
+                mouth animation of the avatar following the voice output of the operating system.
+              </p>
+              <br>
+              <p class="af-card-text">
+                This prototype showed a high potential for multilingual support and lowering computational cost since it uses the
+                native speech engine.
+              </p>
+            </div>
+
+            <div class="af-card">
+              <div class="af-card-title-row">
+                <h3 class="af-card-title text-gradient-brand">Techniques learned</h3>
+                <div class="gradient-brand-bar bar-full bar-thin"></div>
+              </div>
+              <p class="af-card-text">This prototype is actually the predecessor of the current final product, because it was the 
+                first time we achieved verbal conversation with the AI for form filling.
+                Various functions still remain, such as method of finding the python environment, microphone input, textbox...
+              </p>
+            </div>
+
+            <div class="af-card">
+              <div class="af-card-title-row">
+                <h3 class="af-card-title text-gradient-brand">Reason for improvement</h3>
+                <div class="gradient-brand-bar bar-full bar-thin"></div>
+              </div>
+              <p class="af-card-text">Due to the way that C# app instructs the mouth animation which is telling the 
+                mouth animation to end early when it knows the word has already been output, the mouth animation maybe viewed 
+                as jittery at times. The current headTTS approach plays the pre-aligned mouth animation and voice at the same time which was smoother.
+                The windows native speech engine's english voice was also too robotic.
+              </p>
+            </div>
+          </div>
+
+
+          <!--meta-human-->
+          <div class="hidden af-tab-panel" id="meta-human-panel" role="tabpanel" aria-labelledby="meta-human-tab">
+            <div class="af-card">
+              <div class="af-card-title-row">
+                <h3 class="af-card-title text-gradient-brand">Future prototype</h3>
+                <div class="gradient-brand-bar bar-full bar-thin"></div>
+              </div>
+              <p class="af-card-text">This prototype is very minimal and have not been integrated with the application yet.
+                It is using unreal engine's Metahuman which are very realistic and looks better than the current Talkinghead 3D
+                avatars. Metahuman can also express emotions which would be perfect for imitating a real conversation.
+              </p>
+              <img src="assets/images/metahuman.JPG"/>
+              <br>
+              <p class="af-card-text">
+                This prototype showed a high potential for realistic avatars, however it is very difficult to implement it 
+                into the application due to the unreal engine constraint and computational cost. It could be reserved for future development.
+              </p>
+            </div>
+          </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="footer-placeholder"></div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
+  <script>
+    const breadcrumbPaths = {
+      'index.html': [{ title: 'Home', href: 'index.html' }],
+      'research.html': [
+        { title: 'Home', href: 'index.html' },
+        { title: 'research', href: 'research.html' }
+      ],
+      'appendices.html': [
+        { title: 'Home', href: 'index.html' },
+        { title: 'research', href: 'research.html' },
+        { title: 'Appendices', href: 'appendices.html' }
+      ]
+    };
+
+    function addCurrentBreadcrumb() {
+      const breadcrumbsList = document.getElementById('breadcrumbs-list');
+      if (!breadcrumbsList) return;
+
+      const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+      const trail = breadcrumbPaths[currentPath] || [
+        { title: 'Home', href: 'index.html' },
+        { title: 'Page' }
+      ];
+
+      if (currentPath === 'index.html') return;
+
+      trail.slice(1).forEach((crumb, index) => {
+        const isLast = index === trail.slice(1).length - 1;
+        const listItem = document.createElement('li');
+        listItem.className = 'inline-flex items-center gap-2 text-body';
+
+        const separator = `
+          <svg class="w-3 h-3 text-body" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+          </svg>
+        `;
+
+        if (isLast || !crumb.href) {
+          listItem.innerHTML = `${separator}<span aria-current="page">${crumb.title}</span>`;
+        } else {
+          listItem.innerHTML = `${separator}<a href="${crumb.href}" class="hover:text-fg-brand">${crumb.title}</a>`;
+        }
+
+        breadcrumbsList.appendChild(listItem);
+      });
+    }
+
+    function initresearchTabs() {
+      const tabList = document.getElementById('research-tabs');
+      const panelContainer = document.getElementById('research-tab-content');
+      if (!tabList || !panelContainer) return;
+
+      const tabs = Array.from(tabList.querySelectorAll('[role="tab"][data-tabs-target]'));
+      const panels = Array.from(panelContainer.querySelectorAll('[role="tabpanel"]'));
+      if (!tabs.length || !panels.length) return;
+
+      const activateTab = (selectedTab) => {
+        const targetSelector = selectedTab.getAttribute('data-tabs-target');
+        if (!targetSelector) return;
+
+        tabs.forEach((tab) => {
+          const isActive = tab === selectedTab;
+          tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+          tab.tabIndex = isActive ? 0 : -1;
+        });
+
+        panels.forEach((panel) => {
+          panel.classList.add('hidden');
+        });
+
+        const activePanel = panelContainer.querySelector(targetSelector);
+        if (activePanel) {
+          activePanel.classList.remove('hidden');
+        }
+      };
+
+      tabs.forEach((tab) => {
+        tab.addEventListener('click', () => activateTab(tab));
+      });
+
+      const initiallySelected = tabs.find((tab) => tab.getAttribute('aria-selected') === 'true') || tabs[0];
+      activateTab(initiallySelected);
+    }
+
+    function initPersonaIframes() {
+      const personaIframes = Array.from(document.querySelectorAll('#method5 iframe.af-iframe'));
+      if (!personaIframes.length) return;
+
+      const fitIframeImage = (iframe) => {
+        try {
+          const doc = iframe.contentDocument || iframe.contentWindow?.document;
+          if (!doc) return;
+
+          const style = doc.createElement('style');
+          style.textContent = `
+            html, body {
+              margin: 0;
+              width: 100%;
+              height: 100%;
+              overflow: hidden;
+              background: transparent;
+            }
+            body {
+              display: grid;
+              place-items: center;
+            }
+            img {
+              max-width: 100%;
+              max-height: 100%;
+              width: auto;
+              height: auto;
+              object-fit: contain;
+              display: block;
+            }
+          `;
+          doc.head?.appendChild(style);
+        } catch (error) {
+          console.warn('Could not apply iframe fit styling:', error);
+        }
+      };
+
+      personaIframes.forEach((iframe) => {
+        if (iframe.contentDocument?.readyState === 'complete') {
+          fitIframeImage(iframe);
+        }
+        iframe.addEventListener('load', () => fitIframeImage(iframe));
+      });
+    }
+
+
+    fetch('components/navbar.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('navbar-container').innerHTML = data;
+      })
+      .catch(error => console.error('Error loading navbar:', error));
+    
+    fetch('components/sidebar.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('sidebar-container').innerHTML = data;
+      })
+      .catch(error => console.error('Error loading sidebar:', error));
+
+    fetch('components/breadcrumbs.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('breadcrumbs-container').innerHTML = data;
+        addCurrentBreadcrumb();
+      })
+      .catch(error => console.error('Error loading breadcrumbs:', error));
+
+    fetch('components/footer.txt')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('footer-placeholder').innerHTML = data;
+      })
+      .catch(error => console.error('Error loading footer:', error));
+
+    initresearchTabs();
+    initPersonaIframes();
+
+  </script>
+</body>
+
+</html>
