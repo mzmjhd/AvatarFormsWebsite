@@ -1,121 +1,832 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AvatarForms</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet"/>
     <link href="css/styles.css" rel="stylesheet"/>
   </head>
+  <body class="min-h-screen flex flex-col">
+    <nav id="navbar-container" class="fixed top-0 w-full z-50"></nav>
 
-<body class="min-h-screen flex flex-col">
-  <nav id="navbar-container" class="fixed top-0 w-full z-50"></nav>
+    <!-- Layout Container -->
+    <div class="flex flex-1 pt-16">
+      <aside id="sidebar-container" class="w-64 flex"></aside>
 
-  <!--Layout Container-->
-  <div class="flex flex-1 pt-16">
-    <aside id="sidebar-container" class="w-64 flex-shrink-0 self-stretch"></aside>
-    
-    <!-- Main content area -->
-    <main class="flex-1 p-6">
-      <div id="breadcrumbs-container" class="mb-6"></div>
-
-      <!-- Abstract Section -->
-      <section class="bg-neutral-secondary py-20 px-6">
-          <div class="w-full">
-              <h2 class="text-3xl font-bold mb-6">Open Source Acknowledgments</h2>
-              <ul class="space-y-4 text-lg">
-                  <li><strong>Framework:</strong> <a href="https://github.com/unoplatform/uno" class="text-blue-600 hover:underline">Uno Platform</a></li>
-                  <li><strong>Avatar animation:</strong> <a href="https://github.com/met4citizen/TalkingHead" class="text-blue-600 hover:underline">TalkingHead</a></li>
-                  <li><strong>Avatar Text to Speech:</strong> <a href="https://github.com/met4citizen/HeadTTS" class="text-blue-600 hover:underline">HeadTTS</a></li>
-                  <li><strong>Local AI:</strong> <a href="https://github.com/mozilla-ai/llamafile" class="text-blue-600 hover:underline">llamafile</a></li>
-              </ul>
+      <!-- Main content area -->
+      <main class="flex-1 py-6 px-50">
+        <div id="breadcrumbs-container" class="mb-6"></div>
+        <section class="af-stack">
+          <!--Page Title-->
+          <div class="af-stack">
+            <h1 class="text-5xl text-font-bold text-gradient-brand">Appendices</h1>
+            <p class="af-section-subtitle">Last but not least..</p>
           </div>
-      </section>
-    </main>
-  </div>
+          <!--Tabs-->
+          <ul class="af-tabs" id="appendices-tabs" role="tablist" aria-label="Appendices tabs">
+            <li class="me-2" role="presentation">
+              <button class="af-tab-link" id="appendices-manual-tab" data-tabs-target="#appendices-manual-panel" type="button" role="tab" aria-controls="appendices-manual-panel" aria-selected="true">User Manual</button>
+            </li>
+            <li class="me-2" role="presentation">
+              <button class="af-tab-link" id="appendices-readme-tab" data-tabs-target="#appendices-readme-panel" type="button" role="tab" aria-controls="appendices-readme-panel" aria-selected="false">AvatarForms README</button>
+            </li>
+            <li class="me-2" role="presentation">
+              <button class="af-tab-link" id="appendices-gdpr-tab" data-tabs-target="#appendices-gdpr-panel" type="button" role="tab" aria-controls="appendices-gdpr-panel" aria-selected="false">GDPR</button>
+            </li>
+            <li class="me-2" role="presentation">
+              <button class="af-tab-link" id="appendices-privacy-tab" data-tabs-target="#appendices-privacy-panel" type="button" role="tab" aria-controls="appendices-privacy-panel" aria-selected="false">Privacy Policy</button>
+            </li>
+            <li class="me-2" role="presentation">
+              <button class="af-tab-link" id="appendices-dependencies-tab" data-tabs-target="#appendices-dependencies-panel" type="button" role="tab" aria-controls="appendices-dependencies-panel" aria-selected="false">Dependencies</button>
+            </li>
+            <li class="me-2" role="presentation">
+              <button class="af-tab-link" id="appendices-contributions-tab" data-tabs-target="#appendices-contributions-panel" type="button" role="tab" aria-controls="appendices-contributions-panel" aria-selected="false">Contributions</button>
+            </li>
+          </ul>
+          <!-- Tab Content -->
+          <div id="appendices-tab-content">
+            <div class="af-tab-panel" id="appendices-manual-panel" role="tabpanel" aria-labelledby="appendices-manual-tab">
+              <div class="af-card">
+                <div class="af-card-title-row">
+                  <h3 class="af-card-title text-gradient-brand">User Manual</h3>
+                  <div class="gradient-brand-bar bar-full bar-thin"></div>
+                </div>
+                <p class="af-card-text">Add tab content here.</p>
+              </div>
+            </div>
+            <!--README-->
+            <div class="hidden af-tab-panel" id="appendices-readme-panel" role="tabpanel" aria-labelledby="appendices-readme-tab">
+              <div class="af-card">
+                <div class="af-card-title-row">
+                  <h3 class="af-card-title text-gradient-brand">AvatarForms README</h3>
+                  <div class="gradient-brand-bar bar-full bar-thin"></div>
+                </div>
+                <p class="af-link"><a id="appendices-readme-link" href="https://github.com/Dexdezdes/COMP0016_2026_Team14_AvatarForms/blob/main/README.md" target="_blank" rel="noopener noreferrer" class="hover:text-fg-brand underline">Open on GitHub</a></p>
+                <pre class="af-code-snippet whitespace-pre-wrap break-words overflow-x-hidden" style="white-space: pre-wrap; overflow-wrap: anywhere; word-break: break-word;" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code id="appendices-readme-code" class="language-markdown whitespace-pre-wrap break-words" style="white-space: pre-wrap; overflow-wrap: anywhere; word-break: break-word;">Loading README.md...</code></pre>
+              </div>
+            </div>
+            <!--GDPR-->
+            <div class="hidden af-tab-panel" id="appendices-gdpr-panel" role="tabpanel" aria-labelledby="appendices-gdpr-tab">
+              <div class="af-card">
+                <div class="af-card-title-row">
+                  <h3 class="af-card-title text-gradient-brand">GDPR Statement</h3>
+                  <div class="gradient-brand-bar bar-full bar-thin"></div>
+                </div>
+                <p class="af-card-text">This section describes how AvatarForms handles personal data under the UK GDPR. For project use, AvatarForms operates primarily as a <strong>Data Processor</strong>, processing form response data on behalf of the form owner/controller.</p>
+                <h4 class="af-card-subtitle">1. Scope of Processing</h4>
+                <p class="af-card-text">AvatarForms processes questionnaire response data entered during interviews. The exact personal data categories depend on the content of each source form (for example, free-text responses and selected options).</p>
+                <h4 class="af-card-subtitle">2. Local-Only Processing</h4>
+                <p class="af-card-text">All processing is performed locally on the user&apos;s device. Data does not leave the running device as part of normal operation. Local AI components and frameworks (including Llamafile, OpenVINO, and local TTS tooling) are used without cloud transfer by default.</p>
+                <h4 class="af-card-subtitle">3. Storage and Retention</h4>
+                <p class="af-card-text">Data is stored locally in project/application files and retained until manual deletion by the user or administrator. No fixed automatic retention period is enforced in the current implementation.</p>
+                <h4 class="af-card-subtitle">4. International Transfers and Third Parties</h4>
+                <p class="af-card-text">No routine transfers outside the UK/EU are intended in the local configuration. No external cloud analytics or hosted LLM service is required for core operation.</p>
+                <h4 class="af-card-subtitle">5. Data Subject Rights</h4>
+                <p class="af-card-text">Where applicable, data subjects may exercise their UK GDPR rights, including:</p>
+                <ul class="list-disc pl-6 mt-2 space-y-2">
+                  <li class="af-table-value">Right of access</li>
+                  <li class="af-table-value">Right to rectification</li>
+                  <li class="af-table-value">Right to erasure</li>
+                  <li class="af-table-value">Right to restrict processing</li>
+                  <li class="af-table-value">Right to data portability</li>
+                  <li class="af-table-value">Right to object</li>
+                </ul>
+                <br>
+                <h4 class="af-card-subtitle">6. Contact</h4>
+                <p class="af-card-text">For data protection queries or rights requests, contact: <strong>muaz.mujahid.24@ucl.ac.uk</strong></p>
+                <p class="af-card-text">You may also raise concerns with the UK Information Commissioner&apos;s Office (ICO) if you believe personal data has been handled unlawfully.</p>
+              </div>
+            </div>
+            <!--Privacy Policy-->
+            <div class="hidden af-tab-panel" id="appendices-privacy-panel" role="tabpanel" aria-labelledby="appendices-privacy-tab">
+              <div class="af-card">
+                <div class="af-card-title-row">
+                  <h3 class="af-card-title text-gradient-brand">Privacy Policy</h3>
+                  <div class="gradient-brand-bar bar-full bar-thin"></div>
+                </div>
+                <p class="af-card-text"><strong>Effective date:</strong> 25 March 2026</p>
+                <p class="af-card-text">This Privacy Policy explains how AvatarForms handles personal data for end users of the application.</p>
 
-  <div id="footer-placeholder"></div>
+                <h4 class="af-card-subtitle">1. What Data We Process</h4>
+                <p class="af-card-text">AvatarForms processes form and interview response content provided by users. The exact data depends on the form questions configured by the form owner/controller.</p>
 
-  <!-- FlowBite JS-->
-  <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
-  <script>
-    const breadcrumbPaths = {
-      'index.html': [{ title: 'Home', href: 'index.html' }],
-      'requirements.html': [
-        { title: 'Home', href: 'index.html' },
-        { title: 'Requirements', href: 'requirements.html' }
-      ],
-      'appendices.html': [
-        { title: 'Home', href: 'index.html' },
-        { title: 'Requirements', href: 'requirements.html' },
-        { title: 'Appendices', href: 'appendices.html' }
-      ]
-    };
+                <h4 class="af-card-subtitle">2. Lawful Basis</h4>
+                <p class="af-card-text">Processing is based on <strong>consent</strong>. By proceeding with data entry and interview submission, users consent to processing of their response data for the intended form purpose.</p>
 
-    function addCurrentBreadcrumb() {
-      const breadcrumbsList = document.getElementById('breadcrumbs-list');
-      if (!breadcrumbsList) return;
+                <h4 class="af-card-subtitle">3. How Data Is Processed</h4>
+                <p class="af-card-text">Data is processed locally on the device running AvatarForms. Local AI components may be used to support interview and response workflows. Under the standard local setup, data is not sent to external cloud services.</p>
 
-      const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-      const trail = breadcrumbPaths[currentPath] || [
-        { title: 'Home', href: 'index.html' },
-        { title: 'Page' }
-      ];
+                <h4 class="af-card-subtitle">4. Storage and Retention</h4>
+                <p class="af-card-text">Data is stored locally in application/project files and retained until manually deleted by the user or administrator.</p>
 
-      if (currentPath === 'index.html') return;
+                <h4 class="af-card-subtitle">5. Cookies, Tracking, and Telemetry</h4>
+                <p class="af-card-text">AvatarForms does not use cookies, advertising trackers, or analytics telemetry in its standard local configuration.</p>
 
-      trail.slice(1).forEach((crumb, index) => {
-        const isLast = index === trail.slice(1).length - 1;
-        const listItem = document.createElement('li');
-        listItem.className = 'inline-flex items-center gap-2 text-body';
+                <h4 class="af-card-subtitle">6. Children and Sensitive Data</h4>
+                <p class="af-card-text">AvatarForms is not intended for children without appropriate supervision and legal basis. Special category data (for example health, biometric, or other sensitive personal data) should not be collected unless explicitly required and lawfully managed by the responsible controller.</p>
 
-        const separator = `
-          <svg class="w-3 h-3 text-body" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-          </svg>
-        `;
+                <h4 class="af-card-subtitle">7. Your Rights</h4>
+                <p class="af-card-text">Where applicable, users can request access, rectification, erasure, restriction, portability, and objection in line with UK GDPR rights.</p>
 
-        if (isLast || !crumb.href) {
-          listItem.innerHTML = `${separator}<span aria-current="page">${crumb.title}</span>`;
-        } else {
-          listItem.innerHTML = `${separator}<a href="${crumb.href}" class="hover:text-fg-brand">${crumb.title}</a>`;
-        }
+                <h4 class="af-card-subtitle">8. Security</h4>
+                <p class="af-card-text">We apply reasonable technical and organisational safeguards for a local-first application setup. However, no method of storage or processing can be guaranteed to be completely secure.</p>
 
-        breadcrumbsList.appendChild(listItem);
-      });
-    }
+                <h4 class="af-card-subtitle">9. Contact</h4>
+                <p class="af-card-text">For privacy requests or questions, contact: <strong>muaz.mujahid.24@ucl.ac.uk</strong></p>
+              </div>
+            </div>
+            <!--Dependencies-->
+            <div class="hidden af-tab-panel" id="appendices-dependencies-panel" role="tabpanel" aria-labelledby="appendices-dependencies-tab">
+              <div class="af-card">
+                <div class="af-card-title-row">
+                  <h3 class="af-card-title text-gradient-brand">WinUI3</h3>
+                  <div class="gradient-brand-bar bar-full bar-thin"></div>
+                </div>
+                <p class="af-card-text">Windows desktop UI framework used by AvatarForms.</p>
+                <a class="af-link" href="https://github.com/microsoft/microsoft-ui-xaml" target="_blank" rel="noopener noreferrer">https://github.com/microsoft/microsoft-ui-xaml</a>
+                <div id="dep-accordion-winui" data-accordion="collapse" class="af-callout mt-3 overflow-hidden">
+                  <h2 id="dep-accordion-winui-heading-1">
+                    <button type="button" class="flex items-center justify-between w-full p-3 font-medium text-left" data-accordion-target="#dep-accordion-winui-body-1" aria-expanded="false" aria-controls="dep-accordion-winui-body-1">
+                      <span>Copyright & License</span>
+                      <svg data-accordion-icon class="w-3 h-3 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                      </svg>
+                    </button>
+                  </h2>
+                  <div id="dep-accordion-winui-body-1" class="hidden" aria-labelledby="dep-accordion-winui-heading-1">
+                    <div class="px-3 py-3" style="border-top: 1px solid var(--surface-border);">
+                      <p class="af-card-text"><strong>License:</strong> MIT</p>
+                      <p class="af-card-text"><strong>Official copyright line:</strong> Copyright (c) Microsoft Corporation. All rights reserved.</p>
+                      <p class="af-card-text"><strong>Official license statement:</strong> Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software.</p>
+                      <p class="af-card-text"><strong>Disclaimer:</strong> THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="af-card">
+                <div class="af-card-title-row">
+                  <h3 class="af-card-title text-gradient-brand">Flowbite</h3>
+                  <div class="gradient-brand-bar bar-full bar-thin"></div>
+                </div>
+                <p class="af-card-text">Component library used for tabs, nav, and utility UI patterns.</p>
+                <a class="af-link" href="https://github.com/themesberg/flowbite" target="_blank" rel="noopener noreferrer">https://github.com/themesberg/flowbite</a>
+                <div id="dep-accordion-flowbite" data-accordion="collapse" class="af-callout mt-3 overflow-hidden">
+                  <h2 id="dep-accordion-flowbite-heading-1">
+                    <button type="button" class="flex items-center justify-between w-full p-3 font-medium text-left" data-accordion-target="#dep-accordion-flowbite-body-1" aria-expanded="false" aria-controls="dep-accordion-flowbite-body-1">
+                      <span>Copyright & License</span>
+                      <svg data-accordion-icon class="w-3 h-3 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                      </svg>
+                    </button>
+                  </h2>
+                  <div id="dep-accordion-flowbite-body-1" class="hidden" aria-labelledby="dep-accordion-flowbite-heading-1">
+                    <div class="px-3 py-3" style="border-top: 1px solid var(--surface-border);">
+                      <p class="af-card-text"><strong>License:</strong> MIT</p>
+                      <p class="af-card-text"><strong>Official copyright line:</strong> Copyright (c) 2023 Bergside Inc.</p>
+                      <p class="af-card-text"><strong>Official license statement:</strong> Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software.</p>
+                      <p class="af-card-text"><strong>Disclaimer:</strong> THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="af-card">
+                <div class="af-card-title-row">
+                  <h3 class="af-card-title text-gradient-brand">Tailwind CSS</h3>
+                  <div class="gradient-brand-bar bar-full bar-thin"></div>
+                </div>
+                <p class="af-card-text">Utility-first CSS framework used across website pages.</p>
+                <a class="af-link" href="https://github.com/tailwindlabs/tailwindcss" target="_blank" rel="noopener noreferrer">https://github.com/tailwindlabs/tailwindcss</a>
+                <div id="dep-accordion-tailwind" data-accordion="collapse" class="af-callout mt-3 overflow-hidden">
+                  <h2 id="dep-accordion-tailwind-heading-1">
+                    <button type="button" class="flex items-center justify-between w-full p-3 font-medium text-left" data-accordion-target="#dep-accordion-tailwind-body-1" aria-expanded="false" aria-controls="dep-accordion-tailwind-body-1">
+                      <span>Copyright & License</span>
+                      <svg data-accordion-icon class="w-3 h-3 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                      </svg>
+                    </button>
+                  </h2>
+                  <div id="dep-accordion-tailwind-body-1" class="hidden" aria-labelledby="dep-accordion-tailwind-heading-1">
+                    <div class="px-3 py-3" style="border-top: 1px solid var(--surface-border);">
+                      <p class="af-card-text"><strong>License:</strong> MIT</p>
+                      <p class="af-card-text"><strong>Official copyright line:</strong> Copyright (c) Tailwind Labs, Inc.</p>
+                      <p class="af-card-text"><strong>Official license statement:</strong> Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software.</p>
+                      <p class="af-card-text"><strong>Disclaimer:</strong> THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="af-card">
+                <div class="af-card-title-row">
+                  <h3 class="af-card-title text-gradient-brand">Prism.js</h3>
+                  <div class="gradient-brand-bar bar-full bar-thin"></div>
+                </div>
+                <p class="af-card-text">Syntax highlighting library used for code snippets.</p>
+                <a class="af-link" href="https://github.com/PrismJS/prism" target="_blank" rel="noopener noreferrer">https://github.com/PrismJS/prism</a>
+                <div id="dep-accordion-prism" data-accordion="collapse" class="af-callout mt-3 overflow-hidden">
+                  <h2 id="dep-accordion-prism-heading-1">
+                    <button type="button" class="flex items-center justify-between w-full p-3 font-medium text-left" data-accordion-target="#dep-accordion-prism-body-1" aria-expanded="false" aria-controls="dep-accordion-prism-body-1">
+                      <span>Copyright & License</span>
+                      <svg data-accordion-icon class="w-3 h-3 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                      </svg>
+                    </button>
+                  </h2>
+                  <div id="dep-accordion-prism-body-1" class="hidden" aria-labelledby="dep-accordion-prism-heading-1">
+                    <div class="px-3 py-3" style="border-top: 1px solid var(--surface-border);">
+                      <p class="af-card-text"><strong>License:</strong> MIT</p>
+                      <p class="af-card-text"><strong>Official copyright line:</strong> Copyright (c) 2012 Lea Verou</p>
+                      <p class="af-card-text"><strong>Official license statement:</strong> Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software.</p>
+                      <p class="af-card-text"><strong>Disclaimer:</strong> THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="af-card">
+                <div class="af-card-title-row">
+                  <h3 class="af-card-title text-gradient-brand">HeadTTS</h3>
+                  <div class="gradient-brand-bar bar-full bar-thin"></div>
+                </div>
+                <p class="af-card-text">Local text-to-speech engine for avatar voice output and viseme timing.</p>
+                <a class="af-link" href="https://github.com/met4citizen/HeadTTS" target="_blank" rel="noopener noreferrer">https://github.com/met4citizen/HeadTTS</a>
+                <div id="dep-accordion-headtts" data-accordion="collapse" class="af-callout mt-3 overflow-hidden">
+                  <h2 id="dep-accordion-headtts-heading-1">
+                    <button type="button" class="flex items-center justify-between w-full p-3 font-medium text-left" data-accordion-target="#dep-accordion-headtts-body-1" aria-expanded="false" aria-controls="dep-accordion-headtts-body-1">
+                      <span>Copyright & License</span>
+                      <svg data-accordion-icon class="w-3 h-3 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                      </svg>
+                    </button>
+                  </h2>
+                  <div id="dep-accordion-headtts-body-1" class="hidden" aria-labelledby="dep-accordion-headtts-heading-1">
+                    <div class="px-3 py-3" style="border-top: 1px solid var(--surface-border);">
+                      <p class="af-card-text"><strong>License:</strong> MIT</p>
+                      <p class="af-card-text"><strong>Official copyright line:</strong> Copyright (c) 2025 Mika Suominen</p>
+                      <p class="af-card-text"><strong>Official license statement:</strong> Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software.</p>
+                      <p class="af-card-text"><strong>Disclaimer:</strong> THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="af-card">
+                <div class="af-card-title-row">
+                  <h3 class="af-card-title text-gradient-brand">Kokoro</h3>
+                  <div class="gradient-brand-bar bar-full bar-thin"></div>
+                </div>
+                <p class="af-card-text">Open-weight TTS model used by HeadTTS for speech synthesis.</p>
+                <a class="af-link" href="https://github.com/hexgrad/kokoro" target="_blank" rel="noopener noreferrer">https://github.com/hexgrad/kokoro</a>
+                <div id="dep-accordion-kokoro" data-accordion="collapse" class="af-callout mt-3 overflow-hidden">
+                  <h2 id="dep-accordion-kokoro-heading-1">
+                    <button type="button" class="flex items-center justify-between w-full p-3 font-medium text-left" data-accordion-target="#dep-accordion-kokoro-body-1" aria-expanded="false" aria-controls="dep-accordion-kokoro-body-1">
+                      <span>Copyright & License</span>
+                      <svg data-accordion-icon class="w-3 h-3 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                      </svg>
+                    </button>
+                  </h2>
+                  <div id="dep-accordion-kokoro-body-1" class="hidden" aria-labelledby="dep-accordion-kokoro-heading-1">
+                    <div class="px-3 py-3" style="border-top: 1px solid var(--surface-border);">
+                      <p class="af-card-text"><strong>License:</strong> Apache-2.0</p>
+                      <p class="af-card-text"><strong>Official statement:</strong> Apache License, Version 2.0, January 2004 — http://www.apache.org/licenses/</p>
+                      <p class="af-card-text"><strong>Official license statement:</strong> Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.</p>
+                      <p class="af-card-text"><strong>Disclaimer:</strong> Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="af-card">
+                <div class="af-card-title-row">
+                  <h3 class="af-card-title text-gradient-brand">OpenVino</h3>
+                  <div class="gradient-brand-bar bar-full bar-thin"></div>
+                </div>
+                <p class="af-card-text">Inference optimization toolkit used for local runtime acceleration.</p>
+                <a class="af-link" href="https://github.com/openvinotoolkit/openvino" target="_blank" rel="noopener noreferrer">https://github.com/openvinotoolkit/openvino</a>
+                <div id="dep-accordion-openvino" data-accordion="collapse" class="af-callout mt-3 overflow-hidden">
+                  <h2 id="dep-accordion-openvino-heading-1">
+                    <button type="button" class="flex items-center justify-between w-full p-3 font-medium text-left" data-accordion-target="#dep-accordion-openvino-body-1" aria-expanded="false" aria-controls="dep-accordion-openvino-body-1">
+                      <span>Copyright & License</span>
+                      <svg data-accordion-icon class="w-3 h-3 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                      </svg>
+                    </button>
+                  </h2>
+                  <div id="dep-accordion-openvino-body-1" class="hidden" aria-labelledby="dep-accordion-openvino-heading-1">
+                    <div class="px-3 py-3" style="border-top: 1px solid var(--surface-border);">
+                      <p class="af-card-text"><strong>License:</strong> Apache-2.0</p>
+                      <p class="af-card-text"><strong>Official statement:</strong> Apache License, Version 2.0, January 2004 — http://www.apache.org/licenses/</p>
+                      <p class="af-card-text"><strong>Official license statement:</strong> Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.</p>
+                      <p class="af-card-text"><strong>Disclaimer:</strong> Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--Contributions-->
+            <div class="hidden af-tab-panel" id="appendices-contributions-panel" role="tabpanel" aria-labelledby="appendices-contributions-tab">
+              <!--System Artifacts-->
+              <div class="af-card">
+                <div class="af-card-title-row">
+                  <h3 class="af-card-title text-gradient-brand">System Artifacts</h3>
+                  <div class="gradient-brand-bar bar-full bar-thin"></div>
+                </div>
+                <div class="af-table-wrap">
+                  <table class="af-table">
+                    <thead>
+                      <tr>
+                        <th class="af-table-header">Feature</th>
+                        <th class="af-table-header">Atticus (%)</th>
+                        <th class="af-table-header">Dex (%)</th>
+                        <th class="af-table-header">Fakhrur (%)</th>
+                        <th class="af-table-header">Muaz (%)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="af-table-value">Overall</td>
+                        <td class="af-table-value">25</td>
+                        <td class="af-table-value">25</td>
+                        <td class="af-table-value">25</td>
+                        <td class="af-table-value">25</td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-value"><strong>AI Implementation</strong></td>
+                        <td class="af-table-value">-</td>
+                        <td class="af-table-value">-</td>
+                        <td class="af-table-value">-</td>
+                        <td class="af-table-value">-</td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-value" style="padding-left: 2rem;">Python Agents</td>
+                        <td class="af-table-value"></td>
+                        <td class="af-table-value"></td>
+                        <td class="af-table-value"></td>
+                        <td class="af-table-value"></td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-value" style="padding-left: 2rem;">Llamafile</td>
+                        <td class="af-table-value"></td>
+                        <td class="af-table-value"></td>
+                        <td class="af-table-value"></td>
+                        <td class="af-table-value"></td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-value" style="padding-left: 2rem;">I/O Streaming</td>
+                        <td class="af-table-value"></td>
+                        <td class="af-table-value"></td>
+                        <td class="af-table-value"></td>
+                        <td class="af-table-value"></td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-value"><strong>AI Implementation</strong></td>
+                        <td class="af-table-value">-</td>
+                        <td class="af-table-value">-</td>
+                        <td class="af-table-value">-</td>
+                        <td class="af-table-value">-</td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-value">WinUI 3</td>
+                        <td class="af-table-value">0</td>
+                        <td class="af-table-value">60</td>
+                        <td class="af-table-value">25</td>
+                        <td class="af-table-value">15</td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-value"><strong>Backend Implementation</strong></td>
+                        <td class="af-table-value">-</td>
+                        <td class="af-table-value">-</td>
+                        <td class="af-table-value">-</td>
+                        <td class="af-table-value">-</td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-value" style="padding-left: 2rem;">Forms Parsing</td>
+                        <td class="af-table-value">0</td>
+                        <td class="af-table-value">100</td>
+                        <td class="af-table-value">0</td>
+                        <td class="af-table-value">0</td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-value" style="padding-left: 2rem;">Python Process Service</td>
+                        <td class="af-table-value"></td>
+                        <td class="af-table-value"></td>
+                        <td class="af-table-value"></td>
+                        <td class="af-table-value"></td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-value" style="padding-left: 2rem;">Llamafile Process Service</td>
+                        <td class="af-table-value"></td>
+                        <td class="af-table-value"></td>
+                        <td class="af-table-value"></td>
+                        <td class="af-table-value"></td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-value" style="padding-left: 2rem;">API Services</td>
+                        <td class="af-table-value"></td>
+                        <td class="af-table-value"></td>
+                        <td class="af-table-value"></td>
+                        <td class="af-table-value"></td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-value" style="padding-left: 2rem;">Response Export</td>
+                        <td class="af-table-value"></td>
+                        <td class="af-table-value"></td>
+                        <td class="af-table-value"></td>
+                        <td class="af-table-value"></td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-value"><strong>Database Implementation</strong></td>
+                        <td class="af-table-value">-</td>
+                        <td class="af-table-value">-</td>
+                        <td class="af-table-value">-</td>
+                        <td class="af-table-value">-</td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-value" style="padding-left: 2rem;">SQL Implementation</td>
+                        <td class="af-table-value">0</td>
+                        <td class="af-table-value">0</td>
+                        <td class="af-table-value">0</td>
+                        <td class="af-table-value">100</td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-value"><strong>Avatar Generation</strong></td>
+                        <td class="af-table-value"></td>
+                        <td class="af-table-value"></td>
+                        <td class="af-table-value"></td>
+                        <td class="af-table-value"></td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-value" style="padding-left: 2rem;">HeadTTS</td>
+                        <td class="af-table-value"></td>
+                        <td class="af-table-value"></td>
+                        <td class="af-table-value"></td>
+                        <td class="af-table-value"></td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-value" style="padding-left: 2rem;">Kokoro Lip Sync</td>
+                        <td class="af-table-value"></td>
+                        <td class="af-table-value"></td>
+                        <td class="af-table-value"></td>
+                        <td class="af-table-value"></td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-value" style="padding-left: 2rem;">Avatar Generation</td>
+                        <td class="af-table-value"></td>
+                        <td class="af-table-value"></td>
+                        <td class="af-table-value"></td>
+                        <td class="af-table-value"></td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-value"><strong>Packaging & Deployment</strong></td>
+                        <td class="af-table-value"></td>
+                        <td class="af-table-value"></td>
+                        <td class="af-table-value"></td>
+                        <td class="af-table-value"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <!--Website Report-->
+              <div class="af-card">
+                <div class="af-card-title-row">
+                  <h3 class="af-card-title text-gradient-brand">Website Report</h3>
+                  <div class="gradient-brand-bar bar-full bar-thin"></div>
+                </div>
+                <div class="af-table-wrap">
+                  <table class="af-table">
+                    <thead>
+                      <tr>
+                        <th class="af-table-header">Feature</th>
+                        <th class="af-table-header">Atticus</th>
+                        <th class="af-table-header">Dex</th>
+                        <th class="af-table-header">Fakhrur</th>
+                        <th class="af-table-header">Muaz</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="af-table-value">Overall</td>
+                        <td class="af-table-value">20%</td>
+                        <td class="af-table-value">20%</td>
+                        <td class="af-table-value">20%</td>
+                        <td class="af-table-value">40%</td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-value"><strong>HTML Structure</strong></td>
+                        <td class="af-table-value">0</td>
+                        <td class="af-table-value">0</td>
+                        <td class="af-table-value">0</td>
+                        <td class="af-table-value">100</td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-value"><strong>CSS Styling & Tailwind</strong></td>
+                        <td class="af-table-value">0</td>
+                        <td class="af-table-value">0</td>
+                        <td class="af-table-value">5</td>
+                        <td class="af-table-value">95</td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-value"><strong>JavaScript & Interactivity</strong></td>
+                        <td class="af-table-value">0</td>
+                        <td class="af-table-value">0</td>
+                        <td class="af-table-value">15</td>
+                        <td class="af-table-value">75</td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-value"><strong>Component Development</strong></td>
+                        <td class="af-table-value">-</td>
+                        <td class="af-table-value">-</td>
+                        <td class="af-table-value">-</td>
+                        <td class="af-table-value">-</td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-value" style="padding-left: 2rem;">Navbar</td>
+                        <td class="af-table-value">0</td>
+                        <td class="af-table-value">0</td>
+                        <td class="af-table-value">0</td>
+                        <td class="af-table-value">100</td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-value" style="padding-left: 2rem;">Sidebar</td>
+                        <td class="af-table-value">0</td>
+                        <td class="af-table-value">0</td>
+                        <td class="af-table-value">3</td>
+                        <td class="af-table-value">97</td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-value" style="padding-left: 2rem;">Breadcrumbs</td>
+                        <td class="af-table-value">0</td>
+                        <td class="af-table-value">0</td>
+                        <td class="af-table-value">0</td>
+                        <td class="af-table-value">100</td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-value" style="padding-left: 2rem;">Footer</td>
+                        <td class="af-table-value">0</td>
+                        <td class="af-table-value">0</td>
+                        <td class="af-table-value">0</td>
+                        <td class="af-table-value">100</td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-value"><strong>Page Development</strong></td>
+                        <td class="af-table-value">-</td>
+                        <td class="af-table-value">-</td>
+                        <td class="af-table-value">-</td>
+                        <td class="af-table-value">-</td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-value" style="padding-left: 2rem;">Home Page</td>
+                        <td class="af-table-value">0</td>
+                        <td class="af-table-value">0</td>
+                        <td class="af-table-value">0</td>
+                        <td class="af-table-value">100</td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-value" style="padding-left: 2rem;">Requirements Page</td>
+                        <td class="af-table-value">0</td>
+                        <td class="af-table-value">0</td>
+                        <td class="af-table-value">0</td>
+                        <td class="af-table-value">100</td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-value" style="padding-left: 2rem;">Research Page</td>
+                        <td class="af-table-value">0</td>
+                        <td class="af-table-value">100</td>
+                        <td class="af-table-value">0</td>
+                        <td class="af-table-value">0</td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-value" style="padding-left: 2rem;">System Design Page</td>
+                        <td class="af-table-value">0</td>
+                        <td class="af-table-value">0</td>
+                        <td class="af-table-value">100</td>
+                        <td class="af-table-value">0</td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-value" style="padding-left: 2rem;">Implementation Page</td>
+                        <td class="af-table-value">25</td>
+                        <td class="af-table-value">25</td>
+                        <td class="af-table-value">25</td>
+                        <td class="af-table-value">25</td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-value" style="padding-left: 2rem;">Testing Page</td>
+                        <td class="af-table-value">70</td>
+                        <td class="af-table-value">30</td>
+                        <td class="af-table-value">0</td>
+                        <td class="af-table-value">0</td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-value" style="padding-left: 2rem;">Evaluation Page</td>
+                        <td class="af-table-value">50</td>
+                        <td class="af-table-value">0</td>
+                        <td class="af-table-value">50</td>
+                        <td class="af-table-value">0</td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-value" style="padding-left: 2rem;">Appendices Page</td>
+                        <td class="af-table-value">0</td>
+                        <td class="af-table-value">0</td>
+                        <td class="af-table-value">0</td>
+                        <td class="af-table-value">100</td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-value"><strong>Documentation & Content</strong></td>
+                        <td class="af-table-value">0</td>
+                        <td class="af-table-value">0</td>
+                        <td class="af-table-value">0</td>
+                        <td class="af-table-value">100</td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-value"><strong>UI/UX Design & Branding</strong></td>
+                        <td class="af-table-value">0</td>
+                        <td class="af-table-value">0</td>
+                        <td class="af-table-value">2</td>
+                        <td class="af-table-value">98</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
 
-    fetch('components/navbar.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('navbar-container').innerHTML = data;
-      })
-      .catch(error => console.error('Error loading navbar:', error));
+    <div id="footer-placeholder"></div>
     
-    fetch('components/sidebar.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('sidebar-container').innerHTML = data;
-      })
-      .catch(error => console.error('Error loading sidebar:', error));
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markdown.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script>
+      const breadcrumbPaths = {
+        'index.html': [{ title: 'Home', href: 'index.html' }],
+        'requirements.html': [
+          { title: 'Home', href: 'index.html' },
+          { title: 'Requirements', href: 'requirements.html' }
+        ],
+        'appendices.html': [
+          { title: 'Home', href: 'index.html' },
+          { title: 'Appendices', href: 'appendices.html' }
+        ],
+        'ui-showcase.html': [
+          { title: 'Home', href: 'index.html' },
+          { title: 'UI Showcase', href: 'ui-showcase.html' }
+        ]
+      };
 
-    fetch('components/breadcrumbs.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('breadcrumbs-container').innerHTML = data;
-        addCurrentBreadcrumb();
-      })
-      .catch(error => console.error('Error loading breadcrumbs:', error));
+      function addCurrentBreadcrumb() {
+        const breadcrumbsList = document.getElementById('breadcrumbs-list');
+        if (!breadcrumbsList) return;
 
-    fetch('components/footer.txt')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('footer-placeholder').innerHTML = data;
-      })
-      .catch(error => console.error('Error loading footer:', error));
+        const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+        const trail = breadcrumbPaths[currentPath] || [
+          { title: 'Home', href: 'index.html' },
+          { title: 'Page' }
+        ];
 
-  </script>
-</body>
+        if (currentPath === 'index.html') return;
 
+        trail.slice(1).forEach((crumb, index) => {
+          const isLast = index === trail.slice(1).length - 1;
+          const listItem = document.createElement('li');
+          listItem.className = 'inline-flex items-center gap-2 text-body';
+
+          const separator = `
+            <svg class="w-3 h-3 text-body" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+            </svg>
+          `;
+
+          if (isLast || !crumb.href) {
+            listItem.innerHTML = `${separator}<span aria-current="page">${crumb.title}</span>`;
+          } else {
+            listItem.innerHTML = `${separator}<a href="${crumb.href}" class="hover:text-fg-brand">${crumb.title}</a>`;
+          }
+
+          breadcrumbsList.appendChild(listItem);
+        });
+      }
+
+      fetch('components/navbar.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('navbar-container').innerHTML = data;
+        })
+        .catch(error => console.error('Error loading navbar:', error));
+
+      fetch('components/sidebar.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('sidebar-container').innerHTML = data;
+        })
+        .catch(error => console.error('Error loading sidebar:', error));
+
+      fetch('components/breadcrumbs.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('breadcrumbs-container').innerHTML = data;
+          addCurrentBreadcrumb();
+        })
+        .catch(error => console.error('Error loading breadcrumbs:', error));
+
+      fetch('components/footer.txt')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('footer-placeholder').innerHTML = data;
+        })
+        .catch(error => console.error('Error loading footer:', error));
+
+      const GITHUB_README_PAGE_URL = 'https://github.com/Dexdezdes/COMP0016_2026_Team14_AvatarForms/blob/main/README.md';
+      const GITHUB_README_RAW_URL = 'https://raw.githubusercontent.com/Dexdezdes/COMP0016_2026_Team14_AvatarForms/main/README.md';
+
+      function loadReadmeIntoCodeBlock() {
+        const codeEl = document.getElementById('appendices-readme-code');
+        const readmeLinkEl = document.getElementById('appendices-readme-link');
+        if (!codeEl || !readmeLinkEl) return;
+
+        readmeLinkEl.href = GITHUB_README_PAGE_URL;
+
+        const setReadmeText = (markdownText) => {
+          codeEl.textContent = markdownText;
+          if (window.Prism) {
+            window.Prism.highlightElement(codeEl);
+          }
+        };
+
+        fetch(GITHUB_README_RAW_URL)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error(`HTTP ${response.status}`);
+            }
+            return response.text();
+          })
+          .then(markdown => {
+            setReadmeText(markdown);
+          })
+          .catch(error => {
+            console.error('Error loading GitHub README.md, trying local README.md:', error);
+
+            fetch('README.md')
+              .then(localResponse => {
+                if (!localResponse.ok) {
+                  throw new Error(`HTTP ${localResponse.status}`);
+                }
+                return localResponse.text();
+              })
+              .then(localMarkdown => {
+                setReadmeText(localMarkdown);
+              })
+              .catch(localError => {
+                console.error('Error loading local README.md:', localError);
+                setReadmeText('Unable to load README.md from GitHub or local site root.');
+              });
+          });
+      }
+
+      loadReadmeIntoCodeBlock();
+
+      function initAfTabs(tabListId, panelContainerId) {
+        const tabList = document.getElementById(tabListId);
+        const panelContainer = document.getElementById(panelContainerId);
+        if (!tabList || !panelContainer) return;
+    
+        const tabs = Array.from(tabList.querySelectorAll('[role=\"tab\"][data-tabs-target]'));
+        const panels = Array.from(panelContainer.querySelectorAll('[role=\"tabpanel\"]'));
+        if (!tabs.length || !panels.length) return;
+    
+        const activateTab = (selectedTab) => {
+          const targetSelector = selectedTab.getAttribute('data-tabs-target');
+          if (!targetSelector) return;
+    
+          tabs.forEach((tab) => {
+            const isActive = tab === selectedTab;
+            tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+            tab.tabIndex = isActive ? 0 : -1;
+          });
+    
+          panels.forEach((panel) => panel.classList.add('hidden'));
+    
+          const activePanel = panelContainer.querySelector(targetSelector);
+          if (activePanel) activePanel.classList.remove('hidden');
+        };
+    
+        tabs.forEach((tab) => {
+          tab.addEventListener('click', () => activateTab(tab));
+        });
+    
+        const initiallySelected = tabs.find((tab) => tab.getAttribute('aria-selected') === 'true') || tabs[0];
+        activateTab(initiallySelected);
+      }
+    
+      initAfTabs('appendices-tabs', 'appendices-tab-content');
+    </script>
+  </body>
 </html>
