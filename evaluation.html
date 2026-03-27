@@ -26,6 +26,9 @@
             <li class="me-2" role="presentation">
               <button class="af-tab-link" id="evaluation-critical-tab" data-tabs-target="#evaluation-critical-panel" type="button" role="tab" aria-controls="evaluation-critical-panel" aria-selected="false">Critical Analysis</button>
             </li>
+            <li class="me-2" role="presentation">
+              <button class="af-tab-link" id="evaluation-future-work-tab" data-tabs-target="#evaluation-future-work-panel" type="button" role="tab" aria-controls="evaluation-future-work-panel" aria-selected="false">Future Work</button>
+            </li>
           </ul>
         
           <div id="evaluation-tab-content">
@@ -70,9 +73,9 @@
                     <li><label><input class="af-achievement-check" type="checkbox" checked disabled> The platform could integrate with Microsoft Teams.</label></li>
                     <li><label><input class="af-achievement-check" type="checkbox" checked disabled> The platform could offer ultra-realistic avatar styles.</label></li>
                   </ul>
-                  <p class="af-card-text">Progress: 3/3 complete (100%)</p>
+                  <p class="af-card-text">Progress: 0/3 complete (0%)</p>
                   <div class="af-progress-track">
-                    <div class="af-progress-fill" style="width: 100%;"></div>
+                    <div class="af-progress-fill" style="width: 0%;"></div>
                   </div>
                 </div>
 
@@ -155,6 +158,48 @@
                 </div>
                 <p class="af-card-text">Add tab content here.</p>
               </div>
+            </div>
+            <div class="hidden af-tab-panel" id="evaluation-future-work-panel" role="tabpanel" aria-labelledby="evaluation-future-work-tab">
+              <div class="af-card">
+                <div class="af-card-title-row">
+                  <h3 class="af-card-title text-gradient-brand">Customisable Background</h3>
+                  <div class="gradient-brand-bar bar-full bar-thin"></div>
+                </div>
+                <p class="af-card-text">In the current application, the avatar view is limited to a plain black background, with no assets other than the avatar itself. Future versions of the application could allow the user to add custom backgrounds to add colour or match the context of the questionnaire. For example, a questionnaire meant for students could use a classroom backdrop.</p>
+              </div>
+
+              <div class="af-card">
+                <div class="af-card-title-row">
+                  <h3 class="af-card-title text-gradient-brand">Voice Synthesis</h3>
+                  <div class="gradient-brand-bar bar-full bar-thin"></div>
+                </div>
+                <p class="af-card-text">Our application allows for 3D models scanned using Avaturn.me to be used as avatars but currently only pre-set Kokoro TTS voices can be used. If support were added for a TTS with voice cloning functionality, it would be possible to create avatars that not only look but also sound like the intended person. This could be useful in applications such as SEND schools, where a student may be more comfortable answering questions if the interviewer has the appearance of a family member or teacher.</p>
+              </div>
+
+              <div class="af-card">
+                <div class="af-card-title-row">
+                  <h3 class="af-card-title text-gradient-brand">Different Model Sources e.g. Foundry Local</h3>
+                  <div class="gradient-brand-bar bar-full bar-thin"></div>
+                </div>
+                <p class="af-card-text">Currently we are using a Llamafile for local LLM inferencing. This works effectively but the LLamafile has to be included in the packaged application, which adds ~3 GB to the file size. Integration with Foundry Local would mean that our application could be distributed in a more lightweight way and integrate more tightly with the Windows ecosystem.</p>
+              </div>
+
+              <div class="af-card">
+                <div class="af-card-title-row">
+                  <h3 class="af-card-title text-gradient-brand">Sign Language Support</h3>
+                  <div class="gradient-brand-bar bar-full bar-thin"></div>
+                </div>
+                <p class="af-card-text">A key success of our application was the support for multilingual input to help facilitate communication across language barriers. However, AvatarForms currently only supports voice and text input. If paired with a camera and an existing sign language recognition library, our avatar would be able to interpret sign language to interview individuals with speech issues.</p>
+              </div>
+
+              <div class="af-card">
+                <div class="af-card-title-row">
+                  <h3 class="af-card-title text-gradient-brand">Integration with Motion Input</h3>
+                  <div class="gradient-brand-bar bar-full bar-thin"></div>
+                </div>
+                <p class="af-card-text">Add tab content here.</p>
+              </div>
+
             </div>
           </div>
         </section>

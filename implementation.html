@@ -67,38 +67,278 @@
                         <div class="af-tab-panel" id="implementation-AI-panel" role="tabpanel" aria-labelledby="implementation-AI-tab">
                             <div class="af-card">
                                 <div class="af-card-title-row">
-                                    <span class="af-card-title text-gradient-brand">Python Agents</span>
+                                    <span class="af-card-title text-gradient-brand">Agent Orchestration Overview</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
-                                <p class="af-card-text">Python agent description.</p>
+                                <p class="af-card-text">The application uses a custom Agent Orchestration layer centred around the <code class="af-inline-code">AvatarFormsInterviewer</code> class. This class coordinates the interview, maintaining the state of the conversation and deciding when to transition between questions based on agent feedback, whilst <code class="af-inline-code">Agent</code> and <code class="af-inline-code">Model</code> classes interface with the LLM. The framework is designed to be modular and model agnostic, to allow for Agents to be easily modified or switched out when needed.</p>
+                            </div>
+
+                            <div class="af-card">
+                                <div class="af-card-title-row">
+                                    <span class="af-card-title text-gradient-brand">AvatarFormsInterviewer</span>
+                                    <span class="gradient-brand-bar bar-thin"></span>
+                                </div>
+                                <p class="af-card-text">.</p>
                             </div>
                             <div class="af-card">
                                 <div class="af-card-title-row">
-                                    <span class="af-card-title text-gradient-brand">Llamafile</span>
+                                    <span class="af-card-title text-gradient-brand">Model Class</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
-                                <p class="af-card-text">Llamafile description.</p>
+                                <p class="af-card-text">The <code class="af-inline-code">Model</code> class serves as a standardized interface for interacting with an LLM endpoint. All agents make use of this class, so the interviewer can be modified to use a different LLM, whether local or cloud-based, purely by modifying the Model initialisation.</p>
+                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-python"># agents.py
+
+class Model:
+    def __init__(self, url: str, model: str, api_key: str = None, params: dict = None) -> None:
+        self.url = url
+        self.model = model
+        self.api_key = api_key
+        self.params = params if params is not None else {
+            "max_tokens": 4096,
+            "top_p": 1,
+            "top_k": 40,
+            "presence_penalty": 0,
+            "frequency_penalty": 0,
+            "temperature": 0.6,
+            "stream": False
+        }
+        
+    def generate(self, messages: list, temperature: float = None) -> dict:
+        # Call the model's API with the messages and return the response
+        payload = {
+            "model": self.model,
+            **self.params,
+            "messages": messages
+        }
+        if temperature is not None:
+            payload["temperature"] = temperature
+            
+        headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        }
+
+        if self.api_key:
+            headers["Authorization"] = f"Bearer {self.api_key}"
+        response = requests.request("POST", self.url, headers=headers, data=json.dumps(payload))
+
+        if response.status_code == 200:
+            return response
+        else:
+            raise Exception(f"API call failed with status code {response.status_code}: {response.text}")
+</code></pre>
+
+                            </div>
+
+                            <div class="af-card">
+                                <div class="af-card-title-row">
+                                    <span class="af-card-title text-gradient-brand">Agent Classes</span>
+                                    <span class="gradient-brand-bar bar-thin"></span>
+                                </div>
+                                <p class="af-card-text">The Agent classes act as intermediaries between the <code class="af-inline-code">AvatarFormsInterviewer</code> and the <code class="af-inline-code">Model</code>, taking in structured data to be formatted into text prompts and passed into <code class="af-inline-code">Model.generate</code>. The Agent then cleans and formats the output to be returned to the <code class="af-inline-code">AvatarFormsInterviewer</code>.
+
+The base class Agent is inherited by all other Agents. An optional <code class="af-inline-code">Tracer</code> object can be passed to log all calls made with the Agent as described in a section below.</p>
+                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-python"># agents.py
+
+class Agent:
+    def __init__(self, model: Model, tracer: Tracer = None) -> None:
+        self.agent = self.__class__.__name__
+        self.model = model
+        self.tracer = tracer
+
+    def run(self, messages: list, temperature: float = None) -> str:
+        response = self.model.generate(messages, temperature=temperature)
+        output = response.json()["choices"][0]["message"]["content"]
+        if self.tracer:
+            self.tracer.log(
+                agent_name=self.agent,
+                prompt=messages,
+                output=output,
+                temperature=temperature,
+                response_time=response.elapsed.total_seconds()
+            )
+        return output
+</code></pre>
+
+                                <p class="af-card-text">The Agent classes act as intermediaries between the <code class="af-inline-code">AvatarFormsInterviewer</code> and the <code class="af-inline-code">Model</code>, taking in structured data to be formatted into text prompts and passed into <code class="af-inline-code">Model.generate</code>. The Agent then cleans and formats the output to be returned to the <code class="af-inline-code">AvatarFormsInterviewer</code>.
+
+The base class Agent is inherited by all other Agents. An optional <code class="af-inline-code">Tracer</code> object can be passed to log all calls made with the Agent as described in a section below.</p>
+                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-python"># agents.py
+
+from formatting import clean_script, outputToJSON, conversationToText, LLM_strip
+
+class EvaluatorAgent(Agent):
+    def __init__(self, model: Model, interview_context: str, tracer: Tracer = None, language: str = "en-US") -> None:
+        super().__init__(model, tracer=tracer)
+        self.prompt = Evaluator_system_prompt
+        self.interview_context = interview_context
+        self.language = language
+
+    def evaluate(self, question: str, conversation_history: list) -> dict:
+        transcript = conversationToText(conversation_history)
+        system = self.prompt(self.interview_context, question, transcript, self.language)
+        messages = [{"role": "system", "content": system}]
+        output = self.run(messages, temperature=0.2)
+        return outputToJSON(output)</code></pre>
+
+
+
                             </div>
                             <div class="af-card">
-								<div class="af-card-title-row">
-									<span class="af-card-title text-gradient-brand">Code Snippet Example</span>
-									<span class="gradient-brand-bar bar-thin"></span>
-								</div>
-								<p class="af-card-text">A Prism.js C# snippet with line numbers and a glyph-based copy button.</p>
-								<pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-csharp">using System;
+                                <div class="af-card-title-row">
+                                    <span class="af-card-title text-gradient-brand">Prompts</span>
+                                    <span class="gradient-brand-bar bar-thin"></span>
+                                </div>
+                                <p class="af-card-text">The AI Agents import parameterised prompts from the <code class="af-inline-code">prompts.py</code> file. This allows for easy editing and iteration of prompts, without impacting the rest of the codebase. Prompts can be freely be switched out so long as the function signature matches. 
 
-namespace HelloWorldDemo
-{
-	internal static class Program
-	{
-		private static void Main()
-		{
-			Console.WriteLine("Hello, World!");
-		}
-	}
-}</code></pre>
-							</div>
-                        </div>
+An example prompt for the <code class="af-inline-code">TalkerAgent</code>:</p>
+                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-python"># agents.py
+
+def Talker_follow_up_question_prompt(question: str, reasoning: str, transcript: str, previous_q_and_a: str = None, follow_up: str = None) -> str:
+
+    task = f"""
+
+Original question: {question}
+
+  
+
+The user did not answer the current question suitably.
+
+The reasoning for this is: {reasoning}
+
+Rephrase the question or ask a follow-up question to clarify and get more information.
+
+  
+
+{f"Example follow-up question: {follow_up}" if follow_up else ""}
+
+  
+
+---------------------------------------------------------------
+
+{f'''
+
+Summary of previous questions and answers:
+
+  
+
+==================
+
+  
+
+{previous_q_and_a}
+
+  
+
+==================
+
+''' if previous_q_and_a else ""}
+
+  
+
+Transcript of the user's answer to the current question:
+
+==================
+
+  
+
+{transcript}
+
+  
+
+==================
+
+  
+
+----------------------------------------------------------------
+
+"""
+    return task</code></pre>
+                            </div>
+
+
+                            <div class="af-card">
+                                <div class="af-card-title-row">
+                                    <span class="af-card-title text-gradient-brand">Formatting Utilities</span>
+                                    <span class="gradient-brand-bar bar-thin"></span>
+                                </div>
+                                <p class="af-card-text">To format data for use in prompts, the Agents use utility functions in <code class="af-inline-code">formatting.py</code>.</p>
+                                         <div class="af-table-wrap mt-4">
+                  <table class="af-table">
+                    <thead>
+                      <tr>
+                        <th scope="col" class="af-table-key">Name</th>
+                        <th scope="col" class="af-table-value">Function</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="af-table-key"><code class="af-inline-code">clean_script</code></td>
+                        <td class="af-table-value">Sanitises LLM output by removing content within XML tags , emojis and text within brackets.</td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-key"><code class="af-inline-code">LLM_strip</code></td>
+                        <td class="af-table-value">Removes XML-style tags (e.g., `&lt;think&gt;...&lt;/think&gt;`) and all content contained within those tags. Is run as part of <code class="af-inline-code">clean_script</code>.</td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-key"><code class="af-inline-code">conversationToText</code></td>
+                        <td class="af-table-value">Converts a list of message dictionaries into a single, newline-separated string.</td>
+                      </tr>
+                      <tr>
+                        <td class="af-table-key"><code class="af-inline-code">format_q_and_as</code></td>
+                        <td class="af-table-value">Transforms a dictionary of question-answer pairs into a readable string using "Q:" and "A:" prefixes for each entry.</td>
+                      </tr>
+ 
+                    </tbody>
+                  </table>
+                </div>
+                                <p class="af-card-text"><code class="af-inline-code">LLM_strip</code> uses regular expressions to identify and remove XML tags:</p>
+                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-python">def LLM_strip(text: str) -> str:
+
+    tags = re.findall(r"<[^>/]*>", text, flags=re.DOTALL)
+
+    for tag in tags:
+
+        pattern = re.escape(tag) + r".*?" + re.escape(tag.replace("<", "&lt;/"))
+
+        text = re.sub(pattern, "", text, flags=re.DOTALL)
+
+    return text.strip()</code></pre>
+                            </div>
+
+                            <div class="af-card">
+                                <div class="af-card-title-row">
+                                    <span class="af-card-title text-gradient-brand">Observability and Tracing</span>
+                                    <span class="gradient-brand-bar bar-thin"></span>
+                                </div>
+                                <p class="af-card-text">For debugging and quality assurance, it was important to be able to view detailed information about how and when each Agent is run. This is implemented by the <code class="af-inline-code">Tracer</code> class, which logs information about Agent calls to a specified file in JSON format.
+
+<code class="af-inline-code">AvatarFormsInterviewer</code> can optionally be set to log AI Agent calls using the <code class="af-inline-code">log_dir=path\to\dir</code> and <code class="af-inline-code">print_logs=True</code> parameters.
+
+The <code class="af-inline-code">LLM_Trace</code> object details the information recorded when an Agent is called.</p>
+                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-python">class LLM_Trace:
+
+    def __init__(self, agent_name: str, prompt: str, output: str, parameters: dict = None, response_time: float = None) -> None:
+
+        self.agent_name = agent_name
+        self.prompt = prompt
+        self.output = output
+        self.parameters = parameters
+        self.response_time = response_time
+
+    def to_dict(self) -> dict:
+        return {
+            "agent": self.agent_name,
+            "prompt": self.prompt,
+            "output": self.output,
+            "parameters": self.parameters,
+            "response_time": self.response_time
+        }</code></pre>
+                            </div>
+
+                </div>
+
+
 
                         <!-- Frontend Implementation -->
                         <div class="af-tab-panel" id="implementation-frontend-panel" role="tabpanel" aria-labelledby="implementation-frontend-tab">
