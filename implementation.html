@@ -77,13 +77,6 @@
                                 <p class="af-card-text">Llamafile description.</p>
                             </div>
                             <div class="af-card">
-                                <div class="af-card-title-row">
-                                    <span class="af-card-title text-gradient-brand">I/O Streaming</span>
-                                    <span class="gradient-brand-bar bar-thin"></span>
-                                </div>
-                                <p class="af-card-text">Content</p>
-                            </div>
-                            <div class="af-card">
 								<div class="af-card-title-row">
 									<span class="af-card-title text-gradient-brand">Code Snippet Example</span>
 									<span class="gradient-brand-bar bar-thin"></span>
@@ -352,20 +345,36 @@ def receive_questionnaire():
         # ...</code></pre>
                                 <p class="af-card-text">The interview would then be conducted promptly until all the questions are completed. When it's time for the responses to be sent back, the responses will be sent to a HTTP Server on the .NET application side in <code class="af-inline-code">ResponseAPIService</code>, which acts as a HTTP Listener that runs from the start of an interview until it receives a set number of response (same as number of questions sent in the first place) to be stored back into the database.</p>
                                 <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-csharp">public void SetExpectedQuestionCount(int count)
-    {
-        _expectedQuestionCount = count;
-        _receivedResponseCount = 0;
+{
+    _expectedQuestionCount = count;
+    _receivedResponseCount = 0;
+}
+
+public async Task StartServerAsync(int port = 5000)
+{
+    // Start HTTP server using the in-built HttpListener class
+}
+
+public async Task StopServerAsync()
+{
+    // Stop server if _receivedResponseCount == _expectedQuestionCount or receive _cancellationToken
+}</code></pre>
+<pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-python">def send_response(questionnaire_id, question_order, question, answer, port, question_type, selected_option=None):
+    url = f"http://localhost:{port}/response"
+
+    payload = {
+        "questionnaire_id": questionnaire_id,
+        "question_order": question_order,
+        "question": question,
+        "answer": answer,
+        "question_type": question_type,
+        "selected_option": selected_option
     }
 
-    public async Task StartServerAsync(int port = 5000)
-    {
-        // Start HTTP server using the in-built HttpListener class
-    }
-
-    public async Task StopServerAsync()
-    {
-        // Stop server if _receivedResponseCount == _expectedQuestionCount or receive _cancellationToken
-    }</code></pre>
+    try:
+        response = requests.post(url, json=payload, timeout=5)
+    except Exception as e:
+        return False</code></pre>
                                 <p class="af-card-text">The <code class="af-inline-code">ResponseAPIService</code> will handle the response by first receiving the payload (one response to one question) using <code class="af-inline-code">StreamReader</code>. It'll deserialise it using <code class="af-inline-code">JsonDeserializer</code> class, check if <code class="af-inline-code">questionnaire_id</code>, <code class="af-inline-code">question</code>, <code class="af-inline-code">order</code>(question number), and <code class="af-inline-code">answer</code> fields are present, and store them in the database if everything is valid.</p>
                                 <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-csharp">private async Task HandleResponseAsync(HttpListenerRequest request, HttpListenerResponse response, CancellationToken cancellationToken)
 {
