@@ -51,9 +51,6 @@
             <li class="me-2" role="presentation">
                 <button class="af-tab-link" id="lipsync-tab" data-tabs-target="#lipsync-panel" type="button" role="tab" aria-controls="lipsync-panel" aria-selected="false">Native speech engine lip-sync</button>
             </li>
-            <li class="me-2" role="presentation">
-                <button class="af-tab-link" id="meta-human-tab" data-tabs-target="#meta-human-panel" type="button" role="tab" aria-controls="meta-human-panel" aria-selected="false">Metahuman avatars</button>
-            </li>
         </ul>
 
         <!--Tab Content-->
@@ -194,28 +191,6 @@
               <p class="af-card-text">While highly functional, this synchronization method relied on the C# application dynamically terminating animations based on real-time audio telemetry, which occasionally led to minor timing discrepancies. 
                 In contrast, the current HeadTTS architecture utilizes a pre-aligned, unified playback system that ensures a smoother visual experience. 
                 Additionally, the transition from the native speech engine to our current solution allowed us to move beyond the more traditional synthetic tonal quality of OS-level voices toward a more natural, human-like auditory experience.
-              </p>
-            </div>
-          </div>
-
-
-          <!--meta-human-->
-          <div class="hidden af-tab-panel" id="meta-human-panel" role="tabpanel" aria-labelledby="meta-human-tab">
-            <div class="af-card">
-              <div class="af-card-title-row">
-                <h3 class="af-card-title text-gradient-brand">Future prototype</h3>
-                <div class="gradient-brand-bar bar-full bar-thin"></div>
-              </div>
-              <p class="af-card-text">This exploratory prototype represents a high-fidelity frontier for the project, utilizing Unreal Engine’s MetaHuman framework to achieve superior visual realism. 
-                Beyond static aesthetics, MetaHumans offer a sophisticated emotional expression system, providing a more empathetic and lifelike conversational experience. 
-                While currently independent of the main application, this iteration serves as a benchmark for the next generation of user-centric digital interaction.
-              </p>
-              <img src="assets/images/metahuman.JPG"/>
-              <br>
-              <p class="af-card-text">
-                This iteration demonstrated significant potential for high-fidelity user interaction; however, full system integration presents substantial architectural complexities.
-                The primary challenges involve the hardware requirements inherent in the Unreal Engine environment and the associated computational overhead. 
-                Consequently, this high-performance framework remains a strategic roadmap item for future development cycles.
               </p>
             </div>
           </div>
