@@ -145,6 +145,10 @@
             transform: scaleX(1);
         }
 
+        #default-navbar .nav-link-bar[aria-current="page"]::after {
+            transform: scaleX(1);
+        }
+
         #default-sidebar > div {
             background-color: var(--sidebar-bg);
             border-color: var(--sidebar-border);
@@ -197,6 +201,14 @@
             background-color: var(--sidebar-link-hover-bg);
             color: var(--sidebar-link-hover-text);
             border-radius: var(--radius-base);
+        }
+
+        #default-sidebar a[aria-current="page"] {
+            background: var(--gradient-brand);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
         }
 
         .radius-strict-ui :where(a, button, input, select, textarea, .af-card, .af-callout, .af-badge, .af-btn, .af-input, .af-select, .af-textarea, #default-sidebar a) {
