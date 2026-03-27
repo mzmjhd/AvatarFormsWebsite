@@ -294,6 +294,7 @@ Transcript of the user's answer to the current question:
                 </div>
                                 <p class="af-card-text"><code class="af-inline-code">LLM_strip</code> uses regular expressions to identify and remove XML tags:</p>
                                 <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-python"># formatting.py
+
 def LLM_strip(text: str) -> str:
 
     tags = re.findall(r"<[^>/]*>", text, flags=re.DOTALL)
@@ -318,6 +319,7 @@ def LLM_strip(text: str) -> str:
 
 The <code class="af-inline-code">LLM_Trace</code> object details the information recorded when an Agent is called.</p>
                                 <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-python"># tracing.py
+
 class LLM_Trace:
 
     def __init__(self, agent_name: str, prompt: str, output: str, parameters: dict = None, response_time: float = None) -> None:

@@ -53,10 +53,33 @@
 						<div class="af-tab-panel" id="testing-unit-panel" role="tabpanel" aria-labelledby="testing-unit-tab">
 							<div class="af-card">
 								<div class="af-card-title-row">
-									<span class="af-card-title text-gradient-brand">Unit Testing</span>
+									<span class="af-card-title text-gradient-brand">Python Unit Testing</span>
 									<span class="gradient-brand-bar bar-thin"></span>
 								</div>
-								<p class="af-card-text">Content placeholder.</p>
+								<p class="af-card-text">Unit tests for the Python backend were run using Pytest.
+There are a total of 94 test cases, which all pass with a coverage of 93%.</p>
+								<img src="assets/images/python-tests.png" alt="Python Unit Test Results" class="af-card-image">
+								<p class="af-card-text">The tests use the standard workflow for unit tests, mocking external dependencies as needed using <code class="af-inline-code">unittest.mock</code> and <code class="af-inline-code">unittest.patch</code>.
+								This is an example of a test case for the <code class="af-inline-code">Model.generate</code> function, which mocks the API call to the LLM and checks that the function correctly processes the response and returns the expected output.
+								</p>
+								<pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-python"># Backend-Test\test_agents.py
+
+@patch('requests.request')
+def test_generate_success(self, mock_request):
+	"""Test successful model generation"""
+	mock_response = Mock()
+	mock_response.status_code = 200
+	mock_response.json.return_value = {"choices": [{"message": {"content": "Test response"}}]}
+	mock_request.return_value = mock_response
+
+	model = Model(url="http://test.com", model="test-model")
+	messages = [{"role": "user", "content": "Hello"}]
+	
+	result = model.generate(messages, temperature=0.3)
+	
+	assert result.json() == mock_response.json()
+	mock_request.assert_called_once()
+</code></pre>
 							</div>
 						</div>
 
