@@ -162,12 +162,75 @@
             <div class="hidden af-tab-panel" id="evaluation-critical-panel" role="tabpanel" aria-labelledby="evaluation-critical-tab">
               <div class="af-card">
                 <div class="af-card-title-row">
-                  <h3 class="af-card-title text-gradient-brand">Critical Analysis</h3>
+                  <h3 class="af-card-title text-gradient-brand">User Interface & Experience</h3>
                   <div class="gradient-brand-bar bar-full bar-thin"></div>
                 </div>
-                <p class="af-card-text">Add tab content here.</p>
+                <p class="af-card-text">
+                  The interface adopts a bifurcated design strategy tailored to distinct user roles. For the respondent (student), the system prioritizes a frictionless, "eyes-free" experience, utilizing voice-driven interaction to eliminate the cognitive load of text-based input. Conversely, the administrative interface (teacher) provides a robust suite of configuration tools. This includes granular control over avatar aesthetics and linguistic parameters, alongside sophisticated scraping and data-export utilities that streamline the lifecycle of questionnaire management and response analysis.
+                </p>
+              </div>
+
+              <div class="af-card">
+                <div class="af-card-title-row">
+                  <h3 class="af-card-title text-gradient-brand">Functional Integrity</h3>
+                  <div class="gradient-brand-bar bar-full bar-thin"></div>
+                </div>
+                <p class="af-card-text">
+                  The final implementation successfully addresses the complete spectrum of mandatory requirements outlined in our technical specifications. Rigorous iterative testing has confirmed a high degree of functional reliability, the system consistently performs as intended under various user scenarios, with no critical defects identified during the final evaluation phase.
+                </p>
+              </div>
+
+              <div class="af-card">
+                <div class="af-card-title-row">
+                  <h3 class="af-card-title text-gradient-brand">Stability & Quality Assurance</h3>
+                  <div class="gradient-brand-bar bar-full bar-thin"></div>
+                </div>
+                <p class="af-card-text">
+                  System stability is underpinned by a comprehensive testing framework encompassing unit and integration tests across both the C# application core and the Python orchestration layer. By maintaining high code coverage and validating all API inter-dependencies, we have ensured a resilient architecture. This rigorous approach to quality assurance provides a high level of confidence for public-facing deployment and long-term operational uptime.
+                </p>
+              </div>
+
+              <div class="af-card">
+                <div class="af-card-title-row">
+                  <h3 class="af-card-title text-gradient-brand">Computational Efficiency</h3>
+                  <div class="gradient-brand-bar bar-full bar-thin"></div>
+                </div>
+                <p class="af-card-text">
+                  The application is engineered for high performance, particularly regarding the local execution of Large Language Models (LLMs). By utilizing quantized models, we significantly mitigate the primary computational burden. The surrounding C# and Python logic layers introduce negligible overhead, ensuring that the system's intelligence and conversational flow remain fluid and responsive even on consumer-grade hardware.
+                </p>
+              </div>
+
+              <div class="af-card">
+                <div class="af-card-title-row">
+                  <h3 class="af-card-title text-gradient-brand">Compatibility & Scalability</h3>
+                  <div class="gradient-brand-bar bar-full bar-thin"></div>
+                </div>
+                <p class="af-card-text">
+                  While optimized for Windows environments, the application possesses inherent cross-platform extensibility through the Uno Platform. While initial development versions supported macOS, resources were strategically reallocated to prioritize core functional depth. To maximize hardware utility, we have implemented GPU-accelerated optimizations. While mobile support is currently constrained by LLM hardware requirements, the architecture remains poised for future adaptation as edge computing capabilities evolve.
+                </p>
+              </div>
+
+              <div class="af-card">
+                <div class="af-card-title-row">
+                  <h3 class="af-card-title text-gradient-brand">Architectural Maintainability</h3>
+                  <div class="gradient-brand-bar bar-full bar-thin"></div>
+                </div>
+                <p class="af-card-text">
+                  Adhering to strict software engineering paradigms, the system utilizes the Model-View-ViewModel (MVVM) design pattern to ensure a clean separation of concerns. Maintainability is further bolstered by a modular folder hierarchy, consistent naming conventions, and an isolated testing project to prevent environment pollution. The Python integration layer is designed with modularity as a core tenet, facilitating effortless updates to the underlying AI orchestration.
+                </p>
+              </div>
+
+              <div class="af-card">
+                <div class="af-card-title-row">
+                  <h3 class="af-card-title text-gradient-brand">Project Management & Collaboration</h3>
+                  <div class="gradient-brand-bar bar-full bar-thin"></div>
+                </div>
+                <p class="af-card-text">
+                  The development lifecycle was governed by a structured communication protocol involving synchronous physical meetings and virtual collaboration via Microsoft Teams. We employed an agile-inspired goal allocation strategy to ensure consistent progress. Version control and documentation were meticulously managed via GitHub, utilizing a rigorous pull-request workflow and transparent commit history to maintain a high standard of professional accountability.
+                </p>
               </div>
             </div>
+
             <div class="hidden af-tab-panel" id="evaluation-future-work-panel" role="tabpanel" aria-labelledby="evaluation-future-work-tab">
               <div class="af-card">
                 <div class="af-card-title-row">
