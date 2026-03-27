@@ -68,7 +68,7 @@
 								</div>
 								<p class="af-card-text">Compatibility testing was conducted on a range of Windows-based systems using both NVIDIA and AMD GPUs, alongside machines equipped with AMD and Intel CPUs.
 									Theoretically, the application can be run on any devices with a CPU architecture of either AMD64 (AMD CPUs circa 2003+) or ARM64 (Intel CPUs circa 2006+), while compatibility with Qualcomm Snapdragon CPUs have not yet been tested.</p>
-								<p class="af-card-text">The Text-To-Speech and 3D avatar lip-sync models are already deployed using the ONNX Runtime format, but the LLM solution (llamafile) has limited documentation on NPU support.
+								<p class="af-card-text">The Text-To-Speech and 3D avatar lip-sync models are already deployed using the ONNX Runtime format, but the LLM solution (.llamafile) has limited documentation on NPU support.
 									That being said, the application ran reliably across these configurations when GPU acceleration was available.
 									However, when running on CPU-only systems, particularly during LLM inference, performance degraded significantly as expected, which will be discussed further in the Performance section.</p>
 								<p class="af-card-text">As this is a Windows-based application, compatibility with macOS or other UNIX-based systems was not tested.</p>
@@ -82,20 +82,114 @@
 									<span class="gradient-brand-bar bar-thin"></span>
 								</div>
 								<p class="af-card-text">The performance was tested on devices with the following system specifications:</p>
-								<ul class="list-disc pl-6 mt-4 space-y-3">
+								<ul class="list-disc pl-6 mt-4 mb-6 space-y-3">
 									<li class="af-table-value">
 										<strong class="type-heading">CPU-Only Windows System:</strong>
-										AMD Ryzen 5 4600H (Mobile) (6 Cores) + 16GB RAM (DRR4@2666MT/s)
+										AMD Ryzen 5 4600H (Mobile) (6 Cores) + 16GB RAM
 									</li>
 									<li class="af-table-value">
 										<strong class="type-heading">CPU + GPU (Mid-Range with 6GB VRAM) Windows System:</strong>
-										Intel i5-9600KF (6 Cores) + NVIDIA RTX 2070 6GB + 32GB RAM (DDR4@3200MT/s)
+										Intel i5-9600KF (6 Cores) + NVIDIA RTX 2070 6GB + 32GB RAM
 									</li>
 									<li class="af-table-value">
 										<strong class="type-heading">CPU + GPU (Mid-Range with 12GB VRAM) Windows System:</strong>
-										AMD Ryzen 5 5700X (8 Cores) + NVIDIA RTX 4070Ti 12GB + 32GB RAM (DDR4@3200MT/s)
+										AMD Ryzen 5 5700X (8 Cores) + NVIDIA RTX 4070Ti 12GB + 32GB RAM
 									</li>
 								</ul>
+								<p class="af-card-text">We settled for these three control systems as we believe these are realistic representations of what lower-end, mid-range, and high-end devices would look like respectively for our client demographics. 
+									The majority of our clients at NAS schools may be able to get access of a shared school device with GPU specifications between the control that we have chosen.
+									We have also included another control device with no GPU to highlight the impracticality of running this application at its current state fully on CPU inferencing.
+								</p>
+								<p class="af-card-text">The benchmark for the Talker and Evaluator agents time-to-last-token (output delay) for the three control systems are displayed below for comparison.</p>
+
+								<h3 class="af-card-title text-gradient-brand text-center mt-8 mb-6">Talker Agent</h3>
+								<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+									<figure class="af-card p-4">
+										<img src="assets/images/cpu-talker.png" alt="Talker output capture on AMD Ryzen 5 4600H" class="w-full h-auto rounded-lg" />
+										<figcaption class="af-card-text mt-3 text-center">
+											Ryzen 5 4600H (CPU-only)
+										</figcaption>
+									</figure>
+									<figure class="af-card p-4">
+										<img src="assets/images/2070-talker.png" alt="Talker output capture on Intel i5-9600KF and NVIDIA RTX 2070" class="w-full h-auto rounded-lg" />
+										<figcaption class="af-card-text mt-3 text-center">
+											Intel i5-9600KF + NVIDIA RTX 2070
+										</figcaption>
+									</figure>
+									<figure class="af-card p-4">
+										<img src="assets/images/4070-talker.png" alt="Talker output capture on Ryzen 5 5700X and NVIDIA RTX 4070Ti" class="w-full h-auto rounded-lg" />
+										<figcaption class="af-card-text mt-3 text-center">
+											Ryzen 5 5700X + NVIDIA RTX 4070Ti
+										</figcaption>
+									</figure>
+								</div>
+
+								<h3 class="af-card-title text-gradient-brand text-center mt-6 mb-6">Evaluator Agent</h3>
+								<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+									<figure class="af-card p-4">
+										<img src="assets/images/cpu-eval.png" alt="Evaluation benchmark result on AMD Ryzen 5 4600H" class="w-full h-auto rounded-lg" />
+										<figcaption class="af-card-text mt-3 text-center">
+											Ryzen 5 4600H (CPU-only)
+										</figcaption>
+									</figure>
+									<figure class="af-card p-4">
+										<img src="assets/images/2070-eval.png" alt="Evaluation benchmark result on Intel i5-9600KF and NVIDIA RTX 2070" class="w-full h-auto rounded-lg" />
+										<figcaption class="af-card-text mt-3 text-center">
+											Intel i5-9600KF + NVIDIA RTX 2070
+										</figcaption>
+									</figure>
+									<figure class="af-card p-4">
+										<img src="assets/images/4070-eval.png" alt="Evaluation benchmark result on Ryzen 5 5700X and NVIDIA RTX 4070Ti" class="w-full h-auto rounded-lg" />
+										<figcaption class="af-card-text mt-3 text-center">
+											Ryzen 5 5700X + NVIDIA RTX 4070Ti
+										</figcaption>
+									</figure>
+								</div>
+
+								<p class="af-card-text">Below are the summarised values for the performance testing results above.</p>
+								<div class="af-table-wrap mb-6">
+									<table class="af-table">
+										<thead>
+											<tr>
+												<th>System</th>
+												<th>Average Talker TTLT</th>
+												<th>Average Evaluation TTLT</th>
+												<th>Average Response Time</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td class="af-table-key">Ryzen 5 4600H (CPU-only)</td>
+												<td class="af-table-value">4.58s</td>
+												<td class="af-table-value">48.96s</td>
+												<td class="af-table-value">53.54s</td>
+											</tr>
+											<tr>
+												<td class="af-table-key">Intel i5-9600KF + NVIDIA RTX 2070</td>
+												<td class="af-table-value">0.62s</td>
+												<td class="af-table-value">8.97s</td>
+												<td class="af-table-value">9.59s</td>
+											</tr>
+											<tr>
+												<td class="af-table-key">Ryzen 5 5700X + NVIDIA RTX 4070Ti</td>
+												<td class="af-table-value">0.41s</td>
+												<td class="af-table-value">7.29s</td>
+												<td class="af-table-value">7.70s</td>
+										</tbody>
+									</table>
+								</div>
+								<p class="af-card-text">The performance results clearly demonstrate that GPU acceleration is essential for practical use of the system. 
+									While the Talker agent performs reasonably even on CPU-only hardware (4.58s), the Evaluator agent introduces a significant bottleneck, with nearly 49 seconds of delay, resulting in an overall response time exceeding 53 seconds. 
+									This makes the application unsuitable for real-time conversations when running purely on CPU.
+								</p>
+								<p class="af-card-text">In contrast, both GPU equipped systems show a dramatic improvement in performance, reducing total response time to under 10 seconds. 
+									Even the mid-range GPU setup (RTX 2070) achieves a nearly 6x speedup, while the higher-end RTX 4070Ti provides further, albeit smaller, gains. 
+									This suggests that most of the performance benefit comes from having a GPU at all, with diminishing returns at higher tiers.
+								</p>
+								<p class="af-card-text">It is also important to note that these benchmarks were recorded within a testing framework, meaning real-world application runtimes are approximately 20% faster due to the absence of testing overhead. 
+									Additionally, the context size is dynamically adjusted at runtime, particularly for the RTX 2070 with its 6GB of VRAM, allowing the system to maintain comparable performance to the higher-end control by reducing memory usage. 
+									This optimisation introduces only minor inaccuracies, but ensures consistent responsiveness across a wider range of hardware.
+								</p>
 							</div>
 						</div>
 
