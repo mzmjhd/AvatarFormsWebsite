@@ -151,6 +151,39 @@
             transition: background-color 0.2s, border-color 0.2s;
         }
 
+        @media (min-width: 640px) {
+            #sidebar-container {
+                position: sticky;
+                top: 4rem;
+                align-self: flex-start;
+                max-height: calc(100vh - 4rem);
+            }
+
+            #default-sidebar {
+                position: relative;
+                height: 100%;
+                max-height: calc(100vh - 4rem);
+            }
+
+            #default-sidebar::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                height: 2.25rem;
+                background: linear-gradient(to bottom, rgba(255, 255, 255, 0), var(--sidebar-bg) 90%);
+                pointer-events: none;
+                z-index: 1;
+            }
+
+            #default-sidebar > div {
+                overflow-y: auto;
+                height: 100%;
+                max-height: calc(100vh - 4rem);
+            }
+        }
+
         #default-sidebar a {
             color: var(--text);
             font-weight: 600;
