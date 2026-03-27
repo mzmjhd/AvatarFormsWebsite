@@ -1060,11 +1060,40 @@ DEEPEVAL_RESULTS_FOLDER=C:\path\to\results\folder</code></pre>
           breadcrumbsList.appendChild(listItem);
         });
       }
+    function setActiveNavLinks() {
+      const currentPath = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
+      const links = document.querySelectorAll('#default-navbar a[href], #default-sidebar a[href]');
+
+      links.forEach((link) => {
+        const href = link.getAttribute('href');
+        if (!href || /^(https?:|mailto:|#)/i.test(href)) {
+          link.removeAttribute('aria-current');
+          return;
+        }
+
+        const linkPath = href.split('/').pop().toLowerCase();
+        const isSidebarLink = !!link.closest('#default-sidebar');
+
+        if (isSidebarLink) {
+          link.classList.remove('text-gradient-brand');
+        }
+
+        if (linkPath === currentPath) {
+          link.setAttribute('aria-current', 'page');
+          if (isSidebarLink) {
+            link.classList.add('text-gradient-brand');
+          }
+        } else {
+          link.removeAttribute('aria-current');
+        }
+      });
+    }
 
       fetch('components/navbar.html')
         .then(response => response.text())
         .then(data => {
           document.getElementById('navbar-container').innerHTML = data;
+        setActiveNavLinks();
         })
         .catch(error => console.error('Error loading navbar:', error));
 
@@ -1072,6 +1101,7 @@ DEEPEVAL_RESULTS_FOLDER=C:\path\to\results\folder</code></pre>
         .then(response => response.text())
         .then(data => {
           document.getElementById('sidebar-container').innerHTML = data;
+        setActiveNavLinks();
         })
         .catch(error => console.error('Error loading sidebar:', error));
 
