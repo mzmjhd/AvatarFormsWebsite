@@ -413,6 +413,11 @@
             aspect-ratio: 16 / 9;
         }
 
+        .af-iframe-wrap {
+            border-radius: var(--radius-base);
+            overflow: hidden;
+        }
+
         .af-iframe {
             display: block;
             width: 100%;
