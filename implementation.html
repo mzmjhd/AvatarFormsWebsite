@@ -450,7 +450,6 @@ class LLM_Trace:
                                 </div>
                                 <p class="af-card-text">To allow educators and users to easily import existing questionnaires without manual data entry, we implemented the <code class="af-inline-code">FormLinkParserService</code>. This service uses a hidden <code class="af-inline-code">WebView2</code> control to programmatically navigate to form URLs and extract the underlying question metadata into a unified <code class="af-inline-code">ParsedQuestion</code> format. It handles the two most common platforms using fundamentally different strategies:</p>
 
-                                <h4 class="text-lg font-bold mt-4 text-gray-800 dark:text-gray-200">Microsoft Forms: Network Interception</h4>
                                 <p class="af-card-text">Microsoft Forms dynamically loads its data. Rather than scraping the DOM, the service hooks into the WebView's <code class="af-inline-code">WebResourceResponseReceived</code> event to intercept the raw network traffic. It listens for specific API endpoints (like <code class="af-inline-code">runtimeFormsWithResponses</code> or <code class="af-inline-code">ResponsePageStartup.ashx</code>) and captures the JSON payload directly from the stream.</p>
                                 <p class="af-card-text">Additionally, because some forms are hidden behind a landing page, the service automatically injects JavaScript to simulate a click on "Start" buttons to trigger the network request.</p>
                                 <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-csharp">async void OnResponseReceived(object? sender, CoreWebView2WebResourceResponseReceivedEventArgs e)
@@ -503,7 +502,6 @@ class LLM_Trace:
             }
         }</code></pre>
 
-                                <h4 class="text-lg font-bold mt-6 text-gray-800 dark:text-gray-200">Google Forms: DOM State Extraction</h4>
                                 <p class="af-card-text">Unlike Microsoft, Google Forms embeds its entire question structure into the HTML upon initial load inside a global JavaScript array. The service navigates to the URL, waits for the page to load, and then uses <code class="af-inline-code">ExecuteScriptAsync</code> to extract and stringify the <code class="af-inline-code">window.FB_PUBLIC_LOAD_DATA_</code> variable.</p>
                                 <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-csharp">
     // Helper to crawl the JSON tree and find all arrays
@@ -757,7 +755,53 @@ public async Task StopServerAsync()
                                     <span class="af-card-title text-gradient-brand">Response Export</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
-                                <p class="af-card-text">Content</p>
+                                <p class="af-card-text">To make the collected interview data actionable, the application implements a native data export pipeline that transforms relational database records into flat, universally compatible CSV files. This allows educators and administrators to easily import the data into external tools like Excel or pandas for further analysis.</p>
+
+<p class="af-card-text">The export mechanism leverages the native <code class="af-inline-code">Windows.Storage.Pickers.FileSavePicker</code> to handle file system interactions safely, and supports two distinct export modes: extracting a single interview session, or aggregating all responses for a given questionnaire into a bulk report.</p>
+
+<p class="af-card-text">Exporting a single session is straightforward, but bulk exporting requires transforming the hierarchical data (Questionnaires -> Sessions -> Responses) into a flat, tabular format. Because users might skip questions or encounter dynamic interview flows, the export logic dynamically maps and aligns responses to their corresponding question columns using LINQ.</p>
+
+<pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-csharp">// 1. Get all unique questions across all sessions to establish consistent columns
+var questions = sessions
+    .SelectMany(s => s.Responses)
+    .Where(r => r.Question != null)
+    .Select(r => r.Question!)
+    .GroupBy(q => q.Id)
+    .Select(g => g.First())
+    .OrderBy(q => q.Order)
+    .ToList();
+
+// 2. Generate the Questions Header Row
+var questionHeader = "Questions," + string.Join(",", questions.Select(q => $"\"{EscapeCsv(q.Text)}\""));
+csv.AppendLine(questionHeader);
+
+// 3. Generate the Answers Rows (one for each interview session)
+int sessionIndex = 1;
+foreach (var session in sessions)
+{
+    var answers = new List<string>();
+    foreach (var q in questions)
+    {
+        // Safely align the response to the correct question column, defaulting to empty if missing
+        var response = session.Responses.FirstOrDefault(r => r.QuestionId == q.Id);
+        answers.Add($"\"{EscapeCsv(response?.AnswerText ?? string.Empty)}\"");
+    }
+
+    var answerRow = $"Answer{sessionIndex}," + string.Join(",", answers);
+    csv.AppendLine(answerRow);
+    sessionIndex++;
+}</code></pre>
+
+<p class="af-card-text">Because LLM-generated transcriptions and user answers frequently contain commas, quotation marks, and line breaks, writing raw text to a CSV can break the file's structure. The export logic ensures all cells are enclosed in double quotes and uses a dedicated sanitisation helper to escape internal quotes, ensuring data integrity upon import.</p>
+
+<pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-csharp">// Helper method to handle internal quotes in strings to prevent CSV layout corruption
+private string EscapeCsv(string? text)
+{
+    if (string.IsNullOrEmpty(text)) return string.Empty;
+    
+    // RFC 4180 standard: internal double-quotes must be escaped by doubling them
+    return text.Replace("\"", "\"\"");
+}</code></pre>
                             </div>
                         </div>
 
