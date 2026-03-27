@@ -192,7 +192,7 @@ class EvaluatorAgent(Agent):
                                 <p class="af-card-text">The AI Agents import parameterised prompts from the <code class="af-inline-code">prompts.py</code> file. This allows for easy editing and iteration of prompts, without impacting the rest of the codebase. Prompts can be freely be switched out so long as the function signature matches. 
 
 An example prompt for the <code class="af-inline-code">TalkerAgent</code>:</p>
-                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-python"># agents.py
+                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-python"># prompts.py
 
 def Talker_follow_up_question_prompt(question: str, reasoning: str, transcript: str, previous_q_and_a: str = None, follow_up: str = None) -> str:
 
@@ -293,7 +293,8 @@ Transcript of the user's answer to the current question:
                   </table>
                 </div>
                                 <p class="af-card-text"><code class="af-inline-code">LLM_strip</code> uses regular expressions to identify and remove XML tags:</p>
-                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-python">def LLM_strip(text: str) -> str:
+                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-python"># formatting.py
+def LLM_strip(text: str) -> str:
 
     tags = re.findall(r"<[^>/]*>", text, flags=re.DOTALL)
 
@@ -316,7 +317,8 @@ Transcript of the user's answer to the current question:
 <code class="af-inline-code">AvatarFormsInterviewer</code> can optionally be set to log AI Agent calls using the <code class="af-inline-code">log_dir=path\to\dir</code> and <code class="af-inline-code">print_logs=True</code> parameters.
 
 The <code class="af-inline-code">LLM_Trace</code> object details the information recorded when an Agent is called.</p>
-                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-python">class LLM_Trace:
+                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-python"># tracing.py
+class LLM_Trace:
 
     def __init__(self, agent_name: str, prompt: str, output: str, parameters: dict = None, response_time: float = None) -> None:
 
