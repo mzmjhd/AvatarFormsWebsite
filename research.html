@@ -42,96 +42,156 @@
           role="tablist"
           aria-label="research tabs"
         >
-            <li class="me-2" role="presentation">
-                <button class="af-tab-link" id="scraper-filler-tab" data-tabs-target="#scraper-filler-panel" type="button" role="tab" aria-controls="scraper-filler-panel" aria-selected="true">Online form scraper and filler</button>
-            </li>
-            <li class="me-2" role="presentation">
-                <button class="af-tab-link" id="n8n-tab" data-tabs-target="#n8n-panel" type="button" role="tab" aria-controls="n8n-panel" aria-selected="false">n8n AI chain</button>
-            </li>
-            <li class="me-2" role="presentation">
-                <button class="af-tab-link" id="lipsync-tab" data-tabs-target="#lipsync-panel" type="button" role="tab" aria-controls="lipsync-panel" aria-selected="false">Native speech engine lip-sync</button>
-            </li>
+          <li class="me-2" role="presentation">
+            <button class="af-tab-link" id="related-projects-tab" data-tabs-target="#related-projects-panel" type="button" role="tab" aria-controls="related-projects-panel" aria-selected="true">Related Projects Review</button>
+          </li>
+          <li class="me-2" role="presentation">
+            <button class="af-tab-link" id="technology-review-tab" data-tabs-target="#technology-review-panel" type="button" role="tab" aria-controls="technology-review-panel" aria-selected="false">Technology Review</button>
+          </li>
         </ul>
 
         <!--Tab Content-->
         <div id="research-tab-content">
-          <!--Scraper-filler-->
-          <div class="af-tab-panel" id="scraper-filler-panel" role="tabpanel" aria-labelledby="scraper-filler-tab">
+
+          <!--Related Projects-->
+          <div class="af-tab-panel" id="related-projects-panel" role="tabpanel" aria-labelledby="related-projects-tab">
             <div class="af-card">
-              <div id="scraper-filler1" class="py-6">
-                <div class="af-card-title-row">
-                  <h3 class="af-card-title text-gradient-brand">Earliest prototype</h3>
+              <div class="af-card-title-row">
+                  <h3 class="af-card-title text-gradient-brand">Typebot</h3>
                   <div class="gradient-brand-bar bar-full bar-thin"></div>
+              </div>
+              <div class="af-stack">
+                <div class="flex flex-wrap gap-2 mb-2">
+                  <span class="af-badge">Open Source</span>
+                  <span class="af-badge">Conversational Forms</span>
+                  <span class="af-badge">Automation Integrations</span>
                 </div>
-                <div class="card-content">
-                  <p class="af-card-text">Developed prior to the shift toward a C# Windows application, this initial prototype was built entirely in Python. 
-                    The system utilized a form extraction utility to parse online fields, followed by an AI model that conducted user conversations via a terminal interface. 
-                    Once complete, the gathered responses were injected into the target online form using an automated filler.
+                <p class="af-card-text">
+                  Typebot is a form builder designed around conversational flows instead of static fields. It demonstrates how step-by-step dialogue can reduce abandonment and improve completion quality.
+                </p>
+                <p class="af-card-text">
+                  This is relevant to AvatarForms because it validates the same interaction principle: collecting structured data through guided, natural interaction rather than traditional long-form entry.
+                </p>
+                <div class="af-callout">
+                  <p class="af-card-text mb-2"><strong>Reference</strong></p>
+                  <p class="af-card-text mb-0">
+                    GitHub: <a class="af-link" href="https://github.com/baptisteArno/typebot.io" target="_blank" rel="noopener noreferrer">baptisteArno/typebot.io</a><br>
+                    Website: <a class="af-link" href="https://typebot.io" target="_blank" rel="noopener noreferrer">typebot.io</a>
                   </p>
                 </div>
               </div>
             </div>
 
             <div class="af-card">
-              <div id="scraper-filler2" class="py-6">
-                <div class="af-card-title-row">
-                  <h3 class="af-card-title text-gradient-brand">Techniques learned</h3>
-                  <div class="gradient-brand-bar bar-full bar-thin"></div>
-                </div>
-                <div class="card-content">
-                  <p class="af-card-text">The form extraction module proved to be a critical asset, serving as the foundational bridge between the application and external web forms. 
-                    Successfully integrated into the final product, this feature enables seamless data synchronization. 
-                    Furthermore, this prototype provided essential experience in deploying and managing local AI models, a core component of the current system's architecture.
-                  </p>
-                </div>
+              <div class="af-card-title-row">
+                <h3 class="af-card-title text-gradient-brand">Formbricks</h3>
+                <div class="gradient-brand-bar bar-full bar-thin"></div>
               </div>
-            </div>
-
-            <div class="af-card">
-              <div id="scraper-filler3" class="py-6">
-                <div class="af-card-title-row">
-                  <h3 class="af-card-title text-gradient-brand">Reason for improvement</h3>
-                  <div class="gradient-brand-bar bar-full bar-thin"></div>
+              <div class="af-stack">
+                <div class="flex flex-wrap gap-2 mb-2">
+                  <span class="af-badge">Open Source</span>
+                  <span class="af-badge">Surveys and Forms</span>
+                  <span class="af-badge">Self-hostable</span>
                 </div>
-                <div class="card-content">
-                  <p class="af-card-text"> Despite its functional success, the prototype remained an unrefined proof of concept that relied on a terminal-based interface rather than a dedicated graphical user environment. 
-                    Furthermore, the system architecture was limited to single-form processing, creating a rigid dependency on specific online form structures that hindered scalability and user flexibility.
+                <p class="af-card-text">
+                  Formbricks is an open-source platform for surveys and form-style data collection with product-friendly analytics and deployment flexibility.
+                </p>
+                <p class="af-card-text">
+                  It is useful as a benchmark for AvatarForms in areas such as reliability, deployment options, and collection workflows, while highlighting the unique value of avatar-led, voice-assisted completion.
+                </p>
+                <div class="af-callout">
+                  <p class="af-card-text mb-2"><strong>Reference</strong></p>
+                  <p class="af-card-text mb-0">
+                    GitHub: <a class="af-link" href="https://github.com/formbricks/formbricks" target="_blank" rel="noopener noreferrer">formbricks/formbricks</a><br>
+                    Website: <a class="af-link" href="https://formbricks.com" target="_blank" rel="noopener noreferrer">formbricks.com</a>
                   </p>
                 </div>
               </div>
             </div>
           </div>
 
-          <!--n8n-->
-          <div class="hidden af-tab-panel" id="n8n-panel" role="tabpanel" aria-labelledby="n8n-tab">
+          <!--Technology Review-->
+          <div class="af-tab-panel" id="technology-review-panel" role="tabpanel" aria-labelledby="technology-review-tab">
+            
             <div class="af-card">
-
               <div class="af-card-title-row">
-                <h3 class="af-card-title text-gradient-brand">AI control flow prototype</h3>
+                <h3 class="af-card-title text-gradient-brand">Technology Review Overview</h3>
                 <div class="gradient-brand-bar bar-full bar-thin"></div>
+              </div>
+              <div class="af-stack">
+                <div class="flex flex-wrap gap-2 mb-2">
+                  <span class="af-badge">Prototype-led</span>
+                  <span class="af-badge">Comparative Evaluation</span>
+                  <span class="af-badge">Production-focused</span>
                 </div>
-                <div id="n8n-container1" class="py-6">
-                <div class="card-content">
-                  <p class="af-card-text">We integrated n8n to orchestrate a more structured AI control flow. 
-                    In this model, the AI was prompted to return a JSON object containing two key variables: an evaluation flag to determine if a response was satisfactory and the corresponding conversational output. 
-                    This logic was applied iteratively across all form fields, culminating in a structured data table that compiled the user’s final responses for review.
+                <p class="af-card-text">
+                  The final AvatarForms architecture was selected through iterative prototyping and evaluation across three major technical directions: Python-based form automation, n8n conversation orchestration, and native speech-engine lip-sync.
+                </p>
+                <p class="af-card-text">
+                  The cards below summarize what each approach enabled, what it taught us, and why specific elements were either retained or replaced in the production build.
+                </p>
+              </div>
+            </div>
+            
+            <div class="af-card">
+              <div class="af-card-title-row">
+                <h3 class="af-card-title text-gradient-brand">Model and Runtime Evaluation</h3>
+                <div class="gradient-brand-bar bar-full bar-thin"></div>
+              </div>
+              <div class="af-stack">
+                <p class="af-card-text">
+                  We tested multiple local-model families and quantization levels across Qwen and Gemma variants, with a focus on conversational reliability, latency, and answer quality during multi-turn form completion.
+                </p>
+                <p class="af-card-text">
+                  After benchmarking practical usability under desktop constraints, we selected Qwen-3B Q6_K as the strongest tradeoff between performance and reliability. It consistently produced stable responses while remaining responsive enough for real-time user interaction.
+                </p>
+                <p class="af-card-text">
+                  We also evaluated Foundry Local as part of runtime experimentation. While it offers strong operational value for broader scaling and managed workflows, the client requirement for fully self-contained deployment led us to adopt llamafiles for the current release. For future growth scenarios, Foundry Local remains a strong option to revisit.
+                </p>
+              </div>
+            </div>
+
+            <div class="af-card">
+              <div class="af-card-title-row">
+                <h3 class="af-card-title text-gradient-brand">Python Online Form Scraper and Filler</h3>
+                <div class="gradient-brand-bar bar-full bar-thin"></div>
+              </div>
+              <div class="af-stack">
+                <p class="af-card-text">
+                  This earliest prototype was implemented entirely in Python. It extracted online form fields, captured answers through an AI-assisted terminal conversation, and injected responses back into forms through automated filling logic.
+                </p>
+                <p class="af-card-text">
+                  The strongest outcome was technical validation of the extraction-and-fill workflow, which later became a foundational integration in the final system. It also provided practical experience with local model orchestration and prompt-loop control.
+                </p>
+                <div class="af-callout">
+                  <p class="af-card-text mb-2"><strong>Reason for improvement</strong></p>
+                  <p class="af-card-text mb-0">
+                    The prototype remained terminal-centric, constrained to narrow single-form assumptions, and unsuitable for scalable end-user interaction without a robust desktop UI and stronger workflow abstraction.
                   </p>
-                  <img src="assets/images/n8n_chain.jpg"/>
                 </div>
               </div>
             </div>
 
             <div class="af-card">
               <div class="af-card-title-row">
-                <h3 class="af-card-title text-gradient-brand">Techniques learned</h3>
+                <h3 class="af-card-title text-gradient-brand">AI Orchestration Framework</h3>
                 <div class="gradient-brand-bar bar-full bar-thin"></div>
-                </div>
-                  <p class="af-card-text"></p>
-                <div id="n8n-container2" class="py-6">
-                <div class="card-content">
-                  <p class="af-card-text">This phase was essential for establishing the foundational logic of our conversation-driven data collection. 
-                    By prototyping with n8n, we gained a deeper understanding of the AI evaluation loop and the necessity of structured state management. 
-                    These findings were vital in transitioning from a linear script to the adaptive, intelligent interaction model we have today.
+              </div>
+              <div class="af-stack">
+                <p class="af-card-text">
+                  We evaluated n8n as an orchestration layer for a structured AI decision loop where each field generated a JSON payload with validation state and output. This provided clear step-by-step control, visibility, and fast prototyping for workflow iteration.
+                </p>
+                <img src="assets/images/n8n_chain.jpg" alt="n8n AI chain workflow diagram" class="af-image"/>
+                <p class="af-card-text">
+                  We also tested LangChain, which offered useful building blocks for prompt chaining, memory patterns, retrievers, and tool-driven flows. It was effective for experimentation but still added abstraction and operational overhead for our desktop-specific constraints.
+                </p>
+                <p class="af-card-text">
+                  Based on these findings, we implemented a custom orchestration framework tailored to AvatarForms. This gave us tighter control over reliability, fallback behavior, and runtime performance. The full design is documented in the Implementation page.
+                </p>
+                <div class="af-callout">
+                  <p class="af-card-text mb-2"><strong>Reason for improvement</strong></p>
+                  <p class="af-card-text mb-0">
+                    Strict JSON-schema dependence reduced resilience with smaller local models, and integration overhead with a native C# application increased complexity beyond what was justified for production.
                   </p>
                 </div>
               </div>
@@ -139,59 +199,40 @@
 
             <div class="af-card">
               <div class="af-card-title-row">
-                <h3 class="af-card-title text-gradient-brand">Reason for improvement</h3>
+                <h3 class="af-card-title text-gradient-brand">Native Speech Engine Lip-sync Prototype</h3>
                 <div class="gradient-brand-bar bar-full bar-thin"></div>
-                </div>
-                  <p class="af-card-text"></p>
-                <div id="n8n-container2" class="py-6">
-                <div class="card-content">
-                  <p class="af-card-text">
-                    The JSON-based extraction method lacked the necessary robustness for extended dialogues, particularly when utilizing resource-constrained AI models. 
-                    This approach created a rigid dependency on the model’s ability to strictly adhere to a specific schema; any deviation in output syntax resulted in system failure. 
-                    Furthermore, the architectural overhead required to integrate a third-party orchestration tool like n8n into a native C# environment presented significant implementation challenges.
+              </div>
+              <div class="af-stack">
+                <p class="af-card-text">
+                  This prototype synchronized avatar mouth movement with system-generated speech via native Windows voice output and viseme mapping. It offered broad language support and low compute overhead.
+                </p>
+                <p class="af-card-text">
+                  It established core production patterns, including microphone handling, desktop event coordination, and the initial verbal AI interaction model.
+                </p>
+                <div class="af-callout">
+                  <p class="af-card-text mb-2"><strong>Reason for improvement</strong></p>
+                  <p class="af-card-text mb-0">
+                    Real-time animation cut-off logic occasionally introduced small timing drift. Moving to a pre-aligned playback strategy improved visual smoothness and supported more natural-sounding voice output.
                   </p>
                 </div>
               </div>
             </div>
-          </div>
-
-          <!--Lipsync-->
-          <div class="hidden af-tab-panel" id="lipsync-panel" role="tabpanel" aria-labelledby="lipsync-tab">
-            <div class="af-card">
-              <div class="af-card-title-row">
-                <h3 class="af-card-title text-gradient-brand">Conversation prototype</h3>
-                <div class="gradient-brand-bar bar-full bar-thin"></div>
-              </div>
-              <p class="af-card-text">This prototype visually aligns with the final product's interface; however, it utilizes a distinct architectural approach for speech synthesis and lip-synchronization. 
-                By leveraging the Windows native speech engine, the system implemented a word-by-word viseme mapping logic. 
-                In this configuration, the C# application dynamically controlled the avatar’s mouth animations in real-time, synchronizing them with the operating system's localized voice output.
-              </p>
-              <br>
-              <p class="af-card-text">
-                This iteration demonstrated significant potential for broad linguistic compatibility and architectural efficiency. 
-                By leveraging the host environment’s native speech engine, the system achieved a substantial reduction in computational overhead, allowing for high-performance execution without the need for intensive local processing or external cloud dependencies.
-              </p>
-            </div>
 
             <div class="af-card">
               <div class="af-card-title-row">
-                <h3 class="af-card-title text-gradient-brand">Techniques learned</h3>
+                <h3 class="af-card-title text-gradient-brand">Architecture Decision Summary</h3>
                 <div class="gradient-brand-bar bar-full bar-thin"></div>
               </div>
-              <p class="af-card-text">This prototype serves as the foundational iteration of the current production environment, marking the first successful integration of a verbal AI-driven dialogue for data collection. 
-                Several core architectural components developed during this phase remain central to the final application, including the automated Python environment discovery logic, real-time microphone input processing, and the integrated user interface elements.
-              </p>
-            </div>
-
-            <div class="af-card">
-              <div class="af-card-title-row">
-                <h3 class="af-card-title text-gradient-brand">Reason for improvement</h3>
-                <div class="gradient-brand-bar bar-full bar-thin"></div>
+              <div class="af-stack">
+                <p class="af-card-text">
+                  The final stack combines the strongest validated components from all prototypes: robust form extraction, adaptive multi-turn conversational logic, and synchronized avatar interaction optimized for perceived naturalness.
+                </p>
+                <div class="af-callout">
+                  <p class="af-card-text mb-0">
+                    Decision outcome: retain proven extraction and interaction primitives, remove brittle schema dependencies, and adopt playback-aligned speech synchronization for more stable user experience.
+                  </p>
+                </div>
               </div>
-              <p class="af-card-text">While highly functional, this synchronization method relied on the C# application dynamically terminating animations based on real-time audio telemetry, which occasionally led to minor timing discrepancies. 
-                In contrast, the current HeadTTS architecture utilizes a pre-aligned, unified playback system that ensures a smoother visual experience. 
-                Additionally, the transition from the native speech engine to our current solution allowed us to move beyond the more traditional synthetic tonal quality of OS-level voices toward a more natural, human-like auditory experience.
-              </p>
             </div>
           </div>
       </section>
