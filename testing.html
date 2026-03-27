@@ -15,6 +15,9 @@
 			}
 		</script>
 		<link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet"/>
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet"/>
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet"/>
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet"/>
 		<link href="css/styles.css" rel="stylesheet"/>
 	</head>
 	<body class="min-h-screen flex flex-col">
@@ -58,7 +61,7 @@
 								</div>
 								<p class="af-card-text">Unit tests for the Python backend were run using Pytest.
 There are a total of 94 test cases, which all pass with a coverage of 93%.</p>
-								<img src="assets/images/python-tests.png" alt="Python Unit Test Results" class="af-card-image">
+								<img src="assets/images/python-tests.png" alt="Python Unit Test Results" class="w-[calc(100%-2rem)] h-auto rounded-lg mx-auto mt-4 mb-6">
 								<p class="af-card-text">The tests use the standard workflow for unit tests, mocking external dependencies as needed using <code class="af-inline-code">unittest.mock</code> and <code class="af-inline-code">unittest.patch</code>.
 								This is an example of a test case for the <code class="af-inline-code">Model.generate</code> function, which mocks the API call to the LLM and checks that the function correctly processes the response and returns the expected output.
 								</p>
@@ -90,9 +93,8 @@ def test_generate_success(self, mock_request):
 								<p class="af-card-text">Unit tests for the C# was run using dotnet build</p>
 								<p>The C# test suite is driven by a custom PowerShell orchestration script (run-tests.ps1) using xUnit and the .NET 10 CLI. 
 									To achieve high-fidelity results on both native PCs and Mac VMs (ARM64), the pipeline dynamically resolves and injects the required Windows App Runtime native binaries into the test environment.</p>
-								<img src="assets/images/Csharp-unit-tests.jpeg" alt="C# Unit Test Results" class="af-card-image">
-								<p>For integration tests which was included in unit tests, we utilize a combination of In-Memory Databases, Dependency Injection mocking, and Mocked HTTP Handlers to ensure tests are fast, isolated, and representative of real-world scenarios.</p>
-								<p>
+								<img src="assets/images/Csharp-unit-tests.jpeg" alt="C# Unit Test Results" class="w-[calc(100%-2rem)] h-auto rounded-lg mx-auto mt-4 mb-6">
+								<p>For integration tests which was included in unit tests, we utilize a combination of In-Memory Databases, Dependency Injection mocking, and Mocked HTTP Handlers to ensure tests are fast, isolated, and representative of real-world scenarios.
 								This example demonstrates how we test the QuestionnaireAPIService by mocking the HttpClient. 
 								Instead of making a real network call, we intercept the request and force a "Success" (OK) or "Failure" (BadRequest) status to ensure our service handles remote API responses correctly.</p>
 								<pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-Csharp">// AvatarFormsApp.Tests/Services/QuestionnaireAPIServiceTests.cs
@@ -301,6 +303,12 @@ public async Task SendQuestionnaireAsync_ReturnsTrue_WhenPostSucceeds()
 		<div id="footer-placeholder"></div>
 
 		<script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
 		<script>
 			const breadcrumbPaths = {
 				'index.html': [{ title: 'Home', href: 'index.html' }],
