@@ -29,13 +29,13 @@
       <aside id="sidebar-container" class="w-64 flex"></aside>
 
       <!-- Main content area -->
-      <main class="flex-1 py-6 px-50">
+      <main class="flex-1 w-full max-w-[1400px] mx-auto py-6 px-4 sm:px-6 lg:px-8">
         <div id="breadcrumbs-container" class="mb-6"></div>
         <section class="af-stack">
           <!--Page Title-->
           <div class="af-stack">
             <h1 class="text-5xl text-font-bold text-gradient-brand">Appendices</h1>
-            <p class="af-section-subtitle">Last but not least..</p>
+            <p class="af-section-subtitle">Additional project information.</p>
           </div>
           <!--Tabs-->
           <ul class="af-tabs" id="appendices-tabs" role="tablist" aria-label="Appendices tabs">
@@ -63,62 +63,80 @@
             <div class="af-tab-panel" id="appendices-manual-panel" role="tabpanel" aria-labelledby="appendices-manual-tab">
               <div class="af-card">
                 <div class="af-card-title-row">
-                  <h3 class="af-card-title text-gradient-brand">1. Open the Avatar Page</h3>
+                  <h3 class="af-card-title text-gradient-brand">1. Creating Interview Sessions</h3>
                   <div class="gradient-brand-bar bar-full bar-thin"></div>
                 </div>
-                <p class="af-card-text">Start by navigating to the Avatar Page. This is where you prepare the interview environment before collecting responses.</p>
-                <figure>
-                  <img src="assets/images/Avatar%20Page-Empty.png" alt="Avatar Page in the initial empty state" class="af-image w-full h-auto rounded-base border border-border-subtle" />
-                  <figcaption class="af-card-text af-image-caption mt-3">Avatar Page (empty): no active questionnaire loaded yet.</figcaption>
+                <p class="af-card-text">From the home page, click Upload Questionnaire.</p>
+                <figure class="mt-6 mb-12">
+                  <img src="assets/images/Dashboard.png" alt="Dashboard page" class="af-image w-[calc(100%-2rem)] h-auto rounded-base border border-border-subtle mx-auto" />
+                  <figcaption class="af-card-text af-image-caption mt-3 mx-8">Dashboard Page with Upload Questionnaire button.</figcaption>
                 </figure>
+
+                <p class="af-card-text">On the Create Questionnaire Page, paste in your Microsoft Forms or Google Forms links in the designated textbox.</p>
+                <figure class="mt-6 mb-12">
+                  <img src="assets/images/Create Questionnaire-Empty.png" alt="Empty Create Questionnaire Page" class="af-image w-[calc(100%-2rem)] h-auto rounded-base border border-border-subtle mx-auto" />
+                  <figcaption class="af-card-text af-image-caption mt-3 mx-8">Empty Create Questionnaire Page.</figcaption>
+                </figure>
+
+                <p class="af-card-text">The questions will be extracted and you will be able to add, edit, or delete them. Click Create Questionnaire to generate the interview session.</p>
+                <figure class="mt-6 mb-12">
+                  <img src="assets/images/Create Questionnaire-Filled.png" alt="Filled Create Questionnaire Page" class="af-image w-[calc(100%-2rem)] h-auto rounded-base border border-border-subtle mx-auto" />
+                  <figcaption class="af-card-text af-image-caption mt-3 mx-8">Filled Create Questionnaire Page.</figcaption>
+                </figure>
+              </div>
               </div>
 
               <div class="af-card">
                 <div class="af-card-title-row">
-                  <h3 class="af-card-title text-gradient-brand">2. Configure Avatar, Language, and Voice</h3>
+                  <h3 class="af-card-title text-gradient-brand">2. Starting an interview</h3>
+                  <div class="gradient-brand-bar bar-full bar-thin"></div>
+                </div>
+                <p class="af-card-text">From the home page, click on any questionnaire from the questionnaire list.</p>
+                <figure class="mt-6 mb-12">
+                  <img src="assets/images/Dashboard.png" alt="Dashboard page" class="af-image w-[calc(100%-2rem)] h-auto rounded-base border border-border-subtle mx-auto" />
+                  <figcaption class="af-card-text af-image-caption mt-3 mx-8">Dashboard Page with questionnaire list.</figcaption>
+                </figure>
+
+                <p class="af-card-text">Once in the Questionnaire Detail page. Click on Continue to Avatar.</p>
+                <figure class="mt-6 mb-12">
+                  <img src="assets/images/Questionnaire Detail Page.png" alt="Questionnaire Detail page" class="af-image w-[calc(100%-2rem)] h-auto rounded-base border border-border-subtle mx-auto" />
+                  <figcaption class="af-card-text af-image-caption mt-3 mx-8">Questionnaire Detail page with start interview button.</figcaption>
+                </figure>
+
+                <p class="af-card-text">This is where you have your interview session.</p>
+                <figure class="mt-6 mb-12">
+                  <img src="assets/images/Avatar%20Page-Empty.png" alt="Avatar Page in the initial empty state" class="af-image w-[calc(100%-2rem)] h-auto rounded-base border border-border-subtle mx-auto" />
+                  <figcaption class="af-card-text af-image-caption mt-3 mx-8">Avatar Page already initialised.</figcaption>
+              </div>
+
+              <div class="af-card">
+                <div class="af-card-title-row">
+                  <h3 class="af-card-title text-gradient-brand">3. Configure Avatar, Language, and Voice</h3>
                   <div class="gradient-brand-bar bar-full bar-thin"></div>
                 </div>
                 <p class="af-card-text">Choose an avatar, language, and voice profile that matches your interview context. You can also check runtime messages in the console and adjust settings when needed.</p>
                 <div class="af-grid-two">
-                  <figure>
-                    <img src="assets/images/Avatar%20Page-Avatar%20Selection.png" alt="Avatar selection options on the Avatar Page" class="af-image w-full h-auto rounded-base border border-border-subtle" />
-                    <figcaption class="af-card-text af-image-caption mt-3">Select the preferred avatar style.</figcaption>
+                  <figure class="mt-6 mb-12">
+                    <img src="assets/images/Avatar%20Page-Avatar%20Selection.png" alt="Avatar selection options on the Avatar Page" class="af-image w-[calc(100%-2rem)] h-auto rounded-base border border-border-subtle mx-auto" />
+                    <figcaption class="af-card-text af-image-caption mt-3 mx-8">Select the preferred avatar style.</figcaption>
                   </figure>
-                  <figure>
-                    <img src="assets/images/Avatar%20Page-Language%20Selection.png" alt="Language selection controls on the Avatar Page" class="af-image w-full h-auto rounded-base border border-border-subtle" />
-                    <figcaption class="af-card-text af-image-caption mt-3">Set the conversation language.</figcaption>
+                  <figure class="mt-6 mb-12">
+                    <img src="assets/images/Avatar%20Page-Language%20Selection.png" alt="Language selection controls on the Avatar Page" class="af-image w-[calc(100%-2rem)] h-auto rounded-base border border-border-subtle mx-auto" />
+                    <figcaption class="af-card-text af-image-caption mt-3 mx-8">Set the conversation language.</figcaption>
                   </figure>
-                  <figure>
-                    <img src="assets/images/Avatar%20Page-Voice%20Selection.png" alt="Voice selection controls on the Avatar Page" class="af-image w-full h-auto rounded-base border border-border-subtle" />
-                    <figcaption class="af-card-text af-image-caption mt-3">Pick the voice used for speech output.</figcaption>
+                  <figure class="mt-6 mb-12">
+                    <img src="assets/images/Avatar%20Page-Voice%20Selection.png" alt="Voice selection controls on the Avatar Page" class="af-image w-[calc(100%-2rem)] h-auto rounded-base border border-border-subtle mx-auto" />
+                    <figcaption class="af-card-text af-image-caption mt-3 mx-8">Pick the voice used for speech output.</figcaption>
                   </figure>
-                  <figure>
-                    <img src="assets/images/Avatar%20Page-Settings.png" alt="Settings panel on the Avatar Page" class="af-image w-full h-auto rounded-base border border-border-subtle" />
-                    <figcaption class="af-card-text af-image-caption mt-3">Configure advanced behavior in settings.</figcaption>
+                  <figure class="mt-6 mb-12">
+                    <img src="assets/images/Avatar%20Page-Settings.png" alt="Settings panel on the Avatar Page" class="af-image w-[calc(100%-2rem)] h-auto rounded-base border border-border-subtle mx-auto" />
+                    <figcaption class="af-card-text af-image-caption mt-3 mx-8">Configure advanced behavior in settings.</figcaption>
                   </figure>
                 </div>
-                <figure>
-                  <img src="assets/images/Avatar%20Page-Console.png" alt="Console output section on the Avatar Page" class="af-image w-full h-auto rounded-base border border-border-subtle" />
-                  <figcaption class="af-card-text af-image-caption mt-3">Use the console to monitor status and debug messages.</figcaption>
+                <figure class="mt-6 mb-12">
+                  <img src="assets/images/Avatar%20Page-Console.png" alt="Console output section on the Avatar Page" class="af-image w-[calc(100%-2rem)] h-auto rounded-base border border-border-subtle mx-auto" />
+                  <figcaption class="af-card-text af-image-caption mt-3 mx-8">Use the console to monitor status and debug messages.</figcaption>
                 </figure>
-              </div>
-
-              <div class="af-card">
-                <div class="af-card-title-row">
-                  <h3 class="af-card-title text-gradient-brand">3. Create a New Questionnaire</h3>
-                  <div class="gradient-brand-bar bar-full bar-thin"></div>
-                </div>
-                <p class="af-card-text">Open the Create Questionnaire screen, provide a title and questions, then save. The empty and filled states below show the expected input flow.</p>
-                <div class="af-grid-two">
-                  <figure>
-                    <img src="assets/images/Create%20Questionnaire-Empty.png" alt="Create Questionnaire page in empty state" class="af-image w-full h-auto rounded-base border border-border-subtle" />
-                    <figcaption class="af-card-text af-image-caption mt-3">Empty state before entering questionnaire details.</figcaption>
-                  </figure>
-                  <figure>
-                    <img src="assets/images/Create%20Questionnaire-Filled.png" alt="Create Questionnaire page with populated fields" class="af-image w-full h-auto rounded-base border border-border-subtle" />
-                    <figcaption class="af-card-text af-image-caption mt-3">Filled state ready for submission.</figcaption>
-                  </figure>
-                </div>
               </div>
 
               <div class="af-card">
@@ -128,13 +146,13 @@
                 </div>
                 <p class="af-card-text">Use the Dashboard to review available questionnaires, access controls, and adjust settings for active workflows.</p>
                 <div class="af-grid-two">
-                  <figure>
-                    <img src="assets/images/Dashboard.png" alt="Main dashboard overview" class="af-image w-full h-auto rounded-base border border-border-subtle" />
-                    <figcaption class="af-card-text af-image-caption mt-3">Dashboard overview with management controls.</figcaption>
+                  <figure class="mt-6 mb-12">
+                    <img src="assets/images/Dashboard.png" alt="Main dashboard overview" class="af-image w-[calc(100%-2rem)] h-auto rounded-base border border-border-subtle mx-auto" />
+                    <figcaption class="af-card-text af-image-caption mt-3 mx-8">Dashboard overview with management controls.</figcaption>
                   </figure>
-                  <figure>
-                    <img src="assets/images/Dashboard-Settings.png" alt="Dashboard settings panel" class="af-image w-full h-auto rounded-base border border-border-subtle" />
-                    <figcaption class="af-card-text af-image-caption mt-3">Dashboard settings for additional configuration.</figcaption>
+                  <figure class="mt-6 mb-12">
+                    <img src="assets/images/Dashboard-Settings.png" alt="Dashboard settings panel" class="af-image w-[calc(100%-2rem)] h-auto rounded-base border border-border-subtle mx-auto" />
+                    <figcaption class="af-card-text af-image-caption mt-3 mx-8">Dashboard settings for additional configuration.</figcaption>
                   </figure>
                 </div>
               </div>
@@ -145,21 +163,63 @@
                   <div class="gradient-brand-bar bar-full bar-thin"></div>
                 </div>
                 <p class="af-card-text">After interviews are completed, open the responses list to see all submitted entries for a questionnaire.</p>
-                <figure>
-                  <img src="assets/images/Responses.png" alt="Responses list page" class="af-image w-full h-auto rounded-base border border-border-subtle" />
-                  <figcaption class="af-card-text af-image-caption mt-3">Responses list showing all collected submissions.</figcaption>
+                <figure class="mt-6 mb-12">
+                  <img src="assets/images/Responses.png" alt="Responses list page" class="af-image w-[calc(100%-2rem)] h-auto rounded-base border border-border-subtle mx-auto" />
+                  <figcaption class="af-card-text af-image-caption mt-3 mx-8">Responses list showing all collected submissions.</figcaption>
                 </figure>
               </div>
 
               <div class="af-card">
                 <div class="af-card-title-row">
-                  <h3 class="af-card-title text-gradient-brand">6. Open Response Detail</h3>
+                  <h3 class="af-card-title text-gradient-brand">6. View Response Details</h3>
                   <div class="gradient-brand-bar bar-full bar-thin"></div>
                 </div>
                 <p class="af-card-text">Select a response from the list to inspect its full details, including each recorded answer.</p>
-                <figure>
-                  <img src="assets/images/Response%20Detail.png" alt="Response detail page" class="af-image w-full h-auto rounded-base border border-border-subtle" />
-                  <figcaption class="af-card-text af-image-caption mt-3">Detailed response view for auditing and review.</figcaption>
+                <figure class="mt-6 mb-12">
+                  <img src="assets/images/Response%20Detail.png" alt="Response detail page" class="af-image w-[calc(100%-2rem)] h-auto rounded-base border border-border-subtle mx-auto" />
+                  <figcaption class="af-card-text af-image-caption mt-3 mx-8">Detailed response view for auditing and review.</figcaption>
+                </figure>
+              </div>
+
+              <div class="af-card">
+                <div class="af-card-title-row">
+                  <h3 class="af-card-title text-gradient-brand">7. Add Custom Avatars</h3>
+                  <div class="gradient-brand-bar bar-full bar-thin"></div>
+                </div>
+                <p class="af-card-text">Use Avaturn to generate a custom avatar model. Make sure to select the Type-2 model.</p>
+                <figure class="mt-6 mb-12">
+                  <img src="assets/images/Avaturn.png" alt="Avaturn avatar creation page" class="af-image w-[calc(100%-2rem)] h-auto rounded-base border border-border-subtle mx-auto" />
+                  <figcaption class="af-card-text af-image-caption mt-3 mx-8">Create your custom avatar on Avaturn.</figcaption>
+                </figure>
+
+                <p class="af-card-text">Customise the avatar appearance until it matches your preference.</p>
+                <figure class="mt-6 mb-12">
+                  <img src="assets/images/Customise.png" alt="Avatar customisation options" class="af-image w-[calc(100%-2rem)] h-auto rounded-base border border-border-subtle mx-auto" />
+                  <figcaption class="af-card-text af-image-caption mt-3 mx-8">Adjust avatar features and style.</figcaption>
+                </figure>
+
+                <p class="af-card-text">Download the final avatar with animation for use in the application.</p>
+                <figure class="mt-6 mb-12">
+                  <img src="assets/images/Download.png" alt="Avatar download step" class="af-image w-[calc(100%-2rem)] h-auto rounded-base border border-border-subtle mx-auto" />
+                  <figcaption class="af-card-text af-image-caption mt-3 mx-8">Export the completed avatar files with animation.</figcaption>
+                </figure>
+
+                <p class="af-card-text">Click Browse in Settings to locate the downloaded avatar files on your device.</p>
+                <figure class="mt-6 mb-12">
+                  <img src="assets/images/Click Browse.png" alt="Click Browse button for avatar import" class="af-image w-[calc(100%-2rem)] h-auto rounded-base border border-border-subtle mx-auto" />
+                  <figcaption class="af-card-text af-image-caption mt-3 mx-8">Click Browse to choose your avatar package.</figcaption>
+                </figure>
+
+                <p class="af-card-text">Upload Avatar to import the selected files into AvatarForms.</p>
+                <figure class="mt-6 mb-12">
+                  <img src="assets/images/Upload Avatar.png" alt="Upload Avatar action" class="af-image w-[calc(100%-2rem)] h-auto rounded-base border border-border-subtle mx-auto" />
+                  <figcaption class="af-card-text af-image-caption mt-3 mx-8">Upload Avatar to complete the import.</figcaption>
+                </figure>
+
+                <p class="af-card-text">Select Avatar to make your newly imported model active for interviews.</p>
+                <figure class="mt-6 mb-12">
+                  <img src="assets/images/Select Avatar.png" alt="Select Avatar option" class="af-image w-[calc(100%-2rem)] h-auto rounded-base border border-border-subtle mx-auto" />
+                  <figcaption class="af-card-text af-image-caption mt-3 mx-8">Select Avatar and start using it in the session.</figcaption>
                 </figure>
               </div>
             </div>
