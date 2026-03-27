@@ -37,10 +37,14 @@
             <h1 class="text-5xl text-font-bold text-gradient-brand">Appendices</h1>
             <p class="af-section-subtitle">Additional project information.</p>
           </div>
+
           <!--Tabs-->
           <ul class="af-tabs" id="appendices-tabs" role="tablist" aria-label="Appendices tabs">
             <li class="me-2" role="presentation">
               <button class="af-tab-link" id="appendices-manual-tab" data-tabs-target="#appendices-manual-panel" type="button" role="tab" aria-controls="appendices-manual-panel" aria-selected="true">User Manual</button>
+            </li>
+            <li class="me-2" role="presentation">
+              <button class="af-tab-link" id="appendices-blog-tab" data-tabs-target="#appendices-blog-panel" type="button" role="tab" aria-controls="appendices-blog-panel" aria-selected="false">Development Blog</button>
             </li>
             <li class="me-2" role="presentation">
               <button class="af-tab-link" id="appendices-readme-tab" data-tabs-target="#appendices-readme-panel" type="button" role="tab" aria-controls="appendices-readme-panel" aria-selected="false">AvatarForms README</button>
@@ -58,8 +62,10 @@
               <button class="af-tab-link" id="appendices-contributions-tab" data-tabs-target="#appendices-contributions-panel" type="button" role="tab" aria-controls="appendices-contributions-panel" aria-selected="false">Contributions</button>
             </li>
           </ul>
+
           <!-- Tab Content -->
           <div id="appendices-tab-content">
+            <!-- User Manual -->
             <div class="af-tab-panel" id="appendices-manual-panel" role="tabpanel" aria-labelledby="appendices-manual-tab">
               <div class="af-card">
                 <div class="af-card-title-row">
@@ -225,6 +231,18 @@
                   <img src="assets/images/Select Avatar.png" alt="Select Avatar option" class="af-image w-[calc(100%-2rem)] h-auto rounded-base border border-border-subtle mx-auto" />
                   <figcaption class="af-card-text af-image-caption mt-3 mx-8">Select Avatar and start using it in the session.</figcaption>
                 </figure>
+              </div>
+            </div>
+
+            <!--Development Blog-->
+            <div class="hidden af-tab-panel" id="appendices-blog-panel" role="tabpanel" aria-labelledby="appendices-blog-tab">
+              <div class="af-card">
+                <div class="af-card-title-row">
+                  <h3 class="af-card-title text-gradient-brand">Development Blog</h3>
+                  <div class="gradient-brand-bar bar-full bar-thin"></div>
+                </div>
+                <p class="af-card-text">Our team has been invited to contribute a feature article to the Microsoft Education Blog, recognising the pedagogical relevance and technical innovation of the AvatarForms project. At the time of this website's development, the blog post remains under editorial refinement and verification prior to publication.</p>
+                <p class="af-card-text mt-4">Once the article is formally published, the official Microsoft Education Blog link will be provided in this section for reference.</p>
               </div>
             </div>
             
