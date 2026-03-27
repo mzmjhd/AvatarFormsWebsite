@@ -33,7 +33,7 @@
         <!--Page Title-->
         <div class="af-stack">
 						<h1 class="text-5xl text-font-bold text-gradient-brand">Requirements</h1>
-						<p class="af-section-subtitle">This section details the methods for gathering and defining project requirements.</p>
+						<p class="af-section-subtitle">An overview of the methods for gathering and defining project requirements.</p>
 				</div>
         <!--Tabs-->
         <ul
@@ -99,12 +99,10 @@
                 <h3 class="af-card-title text-gradient-brand">Project Background</h3>
                 <div class="gradient-brand-bar bar-full bar-thin"></div>
               </div>
-              <div id="background-container" class="py-6">
+              <div id="background-container">
                 <div class="card-content">
                   <p class="af-card-text">AvatarForms was developed in response to a recurring challenge seen across many services: people are often expected to complete digital forms that do not match their communication preferences, confidence levels, or cognitive needs. Although these forms are technically functional, they often assume prior context, abstract language comprehension, and sustained concentration, which can create significant barriers for a wide range of users.</p>
-                  <br>
                   <p class="af-card-text">In practice, this often means successful completion depends on extra one-to-one support. In classrooms, clinics, and community settings, staff frequently need to reinterpret questions, break tasks into smaller steps, and reassure users throughout the process. While this support is essential, it can unintentionally reduce user autonomy and consume valuable staff time that could otherwise be used for direct support and care.</p>
-                  <br>
                   <p class="af-card-text">The project therefore began with a clear objective: to reframe form-filling as an accessible, guided interaction rather than a static reading-and-writing task. While the first deployment was shaped with NAS and SEND learners as the primary user base, the same approach can support anyone who faces barriers with traditional forms. By introducing a conversational avatar that can explain intent, clarify ambiguity, and respond adaptively, AvatarForms aims to improve comprehension, confidence, and independence while reducing operational burden on staff.</p>
                 </div>
               </div>
@@ -112,14 +110,16 @@
           </div>
           <!--Goals-->
           <div class="hidden af-tab-panel" id="goals-panel" role="tabpanel" aria-labelledby="goals-tab">
-            <p class="af-card-text">AvatarForms aims to take static forms and transform them into interactive, supportive tools for people who face hurdles with traditional digital forms,
-              using human-like avatar interactions powered by AI. The initial design focus was SEND learners in partnership with NAS. Specifically, our goals were as follows:</p>
+            <p class="af-card-text">The problems that we want to solve:</p>
             <div class="af-card">
               <div class="af-card-title-row">
                 <h3 class="af-card-title text-gradient-brand">Project Goals</h3>
                 <div class="gradient-brand-bar bar-full bar-thin"></div>
               </div>
-              <div id="goals-container" class="py-6">
+              <div id="goals-container">
+                <p class="af-card-text">AvatarForms aims to take static forms and transform them into interactive, supportive tools for people who face hurdles with traditional digital forms,
+                  using human-like avatar interactions powered by AI. The initial design focus was SEND learners in partnership with NAS. Specifically, our goals were as follows:
+                </p>
                 <div class="card-content">
                   <ul class="af-card-text list-disc pl-6 space-y-2">
                     <li>The avatar will provide contextual support to guide users through form completion.</li>
@@ -144,11 +144,8 @@
                 </div>
                 <div class="card-content">
                   <p class="af-card-text">We conducted semi-structured interviews with key stakeholders across three sectors: emergency response, education, and general practice. This approach allowed us to deeply explore user pain points and discover unexpected barriers to form completion.</p>
-                  <br>
                   <p class="af-card-text"><strong>Emergency Responders</strong> highlighted communication challenges, particularly with non-English speakers and during high-stress situations. They noted that current manual processes (verbal questioning, notes, digital forms) are time-consuming and prone to missing critical details. They sought a solution that is simple, reliable, and requires minimal setup overhead.</p>
-                  <br>
                   <p class="af-card-text"><strong>Educators</strong> revealed that both traditional and digital forms frequently overwhelm SEND students, causing anxiety and shutdown before completion. They adapt by relying heavily on visual supports (PECS symbols, colors, prompts) and identified a need for tools that feel friendly and human, capable of interpreting responses across verbal cues and emotional signals.</p>
-                  <br>
                   <p class="af-card-text"><strong>General Practitioners</strong> reported time and clarity challenges, often needing to re-interview patients after self-reported information. They found existing forms too rigid and unable to adapt to different communication styles, leading to incomplete or inaccurate data. All stakeholders expressed openness to AI-assisted solutions that save time, remain accurate, and protect data security.</p>
                 </div>
             </div>
@@ -218,15 +215,15 @@
                   <p class="af-card-text">Three detailed personas were created to represent distinct user contexts and validate our design approach:</p>
                   <br>
                   <div class="af-stack">
-                    <div class="af-iframe-container">
-                      <iframe src="assets/images/personaEMR.png" title="Personas Emergency Responder" class="af-iframe" loading="lazy"></iframe>
-                    </div>
-                    <div class="af-iframe-container">
-                      <iframe src="assets/images/personaEd.png" title="Personas Educationalist" class="af-iframe" loading="lazy"></iframe>
-                    </div>
-                    <div class="af-iframe-container">
-                      <iframe src="assets/images/personaGP.png" title="Personas General Practitioner" class="af-iframe" loading="lazy"></iframe>
-                    </div>
+                    <figure class="mt-2 mb-8">
+                      <img src="assets/images/personaEMR.png" alt="Personas Emergency Responder" class="af-image w-[calc(100%-2rem)] h-auto rounded-base border border-border-subtle mx-auto" loading="lazy" />
+                    </figure>
+                    <figure class="mt-2 mb-8">
+                      <img src="assets/images/personaEd.png" alt="Personas Educationalist" class="af-image w-[calc(100%-2rem)] h-auto rounded-base border border-border-subtle mx-auto" loading="lazy" />
+                    </figure>
+                    <figure class="mt-2 mb-8">
+                      <img src="assets/images/personaGP.png" alt="Personas General Practitioner" class="af-image w-[calc(100%-2rem)] h-auto rounded-base border border-border-subtle mx-auto" loading="lazy" />
+                    </figure>
                   </div>
                 </div>
             </div>
@@ -423,50 +420,6 @@
       activateTab(initiallySelected);
     }
 
-    function initPersonaIframes() {
-      const personaIframes = Array.from(document.querySelectorAll('#method5 iframe.af-iframe'));
-      if (!personaIframes.length) return;
-
-      const fitIframeImage = (iframe) => {
-        try {
-          const doc = iframe.contentDocument || iframe.contentWindow?.document;
-          if (!doc) return;
-
-          const style = doc.createElement('style');
-          style.textContent = `
-            html, body {
-              margin: 0;
-              width: 100%;
-              height: 100%;
-              overflow: hidden;
-              background: transparent;
-            }
-            body {
-              display: grid;
-              place-items: center;
-            }
-            img {
-              max-width: 100%;
-              max-height: 100%;
-              width: auto;
-              height: auto;
-              object-fit: contain;
-              display: block;
-            }
-          `;
-          doc.head?.appendChild(style);
-        } catch (error) {
-          console.warn('Could not apply iframe fit styling:', error);
-        }
-      };
-
-      personaIframes.forEach((iframe) => {
-        if (iframe.contentDocument?.readyState === 'complete') {
-          fitIframeImage(iframe);
-        }
-        iframe.addEventListener('load', () => fitIframeImage(iframe));
-      });
-    }
     function setActiveNavLinks() {
       const currentPath = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
       const links = document.querySelectorAll('#default-navbar a[href], #default-sidebar a[href]');
@@ -529,7 +482,6 @@
       .catch(error => console.error('Error loading footer:', error));
 
     initRequirementsTabs();
-    initPersonaIframes();
 
   </script>
 </body>
