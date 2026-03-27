@@ -84,7 +84,6 @@
                   <figcaption class="af-card-text af-image-caption mt-3 mx-8">Filled Create Questionnaire Page.</figcaption>
                 </figure>
               </div>
-              </div>
 
               <div class="af-card">
                 <div class="af-card-title-row">
@@ -107,6 +106,7 @@
                 <figure class="mt-6 mb-12">
                   <img src="assets/images/Avatar%20Page-Empty.png" alt="Avatar Page in the initial empty state" class="af-image w-[calc(100%-2rem)] h-auto rounded-base border border-border-subtle mx-auto" />
                   <figcaption class="af-card-text af-image-caption mt-3 mx-8">Avatar Page already initialised.</figcaption>
+                </figure>
               </div>
 
               <div class="af-card">
@@ -223,6 +223,7 @@
                 </figure>
               </div>
             </div>
+            
             <!--README-->
             <div class="hidden af-tab-panel" id="appendices-readme-panel" role="tabpanel" aria-labelledby="appendices-readme-tab">
               <div class="af-card">
@@ -230,8 +231,162 @@
                   <h3 class="af-card-title text-gradient-brand">AvatarForms README</h3>
                   <div class="gradient-brand-bar bar-full bar-thin"></div>
                 </div>
-                <p class="af-link"><a id="appendices-readme-link" href="https://github.com/Dexdezdes/COMP0016_2026_Team14_AvatarForms/blob/main/README.md" target="_blank" rel="noopener noreferrer" class="hover:text-fg-brand underline">Open on GitHub</a></p>
-                <pre class="af-code-snippet whitespace-pre-wrap break-words overflow-x-hidden" style="white-space: pre-wrap; overflow-wrap: anywhere; word-break: break-word;" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code id="appendices-readme-code" class="language-markdown whitespace-pre-wrap break-words" style="white-space: pre-wrap; overflow-wrap: anywhere; word-break: break-word;">Loading README.md...</code></pre>
+                <div class="space-y-4">
+                  <h2 class="af-card-subtitle">AvatarForms</h2>
+                  <p class="af-card-text">AvatarForms is a Windows application for conversion of digital forms into 3D avatars with a fully local AI interview pipeline.</p>
+                  <p class="af-card-text">In many contexts, from education to industry to healthcare, crucial information is collected through static, online forms. However, questions on digital forms are rigid, often requiring answers in specific formats or assuming users are implicitly aware of context. For many people with accessibility needs, these limitations mean that filling out digital forms can be difficult or unintuitive.</p>
+                  <p class="af-card-text">AvatarForms aims to help solve this issue by offering an alternative. A digital form can easy be converted to a real-time 3D avatar, that asks poses questions in natural conversation, asks clarifying questions and followups when needed, then accurately records the information gathered as if the user had filled out the form themselves.</p>
+
+                  <h2 class="af-card-subtitle">Project Structure</h2>
+                  <pre class="af-code-snippet"><code>.
+├── AvatarFormsApp/    # Backend (.NET 10), Frontend (WinUI), Database (SQLite).
+├── Backend/           # Python AI agent orchestration layer with APIs (HTTP + WebSocket)
+├── Backend-Test/      # Pytest test cases for Python Backend code
+├── Evaluation/        # DeepEval LLM Agent Evaluation Framework (scripts + test cases)
+├── HeadTTS/           # Open-sourced JavaScript TTS solution by @met4citizen
+├── .gitignore         # Git ignore configuration
+└── README.MD          # This file</code></pre>
+
+                  <h2 class="af-card-subtitle">Current Project Configuration</h2>
+                  <ol class="list-decimal pl-6 mt-2 space-y-2">
+                    <li class="af-card-text">SDK: <code>Uno.Sdk</code> <code>6.5.31</code></li>
+                    <li class="af-card-text">.NET: <code>net10.0-windows10.0.19041.0</code> (Windows)</li>
+                    <li class="af-card-text">Frontend packages include:
+                      <ul class="list-disc pl-6 mt-2 space-y-1">
+                        <li><code>Uno.WinUI</code> <code>5.2.161</code></li>
+                        <li><code>Uno.Material.WinUI</code> <code>5.3.1</code></li>
+                        <li><code>Uno.Toolkit.WinUI</code> <code>8.3.2</code></li>
+                        <li><code>CommunityToolkit.Mvvm</code> <code>8.4.0</code></li>
+                        <li><code>Microsoft.EntityFrameworkCore.Sqlite</code> <code>10.0.2</code></li>
+                      </ul>
+                    </li>
+                  </ol>
+                  <p class="af-card-text">The application copies <code>Backend/**/*</code> and <code>HeadTTS/**/*</code> into build output and manages services within the app.</p>
+
+                  <h2 class="af-card-subtitle">Requirements</h2>
+                  <ol class="list-decimal pl-6 mt-2 space-y-2">
+                    <li class="af-card-text">Visual Studio 2022 or newer (with Windows App SDK/WinUI workload) or VS Code + .NET tooling</li>
+                    <li class="af-card-text">.NET 10 SDK</li>
+                    <li class="af-card-text">Windows 10/11 SDK <code>10.0.19041.0</code> or newer</li>
+                    <li class="af-card-text">Python 3.x</li>
+                    <li class="af-card-text">A <code>.llamafile</code> model placed in <code>Backend/</code> (Qwen3_4B_Q6_K is recommended)</li>
+                  </ol>
+
+                  <h3 class="af-card-subtitle">Note</h3>
+                  <p class="af-card-text">"Enable long paths" option must be enabled to overcome Windows 260-character limit for file paths, which NuGet packages often break.</p>
+                  <h4 class="af-card-subtitle">Option A: Admin PowerShell</h4>
+                  <pre class="af-code-snippet"><code>New-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\FileSystem" -Name "LongPathsEnabled" -Value 1 -PropertyType DWORD -Force</code></pre>
+                  <h4 class="af-card-subtitle">Option B: Windows Settings</h4>
+                  <ol class="list-decimal pl-6 mt-2 space-y-2">
+                    <li class="af-card-text">Navigate to Settings &gt; System &gt; Advanced.</li>
+                    <li class="af-card-text">Make sure the "Enable long paths" option is enabled.</li>
+                  </ol>
+
+                  <h2 class="af-card-subtitle">Setup</h2>
+                  <ol class="list-decimal pl-6 mt-2 space-y-2">
+                    <li class="af-card-text">Clone the repository.</li>
+                    <li class="af-card-text">From the repository root:</li>
+                  </ol>
+                  <pre class="af-code-snippet"><code>cd Backend
+python -m venv env
+.\env\Scripts\activate
+pip install -r requirements.txt</code></pre>
+                  <ol class="list-decimal pl-6 mt-2 space-y-2" start="3">
+                    <li class="af-card-text">Compile the Python into an executable:</li>
+                  </ol>
+                  <pre class="af-code-snippet"><code>pyinstaller main.spec</code></pre>
+                  <ol class="list-decimal pl-6 mt-2 space-y-2" start="4">
+                    <li class="af-card-text">Ensure at least one <code>.llamafile</code> exists in <code>Backend/</code>. <code>Qwen3_4B_Q6_K</code> is recommended. Can be downloaded from Hugging Face: <a href="https://huggingface.co/mozilla-ai/Qwen3-4B-llamafile/tree/main" class="hover:text-fg-brand underline">https://huggingface.co/mozilla-ai/Qwen3-4B-llamafile/tree/main</a>.</li>
+                  </ol>
+
+                  <h2 class="af-card-subtitle">How To Run</h2>
+                  <p class="af-card-text">From repository root, build the solution:</p>
+                  <pre class="af-code-snippet"><code>dotnet build .\AvatarFormsApp\AvatarFormsApp.sln</code></pre>
+                  <p class="af-card-text">Then run from Visual Studio or CLI:</p>
+                  <pre class="af-code-snippet"><code>dotnet run --project .\AvatarFormsApp\AvatarFormsApp\AvatarFormsApp.csproj -f net10.0-windows10.0.19041.0</code></pre>
+                  <p class="af-card-text">You can also use workspace tasks:</p>
+                  <ul class="list-disc pl-6 mt-2 space-y-1">
+                    <li class="af-card-text"><code>build</code></li>
+                    <li class="af-card-text"><code>publish</code></li>
+                    <li class="af-card-text"><code>watch</code></li>
+                  </ul>
+
+                  <h2 class="af-card-subtitle">Runtime</h2>
+                  <p class="af-card-text">When you start an interview flow in the app:</p>
+                  <ul class="list-disc pl-6 mt-2 space-y-1">
+                    <li class="af-card-text"><code>LlamafileProcessService</code> starts the <code>.llamafile</code> server on port <code>8081</code>.</li>
+                    <li class="af-card-text"><code>PythonProcessService</code> starts the Python backend using the compiled <code>Backend/dist/main/main.exe</code>.</li>
+                    <li class="af-card-text"><code>ResponseAPIService</code> starts the response API server for response collection on port <code>5000</code>.</li>
+                    <li class="af-card-text"><code>QuestionnaireAPIService</code> sends in questionnaire data to the questionnaire API server started in <code>api.py</code> on port <code>8882</code>.</li>
+                    <li class="af-card-text">The Python backend initialises WebSocket API for real-time speech relay between the Python agent orchestration layer and HeadTTS (3D avatar rendering + TTS layer) on port <code>8083</code>.</li>
+                    <li class="af-card-text">Avatar is loaded through WebView2.</li>
+                  </ul>
+
+                  <h2 class="af-card-subtitle">Running Tests</h2>
+                  <h3 class="af-card-subtitle">C# Tests</h3>
+                  <p class="af-card-text">Open the outer AvatarFormsApp folder in powershell, and run:</p>
+                  <pre class="af-code-snippet"><code>.\run-tests.ps1</code></pre>
+                  <p class="af-card-text">Then html testing report will popup.</p>
+
+                  <h3 class="af-card-subtitle">Python Backend Tests</h3>
+                  <p class="af-card-text">Ensure packages in both <code>Backend\requirements.txt</code> and <code>Backend-Test\test_requirements.txt</code> are installed to the environment.</p>
+                  <p class="af-card-text">Open the <code>Backend-Test</code> folder in the console, and run all test cases with:</p>
+                  <pre class="af-code-snippet"><code>pytest</code></pre>
+                  <p class="af-card-text">Specific test files can be run with:</p>
+                  <pre class="af-code-snippet"><code>pytest test_x.py</code></pre>
+                  <p class="af-card-text">Code coverage stats can be viewed by running:</p>
+                  <pre class="af-code-snippet"><code>pytest --cov=..\Backend</code></pre>
+
+                  <h2 class="af-card-subtitle">DeepEval Agent Evaluation</h2>
+                  <h3 class="af-card-subtitle">Running the Evaluation</h3>
+                  <p class="af-card-text">The DeepEval evaluation is currently set up to use <code>gpt-5-mini</code> as the judge LLM, so requires an OPENAI API key.</p>
+                  <p class="af-card-text">Set the environment variables:</p>
+                  <pre class="af-code-snippet"><code>OPENAI_API_KEY=key here
+DEEPEVAL_RESULTS_FOLDER=C:\path\to\results\folder</code></pre>
+                  <p class="af-card-text">Run the llamafile in the console with flags <code>--ctx-size 2048 --ngl 9999</code>, noting down the port is starts running on.</p>
+                  <p class="af-card-text">Open the <code>Evaluation</code> folder in the console, and run:</p>
+                  <pre class="af-code-snippet"><code>python eval.py --port 8081</code></pre>
+                  <p class="af-card-text">(replacing the port with the llamafile port)</p>
+                  <p class="af-card-text">This will run tests for all 3 agents by default.</p>
+                  <p class="af-card-text">To test individual agents, you can use the flags: <code>talker</code>, <code>evaluator</code>, <code>summariser</code></p>
+                  <p class="af-card-text">E.g.</p>
+                  <pre class="af-code-snippet"><code>python eval.py --port 8081 --evaluator</code></pre>
+                  <p class="af-card-text">Test cases can be viewed or modified in <code>test_cases.py</code>.</p>
+
+                  <h3 class="af-card-subtitle">Viewing Results</h3>
+                  <p class="af-card-text">The evaluation results will be displayed in the console, and saved in json format to the <code>DEEPEVAL_RESULTS_FOLDER</code> specified.</p>
+                  <p class="af-card-text">Example evaluations run previously have been saved to <code>Evaluation\results</code>.</p>
+                  <p class="af-card-text">To view the results graphically, run:</p>
+                  <pre class="af-code-snippet"><code>python display.py example_json_file</code></pre>
+                  <p class="af-card-text">You can optionally specify a path to save the visualation with the flag <code>--save path\to\save</code></p>
+                  <p class="af-card-text">Traces of agent calls are saved to <code>Evaluation\agent_evaluation_logs</code>, where the prompts and outputs of requests for each agent can be viewed for observability.</p>
+
+                  <h2 class="af-card-subtitle">Environment Variables</h2>
+                  <ul class="list-disc pl-6 mt-2 space-y-1">
+                    <li class="af-card-text">Local mode is the default app flow and uses <code>--local</code> with the <code>.llamafile</code> server.</li>
+                    <li class="af-card-text">Cloud mode requires <code>FIREWORKS_API_KEY</code> (read by Python backend).</li>
+                  </ul>
+
+                  <h2 class="af-card-subtitle">Troubleshooting</h2>
+                  <ul class="list-disc pl-6 mt-2 space-y-1">
+                    <li class="af-card-text">No AI model starts: Verify a <code>*.llamafile</code> exists in <code>Backend</code>.</li>
+                    <li class="af-card-text">Python backend fails: Verify <code>Backend\env\Scripts\python.exe</code> exists and packages are installed from <code>requirements.txt</code>.</li>
+                    <li class="af-card-text">Build/path issues on Windows: Enable long paths and restore NuGet packages.</li>
+                    <li class="af-card-text">Web avatar does not render: Ensure WebView2 runtime is installed and <code>HeadTTS</code> files are present in output.</li>
+                  </ul>
+
+                  <h2 class="af-card-subtitle">Packaging</h2>
+                  <p class="af-card-text">For packaging/distribution details, see:</p>
+                  <ul class="list-disc pl-6 mt-2 space-y-1">
+                    <li class="af-card-text"><code>AvatarFormsApp/PACKAGING_GUIDE.md</code></li>
+                  </ul>
+
+                  <h2 class="af-card-subtitle">Additional Development References</h2>
+                  <ul class="list-disc pl-6 mt-2 space-y-1">
+                    <li class="af-card-text">WinUI control/design reference: WinUI Gallery: <a href="https://www.microsoft.com/store/productId/9P3JFPWWDZRC" class="hover:text-fg-brand underline">https://www.microsoft.com/store/productId/9P3JFPWWDZRC</a></li>
+                    <li class="af-card-text">Unpackaged deployment reference: <a href="https://docs.microsoft.com/windows/apps/windows-app-sdk/deploy-unpackaged-apps" class="hover:text-fg-brand underline">https://docs.microsoft.com/windows/apps/windows-app-sdk/deploy-unpackaged-apps</a></li>
+                  </ul>
+                </div>
               </div>
             </div>
             <!--GDPR-->
@@ -412,6 +567,59 @@
               </div>
               <div class="af-card">
                 <div class="af-card-title-row">
+                  <h3 class="af-card-title text-gradient-brand">Avaturn</h3>
+                  <div class="gradient-brand-bar bar-full bar-thin"></div>
+                </div>
+                <p class="af-card-text">3D avatar generation platform used to create realistic and customisable avatars for user interaction.</p>
+                <a class="af-link" href="https://avaturn.me" target="_blank" rel="noopener noreferrer">https://avaturn.me</a>
+                <div id="dep-accordion-avaturn" data-accordion="collapse" class="af-callout mt-3 overflow-hidden">
+                  <h2 id="dep-accordion-avaturn-heading-1">
+                    <button type="button" class="flex items-center justify-between w-full p-3 font-medium text-left" data-accordion-target="#dep-accordion-avaturn-body-1" aria-expanded="false" aria-controls="dep-accordion-avaturn-body-1">
+                      <span>Copyright & License</span>
+                      <svg data-accordion-icon class="w-3 h-3 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                      </svg>
+                    </button>
+                  </h2>
+                  <div id="dep-accordion-avaturn-body-1" class="hidden" aria-labelledby="dep-accordion-avaturn-heading-1">
+                    <div class="px-3 py-3" style="border-top: 1px solid var(--surface-border);">
+                      <p class="af-card-text"><strong>License:</strong> Proprietary (SaaS platform)</p>
+                      <p class="af-card-text"><strong>Official copyright line:</strong> © Avaturn</p>
+                      <p class="af-card-text"><strong>Official license statement:</strong> Usage is subject to Avaturn’s terms of service and platform licensing agreements.</p>
+                      <p class="af-card-text"><strong>Disclaimer:</strong> Service is provided "as is" in accordance with Avaturn’s terms, without guarantees beyond those explicitly stated by the provider.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="af-card">
+                <div class="af-card-title-row">
+                  <h3 class="af-card-title text-gradient-brand">DeepEval</h3>
+                  <div class="gradient-brand-bar bar-full bar-thin"></div>
+                </div>
+                <p class="af-card-text">Evaluation framework used to assess LLM outputs through metrics such as faithfulness, relevance, and correctness.</p>
+                <a class="af-link" href="https://github.com/confident-ai/deepeval" target="_blank" rel="noopener noreferrer">https://github.com/confident-ai/deepeval</a>
+                <div id="dep-accordion-deepeval" data-accordion="collapse" class="af-callout mt-3 overflow-hidden">
+                  <h2 id="dep-accordion-deepeval-heading-1">
+                    <button type="button" class="flex items-center justify-between w-full p-3 font-medium text-left" data-accordion-target="#dep-accordion-deepeval-body-1" aria-expanded="false" aria-controls="dep-accordion-deepeval-body-1">
+                      <span>Copyright & License</span>
+                      <svg data-accordion-icon class="w-3 h-3 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                      </svg>
+                    </button>
+                  </h2>
+                  <div id="dep-accordion-deepeval-body-1" class="hidden" aria-labelledby="dep-accordion-deepeval-heading-1">
+                    <div class="px-3 py-3" style="border-top: 1px solid var(--surface-border);">
+                      <p class="af-card-text"><strong>License:</strong> Apache License 2.0</p>
+                      <p class="af-card-text"><strong>Official copyright line:</strong> Copyright (c) Confident AI</p>
+                      <p class="af-card-text"><strong>Official license statement:</strong> Licensed under the Apache License, Version 2.0. You may not use this file except in compliance with the License. You may obtain a copy at http://www.apache.org/licenses/LICENSE-2.0.</p>
+                      <p class="af-card-text"><strong>Disclaimer:</strong> Distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="af-card">
+                <div class="af-card-title-row">
                   <h3 class="af-card-title text-gradient-brand">HeadTTS</h3>
                   <div class="gradient-brand-bar bar-full bar-thin"></div>
                 </div>
@@ -453,32 +661,6 @@
                     </button>
                   </h2>
                   <div id="dep-accordion-kokoro-body-1" class="hidden" aria-labelledby="dep-accordion-kokoro-heading-1">
-                    <div class="px-3 py-3" style="border-top: 1px solid var(--surface-border);">
-                      <p class="af-card-text"><strong>License:</strong> Apache-2.0</p>
-                      <p class="af-card-text"><strong>Official statement:</strong> Apache License, Version 2.0, January 2004 — http://www.apache.org/licenses/</p>
-                      <p class="af-card-text"><strong>Official license statement:</strong> Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.</p>
-                      <p class="af-card-text"><strong>Disclaimer:</strong> Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="af-card">
-                <div class="af-card-title-row">
-                  <h3 class="af-card-title text-gradient-brand">OpenVino</h3>
-                  <div class="gradient-brand-bar bar-full bar-thin"></div>
-                </div>
-                <p class="af-card-text">Inference optimization toolkit used for local runtime acceleration.</p>
-                <a class="af-link" href="https://github.com/openvinotoolkit/openvino" target="_blank" rel="noopener noreferrer">https://github.com/openvinotoolkit/openvino</a>
-                <div id="dep-accordion-openvino" data-accordion="collapse" class="af-callout mt-3 overflow-hidden">
-                  <h2 id="dep-accordion-openvino-heading-1">
-                    <button type="button" class="flex items-center justify-between w-full p-3 font-medium text-left" data-accordion-target="#dep-accordion-openvino-body-1" aria-expanded="false" aria-controls="dep-accordion-openvino-body-1">
-                      <span>Copyright & License</span>
-                      <svg data-accordion-icon class="w-3 h-3 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
-                      </svg>
-                    </button>
-                  </h2>
-                  <div id="dep-accordion-openvino-body-1" class="hidden" aria-labelledby="dep-accordion-openvino-heading-1">
                     <div class="px-3 py-3" style="border-top: 1px solid var(--surface-border);">
                       <p class="af-card-text"><strong>License:</strong> Apache-2.0</p>
                       <p class="af-card-text"><strong>Official statement:</strong> Apache License, Version 2.0, January 2004 — http://www.apache.org/licenses/</p>
@@ -907,55 +1089,6 @@
           document.getElementById('footer-placeholder').innerHTML = data;
         })
         .catch(error => console.error('Error loading footer:', error));
-
-      const GITHUB_README_PAGE_URL = 'https://github.com/Dexdezdes/COMP0016_2026_Team14_AvatarForms/blob/main/README.md';
-      const GITHUB_README_RAW_URL = 'https://raw.githubusercontent.com/Dexdezdes/COMP0016_2026_Team14_AvatarForms/main/README.md';
-
-      function loadReadmeIntoCodeBlock() {
-        const codeEl = document.getElementById('appendices-readme-code');
-        const readmeLinkEl = document.getElementById('appendices-readme-link');
-        if (!codeEl || !readmeLinkEl) return;
-
-        readmeLinkEl.href = GITHUB_README_PAGE_URL;
-
-        const setReadmeText = (markdownText) => {
-          codeEl.textContent = markdownText;
-          if (window.Prism) {
-            window.Prism.highlightElement(codeEl);
-          }
-        };
-
-        fetch(GITHUB_README_RAW_URL)
-          .then(response => {
-            if (!response.ok) {
-              throw new Error(`HTTP ${response.status}`);
-            }
-            return response.text();
-          })
-          .then(markdown => {
-            setReadmeText(markdown);
-          })
-          .catch(error => {
-            console.error('Error loading GitHub README.md, trying local README.md:', error);
-
-            fetch('README.md')
-              .then(localResponse => {
-                if (!localResponse.ok) {
-                  throw new Error(`HTTP ${localResponse.status}`);
-                }
-                return localResponse.text();
-              })
-              .then(localMarkdown => {
-                setReadmeText(localMarkdown);
-              })
-              .catch(localError => {
-                console.error('Error loading local README.md:', localError);
-                setReadmeText('Unable to load README.md from GitHub or local site root.');
-              });
-          });
-      }
-
-      loadReadmeIntoCodeBlock();
 
       function initAfTabs(tabListId, panelContainerId) {
         const tabList = document.getElementById(tabListId);

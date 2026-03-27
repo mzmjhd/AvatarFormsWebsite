@@ -725,6 +725,7 @@
             box-shadow: var(--shadow-sm);
             background: var(--surface);
             margin-top: 0.75rem;
+            padding: 1rem;
         }
 
         .af-code-snippet[class*="language-"] {
