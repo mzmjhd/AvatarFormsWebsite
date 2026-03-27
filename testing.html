@@ -81,6 +81,43 @@ def test_generate_success(self, mock_request):
 	mock_request.assert_called_once()
 </code></pre>
 							</div>
+
+						<div class="af-card">
+								<div class="af-card-title-row">
+									<span class="af-card-title text-gradient-brand">C# Unit and Integration Testing</span>
+									<span class="gradient-brand-bar bar-thin"></span>
+								</div>
+								<p class="af-card-text">Unit tests for the C# was run using dotnet build</p>
+								<p>The C# test suite is driven by a custom PowerShell orchestration script (run-tests.ps1) using xUnit and the .NET 10 CLI. 
+									To achieve high-fidelity results on both native PCs and Mac VMs (ARM64), the pipeline dynamically resolves and injects the required Windows App Runtime native binaries into the test environment.</p>
+								<img src="assets/images/Csharp-unit-tests.jpeg" alt="C# Unit Test Results" class="af-card-image">
+								<p>For integration tests which was included in unit tests, we utilize a combination of In-Memory Databases, Dependency Injection mocking, and Mocked HTTP Handlers to ensure tests are fast, isolated, and representative of real-world scenarios.</p>
+								<p>
+								This example demonstrates how we test the QuestionnaireAPIService by mocking the HttpClient. 
+								Instead of making a real network call, we intercept the request and force a "Success" (OK) or "Failure" (BadRequest) status to ensure our service handles remote API responses correctly.</p>
+								<pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-Csharp">// AvatarFormsApp.Tests/Services/QuestionnaireAPIServiceTests.cs
+
+[Fact]
+public async Task SendQuestionnaireAsync_ReturnsTrue_WhenPostSucceeds()
+{
+    // Arrange: Create a mock Questionnaire model
+    var q = new Questionnaire { Name = "Test", Id = "id-123", Questions = new() };
+    _mockService.Setup(s => s.GetWithQuestionsAsync("id-123"))
+        .ReturnsAsync(q);
+
+    // Mock the HTTP layer to return a "200 OK" status
+    var client = CreateMockClient(HttpStatusCode.OK);
+    var sut = new QuestionnaireAPIService(_mockService.Object, client);
+
+    // Act: Attempt to send the questionnaire to the remote endpoint
+    var result = await sut.SendQuestionnaireAsync("id-123", 8882);
+
+    // Assert: Verify the service correctly interpreted the success
+    Assert.True(result);
+}
+</code></pre>
+							</div>
+
 						</div>
 
 						<div class="af-tab-panel hidden" id="testing-compatibility-panel" role="tabpanel" aria-labelledby="testing-compatibility-tab">
