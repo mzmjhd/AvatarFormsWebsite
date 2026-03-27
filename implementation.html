@@ -448,7 +448,80 @@ class LLM_Trace:
                                     <span class="af-card-title text-gradient-brand">Forms Parsing</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
-                                <p class="af-card-text">Content</p>
+                                <p class="af-card-text">To allow educators and users to easily import existing questionnaires without manual data entry, we implemented the <code class="af-inline-code">FormLinkParserService</code>. This service uses a hidden <code class="af-inline-code">WebView2</code> control to programmatically navigate to form URLs and extract the underlying question metadata into a unified <code class="af-inline-code">ParsedQuestion</code> format. It handles the two most common platforms using fundamentally different strategies:</p>
+
+                                <h4 class="text-lg font-bold mt-4 text-gray-800 dark:text-gray-200">Microsoft Forms: Network Interception</h4>
+                                <p class="af-card-text">Microsoft Forms dynamically loads its data. Rather than scraping the DOM, the service hooks into the WebView's <code class="af-inline-code">WebResourceResponseReceived</code> event to intercept the raw network traffic. It listens for specific API endpoints (like <code class="af-inline-code">runtimeFormsWithResponses</code> or <code class="af-inline-code">ResponsePageStartup.ashx</code>) and captures the JSON payload directly from the stream.</p>
+                                <p class="af-card-text">Additionally, because some forms are hidden behind a landing page, the service automatically injects JavaScript to simulate a click on "Start" buttons to trigger the network request.</p>
+                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-csharp">async void OnResponseReceived(object? sender, CoreWebView2WebResourceResponseReceivedEventArgs e)
+        {
+            if (tcs.Task.IsCompleted) return;
+
+            var uri = e.Request.Uri;
+
+            // Accept the known MS Forms API endpoints.
+            // ResponsePageStartup.ashx is also included — WebView2 (unlike Playwright's
+            // fresh headless browser) reuses Edge's cache/session, so after clicking Start
+            // the questions are already in memory and no new runtimeFormsWithResponses
+            // request fires. The data comes from the initial ResponsePageStartup.ashx instead.
+            bool isFormApi = uri.Contains("runtimeFormsWithResponses") ||
+                             uri.Contains("light/forms") ||
+                             uri.Contains("formapi/api") ||
+                             uri.Contains("ResponsePageStartup.ashx");
+
+            if (!isFormApi) return;
+
+            Log($"Checking API response from: {uri}");
+
+            try
+            {
+                var irasStream = await e.Response.GetContentAsync();
+                using var reader = new System.IO.StreamReader(irasStream.AsStreamForRead());
+                var text = await reader.ReadToEndAsync();
+
+                if (!text.Contains("\"questions\":["))
+                {
+                    Log("Response missing questions array, skipping.");
+                    return;
+                }
+
+                Log($"Found form payload ({text.Length} chars) from: {uri}");
+                var node = JsonNode.Parse(text);
+                Log("JsonNode parsed OK.");
+
+                // ── Full JSON dump ──────────────────────────────────────────
+                Log("=== RAW JSON START ===");
+                Log(node!.ToJsonString(new System.Text.Json.JsonSerializerOptions { WriteIndented = true }));
+                Log("=== RAW JSON END ===");
+
+                tcs.TrySetResult(node);
+            }
+            catch (Exception ex)
+            {
+                Log($"Response handler EXCEPTION: {ex.GetType().Name}: {ex.Message}");
+                // Don't fail the TCS — keep waiting for another response
+            }
+        }</code></pre>
+
+                                <h4 class="text-lg font-bold mt-6 text-gray-800 dark:text-gray-200">Google Forms: DOM State Extraction</h4>
+                                <p class="af-card-text">Unlike Microsoft, Google Forms embeds its entire question structure into the HTML upon initial load inside a global JavaScript array. The service navigates to the URL, waits for the page to load, and then uses <code class="af-inline-code">ExecuteScriptAsync</code> to extract and stringify the <code class="af-inline-code">window.FB_PUBLIC_LOAD_DATA_</code> variable.</p>
+                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-csharp">
+    // Helper to crawl the JSON tree and find all arrays
+    private void FindAllArrays(JsonNode? node, List<JsonArray> found)
+    {
+        if (node is JsonArray arr)
+        {
+            found.Add(arr);
+            foreach (var item in arr) FindAllArrays(item, found);
+        }
+        else if (node is JsonObject obj)
+        {
+            foreach (var prop in obj) FindAllArrays(prop.Value, found);
+        }
+    }
+                                </code></pre>
+
+                                <p class="af-card-text mt-4">Once the raw JSON (from either platform) is captured, custom parsing algorithms crawl the JSON nodes to extract form titles, descriptions, question types, and multiple-choice options. Regex is used via a <code class="af-inline-code">CleanHtml</code> helper to strip out unwanted formatting tags, ensuring the resulting data is pristine before being saved to the local SQLite database.</p>
                             </div>
                             <div class="af-card">
                                 <div class="af-card-title-row">
