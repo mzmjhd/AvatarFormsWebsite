@@ -278,9 +278,9 @@
 
                   <h3 class="af-card-subtitle">Note</h3>
                   <p class="af-card-text">"Enable long paths" option must be enabled to overcome Windows 260-character limit for file paths, which NuGet packages often break.</p>
-                  <h4 class="af-card-subtitle">Option A: Admin PowerShell</h4>
+                  <h4 class="af-card-subtitle"><strong>Option A:</strong> Admin PowerShell</h4>
                   <pre class="af-code-snippet"><code>New-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\FileSystem" -Name "LongPathsEnabled" -Value 1 -PropertyType DWORD -Force</code></pre>
-                  <h4 class="af-card-subtitle">Option B: Windows Settings</h4>
+                  <h4 class="af-card-subtitle"><strong>Option B:</strong> Windows Settings</h4>
                   <ol class="list-decimal pl-6 mt-2 space-y-2">
                     <li class="af-card-text">Navigate to Settings &gt; System &gt; Advanced.</li>
                     <li class="af-card-text">Make sure the "Enable long paths" option is enabled.</li>
@@ -383,6 +383,18 @@ DEEPEVAL_RESULTS_FOLDER=C:\path\to\results\folder</code></pre>
                   <p class="af-card-text">For packaging/distribution details, see:</p>
                   <ul class="list-disc pl-6 mt-2 space-y-1">
                     <li class="af-card-text"><code>AvatarFormsApp/PACKAGING_GUIDE.md</code></li>
+                  </ul>
+
+                  <h2 class="af-card-subtitle">Dependencies</h2>
+                  <ul class="list-disc pl-6 mt-2 space-y-1">
+                    <li class="af-card-text">WinUI3: <a href="https://github.com/microsoft/microsoft-ui-xaml" class="hover:text-fg-brand underline">https://github.com/microsoft/microsoft-ui-xaml</a></li>
+                    <li class="af-card-text">Flowbite: <a href="https://github.com/themesberg/flowbite" class="hover:text-fg-brand underline">https://github.com/themesberg/flowbite</a></li>
+                    <li class="af-card-text">Tailwind CSS: <a href="https://github.com/tailwindlabs/tailwindcss" class="hover:text-fg-brand underline">https://github.com/tailwindlabs/tailwindcss</a></li>
+                    <li class="af-card-text">Prism.js: <a href="https://github.com/PrismJS/prism" class="hover:text-fg-brand underline">https://github.com/PrismJS/prism</a></li>
+                    <li class="af-card-text">Avaturn: <a href="https://avaturn.me/" class="hover:text-fg-brand underline">https://avaturn.me/</a></li>
+                    <li class="af-card-text">DeepEval: <a href="https://github.com/confident-ai/deepeval" class="hover:text-fg-brand underline">https://github.com/confident-ai/deepeval</a></li>
+                    <li class="af-card-text">HeadTTS: <a href="https://github.com/met4citizen/HeadTTS" class="hover:text-fg-brand underline">https://github.com/met4citizen/HeadTTS</a></li>
+                    <li class="af-card-text">Kokoro: <a href="https://github.com/hexgrad/kokoro" class="hover:text-fg-brand underline">https://github.com/hexgrad/kokoro</a></li>
                   </ul>
 
                   <h2 class="af-card-subtitle">Additional Development References</h2>
