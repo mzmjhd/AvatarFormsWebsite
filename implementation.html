@@ -78,7 +78,67 @@
                                     <span class="af-card-title text-gradient-brand">AvatarFormsInterviewer</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
-                                <p class="af-card-text">.</p>
+                                <p class="af-card-text">The <code class="af-inline-code">AvatarFormsInterviewer</code> is the central class managing interview flow. It maintains conversation state, coordinates the Talker, Evaluator and RAG agents, decides when to advance between questions, and collects final answers for downstream processing.
+
+                                <p class="af-card-text">Key responsibilities:</p>
+                                <ul>
+                                    <li>Track questions, conversation history and other metadata so all agents share a consistent view of the interview state.</li>
+                                    <li>Use the <code class="af-inline-code">EvaluatorAgent</code> to decide whether a user's response is satisfactory or if follow-up is required, and apply a configurable cutoff to avoid getting stuck on a single question.</li>
+                                    <li>Delegate generation to the <code class="af-inline-code">TalkerAgent</code> for question phrasing and follow-ups, and to the <code class="af-inline-code">RAG_Agent</code> when building final, structured answers (including MCQ matching).</li>
+                                    <li>Optionally log agent prompts and outputs via a <code class="af-inline-code">Tracer</code> for debugging and observability purposes.</li>
+                                </ul>
+
+                                <p class="af-card-text">Representative excerpt from <code class="af-inline-code">main.py</code> showing the main methods:</p>
+                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-python">class AvatarFormsInterviewer:
+    def __init__(self, is_local: bool = False, model_name: str = None, local_port: int = 8081, cutoff: int = 4, log_dir: str = None, print_logs: bool = False) -> None:
+        self.cutoff = cutoff
+        self.user_role = "user"
+        self.AI_role = "assistant"
+        self.is_local = is_local
+        self.model_name = model_name
+        self.tracer = Tracer(log_dir=log_dir, print_logs=print_logs) if log_dir else None
+
+    def build_interview(self, questions: list[dict], interview_context: str) -> None:
+        self.questions = questions
+        self.interview_context = interview_context
+        self.questions_index = 0
+        self.conversation_history = []
+        self.question_labels = []
+        self.answers = [""] * len(self.questions)
+        self.model = self.get_model()
+        self.talker = TalkerAgent(model=self.model, conversation_history=self.conversation_history, interview_context=self.interview_context, tracer=self.tracer)
+        self.evaluator = EvaluatorAgent(model=self.model, interview_context=self.interview_context, tracer=self.tracer)
+        self.rag_agent = RAG_Agent(model=self.model, interview_context=self.interview_context, tracer=self.tracer)
+
+    def start_interview(self) -> str:
+        self.reset_interview()
+        question = format_question(self.questions[self.questions_index])
+        speech = self.talker.ask_question(question, previous_q_and_a=None)
+        self.conversation_history.append({"role": self.AI_role, "content": speech})
+        self.question_labels.append(self.questions_index)
+        return speech
+
+    def respond(self, response: str) -> tuple[str, bool]:
+        self.conversation_history.append({"role": self.user_role, "content": response})
+        evaluation = self.evaluator.evaluate(format_question(self.questions[self.questions_index]), self.get_conversation_section(self.questions_index))
+        if self.should_cutoff() or evaluation["satisfactory"] or evaluation["override_skip"]:
+            self.questions_index += 1
+            self.answers[self.questions_index-1] = self.collect_answer(self.questions_index-1)
+        if self.questions_index < len(self.questions):
+            # either a new main question or a follow-up depending on last evaluation
+            next_q = format_question(self.questions[self.questions_index])
+            q_and_as = self.collect_all_answers()
+            q_and_as = None if all(a == "" for a in q_and_as.values()) else q_and_as
+            speech = self.talker.ask_question(next_q, previous_q_and_a=q_and_as)
+            self.conversation_history.append({"role": self.AI_role, "content": speech})
+            self.question_labels.append(self.questions_index)
+            return speech, True
+        else:
+            closing = self.talker.closing_statement()
+            self.conversation_history.append({"role": self.AI_role, "content": closing})
+            return closing, False
+</code></pre>
+
                             </div>
                             <div class="af-card">
                                 <div class="af-card-title-row">
@@ -288,7 +348,10 @@ Transcript of the user's answer to the current question:
                         <td class="af-table-key"><code class="af-inline-code">format_q_and_as</code></td>
                         <td class="af-table-value">Transforms a dictionary of question-answer pairs into a readable string using "Q:" and "A:" prefixes for each entry.</td>
                       </tr>
- 
+                      <tr>
+                        <td class="af-table-key"><code class="af-inline-code">format_question</code></td>
+                        <td class="af-table-value">Formats a question dict into a string. For multiple-choice questions, appends the options.</td>
+                        </tr>
                     </tbody>
                   </table>
                 </div>
