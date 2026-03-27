@@ -42,6 +42,9 @@
 							<button class="af-tab-link" id="testing-unit-tab" data-tabs-target="#testing-unit-panel" type="button" role="tab" aria-controls="testing-unit-panel" aria-selected="true">Unit Testing & Integration Testing</button>
 						</li>
 						<li class="me-2" role="presentation">
+							<button class="af-tab-link" id="testing-deepeval-tab" data-tabs-target="#testing-deepeval-panel" type="button" role="tab" aria-controls="testing-deepeval-panel" aria-selected="false">DeepEval Testing</button>
+						</li>
+						<li class="me-2" role="presentation">
 							<button class="af-tab-link" id="testing-compatibility-tab" data-tabs-target="#testing-compatibility-panel" type="button" role="tab" aria-controls="testing-compatibility-panel" aria-selected="false">Compatibility Testing</button>
 						</li>
 						<li class="me-2" role="presentation">
@@ -120,6 +123,62 @@ public async Task SendQuestionnaireAsync_ReturnsTrue_WhenPostSucceeds()
 </code></pre>
 							</div>
 
+						</div>
+
+						<div class="af-tab-panel hidden" id="testing-deepeval-panel" role="tabpanel" aria-labelledby="testing-deepeval-tab">
+							<div class="af-card">
+								<div class="af-card-title-row">
+									<span class="af-card-title text-gradient-brand">DeepEval Testing</span>
+									<span class="gradient-brand-bar bar-thin"></span>
+								</div>
+								<p class="af-card-text">Testing of our AI agents was conducted using the DeepEval framework, which allows for automated evaluation of LLM outputs using an LLM as a judge.
+									Each agent was evaluated on a set of 25 test cases covering various conversational scenarios, and both open-ended and multiple-choice question types, then scored against 2 metrics:
+									</p>
+														<ul class="list-disc pl-6 mt-4 mb-6 space-y-3">
+									<li class="af-table-value">
+										<strong class="type-heading">Talker Agent</strong>
+										 - Answer Relevance (asking the right question) and Question Appropriateness (phrasing the question appropriately).
+									</li>
+									<li class="af-table-value">
+										<strong class="type-heading">Evaluator Agent</strong>
+										 - Satisfactory Judgement Accuracy and Skip Decision Accuracy (correctly determining if the user's response is satisfactory or if the question should be skipped).
+									</li>
+									<li class="af-table-value">
+										<strong class="type-heading">RAG Agent</strong>
+										 - Answer Relevancy (retrieving the right information) and Faithfulness (retrieving information that is factually correct and supported by the conversation).
+									</li>
+								</ul>
+
+								<h3 class="af-card-title text-gradient-brand text-center mt-8 mb-6">Test Cases Summary</h3>
+								<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+									<figure class="af-card p-4">
+										<img src="assets/images/deepeval_talker.png" alt="Talker DeepEval results" class="w-full h-auto rounded-lg" />
+										<figcaption class="af-card-text mt-3 text-center">
+											Talker Agent
+											<br>
+											92% Pass Rate
+										</figcaption>
+									</figure>
+									<figure class="af-card p-4">
+										<img src="assets/images/deepeval_evaluator.png" alt="Evaluator DeepEval results" class="w-full h-auto rounded-lg" />
+										<figcaption class="af-card-text mt-3 text-center">
+											Evaluator Agent
+											<br>
+											94% Pass Rate
+										</figcaption>
+									</figure>
+									<figure class="af-card p-4">
+										<img src="assets/images/deepeval_rag.png" alt="RAG DeepEval results" class="w-full h-auto rounded-lg" />
+										<figcaption class="af-card-text mt-3 text-center">
+											RAG Agent
+											<br>
+											100% Pass Rate
+										</figcaption>
+									</figure>
+								</div>
+
+
+							</div>
 						</div>
 
 						<div class="af-tab-panel hidden" id="testing-compatibility-panel" role="tabpanel" aria-labelledby="testing-compatibility-tab">
