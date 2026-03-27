@@ -54,6 +54,9 @@
                         <li class="me-2" role="presentation">
                             <button class="af-tab-link" id="implementation-avatar-tab" data-tabs-target="#implementation-avatar-panel" type="button" role="tab" aria-controls="implementation-avatar-panel" aria-selected="true">Avatar Generation</button>
                         </li>
+                        <li class="me-2" role="presentation">
+                            <button class="af-tab-link" id="implementation-speech-tab" data-tabs-target="#implementation-speech-panel" type="button" role="tab" aria-controls="implementation-speech-panel" aria-selected="true">Speech Recognition</button>
+                        </li>
                         <li role="presentation">
                             <button class="af-tab-link" id="implementation-packaging-tab" data-tabs-target="#implementation-packaging-panel" type="button" role="tab" aria-controls="implementation-packaging-panel" aria-selected="true">Packaging & Deployment</button>
                         </li>
@@ -101,7 +104,7 @@ namespace HelloWorldDemo
                         <div class="af-tab-panel" id="implementation-frontend-panel" role="tabpanel" aria-labelledby="implementation-frontend-tab">
                             <div class="af-card">
                                 <div class="af-card-title-row">
-                                    <span class="af-card-title text-gradient-brand">1. WinUI 3 Architecture</span>
+                                    <span class="af-card-title text-gradient-brand">WinUI 3 Architecture</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
                                 <p class="af-card-text">The frontend is built with <code class="af-inline-code">WinUI 3</code> and C#, using a modular page-and-component structure that keeps presentation and behavior predictable across dashboard, response, and avatar workflows. Reusable user controls are used for repeated UI patterns so interaction behavior remains consistent while reducing duplicated implementation effort.</p>
@@ -111,7 +114,7 @@ namespace HelloWorldDemo
 
                             <div class="af-card">
                                 <div class="af-card-title-row">
-                                    <span class="af-card-title text-gradient-brand">2. Mica + Frosted Surface System</span>
+                                    <span class="af-card-title text-gradient-brand">Mica + Frosted Surface System</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
                                 <p class="af-card-text">The frontend visual language follows a frosted-mica direction where layered translucent surfaces separate context without introducing visual clutter. Primary containers establish depth with subtle blur and low-contrast boundaries, while content cards remain slightly more opaque to preserve readability and reduce background interference.</p>
@@ -120,7 +123,7 @@ namespace HelloWorldDemo
 
                             <div class="af-card">
                                 <div class="af-card-title-row">
-                                    <span class="af-card-title text-gradient-brand">3. Dark Mode Implementation</span>
+                                    <span class="af-card-title text-gradient-brand">Dark Mode Implementation</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
                                 <p class="af-card-text">Dark mode is implemented as a first-class design mode rather than a post-process color inversion. Tokens define background, surface, border, muted text, and accent behavior so that component styling can switch coherently while preserving information hierarchy and semantic emphasis.</p>
@@ -129,7 +132,7 @@ namespace HelloWorldDemo
 
                             <div class="af-card">
                                 <div class="af-card-title-row">
-                                    <span class="af-card-title text-gradient-brand">4. Typography + Spacing System</span>
+                                    <span class="af-card-title text-gradient-brand">Typography + Spacing System</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
                                 <p class="af-card-text">Typography uses clear role separation between heading, body, and muted-support text so users can scan dense technical content quickly. Section titles use stronger weight and gradient emphasis, while paragraphs and supporting labels follow stable line-height and spacing rules to keep reading flow smooth.</p>
@@ -138,7 +141,7 @@ namespace HelloWorldDemo
 
                             <div class="af-card">
                                 <div class="af-card-title-row">
-                                    <span class="af-card-title text-gradient-brand">5. Interaction + Motion</span>
+                                    <span class="af-card-title text-gradient-brand">Interaction + Motion</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
                                 <p class="af-card-text">Interaction behavior is designed to feel responsive but restrained. Hover, focus, and state transitions use short-duration easing to communicate affordance changes without drawing unnecessary attention away from task content.</p>
@@ -147,7 +150,7 @@ namespace HelloWorldDemo
 
                             <div class="af-card">
                                 <div class="af-card-title-row">
-                                    <span class="af-card-title text-gradient-brand">6. Component Consistency</span>
+                                    <span class="af-card-title text-gradient-brand">Component Consistency</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
                                 <p class="af-card-text">Consistency is enforced through shared component patterns for cards, tabs, navigation regions, links, and typography roles. Reusing established structures reduces relearning cost and ensures users can transfer interaction expectations between pages with minimal friction.</p>
@@ -156,7 +159,7 @@ namespace HelloWorldDemo
 
                             <div class="af-card">
                                 <div class="af-card-title-row">
-                                    <span class="af-card-title text-gradient-brand">7. Accessibility + Comfort</span>
+                                    <span class="af-card-title text-gradient-brand">Accessibility + Comfort</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
                                 <p class="af-card-text">Accessibility and comfort are treated as implementation constraints, not optional enhancements. Keyboard-reachable controls, visible focus states, and clear text hierarchy support practical usability across different interaction preferences and attention profiles.</p>
@@ -198,19 +201,19 @@ namespace HelloWorldDemo
                             </div>
                             <div class="af-card">
                                 <div class="af-card-title-row">
-                                    <span class="af-card-title text-gradient-brand">1. Forms Parsing</span>
+                                    <span class="af-card-title text-gradient-brand">Forms Parsing</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
                                 <p class="af-card-text">Content</p>
                             </div>
                             <div class="af-card">
                                 <div class="af-card-title-row">
-                                    <span class="af-card-title text-gradient-brand">2. Python Process Service</span>
+                                    <span class="af-card-title text-gradient-brand">Python Process Service</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
 								<p class="af-card-text">The <code class="af-inline-code">PythonProcessService</code> is the main service that manages the main bridge between the WinUI frontend and the Python agent orchestration layer. It abstracts running the Python agent orchestration layer as an external process and streaming its <code class="af-inline-code">stdin/stdout/stderr</code> into the UI and higher-level services.</p>
                                 <p class="af-card-text">The <code class="af-inline-code">public async Task<bool> StartAsync()</code> method takes in the Python startup arguments, build them, and runs the compiled Python application.</p>
-                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-csharp">string arguments = BuildArguments(useLocal, llamaPort, websocketPort, httpPort, responsePort);
+                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-csharp">string arguments = BuildArguments(useLocal, llamaPort, websocketPort, httpPort, responsePort, language);
 // Initialise working directory and find executable path 
 // ...
 
@@ -253,7 +256,7 @@ _pythonProcess.ErrorDataReceived += (s, e) =>
                             </div>
                             <div class="af-card">
                                 <div class="af-card-title-row">
-                                    <span class="af-card-title text-gradient-brand">3. Llamafile Process Service</span>
+                                    <span class="af-card-title text-gradient-brand">Llamafile Process Service</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
                                 <p class="af-card-text">The <code class="af-inline-code">LlamafileProcessService</code> is the main service managing the LLM server. For our use case, we opted for packaging our LLM into an executable using Llamafile, an open source solution to distribute LLMs as a single file, to simplify the user experience. This allows users with minor technical knowledge to run the application without any additional setup, removing the need to install additional third-party local LLM server providers.</p>
@@ -291,7 +294,7 @@ var start = new ProcessStartInfo
                             </div>
                             <div class="af-card">
                                 <div class="af-card-title-row">
-                                    <span class="af-card-title text-gradient-brand">4. API Services</span>
+                                    <span class="af-card-title text-gradient-brand">API Services</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
                                 <p class="af-card-text">As the Python agent orchestration layer is running as an external process, we've implemented two API services, <code class="af-inline-code">QuestionnaireAPIService</code> & <code class="af-inline-code">ResponseAPIService</code>, that forms a simple client-server pipeline for communication.</p>
@@ -359,7 +362,7 @@ public async Task StopServerAsync()
 {
     // Stop server if _receivedResponseCount == _expectedQuestionCount or receive _cancellationToken
 }</code></pre>
-<pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-python">def send_response(questionnaire_id, question_order, question, answer, port, question_type, selected_option=None):
+                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-python">def send_response(questionnaire_id, question_order, question, answer, port, question_type, selected_option=None):
     url = f"http://localhost:{port}/response"
 
     payload = {
@@ -376,7 +379,8 @@ public async Task StopServerAsync()
     except Exception as e:
         return False</code></pre>
                                 <p class="af-card-text">The <code class="af-inline-code">ResponseAPIService</code> will handle the response by first receiving the payload (one response to one question) using <code class="af-inline-code">StreamReader</code>. It'll deserialise it using <code class="af-inline-code">JsonDeserializer</code> class, check if <code class="af-inline-code">questionnaire_id</code>, <code class="af-inline-code">question</code>, <code class="af-inline-code">order</code>(question number), and <code class="af-inline-code">answer</code> fields are present, and store them in the database if everything is valid.</p>
-                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-csharp">private async Task HandleResponseAsync(HttpListenerRequest request, HttpListenerResponse response, CancellationToken cancellationToken)
+                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-csharp">private async Task HandleResponseAsync(HttpListenerRequest request, 
+                                    HttpListenerResponse response, CancellationToken cancellationToken)
 {
     try
     {
@@ -395,7 +399,7 @@ public async Task StopServerAsync()
             // ...
         }
 
-        // Get or create response session (A data structure to store the list of responses to the questions in an interview session)
+        // Get or create response session (A data structure to store the list of responses to the questions)
         // ...
 
         // Find the question by order and questionnaire
@@ -420,7 +424,7 @@ public async Task StopServerAsync()
 
         dbContext.Responses.Add(responseEntity);
 
-        // Increment _receivedResponseCount and check if all responses have been received to stop the server and save changes to database
+        // Increment _receivedResponseCount and check if all responses have been received to save changes to database
         // ...
 
     }
@@ -433,7 +437,7 @@ public async Task StopServerAsync()
                             </div>
                             <div class="af-card">
                                 <div class="af-card-title-row">
-                                    <span class="af-card-title text-gradient-brand">5. Response Export</span>
+                                    <span class="af-card-title text-gradient-brand">Response Export</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
                                 <p class="af-card-text">Content</p>
@@ -444,7 +448,7 @@ public async Task StopServerAsync()
                         <div class="af-tab-panel" id="implementation-database-panel" role="tabpanel" aria-labelledby="implementation-database-tab">
                             <div class="af-card">
                                 <div class="af-card-title-row">
-                                    <span class="af-card-title text-gradient-brand">1. Database Stack and Storage</span>
+                                    <span class="af-card-title text-gradient-brand">Database Stack and Storage</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
                                 <p class="af-card-text">Our data layer uses <code class="af-inline-code">EF Core</code> with a <code class="af-inline-code">DbContext</code> backed by <code class="af-inline-code">SQLite</code>. This keeps deployment light while preserving strong relational modeling and query capabilities.</p>
@@ -454,7 +458,7 @@ public async Task StopServerAsync()
 
                             <div class="af-card">
                                 <div class="af-card-title-row">
-                                    <span class="af-card-title text-gradient-brand">2. Schema Initialization and Lifecycle</span>
+                                    <span class="af-card-title text-gradient-brand">Schema Initialization and Lifecycle</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
                                 <p class="af-card-text">The application uses <code class="af-inline-code">Database.EnsureCreatedAsync()</code> on startup to dynamically create missing tables from <code class="af-inline-code">AppDbContext</code> model definitions. This removes friction during first run setup and keeps schema initialization automatic.</p>
@@ -473,7 +477,7 @@ using (var scope = Host.Services.CreateScope())
 
                             <div class="af-card">
                                 <div class="af-card-title-row">
-                                    <span class="af-card-title text-gradient-brand">3. Entity Model and Relationships</span>
+                                    <span class="af-card-title text-gradient-brand">Entity Model and Relationships</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
                                 <p class="af-card-text">The schema is centered around questionnaires, their questions/options, and response sessions captured during interviews.</p>
@@ -529,7 +533,7 @@ using (var scope = Host.Services.CreateScope())
 
                             <div class="af-card">
                                 <div class="af-card-title-row">
-                                    <span class="af-card-title text-gradient-brand">4. Saving Questionnaires (Repository Service)</span>
+                                    <span class="af-card-title text-gradient-brand">Saving Questionnaires (Repository Service)</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
                                 <p class="af-card-text">Database write operations are encapsulated in <code class="af-inline-code">QuestionnaireService</code> to keep ViewModels independent from persistence details. Before committing, the service injects <code class="af-inline-code">CreatedDate</code> and <code class="af-inline-code">ModifiedDate</code>, then persists the questionnaire graph in one transaction.</p>
@@ -557,7 +561,7 @@ public async Task&lt;Questionnaire&gt; AddAsync(Questionnaire questionnaire)
 
                             <div class="af-card">
                                 <div class="af-card-title-row">
-                                    <span class="af-card-title text-gradient-brand">5. Saving Interview Responses (Internal API Flow)</span>
+                                    <span class="af-card-title text-gradient-brand">Saving Interview Responses (Internal API Flow)</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
                                 <p class="af-card-text">The interview response pipeline is handled through an internal HTTP endpoint in <code class="af-inline-code">ResponseAPIService</code>. This local API pattern allows the Python/Llamafile orchestration flow to submit data asynchronously while the .NET side validates and persists each response.</p>
@@ -597,7 +601,7 @@ if (_expectedQuestionCount &gt; 0 &amp;&amp; _receivedResponseCount &gt;= _expec
 
                             <div class="af-card">
                                 <div class="af-card-title-row">
-                                    <span class="af-card-title text-gradient-brand">6. Migration Strategy in Development</span>
+                                    <span class="af-card-title text-gradient-brand">Migration Strategy in Development</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
                                 <p class="af-card-text">Database migrations are still used during development to evolve schema definitions safely and track structural changes over time.</p>
@@ -607,7 +611,7 @@ if (_expectedQuestionCount &gt; 0 &amp;&amp; _receivedResponseCount &gt;= _expec
 
                             <div class="af-card">
                                 <div class="af-card-title-row">
-                                    <span class="af-card-title text-gradient-brand">7. EF Core Data Operations and Consistency</span>
+                                    <span class="af-card-title text-gradient-brand">EF Core Data Operations and Consistency</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
                                 <p class="af-card-text">Core CRUD behavior is handled through EF Core and service-layer methods, reducing boilerplate SQL while keeping queries strongly typed and model-safe.</p>
@@ -643,7 +647,8 @@ AvatarWebView.CoreWebView2.Navigate(GetHeadTTSUrl());</code></pre>
     var (gpuName, gpuMem) = GetGpuInfo();
     bool useWasm = true;
 
-    if (gpuMem > 6144 && (gpuName.Contains("NVIDIA", StringComparison.OrdinalIgnoreCase) || gpuName.Contains("AMD", StringComparison.OrdinalIgnoreCase)))
+    if (gpuMem > 6144 && (gpuName.Contains("NVIDIA", StringComparison.OrdinalIgnoreCase) 
+                        || gpuName.Contains("AMD", StringComparison.OrdinalIgnoreCase)))
     {
         useWasm = false; // Run on current logic (local inference/non-wasm)
     }
@@ -816,6 +821,73 @@ using (var targetStream = File.Create(targetPath))
                                     This design removes the conversational logic from the visual layer, where the Python orchestrator layer handles interview flow, while <a href="https://github.com/met4citizen/HeadTTS" class="af-link">HeadTTS</a> handles the rendering and playback. 
                                     Additionally, a buffering mechanism <code class="af-inline-code">pendingSpeech</code> ensures that speech is queued until the avatar and TTS engine are fully initialized, in case of avatar model or voice change mid-interview.</p>
                                 <p class="af-card-text">Overall, the implementation uses HeadTTS as the main rendering engine with real time communication via WebSockets to allow sub real-time (3X real-time) inferencing for both the Text-To-Speech and 3D avatar render components.</p>
+                            </div>
+                        </div>
+
+                        <!-- Speech Recognition Implementation -->
+                        <div class="af-tab-panel" id="implementation-speech-panel" role="tabpanel" aria-labelledby="implementation-speech-tab">
+                            <div class="af-card">
+                                <div class="af-card-title-row">
+                                    <span class="af-card-title text-gradient-brand">Speech Recognition</span>
+                                    <span class="gradient-brand-bar bar-thin"></span>
+                                </div>
+                                <p class="af-card-text">The multilingual speech recognition implementation in the AvatarPage is built around the Windows SpeechRecognizer API, which enables dynamic language selection. 
+                                    During initialisation, the system retrieves supported languages on the user's machine and binds them to a ComboBox, allowing the user to select their preferred speech recognition language from the frontend. 
+                                    This selection is persisted using the <code class="af-inline-code">LocalSettingsService</code> and restored on startup, ensuring consistency across sessions. 
+                                    The selected language is then stored in <code class="af-inline-code">_selectedLanguage</code> and used when constructing the recogniser instance, ensuring that speech is interpreted in the correct language from the get go rather than relying on post-processed translation.
+                                </p>
+                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-csharp">var languages = SpeechRecognizer.SupportedTopicLanguages;
+LanguageComboBox.ItemsSource = languages;
+
+_speechRecognizer = _selectedLanguage != null
+    ? new SpeechRecognizer(_selectedLanguage)
+    : new SpeechRecognizer();</code></pre>
+                                <p class="af-card-text">The recognition pipeline is designed for interaction through continuous and incremental updates. 
+                                    The <code class="af-inline-code">HypothesisGenerated</code> event provides partial speech results, allowing the UI to update live as the user speaks, while the <code class="af-inline-code">ResultGenerated</code> event appends finalised segments into a cumulative transcript. 
+                                    A silence detection mechanism using a <code class="af-inline-code">DispatcherTimer</code> detects pauses and optionally triggers the auto-send feature to create a more natural conversational flow. 
+                                    This is designed to mimic human dialogue by allowing users to speak freely without needing to manually segment their input.
+                                </p>
+                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-csharp">_speechRecognizer.HypothesisGenerated += (s, args) =>
+{
+    var currentText = args.Hypothesis.Text;
+    UserInput.Text = string.IsNullOrWhiteSpace(_finalizedSpeech) 
+        ? currentText 
+        : $"{_finalizedSpeech} {currentText}";
+};
+
+_speechRecognizer.ContinuousRecognitionSession.ResultGenerated += (s, args) =>
+{
+    if (args.Result.Status == SpeechRecognitionResultStatus.Success)
+    {
+        _finalizedSpeech += " " + args.Result.Text;
+        UserInput.Text = _finalizedSpeech;
+    }
+};</code></pre>
+                                <p class="af-card-text">Multilingual support is extended beyond speech recognition through the <code class="af-inline-code">PythonProcessService</code> and the agent orchestration layer. 
+                                    The selected language is passed as a command-line argument <code class="af-inline-code">--language</code> when starting the Python executable 
+                                    so that the AI agents can adapt their behaviour based on the user’s language, while still maintaining English output for standardisation.
+                                </p>
+                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-csharp">if (!string.IsNullOrEmpty(language) && language != "en-US")
+{
+    args.Add($"--language {language}");
+}</code></pre>
+                                <p class="af-card-text">At the orchestration level, the language parameter is embedded into system prompts, instructing the agents to accept multilingual input, translate it internally, and respond in English. 
+                                    This ensures that users can interact in their native language while maintaining a unified output format for the responses.
+                                </p>
+                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-python">def Talker_system_prompt(context: str, language: str = "en-US") -> str:
+    return f"""/no_think
+Important: The user's input will be in {language}. You must identify the user's language, 
+translate their input internally to understand it, but you MUST always reply and ask your questions in English.
+</code></pre>
+                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-python">def Evaluator_system_prompt(context: str, question: str, transcript: str, language: str = "en-US") -> str:
+    return f"""
+Note: The user's input might be in {language}. Please translate it to evaluate if the answer is satisfactory. 
+If a follow-up question is needed, it MUST be asked in English.
+</code></pre>
+                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-python">def RAG_system_prompt(context: str, language: str = "en-US") -> str:
+    return f"""
+Note: The user's input might be in {language}. Translate and summarize the answer in English.
+</code></pre>
                             </div>
                         </div>
 
