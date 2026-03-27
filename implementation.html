@@ -814,10 +814,73 @@ using (var targetStream = File.Create(targetPath))
                         <div class="af-tab-panel" id="implementation-packaging-panel" role="tabpanel" aria-labelledby="implementation-packaging-tab">
                             <div class="af-card">
                                 <div class="af-card-title-row">
-                                    <span class="af-card-title text-gradient-brand">Packaging</span>
+                                    <span class="af-card-title text-gradient-brand">Self-Contained Deployment</span>
                                     <span class="gradient-brand-bar bar-thin"></span>
                                 </div>
-                                <p class="af-card-text">Content</p>
+                                <p class="af-card-text">The .NET build system was used to generate a bundled version of our WinUI 3 code for Windows-based systems using the <code class="af-inline-code">dotnet publish</code> with some necessary properties as specified in <code class="af-inline-code">PACKAGING_GUIDE.md</code>. 
+                                    Although standard MSIX packaging is available out-of-the-box for Windows App SDK products, the nature of MSIX installers can create challenges and file size restrictions when executing our external bundled background processes, especially the standalone LLM <code class="af-inline-code">.llamafile</code> executable. 
+                                    Therefore, we decided to use a self-contained deployment approach targeting the win-x64 architecture, also aligning with our client request. 
+                                    The final executable and its dependencies are aggregated in the <code class="af-inline-code">publish/</code> folder located <code class="af-inline-code">**\AvatarForms\AvatarFormsApp\AvatarFormsApp\bin\Release\net10.0-windows10.0.19041.0\win-x64</code>. 
+                                    We simply zip this directory as our final distributed product instead.
+                                </p>
+                                <p class="af-card-text">The external files related to our code were logically separated into dedicated subdirectories alongside the main binary, as shown below. 
+                                    The Python agent orchestration files and API endpoints are located under the Backend directory, containing both the raw scripts and the compiled <code class="af-inline-code">main.exe</code> via PyInstaller. 
+                                    The HeadTTS directory holds the default <code class="af-inline-code">*.glb</code> avatars, web modules, local TTS voice files, and the HeadTTS <code class="af-inline-code">index.html</code> file that gets injected into the WebView2 component. 
+                                    The compiled .NET libraries, required dependencies, and <code class="af-inline-code">AvatarForms.exe</code> sit at the root of the publish output directory.
+                                </p>
+                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-markdown">publish/
+├── AvatarForms.exe
+├── AvatarForms.dll
+├── Backend/
+│   ├── dist/
+│   │   └── main/
+│   │       └── main.exe
+│   ├── main.py
+│   ├── agents.py
+│   ├── prompts.py
+|   ├── api.py 
+|   ├── sockets.py 
+|   ├── formatting.py 
+|   ├── tracing.py 
+|   ├── main.spec
+|   └── Qwen_Qwen3-4B-Q6_K.llamafile
+├── HeadTTS/
+│   ├── avatars/
+│   │   ├── david.glb
+│   │   └── julia.glb
+│   ├── modules/
+│   │   └── headtts.mjs
+│   ├── voices/
+│   └── index.html
+└── ... (other required .NET dlls, language modules and config files)</code></pre>
+                                <p class="af-card-text">
+                                    Under the .NET AvatarFormsApp.csproj configuration, MSBuild was set to copy the required content directories (like the HeadTTS resources and Python scripts) directly into the build output path. 
+                                    Because the application is run from a standalone directory, standard relative paths or hardcoded operating system paths could easily result in FileNotFound exceptions depending on where the user extracted the application. 
+                                    A dynamic path resolution structure was implemented to route references based on the executable's launch context, mapping to the localized folder tree.
+                                </p>
+                                <pre class="line-numbers af-code-snippet" data-prismjs-copy="⧉" data-prismjs-copy-success="✓"><code class="language-csharp">using System;
+using System.IO;
+
+// Resolving the dynamic execution path regardless of the dropped folder location
+string baseDir = AppContext.BaseDirectory;
+
+// Examples of how resources are retrieved in AvatarFormsApp
+var mainPaths = new 
+{
+    // Path routing to the compiled Python AI backend
+    PythonBackendExe = Path.Combine(baseDir, "Backend", "dist", "main", "main.exe"),
+    PythonBackendScript = Path.Combine(baseDir, "Backend", "main.py"),
+    
+    // Path routing to the local HeadTTS web resources for the WebView2 host
+    HeadTTSRoot = Path.Combine(baseDir, "HeadTTS"),
+    AvatarsDir = Path.Combine(baseDir, "HeadTTS", "avatars"),
+    
+    // SQLite local database path initialized in AppDbContext
+    DatabasePath = Path.Combine(
+        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), 
+        "AvatarFormsApp", "questionnaires.db"
+    )
+};</code></pre>
                             </div>
                         </div>
                     </div>
