@@ -20,19 +20,19 @@
   </head>
 
   <!-- Body -->
-  <body>
+  <body class="overflow-x-hidden">
     <div id="navbar-container"></div>
 
     <!-- Hero Section-->
     <section class="bg-hero-aurora py-20">
       <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16">
-        <div class="grid md:grid-cols-2 gap-16">
+        <div class="grid md:grid-cols-2 gap-10 lg:gap-16 items-center">
           <!--Title-->
-          <div class="bg-transparent rounded-base md:p-12 text-center">
+          <div class="bg-transparent rounded-base md:p-8 lg:p-12 text-center min-w-0">
             <span class="inline-flex items-center bg-fuchsia-200/70 outline-2 outline-fuchsia-700 text-fuchsia-700 text-xs font-medium px-1.5 py-0.5 mb-3 rounded-sm">
                 <p>UCL CS Group 14 IXN Project</p>
             </span>
-              <h1 id="gradient-text" class="self-center text-7xl font-bold whitespace-nowrap text-gradient-brand">
+              <h1 id="gradient-text" class="self-center text-5xl sm:text-6xl md:text-5xl lg:text-7xl font-bold text-gradient-brand leading-tight">
                 AvatarForms
               </h1>
               <p class="font-thin type-muted">by Atticus, Dex, Fakhrur, and Muaz</p>
@@ -44,7 +44,7 @@
               </div>
           </div>
           <!--Carousell-->
-          <div id="indicators-carousel" class="relative w-full aspect-video shadow-xl rounded-lg md:self-center" data-carousel="slide">
+          <div id="indicators-carousel" class="relative w-full aspect-video shadow-xl rounded-lg md:self-center min-w-0" data-carousel="slide">
             <!-- Carousel wrapper -->
             <div class="relative overflow-hidden rounded-lg h-full">
               <!-- Item 1 -->
@@ -79,7 +79,7 @@
 
     <!-- Mission Section-->
     <section class="py-20 text-center">
-        <div class="max-w-4xl mx-auto">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6">
           <div class="section-title-group mb-6">
             <h2 id="gradient-text" class="text-5xl font-bold text-gradient-brand">Our mission</h2>
             <div class="gradient-brand-bar bar-full bar-thin"></div>
@@ -96,7 +96,7 @@
 
     <!-- Abstract Section-->
     <section class="py-20 text-center">
-        <div class="max-w-4xl mx-auto">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6">
           <div id="section-title" class="section-title-group mb-6">
             <h2 id="gradient-text" class="text-5xl font-bold text-gradient-brand">Abstract</h2>
             <div class="gradient-brand-bar bar-full bar-thin"></div>
@@ -126,12 +126,12 @@
 
     <!-- Introduction Video Section-->
     <section class="py-20 text-center">
-        <div class="max-w-4xl mx-auto">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6">
           <div class="section-title-group mb-6">
             <h2 id="gradient-text" class="text-5xl font-bold text-gradient-brand">Introduction Video</h2>
             <div class="gradient-brand-bar bar-full bar-thin"></div>
           </div>
-          <div class="af-iframe-container af-iframe-container-video">
+          <div class="af-iframe-container af-iframe-container-video w-full max-w-full">
             <iframe
               class="af-iframe"
               src="https://www.youtube.com/embed/xty691Alb8w?rel=0"
@@ -146,14 +146,14 @@
 
     <!-- Our Team Section-->
     <section class="py-20 text-center">
-      <div class="max-w-6xl mx-auto">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
         <div class="section-title-group mb-6">
           <h2 id="gradient-text" class="text-5xl font-bold text-gradient-brand">Our Team</h2>
           <div class="gradient-brand-bar bar-full bar-thin"></div>
         </div>
-        <div class="flex gap-8 overflow-x-auto py-6">
+        <div class="grid grid-cols-1 gap-6 py-6 md:grid-cols-2 lg:grid-cols-4">
           <!-- Atticus -->
-          <div class="af-card h-full flex-1 min-w-[260px] text-center">
+          <div class="af-card h-full text-center">
             <div class="af-iframe-wrap h-40 w-40 rounded-base mb-4 mx-auto">
               <img src="assets/images/atticus.jpeg" class="af-iframe object-cover object-[50%_70%]" alt="Atticus profile photo"/>
             </div>
@@ -181,7 +181,7 @@
           </div>
 
           <!-- Dex-->
-          <div class="af-card h-full flex-1 min-w-[260px] text-center">
+          <div class="af-card h-full text-center">
             <div class="af-iframe-wrap h-40 w-40 rounded-base mb-4 mx-auto">
               <img src="assets/images/dex.JPG" class="af-iframe object-cover object-[50%_70%]" alt="Dex profile photo"/>
             </div>
@@ -209,7 +209,7 @@
           </div>
 
           <!-- Fakhrur -->
-          <div class="af-card h-full flex-1 min-w-[260px] text-center">
+          <div class="af-card h-full text-center">
             <div class="af-iframe-wrap h-40 w-40 rounded-base mb-4 mx-auto">
               <img src="assets/images/fakhrur.jpeg" class="af-iframe object-cover object-[50%_20%]" alt="Fakhrur profile photo"/>
             </div>
@@ -237,7 +237,7 @@
           </div>
 
           <!-- Muaz-->
-          <div class="af-card h-full flex-1 min-w-[260px] text-center">
+          <div class="af-card h-full text-center">
             <div class="af-iframe-wrap h-40 w-40 rounded-base mb-4 mx-auto">
               <img src="assets/images/muaz.JPG" class="af-iframe object-cover object-[5%_100%]" style="transform: scale(1.5); transform-origin: 5% 100%;" alt="Muaz profile photo"/>
             </div>
@@ -269,7 +269,7 @@
 
     <!-- Project Management Section-->
     <section class="py-20 text-center">
-        <div class="max-w-8xl mx-auto">
+        <div class="max-w-8xl mx-auto px-4 sm:px-6">
           <div class="section-title-group mb-6">
             <h2 id="gradient-text" class="text-5xl font-bold text-gradient-brand">Project Management</h2>
             <div class="gradient-brand-bar bar-full bar-thin"></div>
