@@ -19,15 +19,162 @@
 		<link href="css/styles.css" rel="stylesheet"/>
 	</head>
 	<body class="min-h-screen flex flex-col">
-		<nav id="navbar-container" class="fixed top-0 w-full z-50"></nav>
+		<nav id="default-navbar" class="bg-neutral-primary/70 backdrop-blur-md fixed w-full z-9999 top-0 start-0">
+      <div class="flex flex-wrap items-center mx-auto justify-start py-3 px-3">
+        <button
+          data-collapse-toggle="navbar-default"
+          type="button"
+          class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-body rounded-base hover:bg-neutral-secondary-soft hover:text-heading focus:outline-none focus:ring-2 focus:ring-neutral-tertiary lg:hidden"
+          aria-controls="navbar-default"
+          aria-expanded="false"
+        >
+          <span class="sr-only">Open main menu</span>
+          <svg
+            class="w-6 h-6"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-width="2"
+              d="M5 7h14M5 12h14M5 17h14"
+            />
+          </svg>
+        </button>
+        <div class="flex items-center gap-3">
+            <img src="assets/images/logo.png" class="h-12" alt="AvatarForms Logo"/> <!-- Change logo if you want to -->
+            <span
+                class="self-center text-xl text-heading font-semibold whitespace-nowrap"
+                ><a href="index.html" class="hover:text-fg-brand">AvatarForms</a></span>
+        </div>
+        <div class="hidden w-full lg:flex lg:w-auto lg:ml-auto" id="navbar-default">
+          <ul
+            class="font-medium flex flex-col lg:flex-row lg:gap-3 p-4 lg:p-0 mt-4 lg:mt-0 border border-gray-200/30 dark:border-gray-700/30 lg:border-0 rounded-base lg:rounded-none bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm lg:bg-transparent lg:backdrop-blur-none"
+          >
+            <li>
+              <a
+                href="requirements.html"
+                class="nav-link-bar block py-2 px-3 text-heading bg-brand rounded"
+                >Requirements</a
+              >
+            </li>
+            <li>
+              <a
+                href="research.html"
+                class="nav-link-bar block py-2 px-3 text-heading bg-brand rounded"
+                >Research</a
+              >
+            </li>
+            <li>
+              <a
+                href="ui-design.html"
+                class="nav-link-bar block py-2 px-3 text-heading bg-brand rounded"
+                >UI Design</a
+              >
+            </li>
+            <li>
+              <a
+                href="system-design.html"
+                class="nav-link-bar block py-2 px-3 text-heading bg-brand rounded"
+                >System Design</a
+              >
+            </li>
+            <li>
+              <a
+                href="implementation.html"
+                class="nav-link-bar block py-2 px-3 text-heading bg-brand rounded"
+                >Implementation</a
+              >
+            </li>
+            <li>
+              <a
+                href="testing.html"
+                class="nav-link-bar block py-2 px-3 text-heading bg-brand rounded"
+                >Testing</a
+              >
+            </li>
+            <li>
+              <a
+                href="evaluation.html"
+                class="nav-link-bar block py-2 px-3 text-heading bg-brand rounded"
+                >Evaluation</a
+              >
+            </li>
+            <li>
+              <a
+                href="appendices.html"
+                class="nav-link-bar block py-2 px-3 text-heading bg-brand rounded"
+                >Appendices</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://github.com/Dexdezdes/COMP0016_2026_Team14_AvatarForms.git"
+                class="nav-link-bar block py-2 px-3 text-heading bg-brand rounded"
+                >GitHub</a
+              >
+            </li>
+            <li class="ml-4 flex items-center">
+                <button onclick="document.documentElement.classList.toggle('dark'); localStorage.setItem('color-theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light')" 
+                        class="cursor-pointer p-2 border border-current rounded-md hover:opacity-70 transition-opacity relative w-9 h-9">
+                    <svg class="w-5 h-5 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <g style="opacity: var(--sun-op)">
+                            <circle cx="12" cy="12" r="5"></circle>
+                            <path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M17.66 6.34l1.42-1.42"></path>
+                        </g>
+                        <path style="opacity: var(--moon-op)" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+                </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
 		<!-- Layout Container -->
 		<div class="flex flex-1 pt-16">
-			<aside id="sidebar-container" class="w-64 flex"></aside>
+			<aside id="default-sidebar" class="w-64 transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
+   <div class="px-3 py-4 border-e">
+      <ul class="space-y-2 font-medium">
+         <li>
+            <a href="requirements.html" class="block px-2 py-1.5 rounded-base">Requirements</a>
+         </li>
+         <li>
+            <a href="research.html" class="block px-2 py-1.5 rounded-base">Research</a>
+         </li>
+         <li>
+            <a href="ui-design.html" class="block px-2 py-1.5 rounded-base">UI Design</a>
+         </li>
+         <li>
+            <a href="system-design.html" class="block px-2 py-1.5 rounded-base">System Design</a>
+         </li>
+         <li>
+            <a href="implementation.html" class="block px-2 py-1.5 rounded-base">Implementation</a>
+         </li>
+         <li>
+            <a href="testing.html" class="block px-2 py-1.5 rounded-base">Testing</a>
+         </li>
+         <li>
+            <a href="evaluation.html" class="block px-2 py-1.5 rounded-base">Evaluation</a>
+         </li>
+         <li>
+            <a href="appendices.html" class="block px-2 py-1.5 rounded-base">Appendices</a>
+         </li>
+         <li>
+            <a href="https://github.com/Dexdezdes/COMP0016_2026_Team14_AvatarForms.git" class="block px-2 py-1.5 rounded-base">GitHub</a>
+         </li>
+      </ul>
+   </div>
+</aside>
 
 			<!-- Main content area -->
 			<main class="flex-1 w-full max-w-[1400px] mx-auto py-6 px-4 sm:px-6 lg:px-8">
-				<div id="breadcrumbs-container" class="mb-6"></div>
+
 
 				<section class="af-stack">
 					<div class="af-stack">
@@ -193,7 +340,74 @@
 			</main>
 		</div>
 
-		<div id="footer-placeholder"></div>
+		<!--Footer-->
+<footer class="bg-footer-aurora w-full">
+    <div class="mx-auto w-full max-w-7xl px-8 py-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+            <!--Logo and Name-->
+            <div class="flex justify-center gap-4">
+                <div class="flex items-center gap-3">
+                    <img src="assets/images/logo.png" class="h-12 rounded-base" alt="AvatarForms Logo"/>
+                    <span class="text-heading text-2xl font-semibold whitespace-nowrap">AvatarForms</span>
+                </div>
+            </div>
+
+            <!--About Us-->
+            <div>
+                <h2 class="mb-6 text-sm font-semibold text-heading uppercase">About Us</h2>
+                <p class="type-muted mb-4 text-sm">AvatarForms is a UCL Computer Science student project developed in partnership with the National Autistic Society to create accessible and inclusive digital forms.</p>
+                <ul class="mb-6 text-body font-light">
+                    <li class="mb-3">
+                        <a href="https://github.com/Dexdezdes/COMP0016_2026_Team14_AvatarForms.git" target="_blank" class="hover:underline flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                            <p class="type-muted text-sm">GitHub</p>
+                        </a>
+                    </li>
+                    <li class="mb-3">
+                        <a href="mailto:team14@avatarforms.com" class="hover:underline flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                            </svg>
+                            <p class="type-muted text-sm">Contact Us</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!--Documentation-->
+            <div>
+                <h2 class="mb-6 text-sm font-semibold uppercase">Documentation</h2>
+                <ul class="type-muted text-sm grid grid-cols-2 gap-x-4">
+                    <li class="mb-3"><a href="requirements.html" class="hover:underline">Requirements</a></li>
+                    <li class="mb-3"><a href="testing.html" class="hover:underline">Testing</a></li>
+                    <li class="mb-3"><a href="research.html" class="hover:underline">Research</a></li>
+                    <li class="mb-3"><a href="evaluation.html" class="hover:underline">Evaluation</a></li>
+                    <li class="mb-3"><a href="ui-design.html" class="hover:underline">UI Design</a></li>
+                    <li class="mb-3"><a href="appendices.html" class="hover:underline">Appendices</a></li>
+                    <li class="mb-3"><a href="system-design.html" class="hover:underline">System Design</a></li>
+                    <li class="mb-3"><a href="implementation.html" class="hover:underline">Implementation</a></li>
+                </ul>
+            </div>
+
+            <!--Project Partners-->
+            <div>
+                <h2 class="mb-6 text-sm font-semibold uppercase">Project Partners</h2>
+                <div class="flex flex-col gap-8 items-start">
+                    <img src="assets/images/National_Autistic_Society_Logo_2018.png" class="h-10 w-auto" alt="National Autistic Society Logo"/>
+                    <img src="assets/images/ucl-logo--primary.svg" class="h-10 w-auto" alt="UCL Logo"/>
+                    <img src="assets/images/msLogo.svg" class="h-10 w-auto" alt="Microsoft Logo"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="py-6 text-center">
+            <p class="text-sm type-muted font-thin">© 2026 AvatarForms - UCL CS Group 14. All Rights Reserved.</p>
+        </div>
+    </div>
+</footer>
+
 
 		<script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
 		<script>
@@ -218,38 +432,7 @@
 				]
 			};
 
-			function addCurrentBreadcrumb() {
-				const breadcrumbsList = document.getElementById('breadcrumbs-list');
-				if (!breadcrumbsList) return;
-
-				const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-				const trail = breadcrumbPaths[currentPath] || [
-					{ title: 'Home', href: 'index.html' },
-					{ title: 'Page' }
-				];
-
-				if (currentPath === 'index.html') return;
-
-				trail.slice(1).forEach((crumb, index) => {
-					const isLast = index === trail.slice(1).length - 1;
-					const listItem = document.createElement('li');
-					listItem.className = 'inline-flex items-center gap-2 text-body';
-
-					const separator = `
-						<svg class="w-3 h-3 text-body" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-							<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-						</svg>
-					`;
-
-					if (isLast || !crumb.href) {
-						listItem.innerHTML = `${separator}<span aria-current="page">${crumb.title}</span>`;
-					} else {
-						listItem.innerHTML = `${separator}<a href="${crumb.href}" class="hover:text-fg-brand">${crumb.title}</a>`;
-					}
-
-					breadcrumbsList.appendChild(listItem);
-				});
-			}
+			
 
 			function initAfTabs(tabListId, panelContainerId) {
 				const tabList = document.getElementById(tabListId);
@@ -328,13 +511,7 @@
 				})
 				.catch(error => console.error('Error loading sidebar:', error));
 
-			fetch('components/breadcrumbs.html')
-				.then(response => response.text())
-				.then(data => {
-					document.getElementById('breadcrumbs-container').innerHTML = data;
-					addCurrentBreadcrumb();
-				})
-				.catch(error => console.error('Error loading breadcrumbs:', error));
+
 
 			fetch('components/footer.txt')
 				.then(response => response.text())
